@@ -50,7 +50,7 @@ export class LocaleService {
 	 * @return {string}
 	 */
 	get locale(): string {
-		return this._locale || localStorage.getItem( 'locale' ) || this.appConfig.locale;
+		return this._locale || localStorage.getItem( 'locale' ) || this.appConfig?.locale || 'vi';
 	}
 
 	/**
