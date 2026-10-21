@@ -1,7 +1,8 @@
 // Modules
-export * from 'angular-core';
+export * from '../angular-core';
 export { FormModule } from './form.module';
 export { CoreModule } from './core.module';
+export { AngularCoreModule } from '../angular-core';
 export { EqualValidators } from './equal-validators';
 
 // Components

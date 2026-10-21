@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { DefaultValue } from 'angular-core';
+import { DefaultValue } from '../../../angular-core';
 
 @Component({
 	standalone: false,

@@ -5,7 +5,7 @@ import { Observable, forkJoin, Observer } from 'rxjs';
 import { take } from 'rxjs/operators';
 import _ from 'lodash';
 
-import { CustomMissingTranslationHandler } from 'angular-core';
+import { CustomMissingTranslationHandler } from '../../angular-core';
 
 const i18nModules: I18nAnotation[] = [];
 

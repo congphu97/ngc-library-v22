@@ -1,7 +1,7 @@
 import { PipeTransform, Pipe } from '@angular/core';
 import _ from 'lodash';
 
-import { Memoize } from 'angular-core';
+import { Memoize } from '../../angular-core';
 
 import { ENVIRONMENT } from '@core';
 

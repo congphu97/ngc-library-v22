@@ -2,7 +2,7 @@ import { PipeTransform, Pipe } from '@angular/core';
 import { getExampleNumber, isSupportedCountry, CountryCode } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/examples.mobile.json';
 
-import { Memoize } from 'angular-core';
+import { Memoize } from '../../angular-core';
 
 @Pipe({
 	standalone: false, name: 'examplePhoneNumber' })

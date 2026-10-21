@@ -1,6 +1,6 @@
 import { PipeTransform, Pipe } from '@angular/core';
 
-import { Memoize, IsContrastPipe } from 'angular-core';
+import { Memoize, IsContrastPipe } from '../../angular-core';
 
 import { COLOR } from '@app/@resources';
 

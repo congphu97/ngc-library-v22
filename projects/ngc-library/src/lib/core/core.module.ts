@@ -4,11 +4,11 @@ import { NgModule, Optional, Inject, Injector } from '@angular/core';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import {
-	CoreModule as AngularCoreModule,
+	AngularCoreModule,
 	APP_CONFIG, SERVER_CONFIG, DATE_TIME_CONFIG,
 	STORAGE_CONFIG, AppConfig, ServerConfig, DateTimeConfig,
 	StorageConfig, LODASH_MIXIN
-} from 'angular-core';
+} from '../angular-core';
 import _ from 'lodash';
 
 // Apply lodash mixin

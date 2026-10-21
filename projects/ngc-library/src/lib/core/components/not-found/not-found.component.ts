@@ -11,7 +11,7 @@ import _ from 'lodash';
 import {
 	Unsubscriber, destroyCmp,
 	DefaultValue, CoerceNumber, CoerceArray
-} from 'angular-core';
+} from '../../../angular-core';
 
 export type INotFoundSize = 'normal' | 'large';
 export type INotFoundMode = 'empty' | 'error' | 'search' | 'custom';

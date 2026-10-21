@@ -2,7 +2,7 @@ import { PipeTransform, Pipe } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import _ from 'lodash';
 
-import { Memoize } from 'angular-core';
+import { Memoize } from '../../angular-core';
 
 export interface IMetaEmbed {
 	title: string;

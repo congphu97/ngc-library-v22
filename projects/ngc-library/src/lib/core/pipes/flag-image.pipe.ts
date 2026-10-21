@@ -2,7 +2,7 @@ import { PipeTransform, Pipe } from '@angular/core';
 import { CountryCode } from 'libphonenumber-js';
 import _ from 'lodash';
 
-import { Memoize } from 'angular-core';
+import { Memoize } from '../../angular-core';
 
 @Pipe({
 	standalone: false, name: 'flagImage' })

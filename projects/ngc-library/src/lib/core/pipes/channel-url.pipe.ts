@@ -2,7 +2,7 @@ import { PipeTransform, Pipe } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import _ from 'lodash';
 
-import { Memoize } from 'angular-core';
+import { Memoize } from '../../angular-core';
 
 import { ENVIRONMENT } from '@core';
 

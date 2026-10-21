@@ -1,4 +1,4 @@
-@import 'angular-core/lib/scss/partials/variable';
+@import '../../angular-core/scss/partials/variable';
 
 @function hex-opacity($hex, $opacity: 1, $background: #fff) {
 	@if type-of($hex) == 'color' {

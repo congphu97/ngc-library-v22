@@ -7,8 +7,7 @@
     "build": "ng build demo",
     "build:lib": "ng build ngc-library",
     "watch": "ng build ngc-library --watch --configuration development",
-    "test": "ng test",
-    "postinstall": "rm -rf node_modules/angular-core/node_modules && node scripts/patch-angular-core.js"
+    "test": "ng test"
   },
   "private": true,
   "packageManager": "npm@10.9.9",
@@ -25,7 +24,6 @@
     "@ngx-loading-bar/core": "^7.0.1",
     "@ngx-loading-bar/http-client": "^7.0.1",
     "@ngx-translate/core": "^18.0.0",
-    "angular-core": "github:congphu97/ngc-core#v2.2.9",
     "angular-resizable-element": "^8.0.3",
     "angular-svg-round-progressbar": "^15.0.0",
     "cropperjs": "^1.7.0",

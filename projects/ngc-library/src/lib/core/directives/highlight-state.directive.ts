@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import _ from 'lodash';
 
-import { DefaultValue, CoerceBoolean } from 'angular-core';
+import { DefaultValue, CoerceBoolean } from '../../angular-core';
 
 import { COLOR } from '@resources';
 

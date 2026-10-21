@@ -1,7 +1,7 @@
 import { PipeTransform, Pipe } from '@angular/core';
 import _ from 'lodash';
 
-import { Memoize, RGB } from 'angular-core';
+import { Memoize, RGB } from '../../angular-core';
 
 import { COLOR } from '@app/@resources';
 
