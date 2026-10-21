@@ -4,7 +4,7 @@ import {
 	OnChanges, HostBinding, ChangeDetectionStrategy
 } from '@angular/core';
 
-import { ContrastPipe, DefaultValue, CoerceBoolean, CoerceNumber } from '@core';
+import { ContrastPipe, DefaultValue, CoerceBoolean, CoerceNumber } from '../../core';
 
 @Component({
 	standalone: false,

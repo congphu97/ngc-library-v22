@@ -4,7 +4,7 @@ import {
 	OnChanges, HostBinding, ChangeDetectionStrategy
 } from '@angular/core';
 
-import { AliasOf, DefaultValue, ContrastPipe } from '@core';
+import { AliasOf, DefaultValue, ContrastPipe } from '../core';
 
 export type WGCIBadgePositionMode = 'default' | 'inline' | 'absolute';
 

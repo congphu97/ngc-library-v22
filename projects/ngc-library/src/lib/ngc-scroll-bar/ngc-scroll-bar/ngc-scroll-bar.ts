@@ -8,7 +8,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 import { startWith } from 'rxjs/operators';
 import _ from 'lodash';
 
-import { CoerceBoolean, DefaultValue, untilCmpDestroyed } from '@core';
+import { CoerceBoolean, DefaultValue, untilCmpDestroyed } from '../../core';
 import { NgcScrollBarViewPortDirective } from '../ngc-scroll-bar-view-port/ngc-scroll-bar-view-port.directive';
 import { NgcScrollBarViewPortItemDirective } from '../ngc-scroll-bar-view-port/ngc-scroll-bar-view-port-item.directive';
 

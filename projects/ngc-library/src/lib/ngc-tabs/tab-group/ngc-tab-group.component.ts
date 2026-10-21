@@ -15,7 +15,7 @@ import {
 	DetectScrollDirective, Unsubscriber, CoerceBoolean,
 	CoerceNumber, DefaultValue, CoerceCssPixel,
 	untilCmpDestroyed
-, IObject } from '@core';
+, IObject } from '../../core';
 import { NgcScrollBarDirective, INgcScrollBarMode } from '../../ngc-scroll-bar';
 import { NgcTabComponent } from '../tab/ngc-tab.component';
 

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { CoreModule, FormModule } from '@core';
+import { CoreModule, FormModule } from '../core';
 
 import { NgcFormFieldModule } from '../ngc-form-field';
 import { NgcTruncateModule } from '../ngc-truncate';

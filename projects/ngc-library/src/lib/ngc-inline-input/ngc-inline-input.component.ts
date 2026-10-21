@@ -7,7 +7,7 @@ import {
 import { FormControl, Validators } from '@angular/forms';
 import _ from 'lodash';
 
-import { DefaultValue, CoerceBoolean } from '@core';
+import { DefaultValue, CoerceBoolean } from '../core';
 
 @Component({
 	standalone: false,

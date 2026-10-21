@@ -3,7 +3,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 
 import { NgcButtonModule } from '../ngc-button';
 import { NgcTooltipModule } from '../ngc-tooltip';

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 
 import { NgcEmojiPickerModule } from '../ngc-emoji-picker';
 import { NgcAvatarComponent } from './ngc-avatar.component';

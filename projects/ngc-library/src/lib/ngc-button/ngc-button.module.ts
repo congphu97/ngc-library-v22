@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 
 import { NgcIconModule } from '../ngc-icon';
 import { NgcButtonIconDirective } from './button-icon/ngc-button-icon.directive';

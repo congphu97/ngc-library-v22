@@ -9,7 +9,7 @@ import _ from 'lodash';
 import {
 	Unsubscriber, DefaultValue, CoerceBoolean,
 	CoerceNumber, untilCmpDestroyed
-, IObject } from '@core';
+, IObject } from '../../core';
 import { NgcDropdownItemComponent } from '../dropdown-item/ngc-dropdown-item.component';
 
 @Unsubscriber()

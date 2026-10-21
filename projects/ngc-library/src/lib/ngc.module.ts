@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { I18n } from '@core';
+import { I18n } from './core';
 import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
 
 @NgModule({

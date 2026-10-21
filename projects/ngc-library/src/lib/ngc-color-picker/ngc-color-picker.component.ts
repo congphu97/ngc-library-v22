@@ -5,8 +5,8 @@ import {
 } from '@angular/core';
 import _ from 'lodash';
 
-import { COLOR } from '@resources';
-import { DefaultValue , IObject } from '@core';
+import { COLOR } from '../resources';
+import { DefaultValue , IObject } from '../core';
 
 export type NgcIColorPickerMode = 'default' | 'inline';
 export type NgcIColorPickerPosition = 'above' | 'below';

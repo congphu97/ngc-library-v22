@@ -1,4 +1,4 @@
-import { IObject } from '@core';
+import { IObject } from '..';
 import { PipeTransform, Pipe } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ValidationErrors } from '@angular/forms';

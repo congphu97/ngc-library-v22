@@ -1,6 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 
 import { NgcIconModule } from '../ngc-icon/ngc-icon.module';
 import { NgcCodeBlockComponent } from './ngc-code-block.component';

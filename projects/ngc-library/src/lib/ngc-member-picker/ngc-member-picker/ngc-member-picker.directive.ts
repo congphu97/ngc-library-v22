@@ -19,7 +19,7 @@ import {
 	CoerceBoolean, CoerceCssPixel, CoerceNumber,
 	DefaultValue, Memoize, Unsubscriber,
 	untilCmpDestroyed
-, IObject } from '@core';
+, IObject } from '../../core';
 
 import { NgcIMember, NgcIMemberStatus } from '../ngc-member/ngc-member';
 

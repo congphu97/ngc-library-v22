@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { DefaultValue, AliasOf, CoerceBoolean, CoerceNumber } from '@core';
+import { DefaultValue, AliasOf, CoerceBoolean, CoerceNumber } from '../../core';
 
 @Component({
 	standalone: false,

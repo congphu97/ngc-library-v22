@@ -3,7 +3,7 @@ import {
 	EventEmitter, Input
 } from '@angular/core';
 
-import { DefaultValue, CoerceBoolean, IObject, ENVIRONMENT } from '@core';
+import { DefaultValue, CoerceBoolean, IObject, ENVIRONMENT } from '../../core';
 
 declare const gapi: any;
 declare const google: any;

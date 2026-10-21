@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { DefaultValue, CoerceBoolean } from '@core';
+import { DefaultValue, CoerceBoolean } from '../../core';
 
 import { NgcMenuItemIconDirective } from '../menu-item-icon/ngc-menu-item-icon.directive';
 

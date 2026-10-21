@@ -4,7 +4,7 @@ import {
 	Input, ChangeDetectionStrategy, NgZone
 } from '@angular/core';
 
-import { DefaultValue, CoerceCssPixel, CoerceBoolean , IObject } from '@core';
+import { DefaultValue, CoerceCssPixel, CoerceBoolean , IObject } from '../core';
 
 export type NGCITooltipTheme = 'default' | 'light';
 export type NGCITooltipPosition = 'above' | 'below' | 'before' | 'after';

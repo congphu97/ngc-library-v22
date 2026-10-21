@@ -6,9 +6,9 @@ import {
 import { Subject } from 'rxjs';
 import _ from 'lodash';
 
-import { Unsubscriber, DefaultValue, untilCmpDestroyed , IObject } from '@core';
+import { Unsubscriber, DefaultValue, untilCmpDestroyed , IObject } from '../core';
 
-import { CONSTANT as APP_CONSTANT } from '@resources';
+import { CONSTANT as APP_CONSTANT } from '../resources';
 
 import { NgcIUploadedFile, NgcIFileService, Ngc_FILE_SERVICE } from '../ngc-file-picker';
 import { NgcIAvatar, NgcIAvatarMode } from '../ngc-avatar';

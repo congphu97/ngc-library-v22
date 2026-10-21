@@ -1,4 +1,4 @@
-import { IObject } from '@core';
+import { IObject } from '..';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { TranslateLoader, MissingTranslationHandler, provideTranslateService, TranslatePipe, TranslateDirective } from '@ngx-translate/core';
 import { Observable, forkJoin, Observer } from 'rxjs';

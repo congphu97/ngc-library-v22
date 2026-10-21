@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 
 import { NgcIconModule } from '../ngc-icon';
 import { NgcRadioModule } from '../ngc-radio';

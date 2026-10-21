@@ -4,7 +4,7 @@ import {
 	OnChanges, SimpleChanges, HostBinding
 } from '@angular/core';
 
-import { CoerceBoolean, ContrastPipe , IObject } from '@core';
+import { CoerceBoolean, ContrastPipe , IObject } from '../../core';
 
 export type NgcIToastType = 'default' | 'info' | 'success' | 'warning' | 'danger';
 export type NgcIToastPosition = 'bottom' | 'top' | 'top-left' | 'top-right'| 'bottom-left' | 'bottom-right';

@@ -5,7 +5,7 @@ import {
 import { startWith, takeUntil } from 'rxjs/operators';
 import _ from 'lodash';
 
-import { Unsubscriber, untilCmpDestroyed , IObject } from '@core';
+import { Unsubscriber, untilCmpDestroyed , IObject } from '../../core';
 import { NgcExpansionPanelComponent } from '../expansion-panel/ngc-expansion-panel.component';
 
 @Unsubscriber()

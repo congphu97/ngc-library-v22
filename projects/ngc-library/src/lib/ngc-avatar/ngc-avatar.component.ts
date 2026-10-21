@@ -15,7 +15,7 @@ import {
 	ContrastPipe, EmojiPipe, Memoize,
 	DefaultValue, CoerceNumber, CoerceCssPixel,
 	Unsubscriber, untilCmpDestroyed
-} from '@core';
+} from '../core';
 import { NgcPageComponent } from '../ngc-page';
 import { NgcMenuComponent } from '../ngc-menu';
 import { NgcGridComponent } from '../ngc-grid';

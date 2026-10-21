@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { CoerceBoolean, AliasOf } from '@core';
+import { CoerceBoolean, AliasOf } from '../../core';
 
 import { NgcTabHeaderDirective } from '../tab-header/ngc-tab-header.directive';
 import { NgcTabContentDirective } from '../tab-content/ngc-tab-content.directive';

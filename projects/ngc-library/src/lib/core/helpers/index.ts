@@ -1,4 +1,4 @@
-import { IObject } from '@core';
+import { IObject } from '..';
 import _ from 'lodash';
 
 export const calculateOrders: ReturnType<typeof _.memoize> = _.memoize(

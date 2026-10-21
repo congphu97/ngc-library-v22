@@ -13,5 +13,8 @@
     "./src/lib/scss",
     "./src/lib/i18n",
     "./src/lib/core/i18n"
+  ],
+  "allowedNonPeerDependencies": [
+    ".*"
   ]
 }

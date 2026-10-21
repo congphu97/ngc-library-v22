@@ -18,7 +18,7 @@ import {
 	Unsubscriber, DefaultValue, CoerceBoolean,
 	CoerceNumber, CoerceCssPixel, Memoize,
 	untilCmpDestroyed
-} from '@core';
+} from '../core';
 
 import { NgcFilePickerComponent, NgcIFilePickerPosition, NgcIFilePickerEvent } from './ngc-file-picker.component';
 

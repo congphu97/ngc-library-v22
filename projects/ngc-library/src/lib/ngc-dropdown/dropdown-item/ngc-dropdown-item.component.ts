@@ -3,7 +3,7 @@ import {
 	TemplateRef, ContentChild, ChangeDetectionStrategy
 } from '@angular/core';
 
-import { DefaultValue, CoerceBoolean, CoerceNumber } from '@core';
+import { DefaultValue, CoerceBoolean, CoerceNumber } from '../../core';
 
 @Component({
 	standalone: false,

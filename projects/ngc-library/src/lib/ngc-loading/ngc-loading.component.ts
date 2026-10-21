@@ -1,7 +1,7 @@
 import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
-import { CoerceNumber, CoerceBoolean, DefaultValue } from '@core';
-import { COLOR } from '@resources';
+import { CoerceNumber, CoerceBoolean, DefaultValue } from '../core';
+import { COLOR } from '../resources';
 
 @Component({
 	standalone: false,

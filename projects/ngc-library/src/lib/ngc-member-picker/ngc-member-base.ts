@@ -5,7 +5,7 @@ import {
 import { Subject, Observable, isObservable } from 'rxjs';
 import _ from 'lodash';
 
-import { CoerceBoolean, CoerceNumber, DefaultValue, untilCmpDestroyed , IObject } from '@core';
+import { CoerceBoolean, CoerceNumber, DefaultValue, untilCmpDestroyed , IObject } from '../core';
 
 import { NgcSearchBoxComponent } from '../ngc-search-box';
 import { NgcMember, NgcIMember, NgcIMemberStatus } from './ngc-member/ngc-member';

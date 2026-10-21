@@ -3,7 +3,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 
 import { NgcButtonModule } from '../ngc-button';
 import { NgcIconModule } from '../ngc-icon';

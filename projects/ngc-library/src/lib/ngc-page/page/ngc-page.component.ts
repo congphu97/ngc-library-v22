@@ -4,7 +4,7 @@ import {
 	HostBinding
 } from '@angular/core';
 
-import { DetectScrollDirective, CoerceBoolean } from '@core';
+import { DetectScrollDirective, CoerceBoolean } from '../../core';
 import { NgcScrollBarDirective, INgcScrollBarMode } from '../../ngc-scroll-bar';
 import { NgcPageHeaderDirective } from '../page-header/ngc-page-header.directive';
 import { NgcPageContentDirective } from '../page-content/ngc-page-content.directive';

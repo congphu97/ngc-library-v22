@@ -17,7 +17,7 @@ import {
 	Unsubscriber, DefaultValue, CoerceBoolean,
 	CoerceNumber, CoerceCssPixel, Memoize,
 	untilCmpDestroyed
-, IObject } from '@core';
+, IObject } from '../../core';
 
 import { NgcMenuComponent, NgcIMenuPosition, NgcIMenuDirection } from '../menu/ngc-menu.component';
 

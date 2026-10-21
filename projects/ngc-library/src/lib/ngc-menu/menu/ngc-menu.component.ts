@@ -12,7 +12,7 @@ import {
 	DetectScrollDirective, Unsubscriber, DefaultValue,
 	CoerceBoolean, CoerceCssPixel, Debounce,
 	untilCmpDestroyed
-, IObject } from '@core';
+, IObject } from '../../core';
 import { NgcScrollBarDirective, INgcScrollBarMode } from '../../ngc-scroll-bar';
 import { NgcMenuButtonCloseDirective } from '../menu-button-close/ngc-menu-button-close.directive';
 import { NgcMenuItemComponent } from '../menu-item/ngc-menu-item.component';

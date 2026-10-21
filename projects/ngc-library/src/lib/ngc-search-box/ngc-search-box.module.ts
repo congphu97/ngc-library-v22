@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
-import { CoreModule, FormModule } from '@core';
+import { CoreModule, FormModule } from '../core';
 
 import { NgcIconModule } from '../ngc-icon';
 import { NgcFormFieldModule } from '../ngc-form-field';

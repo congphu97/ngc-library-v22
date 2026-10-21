@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import moment, { Moment } from 'moment-timezone';
 import _ from 'lodash';
 
-import { CoerceArray, CoerceBoolean, DefaultValue , IObject } from '@core';
+import { CoerceArray, CoerceBoolean, DefaultValue , IObject } from '../../core';
 
 // import { NgcSearchBoxComponent } from '../../ngc-search-box';
 

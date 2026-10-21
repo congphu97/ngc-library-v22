@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 
 import { NgcCollapseComponent } from './ngc-collapse.component';
 import { NgcIconModule } from '../ngc-icon';

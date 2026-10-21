@@ -13,8 +13,8 @@ import _ from 'lodash';
 import {
 	Unsubscriber, DefaultValue, CoerceBoolean,
 	CoerceNumber, untilCmpDestroyed, INotFoundData
-} from '@core';
-import { CONSTANT as APP_CONSTANT } from '@resources';
+} from '../core';
+import { CONSTANT as APP_CONSTANT } from '../resources';
 
 import { NgcIFormFieldAppearance, NgcIFormFieldErrorDisplayMode } from '../ngc-form-field';
 import { NgcMenuTriggerForDirective } from '../ngc-menu';

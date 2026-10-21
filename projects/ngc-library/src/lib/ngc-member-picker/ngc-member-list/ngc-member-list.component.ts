@@ -6,9 +6,9 @@ import {
 import { isObservable } from 'rxjs';
 import _ from 'lodash';
 
-import { CoerceBoolean, CoerceNumber, DefaultValue, Unsubscriber , IObject } from '@core';
+import { CoerceBoolean, CoerceNumber, DefaultValue, Unsubscriber , IObject } from '../../core';
 
-import { CONSTANT as APP_CONSTANT } from '@resources';
+import { CONSTANT as APP_CONSTANT } from '../../resources';
 
 
 import { NgcMemberBase } from '../ngc-member-base';

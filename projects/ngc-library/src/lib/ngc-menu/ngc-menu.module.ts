@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 
 import { NgcIconModule } from '../ngc-icon';
 import { NgcScrollBarModule } from '../ngc-scroll-bar';

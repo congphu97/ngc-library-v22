@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { CoreModule, FormModule } from '@core';
+import { CoreModule, FormModule } from '../core';
 
 import { NgcButtonModule } from '../ngc-button';
 import { NgcIconModule } from '../ngc-icon';

@@ -3,7 +3,7 @@ import {
 	ChangeDetectionStrategy, HostBinding
 } from '@angular/core';
 
-import { CoerceCssPixel } from '@core';
+import { CoerceCssPixel } from '../../core';
 
 @Component({
 	standalone: false,

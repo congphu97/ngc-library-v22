@@ -12,8 +12,8 @@ import {
 	DATE_TIME_CONFIG, DateTimeConfig, WeekStart,
 	TimeFormat, Memoize, DefaultValue,
 	CoerceBoolean
-} from '@core';
-import { CONSTANT as APP_CONSTANT } from '@resources';
+} from '../core';
+import { CONSTANT as APP_CONSTANT } from '../resources';
 
 interface NgcIDateInMonth {
 	year: number;

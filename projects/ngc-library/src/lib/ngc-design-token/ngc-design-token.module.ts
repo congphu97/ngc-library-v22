@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 import { NgcButtonModule }  from '../ngc-button';
 import { NgcIconModule }    from '../ngc-icon';
 import { NgcDividerModule } from '../ngc-divider/ngc-divider.module';

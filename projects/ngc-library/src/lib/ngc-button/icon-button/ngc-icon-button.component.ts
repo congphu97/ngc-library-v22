@@ -5,7 +5,7 @@ import {
 	HostBinding
 } from '@angular/core';
 
-import { ContrastPipe, DefaultValue, CoerceBoolean, CoerceCssPixel } from '@core';
+import { ContrastPipe, DefaultValue, CoerceBoolean, CoerceCssPixel } from '../../core';
 
 @Component({
 	standalone: false,

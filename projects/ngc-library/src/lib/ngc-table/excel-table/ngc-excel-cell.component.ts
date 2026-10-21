@@ -14,8 +14,8 @@ import {
 	DefaultValue, CoerceBoolean, CoerceNumber,
 	DateTimeConfig, DATE_TIME_CONFIG, untilCmpDestroyed,
 	Unsubscriber
-, IObject } from '@core';
-import { REGEX, CONSTANT as APP_CONSTANT } from '@resources';
+, IObject } from '../../core';
+import { REGEX, CONSTANT as APP_CONSTANT } from '../../resources';
 
 import { NgcSearchBoxComponent } from '../../ngc-search-box';
 import { NgcIDatePickerPickedEvent } from '../../ngc-date-picker';

@@ -6,7 +6,7 @@ import { startWith } from 'rxjs/operators';
 import _ from 'lodash';
 import * as XLSX from 'xlsx';
 
-import { Unsubscriber, untilCmpDestroyed } from '@core';
+import { Unsubscriber, untilCmpDestroyed } from '../../core';
 import { NgcExcelCellComponent } from './ngc-excel-cell.component';
 
 @Unsubscriber()

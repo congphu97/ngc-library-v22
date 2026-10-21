@@ -19,7 +19,7 @@ import {
 	Unsubscriber, DefaultValue, CoerceBoolean,
 	CoerceNumber, CoerceCssPixel, Memoize,
 	untilCmpDestroyed
-} from '@core';
+} from './core';
 import { NgcTooltipComponent, NGCITooltipDirection, NGCITooltipPosition } from './ngc-tooltip/ngc-tooltip.component';
 
 export type NGCITooltipTriggerType = 'hover' | 'press';

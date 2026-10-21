@@ -6,7 +6,7 @@ import {
 import { EmojiData } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import _ from 'lodash';
 
-import { DefaultValue, CoerceNumber } from '@core';
+import { DefaultValue, CoerceNumber } from '../../core';
 
 export type NgcIEmojiPickerMode = 'default' | 'inline';
 export type NgcIEmojiPickerPosition = 'above' | 'below';

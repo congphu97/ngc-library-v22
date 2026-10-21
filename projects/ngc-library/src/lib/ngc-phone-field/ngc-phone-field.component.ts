@@ -14,9 +14,9 @@ import {
 } from 'libphonenumber-js';
 import _ from 'lodash';
 
-import { DefaultValue, CoerceBoolean, Memoize } from '@core';
+import { DefaultValue, CoerceBoolean, Memoize } from '../core';
 
-import { PHONE_COUNTRIES, REGEX } from '@resources';
+import { PHONE_COUNTRIES, REGEX } from '../resources';
 
 import { NgcIFormFieldAppearance, NgcIFormFieldErrorDisplayMode } from '../ngc-form-field';
 import { NgcSearchBoxComponent } from '../ngc-search-box';

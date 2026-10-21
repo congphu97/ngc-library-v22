@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import { Memoize, RGB } from '../../angular-core';
 
-import { COLOR } from '@app/@resources';
+import { COLOR } from '../../resources';
 
 @Pipe({
 	standalone: false, name: 'color' })

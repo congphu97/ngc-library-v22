@@ -5,7 +5,7 @@ import {
 	ChangeDetectionStrategy, HostBinding
 } from '@angular/core';
 
-import { ContrastPipe, DefaultValue, CoerceBoolean, CoerceCssPixel } from '@core';
+import { ContrastPipe, DefaultValue, CoerceBoolean, CoerceCssPixel } from '../../core';
 import { NgcButtonIconDirective } from '../button-icon/ngc-button-icon.directive';
 
 

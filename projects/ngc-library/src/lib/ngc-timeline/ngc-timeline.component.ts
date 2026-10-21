@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, HostBinding } from '@angular/core';
-import { CoerceBoolean } from '@core';
+import { CoerceBoolean } from '../core';
 
 @Component({
 	standalone: false,

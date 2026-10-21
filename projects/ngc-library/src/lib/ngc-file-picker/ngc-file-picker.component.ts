@@ -9,8 +9,8 @@ import { Observable, combineLatest } from 'rxjs';
 import moment, { Moment } from 'moment-timezone';
 import _ from 'lodash';
 
-import { Unsubscriber, CoerceBoolean, DefaultValue, untilCmpDestroyed , IObject } from '@core';
-import { CONSTANT as APP_CONSTANT } from '@resources';
+import { Unsubscriber, CoerceBoolean, DefaultValue, untilCmpDestroyed , IObject } from '../core';
+import { CONSTANT as APP_CONSTANT } from '../resources';
 
 
 import { NgcIGoogleDriveFile } from './google-drive/ngc-google-drive-picker.directive';

@@ -3,7 +3,7 @@ import {
 	EventEmitter, Input
 } from '@angular/core';
 
-import { DefaultValue, CoerceBoolean, CoerceNumber } from '@core';
+import { DefaultValue, CoerceBoolean, CoerceNumber } from '../../core';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 declare const Dropbox: any;

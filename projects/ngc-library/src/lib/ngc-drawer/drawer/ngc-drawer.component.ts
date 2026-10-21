@@ -9,7 +9,7 @@ import {
 	transition, trigger
 } from '@angular/animations';
 
-import { DefaultValue, CoerceBoolean, CoerceNumber, CoerceCssPixel } from '@core';
+import { DefaultValue, CoerceBoolean, CoerceNumber, CoerceCssPixel } from '../../core';
 
 import { NgcDrawerLazyDirective } from './ngc-drawer-lazy.directive';
 

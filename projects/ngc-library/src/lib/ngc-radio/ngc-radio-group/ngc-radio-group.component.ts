@@ -9,7 +9,7 @@ import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/f
 import { startWith, takeUntil } from 'rxjs/operators';
 import _ from 'lodash';
 
-import { Unsubscriber, CoerceBoolean, DefaultValue, untilCmpDestroyed } from '@core';
+import { Unsubscriber, CoerceBoolean, DefaultValue, untilCmpDestroyed } from '../../core';
 import { NgcRadioComponent } from '../ngc-radio/ngc-radio.component';
 
 export type NgcRadioGroupDirection = 'vertical' | 'horizontal';

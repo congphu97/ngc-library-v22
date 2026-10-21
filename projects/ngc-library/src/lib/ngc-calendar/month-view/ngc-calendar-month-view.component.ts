@@ -7,9 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Moment } from 'moment-timezone';
 import _ from 'lodash';
 
-import { DATE_TIME_CONFIG, DateTimeConfig, DefaultValue, Unsubscriber } from '@core';
+import { DATE_TIME_CONFIG, DateTimeConfig, DefaultValue, Unsubscriber } from '../../core';
 
-import { CONSTANT as APP_CONSTANT } from '@resources';
+import { CONSTANT as APP_CONSTANT } from '../../resources';
 
 import { NgcCalendarViewBaseComponent, NgcICalendarEventBlock } from '../common/ngc-calendar-view-base.component';
 import { NgcICalendarWeekDay } from '../calendar-types';

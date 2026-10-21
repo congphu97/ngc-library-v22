@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { ResizeEvent } from 'angular-resizable-element';
 
-import { CoerceBoolean } from '@core';
+import { CoerceBoolean } from '../../core';
 
 @Component({
 	standalone: false,

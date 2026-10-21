@@ -3,7 +3,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ResizableModule, ResizableDirective, ResizeHandleDirective } from 'angular-resizable-element';
 
-import { CoreModule, FormModule } from '@core';
+import { CoreModule, FormModule } from '../core';
 
 import { NgcMenuModule } from '../ngc-menu';
 import { NgcIconModule } from '../ngc-icon';

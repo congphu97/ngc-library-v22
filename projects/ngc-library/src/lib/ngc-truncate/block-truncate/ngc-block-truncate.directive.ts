@@ -11,7 +11,7 @@ import {
 } from 'rxjs/operators';
 import _ from 'lodash';
 
-import { DefaultValue, CoerceNumber, Unsubscriber, untilCmpDestroyed } from '@core';
+import { DefaultValue, CoerceNumber, Unsubscriber, untilCmpDestroyed } from '../../core';
 
 const UNAVAILABLE_SIZE: number = 70;
 

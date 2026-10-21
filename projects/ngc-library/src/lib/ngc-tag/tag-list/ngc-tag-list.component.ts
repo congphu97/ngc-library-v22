@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import _ from 'lodash';
 
-import { Unsubscriber, CoerceBoolean } from '@core';
+import { Unsubscriber, CoerceBoolean } from '../../core';
 
 import { NgcBlockTruncateDirective } from '../../ngc-truncate/block-truncate/ngc-block-truncate.directive';
 import { NgcMenuComponent } from '../../ngc-menu';

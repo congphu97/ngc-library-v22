@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 import { DefaultValue, CoerceBoolean } from '../../angular-core';
 
-import { COLOR } from '@resources';
+import { COLOR } from '../../resources';
 
 @Directive({
 	standalone: false, selector: '[highlightState]' })

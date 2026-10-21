@@ -6,7 +6,7 @@ import { NgcToastComponent } from './toast/ngc-toast.component';
 import { NgcToastService } from './toast/ngc-toast.service';
 import { NgcIconModule } from '../ngc-icon';
 import { NgcAlertModule } from '../ngc-alert/ngc-alert.module';
-import { CoreModule } from '@app/@core';
+import { CoreModule } from '../core';
 
 @NgModule({
   declarations: [ NgcToastComponent, NgcToastGroupComponent ],

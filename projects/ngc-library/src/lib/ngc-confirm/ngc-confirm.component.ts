@@ -1,4 +1,4 @@
-import { IObject } from '@core';
+import { IObject } from '../core';
 import {
 	Component, ViewContainerRef, ViewEncapsulation,
 	TemplateRef, ChangeDetectionStrategy, HostBinding

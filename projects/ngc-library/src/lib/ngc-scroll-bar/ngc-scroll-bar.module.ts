@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 
 import { NgcScrollBarComponent } from './ngc-scroll-bar/ngc-scroll-bar.component';
 import { NgcScrollBarDirective } from './ngc-scroll-bar/ngc-scroll-bar.directive';

@@ -14,8 +14,8 @@ import {
 	DATE_TIME_CONFIG, DateTimeConfig, TimeFormat,
 	DefaultValue, CoerceBoolean, CoerceCssPixel,
 	CoerceNumber, Memoize
-} from '@core';
-import { CONSTANT as APP_CONSTANT } from '@resources';
+} from '../../core';
+import { CONSTANT as APP_CONSTANT } from '../../resources';
 
 const yearsRegex: RegExp = /([0-9]+)[ ]?(y(ears?)?)/gi;
 const monthsRegex: RegExp = /([0-9]+)[ ]?(mon(ths?)?)/gi;

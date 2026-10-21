@@ -4,7 +4,7 @@ import {
 	HostListener, ChangeDetectionStrategy, HostBinding
 } from '@angular/core';
 
-import { DefaultValue, CoerceBoolean, CoerceCssPixel } from '@core';
+import { DefaultValue, CoerceBoolean, CoerceCssPixel } from '../../core';
 import { NgcButtonIconDirective } from '../button-icon/ngc-button-icon.directive';
 
 export type NgcIBasicButtonAlignment = 'left' | 'right' | 'center';

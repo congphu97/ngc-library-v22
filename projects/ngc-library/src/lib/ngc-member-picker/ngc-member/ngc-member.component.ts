@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { CoerceBoolean, CoerceCssPixel, DefaultValue, Unsubscriber } from '@core';
+import { CoerceBoolean, CoerceCssPixel, DefaultValue, Unsubscriber } from '../../core';
 
 import { NgcSearchBoxComponent } from '../../ngc-search-box';
 

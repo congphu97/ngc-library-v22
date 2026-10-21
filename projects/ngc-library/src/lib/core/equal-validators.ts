@@ -1,4 +1,4 @@
-import { IObject } from '@core';
+import { IObject } from './';
 import { UntypedFormControl, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import _ from 'lodash';
 

@@ -10,8 +10,8 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import _ from 'lodash';
 
-import { REGEX } from '@resources';
-import { CoerceBoolean, DefaultValue, CoerceNumber } from '@core';
+import { REGEX } from '../resources';
+import { CoerceBoolean, DefaultValue, CoerceNumber } from '../core';
 import { NgcIFormFieldAppearance, NgcIFormFieldErrorDisplayMode } from '../ngc-form-field';
 
 export const Ngc_RANGE_INPUT_VALIDATION: ValidatorFn = Validators.compose([

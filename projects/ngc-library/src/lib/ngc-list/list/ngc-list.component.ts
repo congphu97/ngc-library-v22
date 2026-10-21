@@ -14,7 +14,7 @@ import {
 	DetectScrollDirective, Unsubscriber, calculateOrders,
 	DefaultValue, CoerceBoolean, CoerceNumber,
 	untilCmpDestroyed
-, IObject } from '@core';
+, IObject } from '../../core';
 import { NgcScrollBarDirective, INgcScrollBarMode } from '../../ngc-scroll-bar';
 // import { NgcSearchBoxComponent } from '../../ngc-search-box';
 import { NgcListItemComponent } from '../list-item/ngc-list-item.component';

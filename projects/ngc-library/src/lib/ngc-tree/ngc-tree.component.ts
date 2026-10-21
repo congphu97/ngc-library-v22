@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectorRef, forwardRef } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { CoerceBoolean } from '@core';
+import { CoerceBoolean } from '../core';
 import { NgcTreeNode, NgcTreeService } from './tree-types';
 
 export * from './tree-types';

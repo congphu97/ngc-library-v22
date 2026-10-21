@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Moment } from 'moment-timezone';
 import _ from 'lodash';
 
-import { CoerceNumber, DefaultValue, Unsubscriber } from '@core';
+import { CoerceNumber, DefaultValue, Unsubscriber } from '../../core';
 
 import { NgcCalendarViewBaseComponent, NgcICalendarEventBlock } from '../common/ngc-calendar-view-base.component';
 

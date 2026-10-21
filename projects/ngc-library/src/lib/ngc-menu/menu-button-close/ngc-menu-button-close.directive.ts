@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Input, HostListener } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { CoerceBoolean } from '@core';
+import { CoerceBoolean } from '../../core';
 
 @Directive({
 	standalone: false, selector: '[ngcMenuButtonClose]', exportAs: 'ngcMenuButtonClose' })

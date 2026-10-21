@@ -6,7 +6,7 @@ import {
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
 
-import { ScrollEvent, Unsubscriber, untilCmpDestroyed } from '@core';
+import { ScrollEvent, Unsubscriber, untilCmpDestroyed } from '../../core';
 
 @Unsubscriber()
 @Component({

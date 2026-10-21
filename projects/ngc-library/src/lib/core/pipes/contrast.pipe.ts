@@ -2,7 +2,7 @@ import { PipeTransform, Pipe } from '@angular/core';
 
 import { Memoize, IsContrastPipe } from '../../angular-core';
 
-import { COLOR } from '@app/@resources';
+import { COLOR } from '../../resources';
 
 @Pipe({
 	standalone: false, name: 'contrast' })

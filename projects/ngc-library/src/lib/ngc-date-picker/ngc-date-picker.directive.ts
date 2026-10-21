@@ -19,7 +19,7 @@ import {
 	Unsubscriber, DefaultValue, CoerceBoolean,
 	CoerceNumber, CoerceCssPixel, Memoize,
 	untilCmpDestroyed
-} from '@core';
+} from '../core';
 
 import { NgcDatePickerComponent, NgcIDatePickerPosition, NgcIDatePickerPickedEvent } from './ngc-date-picker.component';
 

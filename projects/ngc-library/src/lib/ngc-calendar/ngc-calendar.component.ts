@@ -7,7 +7,7 @@ import {
 import { UntypedFormControl, Validators } from '@angular/forms';
 import moment, { Moment } from 'moment-timezone';
 
-import { CoerceArray, CoerceBoolean, CoerceNumber } from '@core';
+import { CoerceArray, CoerceBoolean, CoerceNumber } from '../core';
 
 import { NgcCalendarViewBaseComponent } from './common/ngc-calendar-view-base.component';
 

@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
-import { CoerceCssPixel, CoerceBoolean } from '@core';
+import { CoerceCssPixel, CoerceBoolean } from '../../core';
 
 @Directive({
 	standalone: false, selector: '[ngcPageHeader]', exportAs: 'ngcPageHeader' })

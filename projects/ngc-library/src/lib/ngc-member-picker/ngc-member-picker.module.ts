@@ -3,7 +3,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 
 import { NgcAvatarModule } from '../ngc-avatar';
 import { NgcButtonModule } from '../ngc-button';

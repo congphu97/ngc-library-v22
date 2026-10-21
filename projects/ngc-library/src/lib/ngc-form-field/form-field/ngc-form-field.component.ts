@@ -10,8 +10,8 @@ import { merge, Observable } from 'rxjs';
 import { takeWhile, distinctUntilChanged } from 'rxjs/operators';
 import _ from 'lodash';
 
-import { DefaultValue, CoerceBoolean, Unsubscriber, untilCmpDestroyed , IObject } from '@core';
-import { COLOR } from '@resources';
+import { DefaultValue, CoerceBoolean, Unsubscriber, untilCmpDestroyed , IObject } from '../../core';
+import { COLOR } from '../../resources';
 import { NgcFormFieldInputDirective } from '../form-field-input/ngc-form-field-input.directive';
 import { NgcFormFieldErrorDirective } from '../form-field-error/ngc-form-field-error.directive';
 

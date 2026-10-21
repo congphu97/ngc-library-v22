@@ -1,4 +1,4 @@
-import { IObject } from '@core';
+import { IObject } from '../../core';
 import { Component } from '@angular/core';
 import moment from 'moment-timezone';
 import _ from 'lodash';

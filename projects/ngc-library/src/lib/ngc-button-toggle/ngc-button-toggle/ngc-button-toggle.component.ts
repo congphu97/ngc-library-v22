@@ -10,7 +10,7 @@ import _ from 'lodash';
 import {
 	Unsubscriber, DefaultValue, CoerceNumber,
 	CoerceBoolean, untilCmpDestroyed
-, IObject } from '@core';
+, IObject } from '../../core';
 import { NgcButtonToggleItemComponent } from '../ngc-button-toggle-item/ngc-button-toggle-item.component';
 
 export type NgcIButtonToggleTheme = 'default' | 'background';

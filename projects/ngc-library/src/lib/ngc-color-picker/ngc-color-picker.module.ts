@@ -7,7 +7,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { ColorSketchModule } from 'ngx-color/sketch';
 import { ColorPhotoshopModule } from 'ngx-color/photoshop'
 import { NgcColorDotComponent } from './color-dot/ngc-color-dot.component';
-import { CoreModule } from '@app/@core';
+import { CoreModule } from '../core';
 import { NgcTooltipModule } from '../ngc-tooltip';
 import { NgcButtonModule } from '../ngc-button';
 import { NgcColorPickerDirective } from './ngc-color-picker.directive';

@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
-import { CoerceCssPixel } from '@core';
+import { CoerceCssPixel } from '../../core';
 
 @Directive({
 	standalone: false, selector: '[ngcPageContent]', exportAs: 'ngcPageContent' })

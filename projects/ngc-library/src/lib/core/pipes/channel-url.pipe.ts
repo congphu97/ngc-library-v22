@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import { Memoize } from '../../angular-core';
 
-import { ENVIRONMENT } from '@core';
+import { ENVIRONMENT } from '..';
 
 @Pipe({
 	standalone: false, name: 'channelURL' })

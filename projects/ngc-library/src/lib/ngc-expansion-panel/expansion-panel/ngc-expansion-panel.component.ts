@@ -8,7 +8,7 @@ import {
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { trigger, transition, style, animate } from '@angular/animations';
 
-import { DefaultValue, CoerceBoolean, CoerceCssPixel, CoerceNumber } from '@core';
+import { DefaultValue, CoerceBoolean, CoerceCssPixel, CoerceNumber } from '../../core';
 
 import { NgcExpansionPanelHeaderComponent } from '../expansion-panel-header/ngc-expansion-panel-header.component';
 import { NgcExpansionPanelContentComponent } from '../expansion-panel-content/ngc-expansion-panel-content.component';

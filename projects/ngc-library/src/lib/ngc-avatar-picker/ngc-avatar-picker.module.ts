@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 
 import { NgcIFileService, Ngc_FILE_SERVICE } from '../ngc-file-picker';
 import { NgcAvatarModule } from '../ngc-avatar';

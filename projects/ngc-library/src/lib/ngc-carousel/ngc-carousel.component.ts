@@ -9,7 +9,7 @@ import {
 import {
 	DefaultValue, CoerceBoolean, CoerceCssPixel,
 	CoerceNumber, Unsubscriber
-} from '@core';
+} from '../core';
 import { NgcDialogService, NgcIDialogRef } from '../ngc-dialog';
 
 export type NgcICarouselMode = 'auto' | 'cover' | 'contain';

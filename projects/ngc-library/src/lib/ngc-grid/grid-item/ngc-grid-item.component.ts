@@ -4,7 +4,7 @@ import {
 	EventEmitter, ChangeDetectionStrategy
 } from '@angular/core';
 
-import { CoerceBoolean, AliasOf } from '@core';
+import { CoerceBoolean, AliasOf } from '../../core';
 
 @Component({
 	standalone: false,

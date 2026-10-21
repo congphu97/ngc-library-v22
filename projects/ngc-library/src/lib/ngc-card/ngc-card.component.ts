@@ -4,7 +4,7 @@ import {
 	HostBinding,
 } from '@angular/core';
 
-import { CoerceBoolean, CoerceCssPixel } from '@core';
+import { CoerceBoolean, CoerceCssPixel } from '../core';
 
 @Component({
 	standalone: false,

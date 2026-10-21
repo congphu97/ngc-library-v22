@@ -2,7 +2,7 @@ import { Component, Input, ViewEncapsulation, Optional } from '@angular/core';
 import { NgcTreeNode, NgcTreeService } from './tree-types';
 import { Observable } from 'rxjs';
 
-import { CoerceBoolean } from '@core';
+import { CoerceBoolean } from '../core';
 
 @Component({
 	standalone: false,

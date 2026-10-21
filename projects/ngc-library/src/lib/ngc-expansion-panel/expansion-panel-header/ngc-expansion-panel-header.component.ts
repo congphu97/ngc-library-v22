@@ -4,7 +4,7 @@ import {
 	ChangeDetectionStrategy
 } from '@angular/core';
 
-import { ContrastPipe, CoerceBoolean, CoerceCssPixel, DefaultValue } from '@core';
+import { ContrastPipe, CoerceBoolean, CoerceCssPixel, DefaultValue } from '../../core';
 
 @Component({
 	standalone: false,

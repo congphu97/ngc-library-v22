@@ -1,6 +1,6 @@
 import { Directive, ElementRef, NgZone, HostBinding } from '@angular/core';
 
-import { Unsubscriber } from '@core';
+import { Unsubscriber } from '../../core';
 import { NgcScrollBar } from './ngc-scroll-bar';
 
 @Unsubscriber()

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 
-import { CoreModule } from '@core';
+import { CoreModule } from '../core';
 
 import { NgcLoadingComponent } from './ngc-loading.component';
 

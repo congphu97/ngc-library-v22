@@ -6,10 +6,10 @@ import {
 import { isObservable } from 'rxjs';
 import _ from 'lodash';
 
-import { DefaultValue, Unsubscriber } from '@core';
+import { DefaultValue, Unsubscriber } from '../../core';
 
 
-import { CONSTANT as APP_CONSTANT } from '@resources';
+import { CONSTANT as APP_CONSTANT } from '../../resources';
 
 import { NgcSearchBoxComponent } from '../../ngc-search-box';
 

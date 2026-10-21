@@ -7,7 +7,7 @@ import {
 import _ from 'lodash';
 import Cropper from 'cropperjs';
 
-import { CoerceBoolean, CoerceCssPixel } from '@core';
+import { CoerceBoolean, CoerceCssPixel } from '../core';
 
 export interface NgcICroppedEvent {
 	image: string;

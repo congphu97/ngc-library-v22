@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import _ from 'lodash';
 
-import { DefaultValue, CoerceBoolean, ENVIRONMENT } from '@core';
+import { DefaultValue, CoerceBoolean, ENVIRONMENT } from '../../core';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 declare const OneDrive: any;

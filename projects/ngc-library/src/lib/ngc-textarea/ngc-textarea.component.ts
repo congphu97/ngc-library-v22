@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { debounce } from 'lodash';
 import type { DebouncedFunc } from 'lodash';
-import { CoerceBoolean } from '@core';
+import { CoerceBoolean } from '../core';
 
 @Component({
 	standalone: false,

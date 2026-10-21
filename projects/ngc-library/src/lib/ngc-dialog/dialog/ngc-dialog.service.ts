@@ -1,4 +1,4 @@
-import { IObject } from '@core';
+import { IObject } from '../../core';
 import { Injectable, InjectionToken, Injector, ViewContainerRef, StaticProvider } from '@angular/core';
 import { OverlayRef, Overlay, PositionStrategy, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal, TemplatePortal, ComponentType } from '@angular/cdk/portal';

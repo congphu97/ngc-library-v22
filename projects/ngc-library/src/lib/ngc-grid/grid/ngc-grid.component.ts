@@ -11,7 +11,7 @@ import _ from 'lodash';
 import {
 	DetectScrollDirective, Unsubscriber, DefaultValue,
 	CoerceBoolean, CoerceNumber, untilCmpDestroyed
-, IObject } from '@core';
+, IObject } from '../../core';
 import { NgcScrollBarDirective, INgcScrollBarMode } from '../../ngc-scroll-bar';
 import { NgcGridItemComponent } from '../grid-item/ngc-grid-item.component';
 
