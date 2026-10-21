@@ -1,5 +1,5 @@
 import { Component, Inject, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
-import { NGC_DIALOG_DATA, NGC_DIALOG_REF, NgcIDialogRef } from '@app/@ngc/ngc-dialog';
+import { NGC_DIALOG_DATA, NGC_DIALOG_REF, NgcIDialogRef } from '../../ngc-dialog';
 
 @Component({
 	standalone: false,

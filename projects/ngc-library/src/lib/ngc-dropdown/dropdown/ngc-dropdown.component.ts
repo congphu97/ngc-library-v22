@@ -23,7 +23,7 @@ import { NgcMenuTriggerForDirective } from '../../ngc-menu';
 // import { NgcSearchBoxComponent } from '../../ngc-search-box';
 import { NgcDropdownGroupItemComponent } from '../dropdown-group-item/ngc-dropdown-group-item.component';
 import { NgcDropdownItemComponent } from '../dropdown-item/ngc-dropdown-item.component';
-import { NgcSearchBoxComponent } from '@app/@ngc/ngc-search-box';
+import { NgcSearchBoxComponent } from '../../ngc-search-box';
 
 type NgcDropdownInternalItem = NgcDropdownGroupItemComponent | NgcDropdownItemComponent;
 

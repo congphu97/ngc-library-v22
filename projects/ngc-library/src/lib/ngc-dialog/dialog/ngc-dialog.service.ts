@@ -10,7 +10,7 @@ import _ from 'lodash';
 
 
 import { NgcDialogContainerComponent, NgcIDialogPagerType } from '../dialog-container/ngc-dialog-container.component';
-import { NgcToastService } from '@app/@ngc/ngc-toast/toast/ngc-toast.service';
+import { NgcToastService } from '../../ngc-toast/toast/ngc-toast.service';
 
 export const NGC_DIALOG_DATA: InjectionToken<any> = new InjectionToken<any>( 'Ngc_DIALOG_DATA' );
 export const NGC_DIALOG_REF: InjectionToken<NgcIDialogRef> = new InjectionToken<NgcIDialogRef>( 'Ngc_DIALOG_REF' );

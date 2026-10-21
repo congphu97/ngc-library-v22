@@ -15,7 +15,7 @@ import { NgcSearchBoxComponent } from '../../ngc-search-box';
 
 import { NgcIMember, NgcMember } from '../ngc-member/ngc-member';
 import { NgcMemberBase } from '../ngc-member-base';
-import { NgcToastService } from '@app/@ngc/ngc-toast/public-api';
+import { NgcToastService } from '../../ngc-toast/public-api';
 
 export type NgcIMemberPickerMode = 'default' | 'inline';
 

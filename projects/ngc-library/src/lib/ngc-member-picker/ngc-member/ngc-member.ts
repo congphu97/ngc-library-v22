@@ -1,4 +1,4 @@
-import { NgcIAvatar } from "@app/@ngc/ngc-avatar";
+import { NgcIAvatar } from "../../ngc-avatar";
 
 interface IStatus {
 	ACTIVE: 1;

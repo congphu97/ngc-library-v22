@@ -13,8 +13,8 @@ import { CONSTANT as APP_CONSTANT } from '@resources';
 
 import { NgcMemberBase } from '../ngc-member-base';
 import { NgcIMember, NgcIMemberStatus } from '../ngc-member/ngc-member';
-import { NgcToastService } from '@app/@ngc/ngc-toast/public-api';
-import { NgcConfirmService } from '@app/@ngc/ngc-confirm';
+import { NgcToastService } from '../../ngc-toast/public-api';
+import { NgcConfirmService } from '../../ngc-confirm';
 
 @Unsubscriber()
 @Component({

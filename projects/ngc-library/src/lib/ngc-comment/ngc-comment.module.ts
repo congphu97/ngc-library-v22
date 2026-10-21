@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { NgcAvatarModule } from '@app/@ngc/ngc-avatar';
-import { NgcIconModule } from '@app/@ngc/ngc-icon';
-import { NgcMenuModule } from '@app/@ngc/ngc-menu';
-import { NgcTooltipModule } from '@app/@ngc/ngc-tooltip';
-import { NgcEmojiPickerModule } from '@app/@ngc/ngc-emoji-picker';
-import { NgcFilePickerModule } from '@app/@ngc/ngc-file-picker';
+import { NgcAvatarModule } from '../ngc-avatar';
+import { NgcIconModule } from '../ngc-icon';
+import { NgcMenuModule } from '../ngc-menu';
+import { NgcTooltipModule } from '../ngc-tooltip';
+import { NgcEmojiPickerModule } from '../ngc-emoji-picker';
+import { NgcFilePickerModule } from '../ngc-file-picker';
 
 import { NgcCommentBoxComponent } from './ngc-comment-box/ngc-comment-box.component';
 import { NgcCommentListComponent } from './ngc-comment-list/ngc-comment-list.component';

@@ -5,8 +5,8 @@ import {
 	ChangeDetectionStrategy, OnDestroy
 } from '@angular/core';
 import { NgcICommentContent, NgcICommentFile, NgcIComment } from '../interfaces';
-import { NgcIFilePickerEvent } from '@app/@ngc/ngc-file-picker';
-import { NgcIEmojiData } from '@app/@ngc/ngc-emoji-picker';
+import { NgcIFilePickerEvent } from '../../ngc-file-picker';
+import { NgcIEmojiData } from '../../ngc-emoji-picker';
 
 @Component({
 	standalone: false,
