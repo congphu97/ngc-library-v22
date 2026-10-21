@@ -8,7 +8,7 @@
     "build:lib": "ng build ngc-library",
     "watch": "ng build ngc-library --watch --configuration development",
     "test": "ng test",
-    "postinstall": "rm -rf node_modules/angular-core/node_modules"
+    "postinstall": "rm -rf node_modules/angular-core/node_modules && node scripts/patch-angular-core.js"
   },
   "private": true,
   "packageManager": "npm@10.9.9",
