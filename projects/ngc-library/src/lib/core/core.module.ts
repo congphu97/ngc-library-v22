@@ -1,5 +1,5 @@
 import { TranslatePipe, TranslateDirective } from '@ngx-translate/core';
-import { NgModule, Optional, Inject } from '@angular/core';
+import { NgModule, Optional, Inject, Injector } from '@angular/core';
 // import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
@@ -95,18 +95,19 @@ export class CoreModule {
 	 * @param {StorageConfig} _storageConfig
 	 */
 	constructor(
-		@Optional() @Inject( APP_CONFIG ) private _appConfig: AppConfig,
-		@Optional() @Inject( DATE_TIME_CONFIG ) private _dateTimeConfig: DateTimeConfig
+		@Optional() private _injector?: Injector
 	) {
-		if ( this._appConfig ) {
-			this._appConfig.locale = APP_CONSTANT.LOCALE;
+		const appConfig = this._injector?.get( APP_CONFIG, null );
+		if ( appConfig ) {
+			appConfig.locale = APP_CONSTANT.LOCALE;
 		}
 
-		if ( this._dateTimeConfig ) {
-			this._dateTimeConfig.timezone = APP_CONSTANT.TIMEZONE;
-			this._dateTimeConfig.timeFormat = APP_CONSTANT.TIME_FORMAT;
-			this._dateTimeConfig.dateFormat = APP_CONSTANT.DATE_FORMAT;
-			this._dateTimeConfig.weekStart = APP_CONSTANT.WEEK_START;
+		const dateTimeConfig = this._injector?.get( DATE_TIME_CONFIG, null );
+		if ( dateTimeConfig ) {
+			dateTimeConfig.timezone = APP_CONSTANT.TIMEZONE;
+			dateTimeConfig.timeFormat = APP_CONSTANT.TIME_FORMAT;
+			dateTimeConfig.dateFormat = APP_CONSTANT.DATE_FORMAT;
+			dateTimeConfig.weekStart = APP_CONSTANT.WEEK_START;
 		}
 	}
 
