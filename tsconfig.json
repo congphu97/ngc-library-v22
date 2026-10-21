@@ -1,0 +1,59 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "noImplicitOverride": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": false,
+    "strict": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "baseUrl": ".",
+    "paths": {
+      "ngc-library": ["./dist/ngc-library"],
+      "@core": ["projects/ngc-library/src/lib/core"],
+      "@core/*": ["projects/ngc-library/src/lib/core/*"],
+      "@app/@core": ["projects/ngc-library/src/lib/core"],
+      "@app/@core/*": ["projects/ngc-library/src/lib/core/*"],
+      "@resources": ["projects/ngc-library/src/lib/resources"],
+      "@resources/*": ["projects/ngc-library/src/lib/resources/*"],
+      "@app/@resources": ["projects/ngc-library/src/lib/resources"],
+      "@app/@resources/*": ["projects/ngc-library/src/lib/resources/*"],
+      "@app/@ngc/*": ["projects/ngc-library/src/lib/*"],
+      "@ngc/*": ["projects/ngc-library/src/lib/*"]
+    },
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "useDefineForClassFields": false,
+    "module": "preserve",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "ignoreDeprecations": "6.0",
+    "types": ["node"]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "defaultStandalone": false,
+    "strictTemplates": false
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/ngc-library/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngc-library/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/demo/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/demo/tsconfig.spec.json"
+    }
+  ]
+}

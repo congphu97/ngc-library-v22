@@ -1,0 +1,65 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/lib",
+    "declaration": true,
+    "declarationMap": true,
+    "baseUrl": "./src/lib",
+    "ignoreDeprecations": "6.0",
+    "strict": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "noImplicitReturns": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "noImplicitOverride": false,
+    "noImplicitAny": false,
+    "noFallthroughCasesInSwitch": false,
+    "skipLibCheck": true,
+    "paths": {
+      "@core": [
+        "core"
+      ],
+      "@core/*": [
+        "core/*"
+      ],
+      "@app/@core": [
+        "core"
+      ],
+      "@app/@core/*": [
+        "core/*"
+      ],
+      "@resources": [
+        "resources"
+      ],
+      "@resources/*": [
+        "resources/*"
+      ],
+      "@app/@resources": [
+        "resources"
+      ],
+      "@app/@resources/*": [
+        "resources/*"
+      ],
+      "@app/@ngc/*": [
+        "*"
+      ],
+      "@ngc/*": [
+        "*"
+      ]
+    },
+    "types": [
+      "node"
+    ],
+    "useDefineForClassFields": false
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
+  ],
+  "angularCompilerOptions": {
+    "defaultStandalone": false,
+    "strictTemplates": false
+  }
+}

@@ -1,0 +1,441 @@
+@import '../../scss/partials/variable.scss';
+
+.content-component {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.15s ease-in-out;
+  display: block;
+  margin-bottom: 2px;
+
+  &:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+  }
+
+  &--active {
+    background-color: #e4e4e7 !important; /* neutral gray */
+    color: #09090b !important; /* bold deep black */
+    font-weight: 700 !important;
+  }
+}
+
+.sidebar-group-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #4b5563;
+  font-weight: 700;
+  padding: 8px 16px 2px;
+  letter-spacing: 0.05em;
+}
+
+.sidebar-group-divider {
+  border-top: 1px solid #e4e4e7;
+  margin: 8px 16px 6px;
+}
+
+.guideline-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: $font-family-body;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+.guideline-main-content {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  background-color: #fafafa;
+  transition: background-color 0.3s ease;
+
+  ::ng-deep {
+    .ngc-drawer-container--stretch {
+      height: 100% !important;
+      max-height: 100% !important;
+    }
+    
+    .guideline-component-main-title {
+      position: sticky;
+      top: -20px;
+      background-color: #fafafa;
+      z-index: 99;
+      font-size: 28px;
+      font-weight: 700;
+      color: #202124;
+      margin-top: 0;
+      padding-top: 30px;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      line-height: 1.2;
+      border-bottom: 1px solid #e0e0e0;
+
+      & + h3 {
+        display: none !important;
+      }
+    }
+
+    .component-description {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #5f6368;
+      max-width: 900px;
+      margin-top: 5px;
+      margin-bottom: 25px;
+      padding: 12px 18px;
+      background-color: #f1f3f4;
+      border-left: 4px solid #1a73e8;
+      border-radius: 4px;
+    }
+
+    .guideline-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 8px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+
+      th {
+        background-color: #f8fafc;
+        color: #1e293b;
+        font-weight: 600;
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      td {
+        padding: 12px 16px;
+        border-bottom: 1px solid #f1f5f9;
+        color: #475569;
+        vertical-align: middle;
+
+        code {
+          background-color: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 6px;
+          padding: 3px 6px;
+          font-size: 12px;
+          color: #3b82f6;
+          font-family: 'Fira Code', 'Courier New', monospace;
+        }
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      tr:hover td {
+        background-color: #f8fafc;
+        transition: background-color 0.2s ease;
+      }
+    }
+  }
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* ==========================================
+   DARK THEME STYLES
+   ========================================== */
+.guideline-layout.dark-theme {
+  background-color: #0d1117;
+  color: #c9d1d9;
+
+  .guideline-main-content {
+    background-color: #0d1117;
+  }
+
+  ::ng-deep {
+    // Drawer sidebar dark theme
+    .ngc-drawer {
+      border-right: 1px solid #21262d !important;
+      
+      h3 {
+        color: #8b949e;
+      }
+      
+      div {
+        color: #c9d1d9;
+      }
+
+      // Search box overrides
+      .ngc-search-box {
+        background-color: #161b22 !important;
+        border: 1px solid #30363d !important;
+        
+        input {
+          color: #c9d1d9 !important;
+          background: transparent !important;
+          
+          &::placeholder {
+            color: #484f58 !important;
+          }
+        }
+        
+        ngc-icon {
+          --icon-color: #8b949e !important;
+        }
+      }
+      
+      // List items inside drawer
+      .ngc-list-item {
+        background: transparent !important;
+        
+        .content-component {
+          --button-color: transparent !important;
+          --button-text-color: #8b949e !important;
+          
+          &:hover {
+            --button-text-color: #58a6ff !important;
+            background-color: #161b22 !important;
+          }
+        }
+      }
+    }
+
+    // Scrollbar overrides
+    ::-webkit-scrollbar {
+      background-color: #161b22;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #30363d;
+      border-radius: 4px;
+      
+      &:hover {
+        background-color: #484f58;
+      }
+    }
+
+    // Dynamic templates titles
+    h1, h2, h3, h4, h5, h6 {
+      color: #f0f6fc;
+    }
+
+    .guideline-component-main-title {
+      background-color: #0d1117 !important;
+      border-bottom-color: #30363d !important;
+    }
+    
+    // Tab Group Dark Mode
+    .ngc-tab-group {
+      border-color: #30363d !important;
+      background-color: #161b22 !important;
+
+      .ngc-tab-group__header {
+        background-color: transparent !important;
+
+        .ngc-tab-group__header-list {
+          background-color: #0d1117 !important;
+          border: 1px solid #21262d !important;
+        }
+
+        .ngc-tab-group__header-ink-bar {
+          background-color: #21262d !important;
+          border: 1px solid #30363d !important;
+          box-shadow: none !important;
+        }
+
+        .ngc-tab-group__header-item {
+          color: #8b949e !important;
+
+          &:hover {
+            color: #c9d1d9 !important;
+          }
+
+          &.ngc-tab-group__header-item--active {
+            color: #ffffff !important;
+          }
+        }
+      }
+
+      .ngc-tab-group__content {
+        background-color: #161b22 !important;
+        color: #c9d1d9 !important;
+      }
+    }
+
+    // Button Toggle Dark Mode
+    .ngc-button-toggle {
+      background-color: rgba(255, 255, 255, 0.06) !important;
+      border-color: #30363d !important;
+
+      .ngc-button-toggle-item {
+        color: #8b949e !important;
+
+        &:hover:not(.ngc-button-toggle-item--active) {
+          color: #c9d1d9 !important;
+        }
+
+        &.ngc-button-toggle-item--active {
+          background-color: #21262d !important;
+          color: #ffffff !important;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+        }
+      }
+
+      &.ngc-button-toggle--theme-background {
+        background-color: #0d1117 !important;
+        border: 1px solid #21262d !important;
+      }
+    }
+
+    // Accordion / Expansion panel Dark Mode
+    .ngc-expansion-panel {
+      background-color: #161b22 !important;
+      border: 1px solid #30363d !important;
+      color: #c9d1d9 !important;
+      
+      .ngc-expansion-panel__header {
+        background-color: #161b22 !important;
+        color: #f0f6fc !important;
+        border-bottom: 1px solid #30363d !important;
+        
+        button {
+          --button-text-color: #8b949e !important;
+          
+          &:hover {
+            --button-text-color: #ffffff !important;
+          }
+        }
+      }
+
+      .ngc-expansion-panel__body {
+        color: #c9d1d9 !important;
+        background-color: #0d1117 !important;
+      }
+    }
+    
+    // Card component Dark Mode
+    .ngc-card {
+      background-color: #161b22 !important;
+      border: 1px solid #30363d !important;
+      color: #c9d1d9 !important;
+      
+      .ngc-card__header {
+        border-bottom: 1px solid #30363d !important;
+        color: #f0f6fc !important;
+      }
+      
+      .ngc-card__footer {
+        border-top: 1px solid #30363d !important;
+        color: #8b949e !important;
+      }
+    }
+
+    // Code Block component inside Dark Mode
+    .ngc-code-block-container {
+      border-color: #30363d !important;
+      background-color: #0d1117 !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+
+      .ngc-code-block-header {
+        background-color: #161b22 !important;
+        border-bottom-color: #30363d !important;
+
+        .lang-text {
+          color: #8b949e !important;
+        }
+
+        .ngc-code-block-copy-btn {
+          color: #c9d1d9 !important;
+
+          &:hover {
+            background-color: #21262d !important;
+            color: #ffffff !important;
+          }
+
+          &.copied {
+            color: #58a6ff !important;
+            border-color: rgba(88, 166, 255, 0.2) !important;
+            background-color: rgba(88, 166, 255, 0.05) !important;
+            
+            ngc-icon {
+              --icon-color: #58a6ff !important;
+            }
+          }
+        }
+      }
+
+      .ngc-code-block-body {
+        background-color: #0d1117 !important;
+        
+        pre, pre code {
+          color: #c9d1d9 !important;
+          background-color: transparent !important;
+        }
+      }
+    }
+    
+    // Clipboard copy button Dark Mode helper
+    .ngc-button {
+      &.ngc-white {
+        background-color: #21262d !important;
+        border-color: #30363d !important;
+        color: #c9d1d9 !important;
+        
+        &:hover {
+          background-color: #30363d !important;
+          border-color: #8b949e !important;
+          color: #ffffff !important;
+        }
+      }
+    }
+    .component-description {
+      color: #9aa0a6 !important;
+      background-color: #1c2128 !important;
+      border-left-color: #58a6ff !important;
+    }
+
+    .guideline-table {
+      border-radius: 12px !important;
+      border-color: #21262d !important;
+      box-shadow: none !important;
+
+      th {
+        background-color: #161b22 !important;
+        color: #f0f6fc !important;
+        border-bottom: 1px solid #21262d !important;
+      }
+
+      td {
+        border-bottom: 1px solid #161b22 !important;
+        color: #c9d1d9 !important;
+
+        code {
+          background-color: #0d1117 !important;
+          border-color: #21262d !important;
+          border-radius: 6px !important;
+          color: #58a6ff !important;
+        }
+      }
+
+      tr:hover td {
+        background-color: #1c2128 !important;
+      }
+    }
+  }
+}
