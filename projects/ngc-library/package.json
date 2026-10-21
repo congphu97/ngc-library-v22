@@ -4,7 +4,8 @@
   "peerDependencies": {
     "@angular/common": "^22.2.0",
     "@angular/core": "^22.2.0",
-    "@angular/cdk": "^22.2.0"
+    "@angular/cdk": "^22.2.0",
+    "@angular/service-worker": "^22.2.0"
   },
   "dependencies": {
     "@ctrl/ngx-emoji-mart": "^9.3.0",
@@ -25,7 +26,10 @@
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "crypto-js": "^4.2.0",
+    "ngx-cookie-service": "^19.0.0",
+    "socket.io-client": "^4.8.1"
   },
   "sideEffects": false
 }
