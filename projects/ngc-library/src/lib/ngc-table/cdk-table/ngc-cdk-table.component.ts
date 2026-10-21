@@ -3,10 +3,8 @@ import {
 	Input, ChangeDetectionStrategy, HostBinding
 } from '@angular/core';
 import {
-	CDK_TABLE_TEMPLATE, CDK_TABLE, STICKY_POSITIONING_LISTENER,
-	_COALESCED_STYLE_SCHEDULER, CdkTable, _CoalescedStyleScheduler
+	CDK_TABLE, STICKY_POSITIONING_LISTENER, CdkTable
 } from '@angular/cdk/table';
-import { _DisposeViewRepeaterStrategy, _RecycleViewRepeaterStrategy, _VIEW_REPEATER_STRATEGY } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
 
@@ -18,13 +16,11 @@ import { ScrollEvent, Unsubscriber, untilCmpDestroyed } from '../../core';
 	selector		: 'table[ngcCdkTable]',
 	styleUrls		: [ './ngc-cdk-table.scss' ],
 	host			: { class: 'ngc-cdk-table' },
-	template		: CDK_TABLE_TEMPLATE,
+	template		: '<ng-container headerRowOutlet></ng-container><ng-container rowOutlet></ng-container><ng-container noDataRowOutlet></ng-container><ng-container footerRowOutlet></ng-container>',
 	changeDetection	: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{ provide: CdkTable, useExisting: NgcCdkTableComponent },
 		{ provide: CDK_TABLE, useExisting: NgcCdkTableComponent },
-		{ provide: _VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
-		{ provide: _COALESCED_STYLE_SCHEDULER, useClass: _CoalescedStyleScheduler },
 		{ provide: STICKY_POSITIONING_LISTENER, useValue: null },
 	],
 })
