@@ -94,21 +94,5 @@ export class CoreModule {
 	 * @param {DateTimeConfig} _dateTimeConfig
 	 * @param {StorageConfig} _storageConfig
 	 */
-	constructor(
-		@Optional() private _injector?: Injector
-	) {
-		const appConfig = this._injector?.get( APP_CONFIG, null );
-		if ( appConfig ) {
-			appConfig.locale = APP_CONSTANT.LOCALE;
-		}
-
-		const dateTimeConfig = this._injector?.get( DATE_TIME_CONFIG, null );
-		if ( dateTimeConfig ) {
-			dateTimeConfig.timezone = APP_CONSTANT.TIMEZONE;
-			dateTimeConfig.timeFormat = APP_CONSTANT.TIME_FORMAT;
-			dateTimeConfig.dateFormat = APP_CONSTANT.DATE_FORMAT;
-			dateTimeConfig.weekStart = APP_CONSTANT.WEEK_START;
-		}
-	}
-
+	constructor() {}
 }
