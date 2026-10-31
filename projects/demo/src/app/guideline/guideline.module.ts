@@ -56,6 +56,12 @@ import { NgcCollapseMenuModule } from '@app/@ngc/ngc-collapse-menu';
 import { NgcTreeModule } from '@app/@ngc/ngc-tree';
 import { NgcResizeModule } from '@app/@ngc/ngc-resize';
 import { NgcCommentModule } from '@app/@ngc/ngc-comment';
+import { NgcConfirmModule } from '@app/@ngc/ngc-confirm';
+import { NgcCropperModule } from '@app/@ngc/ngc-cropper';
+import { NgcFilePickerModule } from '@app/@ngc/ngc-file-picker';
+import { NgcGridModule } from '@app/@ngc/ngc-grid';
+import { NgcInlineInputModule } from '@app/@ngc/ngc-inline-input';
+import { NgcPageModule } from '@app/@ngc/ngc-page';
 
 import { GuidelineComponent } from './guideline.component';
 import { ContactComponent } from './partial/contact/contact.component';
@@ -129,7 +135,13 @@ import { GuidelineOverviewComponent } from './partial/overview/overview.componen
     NgcCollapseMenuModule,
     NgcTreeModule,
     NgcResizeModule,
-    NgcCommentModule
+    NgcCommentModule,
+    NgcConfirmModule,
+    NgcCropperModule,
+    NgcFilePickerModule,
+    NgcGridModule,
+    NgcInlineInputModule,
+    NgcPageModule
   ],
   exports: [ GuidelineComponent ]
 })

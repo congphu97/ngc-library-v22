@@ -1272,7 +1272,55 @@ export class AppModule &#123; &#125;</code></pre>
 		</ngc-tab>
 	</ngc-tab-group>
 </ng-template>
-<ng-template #compTemplate label="Data Table">18</ng-template>
+<ng-template #compTemplate label="Data Table">
+	<h3 class="mb-20">Data Table</h3>
+	<p class="component-description">
+		<strong>Data Table</strong> provides high-performance data grids with sorting, column resizing, sticky headers, selection checkboxes, and pagination.
+	</p>
+	<h3 class="mb-20">Overview</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<table ngcTable class="w-full">
+				<thead>
+					<tr>
+						<th align="left">Name</th>
+						<th align="left">Role</th>
+						<th align="center">Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of positions">
+						<td class="text-semibold">{{ item.name }}</td>
+						<td>{{ item.description }}</td>
+						<td align="center">
+							<ngc-tag [color]="'PRIMARY' | color" [label]="item.status || 'Active'"></ngc-tag>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;table ngcTable&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th align="left"&gt;Name&lt;/th&gt;
+      &lt;th align="left"&gt;Role&lt;/th&gt;
+      &lt;th align="center"&gt;Status&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr *ngFor="let item of positions"&gt;
+      &lt;td class="text-semibold"&gt;{{ '{' }}{{ '{' }} item.name {{ '}' }}{{ '}' }}&lt;/td&gt;
+      &lt;td&gt;{{ '{' }}{{ '{' }} item.description {{ '}' }}{{ '}' }}&lt;/td&gt;
+      &lt;td align="center"&gt;&lt;ngc-tag [color]="'PRIMARY' | color" [label]="item.status"&gt;&lt;/ngc-tag&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
 <ng-template #compTemplate label="Date Picker">
 	<p class="component-description">
 		<strong>Date Picker</strong> provides direct date select dropdown popups on buttons or inputs, with range select mode, and an inline date picker panel component.
@@ -1536,7 +1584,44 @@ export class AppModule &#123; &#125;</code></pre>
 		</ngc-tab>
 	</ngc-tab-group>
 </ng-template>
-<ng-template #compTemplate label="Input">25</ng-template>
+<ng-template #compTemplate label="Input">
+	<h3 class="mb-20">Input</h3>
+	<p class="component-description">
+		<strong>Input</strong> components wrap HTML inputs inside styled form-fields with floating or static labels, prefix/suffix icons, character count, and error states.
+	</p>
+	<h3 class="mb-20">Input Examples</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div class="layout-row layout-wrap">
+				<div class="w-300 mr-20 mb-15">
+					<ngc-form-field label="Username" required>
+						<input ngcInput placeholder="Enter your username" />
+					</ngc-form-field>
+				</div>
+				<div class="w-300 mr-20 mb-15">
+					<ngc-form-field label="Search with Icon">
+						<ngc-icon ngcPrefix name="search"></ngc-icon>
+						<input ngcInput placeholder="Type to filter..." />
+					</ngc-form-field>
+				</div>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;!-- Standard Input --&gt;
+&lt;ngc-form-field label="Username" required&gt;
+  &lt;input ngcInput placeholder="Enter your username" /&gt;
+&lt;/ngc-form-field&gt;
+
+&lt;!-- Input with Prefix Icon --&gt;
+&lt;ngc-form-field label="Search"&gt;
+  &lt;ngc-icon ngcPrefix name="search"&gt;&lt;/ngc-icon&gt;
+  &lt;input ngcInput placeholder="Type to filter..." /&gt;
+&lt;/ngc-form-field&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
 <ng-template #compTemplate label="Search Box ">
 	<h3 class="mb-20">Search Box</h3>
 	<p class="component-description">
@@ -2281,7 +2366,37 @@ export class AppModule &#123; &#125;</code></pre>
 		</ngc-tab>
 	</ngc-tab-group>
 </ng-template>
-<ng-template #compTemplate label="Popover">31</ng-template>
+<ng-template #compTemplate label="Popover">
+	<h3 class="mb-20">Popover</h3>
+	<p class="component-description">
+		<strong>Popover</strong> displays floating contextual content triggered by user interactions like click or hover, positioning relative to the anchor element.
+	</p>
+	<h3 class="mb-20">Popover Example</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div class="layout-row layout-wrap layout-align-start-center">
+				<div class="mr-15">
+					<button ngcButton [ngcTooltip]="'This is a helpful popover tooltip message!'" position="above">
+						Hover Popover (Above)
+					</button>
+				</div>
+				<div class="mr-15">
+					<button ngcButton [ngcTooltip]="'Popover message displayed below the trigger element.'" position="below">
+						Hover Popover (Below)
+					</button>
+				</div>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;!-- Popover Tooltip --&gt;
+&lt;button ngcButton [ngcTooltip]="'This is a popover message!'" position="above"&gt;
+  Hover Popover
+&lt;/button&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
 <ng-template #compTemplate label="Progress">
 	<h3 class="mv-20">Progress</h3>
 	<p class="component-description">
@@ -2510,7 +2625,37 @@ export class AppModule &#123; &#125;</code></pre>
 		</ngc-tab>
 	</ngc-tab-group>
 </ng-template>
-<ng-template #compTemplate label="Sheet">38</ng-template>
+<ng-template #compTemplate label="Sheet">
+	<h3 class="mb-20">Sheet</h3>
+	<p class="component-description">
+		<strong>Sheet</strong> provides bottom sheet or panel overlays anchored to viewport edges, ideal for mobile actions, detail views, and supplementary workflows.
+	</p>
+	<h3 class="mb-20">Sheet Panel</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<button ngcButton color="primary" (click)="demoDrawerOpened = !demoDrawerOpened">
+				{{ demoDrawerOpened ? 'Close Sheet Panel' : 'Open Sheet Panel' }}
+			</button>
+			<div *ngIf="demoDrawerOpened" class="mt-15 p-20" style="background: var(--card-background, #fff); border: 1px solid var(--border-color, #e4e4e7); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+				<h4>Bottom Sheet Content</h4>
+				<p class="text-secondary" style="font-size: 13px; line-height: 1.6;">
+					This sheet panel presents additional contextual actions or information overlaid on the current screen.
+				</p>
+				<button ngcButton class="mt-10" (click)="demoDrawerOpened = false">Dismiss</button>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;button ngcButton color="primary" (click)="showSheet = !showSheet"&gt;Toggle Sheet&lt;/button&gt;
+
+&lt;div *ngIf="showSheet" class="sheet-container"&gt;
+  &lt;h4&gt;Sheet Content&lt;/h4&gt;
+  &lt;button ngcButton (click)="showSheet = false"&gt;Dismiss&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
 <ng-template #compTemplate label="Sidebar">
 	<h3 class="mb-20">Sidebar (Drawer)</h3>
 	<p class="component-description">
@@ -3965,6 +4110,431 @@ export class AppModule &#123; &#125;</code></pre>
   (commentDeleted)="onDeleted($event)"
   (reactionUpdated)="onReacted($event)"&gt;
 &lt;/ngc-comment-list&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
+
+<ng-template #compTemplate label="Confirm">
+	<h3 class="mb-20">Confirm</h3>
+	<p class="component-description">
+		<strong>Confirm</strong> is a confirmation dialog or popup service used to ask users for explicit verification before carrying out sensitive or irreversible actions.
+	</p>
+	<h3 class="mb-20">Examples</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div class="layout-row layout-wrap">
+				<div class="mr-10">
+					<button ngcButton color="primary" (click)="openConfirm(true)">
+						Open Confirm Dialog
+					</button>
+				</div>
+				<div class="mr-10">
+					<button ngcButton (click)="openConfirm(false)">
+						Open Confirm Popup
+					</button>
+				</div>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;!-- Confirm Dialog --&gt;
+&lt;button ngcButton color="primary" (click)="openConfirm(true)"&gt;
+  Open Confirm Dialog
+&lt;/button&gt;
+
+&lt;!-- Confirm Popup --&gt;
+&lt;button ngcButton (click)="openConfirm(false)"&gt;
+  Open Confirm Popup
+&lt;/button&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
+
+<ng-template #compTemplate label="Cropper">
+	<h3 class="mb-20">Cropper</h3>
+	<p class="component-description">
+		<strong>Cropper</strong> enables interactive image cropping, zooming, and aspect ratio constraint adjustments before uploading or avatar generation.
+	</p>
+	<h3 class="mb-20">Image Cropper</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div class="layout-row layout-wrap layout-align-start-center">
+				<div style="max-width: 400px; max-height: 300px; overflow: hidden; border-radius: 8px; border: 1px solid var(--border-color, #e4e4e7);">
+					<ngc-cropper image="assets/images/arts/signin.png" width="400px" height="260px"></ngc-cropper>
+				</div>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;ngc-cropper
+  image="assets/images/photo.png"
+  width="400px"
+  height="260px"&gt;
+&lt;/ngc-cropper&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
+
+<ng-template #compTemplate label="Drawer">
+	<h3 class="mb-20">Drawer</h3>
+	<p class="component-description">
+		<strong>Drawer</strong> is a collapsible side-panel container that can slide in from the left or right to display secondary content, menus, or inspectors.
+	</p>
+	<h3 class="mb-20">Interactive Drawer</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<button ngcButton (click)="demoDrawerOpened = !demoDrawerOpened" class="mb-15">
+				{{ demoDrawerOpened ? 'Close Drawer' : 'Open Drawer' }}
+			</button>
+			<div style="border: 1px solid var(--border-color, #e4e4e7); border-radius: 8px; overflow: hidden; height: 300px; background-color: #fafafa;">
+				<ngc-drawer-container stretch>
+					<ngc-drawer [opened]="demoDrawerOpened" width="220px" position="left" label="Navigation" paddingVertical="20px" paddingLeft="20px">
+						<ngc-list stretch>
+							<ngc-list-item><button ngcButton>Home</button></ngc-list-item>
+							<ngc-list-item><button ngcButton>Analytics</button></ngc-list-item>
+							<ngc-list-item><button ngcButton>Settings</button></ngc-list-item>
+						</ngc-list>
+					</ngc-drawer>
+					<ngc-drawer-content paddingVertical="20px" paddingHorizontal="20px">
+						<h4>Main Content Area</h4>
+						<p class="text-secondary" style="font-size: 13px; line-height: 1.6; margin-top: 10px;">
+							Click the toggle button above to open or close the sliding drawer container.
+						</p>
+					</ngc-drawer-content>
+				</ngc-drawer-container>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;button ngcButton (click)="opened = !opened"&gt;Toggle Drawer&lt;/button&gt;
+
+&lt;ngc-drawer-container stretch&gt;
+  &lt;ngc-drawer [opened]="opened" width="250px" position="left" label="Drawer"&gt;
+    &lt;p&gt;Drawer Content&lt;/p&gt;
+  &lt;/ngc-drawer&gt;
+  &lt;ngc-drawer-content&gt;
+    &lt;h4&gt;Main Content&lt;/h4&gt;
+  &lt;/ngc-drawer-content&gt;
+&lt;/ngc-drawer-container&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
+
+<ng-template #compTemplate label="File Picker">
+	<h3 class="mb-20">File Picker</h3>
+	<p class="component-description">
+		<strong>File Picker</strong> triggers standard file uploads from the user's local disk, supporting single/multiple file selections, image filtering, and cloud storage providers.
+	</p>
+	<h3 class="mb-20">File Picker Directive</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div class="layout-row layout-wrap layout-align-start-center">
+				<div class="mr-10 mb-10">
+					<button ngcButton ngcFilePicker (picked)="onFilePicked($event)">
+						<ngc-icon name="upload" class="mr-5"></ngc-icon>
+						Choose Any File
+					</button>
+				</div>
+				<div class="mr-10 mb-10">
+					<button ngcButton imageOnly ngcFilePicker (picked)="onFilePicked($event)">
+						<ngc-icon name="image" class="mr-5"></ngc-icon>
+						Choose Image Only
+					</button>
+				</div>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;!-- Any file upload --&gt;
+&lt;button ngcButton ngcFilePicker (picked)="onFilePicked($event)"&gt;
+  &lt;ngc-icon name="upload" class="mr-5"&gt;&lt;/ngc-icon&gt; Choose Any File
+&lt;/button&gt;
+
+&lt;!-- Image file only --&gt;
+&lt;button ngcButton imageOnly ngcFilePicker (picked)="onFilePicked($event)"&gt;
+  &lt;ngc-icon name="image" class="mr-5"&gt;&lt;/ngc-icon&gt; Choose Image Only
+&lt;/button&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
+
+<ng-template #compTemplate label="Grid">
+	<h3 class="mb-20">Grid</h3>
+	<p class="component-description">
+		<strong>Grid</strong> organizes content items in a responsive grid layout with drag-and-drop reordering, column configurations, and item selection.
+	</p>
+	<h3 class="mb-20">Grid Layout</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div style="background-color: var(--surface-background, #fafafa); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color, #e4e4e7);">
+				<ngc-grid [itemsPerRow]="4" stretch>
+					<ngc-grid-item *ngFor="let item of gridDemoItems" [id]="item">
+						<div class="p-15" style="background: var(--card-background, #fff); border-radius: 8px; border: 1px solid var(--border-color, #e4e4e7); text-align: center;">
+							<ngc-icon name="collection" size="24px" class="mb-10"></ngc-icon>
+							<div class="text-semibold">Card #{{ item }}</div>
+							<div class="text-secondary" style="font-size: 12px;">Item Content</div>
+						</div>
+					</ngc-grid-item>
+				</ngc-grid>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;ngc-grid [itemsPerRow]="4" stretch&gt;
+  &lt;ngc-grid-item *ngFor="let item of items" [id]="item"&gt;
+    &lt;div class="p-15 card"&gt;
+      &lt;div class="text-semibold"&gt;Card #{{ '{' }}{{ '{' }} item {{ '}' }}{{ '}' }}&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/ngc-grid-item&gt;
+&lt;/ngc-grid&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
+
+<ng-template #compTemplate label="Inline Input">
+	<h3 class="mb-20">Inline Input</h3>
+	<p class="component-description">
+		<strong>Inline Input</strong> enables seamless click-to-edit inline text modifications without navigating away from the current view.
+	</p>
+	<h3 class="mb-20">Click to Edit</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div class="w-350 p-15" style="border: 1px dashed var(--border-color, #e4e4e7); border-radius: 8px;">
+				<ngc-inline-input [(ngModel)]="inlineInputValue" placeholder="Click to enter title..."></ngc-inline-input>
+			</div>
+			<p class="text-secondary mt-10" style="font-size: 13px;">Value: {{ inlineInputValue }}</p>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;ngc-inline-input [(ngModel)]="inlineInputValue" placeholder="Click to enter title..."&gt;&lt;/ngc-inline-input&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
+
+<ng-template #compTemplate label="Page">
+	<h3 class="mb-20">Page</h3>
+	<p class="component-description">
+		<strong>Page</strong> provides a full-viewport layout shell with dedicated header and content projection areas, including built-in scrolling detection.
+	</p>
+	<h3 class="mb-20">Page Layout Example</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div style="height: 300px; border: 1px solid var(--border-color, #e4e4e7); border-radius: 8px; overflow: hidden; position: relative;">
+				<ngc-page stretch>
+					<div ngcPageHeader class="p-15" style="border-bottom: 1px solid var(--border-color, #e4e4e7); background: var(--header-bg, #fff); display: flex; align-items: center; justify-content: space-between;">
+						<h4 style="margin: 0;">Dashboard Overview</h4>
+						<button ngcButton color="primary">Action</button>
+					</div>
+					<div ngcPageContent class="p-20">
+						<p>This is the page content area with built-in smooth scroll bar.</p>
+						<div *ngFor="let i of [1,2,3,4,5]" style="padding: 10px; margin-bottom: 8px; background: var(--surface-background, #f5f5f5); border-radius: 4px;">
+							Content block {{ i }}
+						</div>
+					</div>
+				</ngc-page>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;ngc-page stretch&gt;
+  &lt;div ngcPageHeader&gt;
+    &lt;h4&gt;Dashboard Overview&lt;/h4&gt;
+    &lt;button ngcButton color="primary"&gt;Action&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div ngcPageContent class="p-20"&gt;
+    &lt;p&gt;Main scrollable content&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/ngc-page&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
+
+<ng-template #compTemplate label="Phone Field">
+	<h3 class="mb-20">Phone Field</h3>
+	<p class="component-description">
+		<strong>Phone Field</strong> is an international phone number input with country code picker, automatic number validation, and flag support.
+	</p>
+	<h3 class="mb-20">Default Phone Input</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div class="w-350 mb-15">
+				<ngc-phone-field label="Phone Number" [(ngModel)]="phoneFieldValue"></ngc-phone-field>
+			</div>
+			<p class="text-secondary" style="font-size: 13px;">Current Value: {{ phoneFieldValue | json }}</p>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;ngc-phone-field label="Phone Number" [(ngModel)]="phoneFieldValue"&gt;&lt;/ngc-phone-field&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
+
+<ng-template #compTemplate label="Range Input">
+	<h3 class="mb-20">Range Input</h3>
+	<p class="component-description">
+		<strong>Range Input</strong> allows users to select a numeric range between minimum and maximum bounds using double input fields or stepper controls.
+	</p>
+	<h3 class="mb-20">Default Range</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div class="w-400 mb-15">
+				<ngc-range-input label="Price Range ($)" [min]="0" [max]="1000" [step]="10" [(ngModel)]="rangeInputValue"></ngc-range-input>
+			</div>
+			<p class="text-secondary" style="font-size: 13px;">Selected: {{ rangeInputValue | json }}</p>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;ngc-range-input
+  label="Price Range ($)"
+  [min]="0"
+  [max]="1000"
+  [step]="10"
+  [(ngModel)]="rangeInputValue"&gt;
+&lt;/ngc-range-input&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
+
+<ng-template #compTemplate label="Scroll Bar">
+	<h3 class="mb-20">Scroll Bar</h3>
+	<p class="component-description">
+		<strong>Scroll Bar</strong> provides a custom-styled, lightweight cross-browser scrollbar wrapper for overflowing content boxes.
+	</p>
+	<h3 class="mb-20">Scrollable Container</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div style="height: 180px; width: 400px; border: 1px solid var(--border-color, #e4e4e7); border-radius: 8px; overflow: hidden;">
+				<ngc-scroll-bar style="height: 100%; display: block; padding: 15px;">
+					<p *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]">
+						Scrollable item row {{ item }}: Smooth scrolling with custom thumb styling.
+					</p>
+				</ngc-scroll-bar>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;ngc-scroll-bar style="height: 180px; display: block;"&gt;
+  &lt;p *ngFor="let item of items"&gt;Scrollable content here...&lt;/p&gt;
+&lt;/ngc-scroll-bar&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
+
+<ng-template #compTemplate label="Tag">
+	<h3 class="mb-20">Tag</h3>
+	<p class="component-description">
+		<strong>Tag</strong> components display compact labels, categories, or keywords with customized color badges and support truncation and minimization.
+	</p>
+	<h3 class="mb-20">Tag Variants & Colors</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div class="layout-row layout-wrap layout-align-start-center mb-15">
+				<div class="mr-10 mb-10">
+					<ngc-tag label="Default Tag"></ngc-tag>
+				</div>
+				<div class="mr-10 mb-10">
+					<ngc-tag [color]="'PRIMARY' | color" label="Primary"></ngc-tag>
+				</div>
+				<div class="mr-10 mb-10">
+					<ngc-tag [color]="'SUCCESS' | color" label="Success"></ngc-tag>
+				</div>
+				<div class="mr-10 mb-10">
+					<ngc-tag [color]="'WARNING' | color" label="Warning"></ngc-tag>
+				</div>
+				<div class="mr-10 mb-10">
+					<ngc-tag [color]="'DANGER' | color" label="Danger"></ngc-tag>
+				</div>
+				<div class="mr-10 mb-10">
+					<ngc-tag color="#9333ea" label="Custom Purple"></ngc-tag>
+				</div>
+			</div>
+			<h4 class="mb-10">Minimized Tag</h4>
+			<div class="layout-row layout-wrap layout-align-start-center">
+				<div class="mr-10 mb-10">
+					<ngc-tag [color]="'PRIMARY' | color" label="Minimized" minimize></ngc-tag>
+				</div>
+				<div class="mr-10 mb-10">
+					<ngc-tag [color]="'SUCCESS' | color" label="Compact" minimize></ngc-tag>
+				</div>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;!-- Default Tag --&gt;
+&lt;ngc-tag label="Default Tag"&gt;&lt;/ngc-tag&gt;
+
+&lt;!-- Colored Tags --&gt;
+&lt;ngc-tag [color]="'PRIMARY' | color" label="Primary"&gt;&lt;/ngc-tag&gt;
+&lt;ngc-tag [color]="'SUCCESS' | color" label="Success"&gt;&lt;/ngc-tag&gt;
+&lt;ngc-tag [color]="'WARNING' | color" label="Warning"&gt;&lt;/ngc-tag&gt;
+&lt;ngc-tag color="#9333ea" label="Custom Purple"&gt;&lt;/ngc-tag&gt;
+
+&lt;!-- Minimized Tag --&gt;
+&lt;ngc-tag [color]="'PRIMARY' | color" label="Minimized" minimize&gt;&lt;/ngc-tag&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+
+	<h3 class="mb-20">Tag List</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<ngc-tag-list wrapping>
+				<ngc-tag *ngFor="let tag of sampleTags" [label]="tag" [color]="'PRIMARY' | color" class="mr-10 mb-10"></ngc-tag>
+			</ngc-tag-list>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;ngc-tag-list wrapping&gt;
+  &lt;ngc-tag *ngFor="let tag of sampleTags" [label]="tag" [color]="'PRIMARY' | color" class="mr-10 mb-10"&gt;&lt;/ngc-tag&gt;
+&lt;/ngc-tag-list&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+</ng-template>
+
+<ng-template #compTemplate label="Truncate">
+	<h3 class="mb-20">Truncate</h3>
+	<p class="component-description">
+		<strong>Truncate</strong> restricts long strings to a specified number of lines and renders an ellipsis with an automatic tooltip showing full contents when overflowing.
+	</p>
+	<h3 class="mb-20">Single Line & Multi-Line</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<h4 class="mb-10">Single Line (limitLine="1")</h4>
+			<div class="w-350 p-10 mb-20" style="border: 1px solid var(--border-color, #e4e4e7); border-radius: 6px;">
+				<ngc-truncate [limitLine]="1">
+					Angular is a platform for building mobile and desktop web applications. Join the community of millions of developers who build compelling user interfaces.
+				</ngc-truncate>
+			</div>
+			<h4 class="mb-10">Multi Line (limitLine="2")</h4>
+			<div class="w-350 p-10" style="border: 1px solid var(--border-color, #e4e4e7); border-radius: 6px;">
+				<ngc-truncate [limitLine]="2">
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type.
+				</ngc-truncate>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;!-- 1 line with ellipsis --&gt;
+&lt;ngc-truncate [limitLine]="1"&gt;
+  Very long text that will be truncated on one line...
+&lt;/ngc-truncate&gt;
+
+&lt;!-- 2 lines with ellipsis --&gt;
+&lt;ngc-truncate [limitLine]="2"&gt;
+  Very long text that will be truncated across two lines...
+&lt;/ngc-truncate&gt;</code></pre>
 			</ngc-code-block>
 		</ngc-tab>
 	</ngc-tab-group>

@@ -10,6 +10,7 @@ import { COLOR } from '@app/@resources';
 import { NgcICalendarEvent } from '@app/@ngc/ngc-calendar';
 import { IObject, untilCmpDestroyed } from '@core';
 import { NgcDialogService, NgcIDialogPagerType, NgcIDialogRef } from '@app/@ngc/ngc-dialog';
+import { NgcConfirmService } from '@app/@ngc/ngc-confirm';
 import { MyDialogComponent } from './partial/dialog/my-dialog.component';
 import { Observable, Observer } from 'rxjs';
 import { NgcIToastType } from '@app/@ngc/ngc-toast/toast/ngc-toast.component';
@@ -32,41 +33,54 @@ const COMPONENT_ICON_MAP: Record<string, string> = {
 	'Clipboard'          : 'clipboard',
 	'Code Block'         : 'code-block',
 	'Collapse'           : 'minimize-left',
+	'Collapse Menu'      : 'menu',
 	'Color Picker'       : 'pick-color',
 	'Color & Typography' : 'palette',
+	'Comment'            : 'message-circle',
+	'Confirm'            : 'help',
+	'Cropper'            : 'crop',
 	'Data Table'         : 'data-list',
 	'Date Picker'        : 'calendar-check',
 	'Dialog'             : 'message',
 	'Divide'             : 'minus',
+	'Drawer'             : 'sidebar',
 	'Dropdown'           : 'dropdown',
 	'Emoji Picker'       : 'emoji',
+	'File Picker'        : 'attachment',
 	'Form Field'         : 'form',
+	'Grid'               : 'grid',
 	'Icon'               : 'image',
+	'Inline Input'       : 'edit',
 	'Input'              : 'text-input',
 	'List'               : 'list',
 	'Loading'            : 'progress-auto',
 	'Member Picker'      : 'user-plus',
 	'Menu'               : 'more-vertical',
+	'Navigation Menu'    : 'menu',
+	'Page'               : 'collection',
 	'Pagination'         : 'more-horizontal',
+	'Phone Field'        : 'phone',
 	'Popover'            : 'info',
 	'Progress'           : 'progress',
 	'Radio Group'        : 'sliders',
+	'Range Input'        : 'sliders',
+	'Resize'             : 'sliders',
+	'Scroll Bar'         : 'sliders',
 	'Search Box '        : 'search',
 	'Select'             : 'dropdown',
 	'Sheet'              : 'document',
 	'Sidebar'            : 'sidebar',
 	'Skeleton'           : 'template',
-	'Navigation Menu'    : 'menu',
-	'Collapse Menu'      : 'menu',
 	'Switch'             : 'switch',
 	'Table'              : 'table',
 	'Tabs'               : 'tab-plus',
+	'Tag'                : 'label',
 	'Textarea'           : 'long-text',
+	'Timeline'           : 'calendar',
 	'Toast'              : 'bell-new',
 	'Tooltip'            : 'help',
 	'Tree'               : 'open-folder',
-	'Resize'             : 'sliders',
-	'Comment'            : 'message-circle',
+	'Truncate'           : 'more-horizontal',
 };
 
 const COMPONENT_GROUP_MAP: Record<string, string> = {
@@ -88,38 +102,51 @@ const COMPONENT_GROUP_MAP: Record<string, string> = {
 	'Collapse Menu': 'Layout',
 	'Color Picker': 'Data Entry',
 	'Color & Typography': 'General',
+	'Comment': 'Data Display',
+	'Confirm': 'Feedback',
+	'Cropper': 'Data Entry',
 	'Data Table': 'Data Display',
 	'Date Picker': 'Data Entry',
 	'Dialog': 'Feedback',
 	'Divide': 'Layout',
+	'Drawer': 'Layout',
 	'Dropdown': 'Data Entry',
 	'Emoji Picker': 'Data Entry',
+	'File Picker': 'Data Entry',
 	'Form Field': 'Data Entry',
+	'Grid': 'Layout',
 	'Icon': 'General',
+	'Inline Input': 'Data Entry',
 	'Input': 'Data Entry',
 	'List': 'Data Display',
 	'Loading': 'Feedback',
 	'Member Picker': 'Data Entry',
 	'Menu': 'Navigation',
+	'Navigation Menu': 'Navigation',
+	'Page': 'Layout',
 	'Pagination': 'Navigation',
+	'Phone Field': 'Data Entry',
 	'Popover': 'Feedback',
 	'Progress': 'Feedback',
 	'Radio Group': 'Data Entry',
+	'Range Input': 'Data Entry',
+	'Resize': 'Layout',
+	'Scroll Bar': 'Layout',
 	'Search Box ': 'Data Entry',
 	'Select': 'Data Entry',
 	'Sheet': 'Layout',
 	'Sidebar': 'Layout',
-	'Tree': 'Data Display',
-	'Resize': 'Layout',
-	'Comment': 'Data Display',
 	'Skeleton': 'Feedback',
-	'Navigation Menu': 'Navigation',
 	'Switch': 'Data Entry',
 	'Table': 'Data Display',
 	'Tabs': 'Navigation',
+	'Tag': 'Data Display',
 	'Textarea': 'Data Entry',
+	'Timeline': 'Data Display',
 	'Toast': 'Feedback',
 	'Tooltip': 'Data Display',
+	'Tree': 'Data Display',
+	'Truncate': 'Data Display',
 };
 
 const COMPONENT_GROUP_ORDER = ['General', 'Layout', 'Navigation', 'Data Entry', 'Data Display', 'Feedback'];
@@ -203,11 +230,53 @@ export class GuidelineComponent implements OnInit, DoCheck {
 
 	get compTemplatesArr(): TemplateRef<any>[] { return (this.compTemplates as IObject)?._results; }
 
+	// Confirm
+	public openConfirm(isDialog: boolean = true) {
+		const confirmRef = this._ngcConfirmService.open(
+			'Are you sure you want to proceed with this action?',
+			'Confirm Action',
+			{ type: isDialog ? 'dialog' : 'popup' }
+		);
+		confirmRef.afterOpened().subscribe(() => console.log('Confirm dialog opened'));
+		confirmRef.afterClosed().subscribe((result) => {
+			console.log('Confirm closed with result:', result);
+			if (result) {
+				this._ngcToastService.success('Action confirmed');
+			}
+		});
+	}
+
+	// Range Input
+	public rangeInputValue: number[] = [20, 80];
+	public singleRangeInputValue: number = 40;
+
+	// Phone Field
+	public phoneFieldValue: any = null;
+
+	// Inline Input
+	public inlineInputValue: string = 'Click here to edit';
+
+	// Grid
+	public gridDemoItems: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+	// Tag
+	public sampleTags: string[] = ['Design', 'Development', 'Frontend', 'Angular', 'Library', 'Components'];
+	public removeTag(tag: string) {
+		this.sampleTags = this.sampleTags.filter(t => t !== tag);
+	}
+
+	// File Picker
+	public onFilePicked(event: any) {
+		console.log('File picked:', event);
+		this._ngcToastService.success('File selected: ' + (event?.target?.files?.[0]?.name || 'File'));
+	}
+
 	constructor(
 		private _route: ActivatedRoute,
 		private _ngcToastService: NgcToastService,
 		private _cdr: ChangeDetectorRef,
 		private _ngcDialogService: NgcDialogService,
+		private _ngcConfirmService: NgcConfirmService,
 		public appComponent: AppComponent,
 	) { };
 
