@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { routes } from './app.routes';
 import { GuidelineModule } from './guideline/guideline.module';
 import { CoreModule, I18nTranslateModule } from '@app/@core';
+import { NgcModule } from 'projects/ngc-library/src/lib/ngc.module';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       GuidelineModule,
       CoreModule,
+      NgcModule,
       TranslateModule.forRoot(),
       I18nTranslateModule,
       BrowserAnimationsModule

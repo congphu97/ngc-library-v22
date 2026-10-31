@@ -185,6 +185,7 @@ export class GuidelineComponent implements OnInit, DoCheck {
 	public isDarkMode = false;
 	public componentDocs: any = {};
 	public demoDrawerOpened = false;
+	public demoOverlayDrawerOpened = false;
 
 	public toggleDrawer() {
 		this.opened = !this.opened;

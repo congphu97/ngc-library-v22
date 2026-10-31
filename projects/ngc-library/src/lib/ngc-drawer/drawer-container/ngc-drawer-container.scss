@@ -2,6 +2,8 @@
 
 .ngc-drawer-container {
 	display: flex;
+	position: relative;
+	overflow: hidden;
 
 	&.ngc-drawer-container--stretch {
 		width: 100%;

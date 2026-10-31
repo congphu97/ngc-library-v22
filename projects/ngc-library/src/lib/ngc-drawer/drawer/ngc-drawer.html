@@ -8,7 +8,16 @@
 </ng-template>
 
 <div
+  class="ngc-drawer__backdrop"
+  *ngIf="mode === 'overlay' && hasBackdrop"
+  [class.ngc-drawer__backdrop--opened]="opened"
+  [class.ngc-drawer__backdrop--sliding]="isSliding"
+  (click)="onBackdropClick($event)">
+</div>
+
+<div
   class="ngc-drawer__content-wrapper"
+  (click)="$event.stopPropagation()"
   [@slide]="opened ? 'opened' : 'closed'"
   (@slide.start)="isSliding = true"
   (@slide.done)="isSliding = false">
@@ -20,7 +29,7 @@
   </div>
 </div>
 
-<div class="ngc-drawer__divider">
+<div class="ngc-drawer__divider" *ngIf="isDividerVisible">
   <button
     class="ngc-drawer__divider-btn-toggle"
     ngcIconButton

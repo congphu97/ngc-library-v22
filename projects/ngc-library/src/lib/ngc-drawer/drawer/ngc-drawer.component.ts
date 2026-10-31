@@ -14,6 +14,7 @@ import { DefaultValue, CoerceBoolean, CoerceNumber, CoerceCssPixel } from '../..
 import { NgcDrawerLazyDirective } from './ngc-drawer-lazy.directive';
 
 export type NgcDrawerPosition = 'left' | 'right';
+export type NgcDrawerMode = 'side' | 'overlay';
 
 @Component({
 	standalone: false,
@@ -38,6 +39,9 @@ export class NgcDrawerComponent implements OnChanges {
 
 	@HostBinding( 'style.--drawer-bg-color' )
 	get styleBgColor(): string { return this.bgColor; }
+
+	@HostBinding( 'style.--drawer-backdrop-color' )
+	get styleBackdropColor(): string { return this.backdropColor; }
 
 	@HostBinding( 'style.--drawer-width' )
 	get styleWidth(): string { return this.width; }
@@ -66,10 +70,17 @@ export class NgcDrawerComponent implements OnChanges {
 	@HostBinding( 'class.ngc-drawer--sliding' )
 	get classSliding(): boolean { return this.isSliding; }
 
+	@HostBinding( 'class.ngc-drawer--overlay' )
+	get classOverlay(): boolean { return this.mode === 'overlay'; }
+
+	@HostBinding( 'class.ngc-drawer--side' )
+	get classSide(): boolean { return this.mode === 'side'; }
+
 	@ContentChild( NgcDrawerLazyDirective ) public lazyContent: NgcDrawerLazyDirective;
 
 	@Input() public label: string;
 	@Input() public bgColor: string;
+	@Input() public backdropColor: string;
 	@Input() @DefaultValue() @CoerceNumber() public renderDelay: number = 225;
 	@Input() @CoerceBoolean() public opened: boolean;
 	@Input() @CoerceCssPixel() public width: string;
@@ -80,6 +91,15 @@ export class NgcDrawerComponent implements OnChanges {
 	@Input() @CoerceCssPixel() public paddingLeft: string;
 	@Input() @CoerceCssPixel() public paddingRight: string;
 	@Input() @DefaultValue() public position: NgcDrawerPosition = 'left';
+	@Input() @DefaultValue() public mode: NgcDrawerMode = 'side';
+	@Input() @DefaultValue() @CoerceBoolean() public hasBackdrop: boolean = true;
+	@Input() @DefaultValue() @CoerceBoolean() public closeOnBackdropClick: boolean = true;
+	@Input() @CoerceBoolean() public hasDivider: boolean;
+
+	get isDividerVisible(): boolean {
+		if ( this.hasDivider !== undefined ) return this.hasDivider;
+		return this.mode !== 'overlay';
+	}
 
 	@Output() public openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -104,11 +124,44 @@ export class NgcDrawerComponent implements OnChanges {
 	/**
 	 * @return {void}
 	 */
+	public open() {
+		if ( this.opened ) return;
+		this.opened = true;
+
+		this._render();
+		this.openedChange.emit( this.opened );
+	}
+
+	/**
+	 * @return {void}
+	 */
+	public close() {
+		if ( !this.opened ) return;
+		this.opened = false;
+
+		this.openedChange.emit( this.opened );
+	}
+
+	/**
+	 * @return {void}
+	 */
 	public toggle() {
 		this.opened = !this.opened;
 
 		this._render();
 		this.openedChange.emit( this.opened );
+	}
+
+	/**
+	 * @param {MouseEvent} [event]
+	 * @return {void}
+	 */
+	public onBackdropClick( event?: MouseEvent ) {
+		if ( event ) {
+			event.stopPropagation();
+		}
+		if ( !this.closeOnBackdropClick ) return;
+		this.close();
 	}
 
 	/**

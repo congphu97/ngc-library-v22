@@ -4181,9 +4181,87 @@ export class AppModule &#123; &#125;</code></pre>
 <ng-template #compTemplate label="Drawer">
 	<h3 class="mb-20">Drawer</h3>
 	<p class="component-description">
-		<strong>Drawer</strong> is a collapsible side-panel container that can slide in from the left or right to display secondary content, menus, or inspectors.
+		<strong>Drawer</strong> is a collapsible side-panel container that can slide in from the left or right to display secondary content, menus, or inspectors. It supports both inline <code>side</code> mode and floating <code>overlay</code> mode with a dark backdrop.
 	</p>
-	<h3 class="mb-20">Interactive Drawer</h3>
+
+	<h3 class="mb-20">Overlay Mode (Floating with Dark Backdrop)</h3>
+	<p class="text-secondary mb-15" style="font-size: 13px;">
+		In <code>mode="overlay"</code>, the drawer floats above the main content area with elevation shadow, accompanied by a semi-transparent black backdrop. Clicking the backdrop automatically dismisses the drawer.
+	</p>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<button ngcButton color="primary" (click)="demoOverlayDrawerOpened = !demoOverlayDrawerOpened" class="mb-15">
+				{{ demoOverlayDrawerOpened ? 'Close Overlay Drawer' : 'Open Overlay Drawer' }}
+			</button>
+			<div style="border: 1px solid var(--border-color, #e4e4e7); border-radius: 8px; overflow: hidden; height: 350px; background-color: #fafafa; position: relative;">
+				<ngc-drawer-container stretch>
+					<ngc-drawer
+						mode="overlay"
+						[opened]="demoOverlayDrawerOpened"
+						(openedChange)="demoOverlayDrawerOpened = $event"
+						width="260px"
+						position="left"
+						paddingVertical="20px"
+						paddingHorizontal="20px"
+						[bgColor]="(isDarkMode ? 'darkGray.700' : 'WHITE') | color">
+						<div style="display: flex; align-items: center; justify-content: space-between;" class="mb-15">
+							<h4 style="margin: 0;">Overlay Menu</h4>
+							<button ngcIconButton size="28px" icon="close" (click)="demoOverlayDrawerOpened = false"></button>
+						</div>
+						<ngc-list stretch>
+							<ngc-list-item><button ngcButton>Dashboard</button></ngc-list-item>
+							<ngc-list-item><button ngcButton>Projects</button></ngc-list-item>
+							<ngc-list-item><button ngcButton>Team Members</button></ngc-list-item>
+							<ngc-list-item><button ngcButton>Settings</button></ngc-list-item>
+						</ngc-list>
+					</ngc-drawer>
+					<ngc-drawer-content paddingVertical="25px" paddingHorizontal="25px">
+						<h4>Main Content Area (Underneath)</h4>
+						<p class="text-secondary" style="font-size: 13px; line-height: 1.6; margin-top: 10px;">
+							The main content remains full width without being pushed or shifted when the drawer is in overlay mode.
+							Click the button above to slide the drawer open over this content with a dark backdrop.
+						</p>
+						<div class="mt-20 p-15" style="background: var(--card-background, #fff); border: 1px solid var(--border-color, #e4e4e7); border-radius: 6px;">
+							<p style="margin: 0; font-size: 13px;">
+								Tip: You can click anywhere outside on the black backdrop to close the drawer smoothly.
+							</p>
+						</div>
+					</ngc-drawer-content>
+				</ngc-drawer-container>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;!-- Toggle button --&gt;
+&lt;button ngcButton color="primary" (click)="isDrawerOpened = !isDrawerOpened"&gt;
+  Toggle Overlay Drawer
+&lt;/button&gt;
+
+&lt;!-- Container with overlay drawer and dark backdrop --&gt;
+&lt;ngc-drawer-container stretch&gt;
+  &lt;ngc-drawer
+    mode="overlay"
+    [(opened)]="isDrawerOpened"
+    [hasBackdrop]="true"
+    [closeOnBackdropClick]="true"
+    width="260px"
+    position="left"&gt;
+    &lt;h4&gt;Drawer Menu&lt;/h4&gt;
+    &lt;button ngcButton (click)="isDrawerOpened = false"&gt;Close&lt;/button&gt;
+  &lt;/ngc-drawer&gt;
+
+  &lt;ngc-drawer-content&gt;
+    &lt;h4&gt;Main Page Content&lt;/h4&gt;
+  &lt;/ngc-drawer-content&gt;
+&lt;/ngc-drawer-container&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+
+	<h3 class="mb-20">Side Mode (Push / Inline)</h3>
+	<p class="text-secondary mb-15" style="font-size: 13px;">
+		In default <code>mode="side"</code>, the drawer shares space side-by-side with the content and includes a collapsible divider toggle bar.
+	</p>
 	<ngc-tab-group class="mb-20">
 		<ngc-tab [label]="'Preview'">
 			<button ngcButton (click)="demoDrawerOpened = !demoDrawerOpened" class="mb-15">
