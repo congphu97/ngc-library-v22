@@ -1,7 +1,6 @@
 import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
-import { TranslateModule } from '@ngx-translate/core';
 import { routes } from './app.routes';
 import { GuidelineModule } from './guideline/guideline.module';
 import { CoreModule, I18nTranslateModule } from '@app/@core';
@@ -15,7 +14,6 @@ export const appConfig: ApplicationConfig = {
       GuidelineModule,
       CoreModule,
       NgcModule,
-      TranslateModule.forRoot(),
       I18nTranslateModule,
       BrowserAnimationsModule
     ),

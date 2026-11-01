@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
 	SKETCH_CATALOG,
@@ -87,13 +87,69 @@ export class SketchComponent implements OnInit {
 	];
 
 	// Floating Canvas Toolbar State
-	canvasInteractionMode: 'select' | 'interactive' = 'select';
+	canvasInteractionMode: 'select' | 'hand' = 'select';
 	canvasZoom: number = 100;
 	zoomLevels: number[] = [50, 75, 90, 100, 110, 125, 150];
 	showCanvasGrid: boolean = true;
 
-	setInteractionMode(mode: 'select' | 'interactive'): void {
+	// Pan / Hand tool state (Figma style)
+	isSpacePressed: boolean = false;
+	isPanning: boolean = false;
+	panStartX: number = 0;
+	panStartY: number = 0;
+	canvasPanX: number = 0;
+	canvasPanY: number = 0;
+
+	get isHandModeActive(): boolean {
+		return this.canvasInteractionMode === 'hand' || this.isSpacePressed;
+	}
+
+	setInteractionMode(mode: 'select' | 'hand'): void {
 		this.canvasInteractionMode = mode;
+	}
+
+	onCanvasMouseDown(event: MouseEvent): void {
+		if (this.isHandModeActive || event.button === 1 /* Middle click */) {
+			this.isPanning = true;
+			this.panStartX = event.clientX - this.canvasPanX;
+			this.panStartY = event.clientY - this.canvasPanY;
+			event.preventDefault();
+		}
+	}
+
+	onCanvasMouseMove(event: MouseEvent): void {
+		if (this.isPanning) {
+			this.canvasPanX = event.clientX - this.panStartX;
+			this.canvasPanY = event.clientY - this.panStartY;
+			event.preventDefault();
+		}
+	}
+
+	onCanvasMouseUp(): void {
+		this.isPanning = false;
+	}
+
+	@HostListener('window:keydown', ['$event'])
+	handleKeyDown(event: KeyboardEvent): void {
+		const targetTag = (event.target as HTMLElement)?.tagName;
+		if (targetTag === 'INPUT' || targetTag === 'TEXTAREA') return;
+
+		if (event.code === 'Space' && !this.isSpacePressed) {
+			this.isSpacePressed = true;
+			event.preventDefault();
+		} else if (event.key === 'v' || event.key === 'V') {
+			this.setInteractionMode('select');
+		} else if (event.key === 'h' || event.key === 'H') {
+			this.setInteractionMode('hand');
+		}
+	}
+
+	@HostListener('window:keyup', ['$event'])
+	handleKeyUp(event: KeyboardEvent): void {
+		if (event.code === 'Space') {
+			this.isSpacePressed = false;
+			this.isPanning = false;
+		}
 	}
 
 	zoomIn(): void {
@@ -130,6 +186,8 @@ export class SketchComponent implements OnInit {
 
 	resetCanvasView(): void {
 		this.canvasZoom = 100;
+		this.canvasPanX = 0;
+		this.canvasPanY = 0;
 		this.canvasInteractionMode = 'select';
 	}
 

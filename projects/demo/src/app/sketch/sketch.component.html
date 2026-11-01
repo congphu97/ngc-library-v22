@@ -11,24 +11,6 @@
 				<span class="brand-badge">STUDIO</span>
 				<span class="brand-title">{{ deviceFrame === 'web' ? 'Web Simulator' : 'Mobile Simulator' }}</span>
 			</div>
-			<div class="preset-selector">
-				<label>Template:</label>
-				<select [ngModel]="selectedPresetId" (ngModelChange)="loadPreset($event)" class="preset-dropdown">
-					<option *ngFor="let p of presets" [value]="p.id">{{ p.name }}</option>
-				</select>
-				<button class="new-template-btn" (click)="openNewTemplateDialog()" title="Create custom template">
-					<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-					<span>New</span>
-				</button>
-				<button *ngIf="selectedPresetId.startsWith('custom_')" class="save-template-btn" (click)="saveCurrentAsTemplate()" title="Save changes to this template">
-					<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-					<span>Save</span>
-				</button>
-				<button *ngIf="selectedPresetId.startsWith('custom_')" class="remove-template-btn" (click)="deleteCurrentTemplate()" title="Delete this custom template">
-					<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-					<span>Delete</span>
-				</button>
-			</div>
 		</div>
 
 		<div class="topbar-center">
@@ -81,6 +63,31 @@
 	<div class="studio-body">
 		<!-- LEFT PANEL: COMPONENT PALETTE -->
 		<aside class="palette-panel" [class.mobile-active]="activeMobileTab === 'palette'">
+			<!-- TEMPLATE SELECTOR (BEFORE UI COMPONENTS) -->
+			<div class="palette-template-section">
+				<div class="template-section-header">
+					<div class="template-header-title">
+						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path><line x1="4" y1="9" x2="20" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+						<span>Screen Template</span>
+					</div>
+					<button class="new-template-btn" (click)="openNewTemplateDialog()" title="Create custom template">
+						<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+						<span>New</span>
+					</button>
+				</div>
+				<div class="template-select-row">
+					<select [ngModel]="selectedPresetId" (ngModelChange)="loadPreset($event)" class="template-dropdown">
+						<option *ngFor="let p of presets" [value]="p.id">{{ p.name }}</option>
+					</select>
+					<button *ngIf="selectedPresetId.startsWith('custom_')" class="tpl-act-btn save" (click)="saveCurrentAsTemplate()" title="Save changes to this template">
+						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+					</button>
+					<button *ngIf="selectedPresetId.startsWith('custom_')" class="tpl-act-btn delete" (click)="deleteCurrentTemplate()" title="Delete this custom template">
+						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+					</button>
+				</div>
+			</div>
+
 			<div class="panel-header">
 				<h3>UI Components</h3>
 				<span class="count-tag">{{ filteredCatalog.length }}</span>
@@ -133,23 +140,36 @@
 
 		<!-- CENTER PANEL: MOBILE SIMULATOR CANVAS -->
 		<section class="canvas-area-wrapper" [class.mobile-active]="activeMobileTab === 'canvas'">
-			<!-- INTERACTIVE / LIVE TEST MODE BANNER -->
-			<div class="canvas-mode-banner" *ngIf="canvasInteractionMode === 'interactive'">
+			<!-- HAND / PAN MODE BANNER -->
+			<div class="canvas-mode-banner" *ngIf="isHandModeActive">
 				<span class="pulse-indicator"></span>
-				<span class="banner-text">Live Hover & Test Mode: Click & hover elements directly</span>
-				<button class="banner-exit-btn" (click)="setInteractionMode('select')" title="Switch back to Select Mode">
+				<span class="banner-text">Hand Tool Active: Click & drag anywhere to pan canvas (H / Space)</span>
+				<button class="banner-exit-btn" (click)="setInteractionMode('select')" title="Switch back to Select Mode (V)">
 					Exit (Select Mode)
 				</button>
 			</div>
 
-			<main class="canvas-panel" [class.no-grid]="!showCanvasGrid">
-				<div class="canvas-viewport" [class.dark-theme]="isMobileDark">
+			<main
+				class="canvas-panel"
+				[class.no-grid]="!showCanvasGrid"
+				[class.is-hand-mode]="isHandModeActive"
+				[class.is-panning]="isPanning"
+				(mousedown)="onCanvasMouseDown($event)"
+				(mousemove)="onCanvasMouseMove($event)"
+				(mouseup)="onCanvasMouseUp()"
+				(mouseleave)="onCanvasMouseUp()"
+				[style.backgroundPosition]="canvasPanX + 'px ' + canvasPanY + 'px'"
+			>
+				<div
+					class="canvas-viewport"
+					[class.dark-theme]="isMobileDark"
+					[style.transform]="'translate(' + canvasPanX + 'px, ' + canvasPanY + 'px)'"
+				>
 				<!-- PHONE FRAME WRAPPER WITH DYNAMIC SIZE -->
 				<div
 					class="phone-frame-shell"
 					[ngClass]="deviceFrame"
 					[class.is-dark]="isMobileDark"
-					[class.interactive-mode]="canvasInteractionMode === 'interactive'"
 					[style.width.px]="deviceCustomWidth"
 					[style.height.px]="deviceCustomHeight"
 					[style.transform]="'scale(' + (canvasZoom / 100) + ')'"
@@ -235,7 +255,6 @@
 									*ngFor="let item of placedComponents; let i = index"
 									class="placed-component-wrapper"
 									[class.is-selected]="selectedItem?.id === item.id"
-									[class.is-interactive-mode]="canvasInteractionMode === 'interactive'"
 									[style.--active-color]="selectedItem?.id === item.id ? (item.props.customColor || item.props.color || item.props.bgColor || '#2563eb') : '#2563eb'"
 									cdkDrag
 									(click)="selectComponent(item, $event)"
@@ -630,9 +649,9 @@
 					<button
 						type="button"
 						class="tool-btn"
-						[class.active]="canvasInteractionMode === 'interactive'"
-						(click)="setInteractionMode('interactive')"
-						title="Interactive & Hover Mode (H) - Test hover effects & interactions without selection"
+						[class.active]="canvasInteractionMode === 'hand'"
+						(click)="setInteractionMode('hand')"
+						title="Hand Tool (H / Hold Space) - Click & drag to pan canvas & background"
 					>
 						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
 							<path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
