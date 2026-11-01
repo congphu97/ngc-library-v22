@@ -1,0 +1,1153 @@
+<div class="sketch-studio">
+	<!-- TOP TOOLBAR -->
+	<header class="studio-topbar">
+		<div class="topbar-left">
+			<a routerLink="/components" class="back-home-btn" title="Back to Guideline Home">
+				<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+				<span>Home</span>
+			</a>
+			<div class="topbar-divider"></div>
+			<div class="studio-brand">
+				<span class="brand-badge">STUDIO</span>
+				<span class="brand-title">{{ deviceFrame === 'web' ? 'Web Simulator' : 'Mobile Simulator' }}</span>
+			</div>
+			<div class="preset-selector">
+				<label>Template:</label>
+				<select [ngModel]="selectedPresetId" (ngModelChange)="loadPreset($event)" class="preset-dropdown">
+					<option *ngFor="let p of presets" [value]="p.id">{{ p.name }}</option>
+				</select>
+				<button class="new-template-btn" (click)="openNewTemplateDialog()" title="Create custom template">
+					<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+					<span>New</span>
+				</button>
+				<button *ngIf="selectedPresetId.startsWith('custom_')" class="save-template-btn" (click)="saveCurrentAsTemplate()" title="Save changes to this template">
+					<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+					<span>Save</span>
+				</button>
+				<button *ngIf="selectedPresetId.startsWith('custom_')" class="remove-template-btn" (click)="deleteCurrentTemplate()" title="Delete this custom template">
+					<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+					<span>Delete</span>
+				</button>
+			</div>
+		</div>
+
+		<div class="topbar-center">
+			<div class="device-switcher">
+				<button class="switch-btn" [class.active]="deviceFrame === 'iphone'" (click)="setDeviceFrame('iphone')">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+					iPhone 15
+				</button>
+				<button class="switch-btn" [class.active]="deviceFrame === 'pixel'" (click)="setDeviceFrame('pixel')">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="3" ry="3"></rect><circle cx="12" cy="5" r="1"></circle></svg>
+					Pixel 8
+				</button>
+				<button class="switch-btn" [class.active]="deviceFrame === 'ipad'" (click)="setDeviceFrame('ipad')">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="2" width="18" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+					iPad Mini
+				</button>
+				<button class="switch-btn" [class.active]="deviceFrame === 'web'" (click)="setDeviceFrame('web')" title="Switch to Desktop Web View">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+					Web Desktop
+				</button>
+			</div>
+
+			<!-- Quick Dimension Adjusters for Screen -->
+			<div class="dimension-quick-bar">
+				<span class="dim-label">W:</span>
+				<input type="number" class="dim-input" [(ngModel)]="deviceCustomWidth" (change)="deviceFrame = 'custom'" min="300" max="1600" step="10" />
+				<span class="dim-label">H:</span>
+				<input type="number" class="dim-input" [(ngModel)]="deviceCustomHeight" (change)="deviceFrame = 'custom'" min="400" max="1400" step="10" />
+			</div>
+		</div>
+
+		<div class="topbar-right">
+			<button class="tool-btn" [class.active]="isMobileDark" (click)="toggleDarkMode()" title="Toggle Dark/Light theme">
+				<svg *ngIf="!isMobileDark" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+				<svg *ngIf="isMobileDark" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+				<span>{{ isMobileDark ? 'Light' : 'Dark' }}</span>
+			</button>
+			<button class="tool-btn" (click)="generateAngularCode()" title="View Generated Angular Template">
+				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+				<span>Export Code</span>
+			</button>
+			<button class="tool-btn danger" (click)="clearCanvas()" title="Clear mobile canvas">
+				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+				<span>Clear</span>
+			</button>
+		</div>
+	</header>
+
+	<!-- MAIN WORKSPACE -->
+	<div class="studio-body">
+		<!-- LEFT PANEL: COMPONENT PALETTE -->
+		<aside class="palette-panel" [class.mobile-active]="activeMobileTab === 'palette'">
+			<div class="panel-header">
+				<h3>UI Components</h3>
+				<span class="count-tag">{{ filteredCatalog.length }}</span>
+			</div>
+
+			<div class="search-box-wrap">
+				<svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+				<input
+					type="text"
+					class="search-input"
+					placeholder="Search components..."
+					[(ngModel)]="searchQuery"
+				/>
+			</div>
+
+			<div class="category-tabs">
+				<button
+					*ngFor="let cat of categories"
+					class="cat-chip"
+					[class.active]="selectedCategory === cat"
+					(click)="selectedCategory = cat"
+				>
+					{{ cat }}
+				</button>
+			</div>
+
+			<div class="palette-items-list">
+				<div
+					*ngFor="let item of filteredCatalog"
+					class="palette-card"
+					(click)="addComponent(item)"
+					title="Click to add to canvas"
+				>
+					<div class="card-icon">
+						<!-- Special Aa preview for Color & Typography (like in Overview) -->
+						<span *ngIf="item.name === 'Color & Typography'" class="preview-aa">Aa</span>
+						<!-- NgcIcon matching Overview -->
+						<ngc-icon *ngIf="item.name !== 'Color & Typography'" [name]="item.icon" size="18px"></ngc-icon>
+					</div>
+					<div class="card-info">
+						<span class="card-name">{{ item.name }}</span>
+						<span class="card-cat">{{ item.category }}</span>
+					</div>
+					<button class="add-btn" (click)="$event.stopPropagation(); addComponent(item)">
+						<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+					</button>
+				</div>
+			</div>
+		</aside>
+
+		<!-- CENTER PANEL: MOBILE SIMULATOR CANVAS -->
+		<section class="canvas-area-wrapper" [class.mobile-active]="activeMobileTab === 'canvas'">
+			<!-- INTERACTIVE / LIVE TEST MODE BANNER -->
+			<div class="canvas-mode-banner" *ngIf="canvasInteractionMode === 'interactive'">
+				<span class="pulse-indicator"></span>
+				<span class="banner-text">Live Hover & Test Mode: Click & hover elements directly</span>
+				<button class="banner-exit-btn" (click)="setInteractionMode('select')" title="Switch back to Select Mode">
+					Exit (Select Mode)
+				</button>
+			</div>
+
+			<main class="canvas-panel" [class.no-grid]="!showCanvasGrid">
+				<div class="canvas-viewport" [class.dark-theme]="isMobileDark">
+				<!-- PHONE FRAME WRAPPER WITH DYNAMIC SIZE -->
+				<div
+					class="phone-frame-shell"
+					[ngClass]="deviceFrame"
+					[class.is-dark]="isMobileDark"
+					[class.interactive-mode]="canvasInteractionMode === 'interactive'"
+					[style.width.px]="deviceCustomWidth"
+					[style.height.px]="deviceCustomHeight"
+					[style.transform]="'scale(' + (canvasZoom / 100) + ')'"
+					[style.transform-origin]="'center top'"
+				>
+					<!-- PHONE / WEB BROWSER OUTER BEZEL -->
+					<div class="phone-bezel">
+						<!-- DYNAMIC ISLAND / NOTCH (MOBILE ONLY) -->
+						<div class="phone-notch" *ngIf="deviceFrame !== 'web'">
+							<div class="camera-lens"></div>
+							<div class="sensor"></div>
+						</div>
+
+						<!-- HARDWARE BUTTONS (MOBILE ONLY) -->
+						<div class="hw-button vol-up" *ngIf="deviceFrame !== 'web'"></div>
+						<div class="hw-button vol-down" *ngIf="deviceFrame !== 'web'"></div>
+						<div class="hw-button power" *ngIf="deviceFrame !== 'web'"></div>
+
+						<!-- DESKTOP WEB BROWSER HEADER (WEB ONLY) -->
+						<div class="web-browser-header" *ngIf="deviceFrame === 'web'">
+							<div class="browser-window-controls">
+								<span class="control-dot close"></span>
+								<span class="control-dot minimize"></span>
+								<span class="control-dot maximize"></span>
+							</div>
+							<div class="browser-nav-actions">
+								<button class="browser-nav-btn" title="Back">
+									<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+								</button>
+								<button class="browser-nav-btn" title="Forward">
+									<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+								</button>
+								<button class="browser-nav-btn" title="Reload">
+									<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+								</button>
+							</div>
+							<div class="browser-address-bar">
+								<svg class="lock-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+								<span class="address-url">https://myapp.design/preview</span>
+							</div>
+							<div class="browser-right-actions">
+								<span class="browser-badge">Desktop Web</span>
+							</div>
+						</div>
+
+						<!-- INNER SCREEN -->
+						<div
+							class="screen-viewport"
+							[class.screen-dark]="isMobileDark"
+							[class.is-web-mode]="deviceFrame === 'web'"
+							[style.fontFamily]="screenFontFamily"
+							[style.fontSize.px]="screenFontSize"
+							[style.fontWeight]="screenFontWeight"
+						>
+							<!-- STATUS BAR (MOBILE ONLY) -->
+							<div class="mobile-status-bar" *ngIf="deviceFrame !== 'web'">
+								<span class="status-time">{{ currentTime }}</span>
+								<div class="status-icons">
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="14" width="4" height="8" rx="1"></rect><rect x="8" y="10" width="4" height="12" rx="1"></rect><rect x="14" y="6" width="4" height="16" rx="1"></rect><rect x="20" y="2" width="4" height="20" rx="1"></rect></svg>
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+									<span class="battery-icon">
+										<span class="battery-fill"></span>
+									</span>
+								</div>
+							</div>
+
+							<!-- SCROLLABLE SCREEN CANVAS -->
+							<div
+								class="screen-content-scroll"
+								cdkDropList
+								[cdkDropListData]="placedComponents"
+								(cdkDropListDropped)="onDrop($event)"
+							>
+								<!-- EMPTY STATE -->
+								<div *ngIf="placedComponents.length === 0" class="canvas-empty">
+									<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+									<h4>Canvas is empty</h4>
+									<p>Click components from the left palette to build your custom screen.</p>
+								</div>
+
+								<!-- RENDERED COMPONENTS -->
+								<div
+									*ngFor="let item of placedComponents; let i = index"
+									class="placed-component-wrapper"
+									[class.is-selected]="selectedItem?.id === item.id"
+									[class.is-interactive-mode]="canvasInteractionMode === 'interactive'"
+									[style.--active-color]="selectedItem?.id === item.id ? (item.props.customColor || item.props.color || item.props.bgColor || '#2563eb') : '#2563eb'"
+									cdkDrag
+									(click)="selectComponent(item, $event)"
+									[style.width]="item.props.width || '100%'"
+									[style.height]="item.props.height && item.props.height !== 'auto' ? item.props.height : 'auto'"
+									[style.alignSelf]="item.props.width === 'auto' ? 'center' : 'stretch'"
+									[style.fontFamily]="item.props.fontFamily || null"
+									[style.fontSize.px]="item.props.fontSize || null"
+									[style.fontWeight]="item.props.fontWeight || null"
+								>
+									<!-- SELECTION ACTION TOOLBAR -->
+									<div class="component-actions" *ngIf="selectedItem?.id === item.id">
+										<button class="act-btn mobile-inspect-btn" (click)="activeMobileTab = 'inspector'; $event.stopPropagation()" title="Open in Inspector">
+											<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+										</button>
+										<button class="act-btn" (click)="moveComponent(i, 'up', $event)" title="Move Up" [disabled]="i === 0">
+											<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+										</button>
+										<button class="act-btn" (click)="moveComponent(i, 'down', $event)" title="Move Down" [disabled]="i === placedComponents.length - 1">
+											<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+										</button>
+										<button class="act-btn" (click)="duplicateComponent(item, $event)" title="Duplicate">
+											<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+										</button>
+										<button class="act-btn danger" (click)="removeComponent(item.id, $event)" title="Delete">
+											<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+										</button>
+									</div>
+
+									<!-- DYNAMIC COMPONENT RENDERER -->
+									<div class="component-render-outlet" [style.height]="item.props.height && item.props.height !== 'auto' ? '100%' : 'auto'">
+										<!-- Mobile Nav Bar -->
+										<div
+											*ngIf="item.type === 'mobile-header'"
+											class="nav-header-widget"
+											[style.backgroundColor]="item.props.bgColor"
+											[style.color]="item.props.textColor"
+											[style.width]="item.props.width || '100%'"
+										>
+											<button class="nav-icon-btn" *ngIf="item.props.showBack" [style.color]="item.props.textColor">
+												<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+											</button>
+											<div class="nav-title">{{ item.props.title }}</div>
+											<button class="nav-icon-btn" *ngIf="item.props.showAction" [style.color]="item.props.textColor">
+												<svg *ngIf="item.props.actionIcon === 'more'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+												<svg *ngIf="item.props.actionIcon === 'settings'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+												<svg *ngIf="item.props.actionIcon === 'search'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+												<svg *ngIf="item.props.actionIcon === 'plus'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+											</button>
+										</div>
+
+										<!-- Button -->
+										<div *ngIf="item.type === 'button'" class="widget-row">
+											<button
+												ngcButton
+												[color]="item.props.color"
+												[disabled]="item.props.disabled"
+												[style.width]="item.props.width || (item.props.fullWidth ? '100%' : 'auto')"
+												[style.height]="item.props.height && item.props.height !== 'auto' ? item.props.height : '42px'"
+											>
+												{{ item.props.label }}
+											</button>
+										</div>
+
+										<!-- Button Toggle Group -->
+										<div *ngIf="item.type === 'button-toggle'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-button-toggle [selectedIndex]="item.props.selectedIndex || 0" (selectedIndexChange)="item.props.selectedIndex = $event">
+												<ngc-button-toggle-item>{{ item.props.option1 }}</ngc-button-toggle-item>
+												<ngc-button-toggle-item>{{ item.props.option2 }}</ngc-button-toggle-item>
+												<ngc-button-toggle-item>{{ item.props.option3 }}</ngc-button-toggle-item>
+											</ngc-button-toggle>
+										</div>
+
+										<!-- Avatar -->
+										<div *ngIf="item.type === 'avatar'" class="widget-row flex-center">
+											<ngc-avatar
+												[label]="item.props.label"
+												[color]="item.props.color"
+												[rounded]="item.props.rounded"
+												[size]="item.props.size"
+												[style.width]="item.props.width || 'auto'"
+											></ngc-avatar>
+										</div>
+
+										<!-- Badge -->
+										<div *ngIf="item.type === 'badge'" class="widget-row flex-center">
+											<ngc-badge
+												[content]="item.props.content"
+												[color]="item.props.color"
+												[dot]="item.props.dot"
+												[style.width]="item.props.width || 'auto'"
+											></ngc-badge>
+										</div>
+
+										<!-- Tag -->
+										<div *ngIf="item.type === 'tag'" class="widget-row flex-center">
+											<ngc-tag
+												[label]="item.props.label"
+												[color]="item.props.color"
+												[closable]="item.props.closable"
+												[style.width]="item.props.width || 'auto'"
+											></ngc-tag>
+										</div>
+
+										<!-- Card Container -->
+										<div *ngIf="item.type === 'card'" class="widget-row" [style.height]="item.props.height && item.props.height !== 'auto' ? '100%' : 'auto'">
+											<ngc-card
+												[style.width]="item.props.width || '100%'"
+												[style.height]="item.props.height && item.props.height !== 'auto' ? '100%' : 'auto'"
+											>
+												<div ngcCardHeader *ngIf="item.props.headerTitle" class="demo-card-header">
+													<strong>{{ item.props.headerTitle }}</strong>
+												</div>
+												<div ngcCardContent class="demo-card-content">
+													<p class="card-content-text">{{ item.props.content }}</p>
+												</div>
+												<div ngcCardFooter *ngIf="item.props.showFooter" class="demo-card-footer">
+													<span class="card-footer-link">{{ item.props.footerText }}</span>
+												</div>
+											</ngc-card>
+										</div>
+
+										<!-- Form Field / Text Input -->
+										<div *ngIf="item.type === 'input'" class="widget-row">
+											<ngc-form-field
+												[label]="item.props.label"
+												[style.width]="item.props.width || '100%'"
+											>
+												<input
+													ngcFormFieldInput
+													[placeholder]="item.props.placeholder"
+													[(ngModel)]="item.props.value"
+													[disabled]="item.props.disabled"
+													[required]="item.props.required"
+												/>
+											</ngc-form-field>
+										</div>
+
+										<!-- Multiline Textarea -->
+										<div *ngIf="item.type === 'textarea'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-textarea
+												[label]="item.props.label"
+												[placeholder]="item.props.placeholder"
+												[(ngModel)]="item.props.value"
+												[rows]="item.props.rows || 3"
+											></ngc-textarea>
+										</div>
+
+										<!-- Search Box -->
+										<div *ngIf="item.type === 'search-box'" class="widget-row">
+											<ngc-search-box
+												[label]="item.props.label"
+												[placeholder]="item.props.placeholder"
+												[(ngModel)]="item.props.query"
+												[clearable]="item.props.clearable"
+												[style.width]="item.props.width || '100%'"
+											></ngc-search-box>
+										</div>
+
+										<!-- Select Dropdown -->
+										<div *ngIf="item.type === 'select'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-select
+												[label]="item.props.label"
+												[placeholder]="item.props.placeholder"
+												[selectedValue]="item.props.selectedValue"
+												[options]="[
+													{ label: 'Administrator', value: 'admin' },
+													{ label: 'Editor', value: 'editor' },
+													{ label: 'Viewer', value: 'viewer' },
+													{ label: 'Billing Manager', value: 'billing' }
+												]"
+												(selectionChange)="item.props.selectedValue = $event"
+											></ngc-select>
+										</div>
+
+										<!-- Switch -->
+										<div *ngIf="item.type === 'switch'" class="widget-row switch-row" [style.width]="item.props.width || '100%'">
+											<div class="switch-texts">
+												<div class="sw-label">{{ item.props.label }}</div>
+												<div class="sw-desc" *ngIf="item.props.description">{{ item.props.description }}</div>
+											</div>
+											<ngc-switch
+												[(ngModel)]="item.props.checked"
+												[color]="item.props.color"
+												[disabled]="item.props.disabled"
+											></ngc-switch>
+										</div>
+
+										<!-- Checkbox -->
+										<div *ngIf="item.type === 'checkbox'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-checkbox
+												[(ngModel)]="item.props.checked"
+												[label]="item.props.label"
+												[color]="item.props.color"
+												[disabled]="item.props.disabled"
+											></ngc-checkbox>
+										</div>
+
+										<!-- Radio -->
+										<div *ngIf="item.type === 'radio'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-radio
+												[(ngModel)]="item.props.checked"
+												[label]="item.props.label"
+												[color]="item.props.color"
+												[disabled]="item.props.disabled"
+											></ngc-radio>
+										</div>
+
+										<!-- Date Picker -->
+										<div *ngIf="item.type === 'date-picker'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-date-picker
+												[label]="item.props.label"
+												[(ngModel)]="item.props.date"
+											></ngc-date-picker>
+										</div>
+
+										<!-- Range Slider -->
+										<div *ngIf="item.type === 'range-input'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-range-input
+												[label]="item.props.label"
+												[min]="item.props.min"
+												[max]="item.props.max"
+												[step]="item.props.step"
+												[(ngModel)]="item.props.range"
+											></ngc-range-input>
+										</div>
+
+										<!-- Phone Field -->
+										<div *ngIf="item.type === 'phone-field'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-phone-field
+												[label]="item.props.label"
+												[(ngModel)]="item.props.phone"
+											></ngc-phone-field>
+										</div>
+
+										<!-- Tabs Bar -->
+										<div *ngIf="item.type === 'tabs'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-tab-group>
+												<ngc-tab [label]="item.props.tab1">
+													<div class="tab-pane-content">{{ item.props.tab1 }} overview panel</div>
+												</ngc-tab>
+												<ngc-tab [label]="item.props.tab2">
+													<div class="tab-pane-content">{{ item.props.tab2 }} metrics & analytics</div>
+												</ngc-tab>
+												<ngc-tab [label]="item.props.tab3">
+													<div class="tab-pane-content">{{ item.props.tab3 }} preferences</div>
+												</ngc-tab>
+											</ngc-tab-group>
+										</div>
+
+										<!-- Accordion Expansion Panel -->
+										<div *ngIf="item.type === 'expansion-panel'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-expansion-panel [expanded]="item.props.expanded">
+												<ngc-expansion-panel-header>
+													{{ item.props.header }}
+												</ngc-expansion-panel-header>
+												<p class="expansion-content-body">{{ item.props.content }}</p>
+											</ngc-expansion-panel>
+										</div>
+
+										<!-- Alert Banner -->
+										<div *ngIf="item.type === 'alert'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-alert
+												[color]="item.props.color"
+												[icon]="item.props.icon"
+											>
+												<div class="alert-content-inner">
+													<strong *ngIf="item.props.title" class="alert-title">{{ item.props.title }}: </strong>
+													<span class="alert-msg">{{ item.props.message }}</span>
+												</div>
+											</ngc-alert>
+										</div>
+
+										<!-- Progress Bar -->
+										<div *ngIf="item.type === 'progress-bar'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<div class="progress-label" *ngIf="item.props.label">
+												<span>{{ item.props.label }}</span>
+												<span>{{ item.props.value }}%</span>
+											</div>
+											<ngc-progress-bar
+												[value]="item.props.value"
+												[color]="item.props.color"
+												[mode]="item.props.mode"
+											></ngc-progress-bar>
+										</div>
+
+										<!-- Loading Spinner -->
+										<div *ngIf="item.type === 'loading'" class="widget-row flex-center p-10" [style.width]="item.props.width || '100%'">
+											<ngc-loading></ngc-loading>
+											<span class="ml-10 text-muted" *ngIf="item.props.label">{{ item.props.label }}</span>
+										</div>
+
+										<!-- List Item -->
+										<div *ngIf="item.type === 'list-item'" class="widget-row custom-list-item" [style.width]="item.props.width || '100%'">
+											<div class="item-icon-box" *ngIf="item.props.icon">
+												<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+											</div>
+											<div class="item-texts">
+												<div class="item-title">{{ item.props.title }}</div>
+												<div class="item-subtitle">{{ item.props.subtitle }}</div>
+											</div>
+											<svg class="item-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+										</div>
+
+										<!-- Timeline Item (Full height capable) -->
+										<div
+											*ngIf="item.type === 'timeline-item'"
+											class="widget-row timeline-item-box"
+											[style.width]="item.props.width || '100%'"
+											[style.height]="item.props.height && item.props.height !== 'auto' ? '100%' : 'auto'"
+										>
+											<div class="tl-bullet" [class]="'bullet-' + item.props.color"></div>
+											<div class="tl-content">
+												<div class="tl-time">{{ item.props.time }}</div>
+												<div class="tl-title">{{ item.props.title }}</div>
+												<div class="tl-desc">{{ item.props.description }}</div>
+											</div>
+										</div>
+
+										<!-- Skeleton -->
+										<div *ngIf="item.type === 'skeleton'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-skeleton
+												[active]="item.props.active"
+												[shape]="item.props.shape"
+												[style.height]="item.props.height || '40px'"
+											></ngc-skeleton>
+										</div>
+
+										<!-- Divider -->
+										<div *ngIf="item.type === 'divider'" class="widget-row" [style.width]="item.props.width || '100%'">
+											<ngc-divider [align]="item.props.align">
+												<span *ngIf="item.props.text">{{ item.props.text }}</span>
+											</ngc-divider>
+										</div>
+
+										<!-- Pagination -->
+										<div *ngIf="item.type === 'pagination'" class="widget-row flex-center" [style.width]="item.props.width || '100%'">
+											<ngc-pagination
+												[pageIndex]="item.props.pageIndex || 1"
+												[pageSize]="item.props.pageSize || 10"
+												[total]="item.props.total || 50"
+											></ngc-pagination>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- HOME INDICATOR (MOBILE ONLY) -->
+							<div class="mobile-home-indicator" *ngIf="deviceFrame !== 'web'">
+								<span class="home-bar"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</main>
+
+			<!-- FLOATING CANVAS TOOLBAR (FIGMA STYLE - DRAGGABLE) -->
+			<aside
+				class="floating-canvas-toolbar"
+				cdkDrag
+				cdkDragBoundary=".canvas-area-wrapper"
+				role="toolbar"
+				aria-label="Canvas Floating Toolbar"
+			>
+				<!-- GRIP DRAG HANDLE -->
+				<div class="toolbar-drag-handle" cdkDragHandle title="Hold and drag to move toolbar anywhere">
+					<svg width="10" height="14" viewBox="0 0 10 16" fill="currentColor">
+						<circle cx="2.5" cy="2.5" r="1.5"></circle>
+						<circle cx="7.5" cy="2.5" r="1.5"></circle>
+						<circle cx="2.5" cy="8" r="1.5"></circle>
+						<circle cx="7.5" cy="8" r="1.5"></circle>
+						<circle cx="2.5" cy="13.5" r="1.5"></circle>
+						<circle cx="7.5" cy="13.5" r="1.5"></circle>
+					</svg>
+				</div>
+
+				<!-- GROUP 1: INTERACTION MODES -->
+				<div class="toolbar-group">
+					<button
+						type="button"
+						class="tool-btn"
+						[class.active]="canvasInteractionMode === 'select'"
+						(click)="setInteractionMode('select')"
+						title="Select Mode (V) - Click components to select & configure options"
+					>
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"></path>
+							<path d="M13 13l6 6"></path>
+						</svg>
+					</button>
+					<button
+						type="button"
+						class="tool-btn"
+						[class.active]="canvasInteractionMode === 'interactive'"
+						(click)="setInteractionMode('interactive')"
+						title="Interactive & Hover Mode (H) - Test hover effects & interactions without selection"
+					>
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path>
+							<path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"></path>
+							<path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path>
+							<path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path>
+						</svg>
+					</button>
+				</div>
+
+				<div class="tool-divider"></div>
+
+				<!-- GROUP 2: SCALE & ZOOM -->
+				<div class="toolbar-group zoom-group">
+					<button
+						type="button"
+						class="tool-btn mini"
+						(click)="zoomOut()"
+						[disabled]="canvasZoom <= 40"
+						title="Zoom Out (-)"
+					>
+						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+					</button>
+					<button
+						type="button"
+						class="tool-btn zoom-val-btn"
+						(click)="cycleZoom()"
+						title="Click to cycle Zoom (50%, 75%, 90%, 100%, 110%, 125%, 150%)"
+					>
+						{{ canvasZoom }}%
+					</button>
+					<button
+						type="button"
+						class="tool-btn mini"
+						(click)="zoomIn()"
+						[disabled]="canvasZoom >= 200"
+						title="Zoom In (+)"
+					>
+						<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+					</button>
+				</div>
+
+				<div class="tool-divider"></div>
+
+				<!-- GROUP 3: FONT SIZE QUICK ACCESS & FOCUS -->
+				<div class="toolbar-group">
+					<button
+						type="button"
+						class="tool-btn typo-quick-btn"
+						(click)="openAndFocusFontSize()"
+						title="Quick Typography: Open Font Size in Inspector & focus slider"
+					>
+						<span class="typo-icon-text">T</span>
+						<span class="typo-size-badge">{{ getCurrentFontSize() }}px</span>
+					</button>
+				</div>
+
+				<div class="tool-divider"></div>
+
+				<!-- GROUP 4: CANVAS UTILITIES -->
+				<div class="toolbar-group">
+					<button
+						type="button"
+						class="tool-btn"
+						[class.active]="showCanvasGrid"
+						(click)="toggleCanvasGrid()"
+						title="Toggle Dot Grid"
+					>
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<rect x="3" y="3" width="7" height="7"></rect>
+							<rect x="14" y="3" width="7" height="7"></rect>
+							<rect x="14" y="14" width="7" height="7"></rect>
+							<rect x="3" y="14" width="7" height="7"></rect>
+						</svg>
+					</button>
+					<button
+						type="button"
+						class="tool-btn"
+						(click)="resetCanvasView()"
+						title="Reset Zoom to 100% & Select Mode"
+					>
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+					</button>
+				</div>
+			</aside>
+		</section>
+
+		<!-- RIGHT PANEL: DYNAMIC PROPERTY INSPECTOR & COMPONENT TREE -->
+		<aside class="inspector-panel" [class.mobile-active]="activeMobileTab === 'inspector'">
+
+			<!-- COLLAPSIBLE SECTION 1: INSPECTOR & OPTIONS (DEFAULT: OPEN) -->
+			<div class="panel-collapse-section inspector-section" [class.is-collapsed]="isInspectorCollapsed">
+				<div class="panel-collapse-header" (click)="toggleInspector()" title="Click to toggle Inspector & Options">
+					<div class="header-left">
+						<svg class="chevron-icon" [class.rotated]="!isInspectorCollapsed" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+							<polyline points="9 18 15 12 9 6"></polyline>
+						</svg>
+						<svg class="section-icon insp-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="12" cy="12" r="3"></circle>
+							<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+						</svg>
+						<span class="section-title">Inspector & Options</span>
+					</div>
+					<span class="comp-badge" *ngIf="selectedItem">{{ selectedItem.name }}</span>
+				</div>
+
+				<div class="panel-collapse-body inspector-body" *ngIf="!isInspectorCollapsed">
+					<div class="inspector-content" *ngIf="selectedItem; else noSelection">
+						<div class="comp-header-meta">
+							<div class="meta-title">{{ selectedItem.name }}</div>
+							<div class="meta-id">ID: <code>{{ selectedItem.id }}</code></div>
+						</div>
+
+						<!-- QUICK THEME / ACCENT COLOR SWATCHES -->
+						<div class="quick-color-section">
+							<div class="section-label-row">
+								<span class="sec-label">Theme & accent color</span>
+								<span class="active-hex">{{ selectedItem.props.customColor || selectedItem.props.color || selectedItem.props.bgColor || '#2563eb' }}</span>
+							</div>
+							<div class="swatches-grid">
+								<button
+									*ngFor="let c of colorPresets"
+									class="swatch-btn"
+									[style.backgroundColor]="c"
+									[class.is-white]="c === '#ffffff'"
+									[class.active]="(selectedItem.props.customColor || selectedItem.props.color || selectedItem.props.bgColor) === c"
+									(click)="applyPresetColor(c)"
+									[title]="'Set ' + c"
+								></button>
+								<input
+									type="color"
+									class="swatch-custom-picker"
+									[ngModel]="selectedItem.props.customColor || selectedItem.props.color || selectedItem.props.bgColor || '#2563eb'"
+									(ngModelChange)="applyPresetColor()"
+									title="Custom color"
+								/>
+							</div>
+						</div>
+
+						<!-- DYNAMIC FORM PROPS -->
+						<div class="props-list">
+							<div class="prop-form-group" *ngFor="let def of getSelectedDefinitions()">
+								<label class="prop-label">{{ def.label }}</label>
+
+								<!-- TEXT INPUT -->
+								<div *ngIf="def.type === 'text'">
+									<input
+										type="text"
+										class="prop-input"
+										[(ngModel)]="selectedItem.props[def.key]"
+										[placeholder]="'Enter ' + def.label"
+									/>
+								</div>
+
+								<!-- SELECT DROPDOWN -->
+								<div *ngIf="def.type === 'select'">
+									<select class="prop-select" [(ngModel)]="selectedItem.props[def.key]">
+										<option *ngFor="let opt of def.options" [value]="opt.value">
+											{{ opt.label }}
+										</option>
+									</select>
+								</div>
+
+								<!-- BOOLEAN SWITCH -->
+								<div *ngIf="def.type === 'boolean'" class="prop-switch-line">
+									<label class="toggle-checkbox">
+										<input
+											type="checkbox"
+											[(ngModel)]="selectedItem.props[def.key]"
+										/>
+										<span class="slider"></span>
+									</label>
+									<span class="switch-state-text">{{ selectedItem.props[def.key] ? 'Enabled' : 'Disabled' }}</span>
+								</div>
+
+								<!-- COLOR PICKER -->
+								<div *ngIf="def.type === 'color'" class="prop-color-group">
+									<input
+										type="color"
+										class="color-picker-input"
+										[(ngModel)]="selectedItem.props[def.key]"
+									/>
+									<input
+										type="text"
+										class="prop-input color-text"
+										[(ngModel)]="selectedItem.props[def.key]"
+									/>
+								</div>
+
+								<!-- NUMBER SLIDER / INPUT -->
+								<div *ngIf="def.type === 'number'" class="prop-number-group">
+									<input
+										type="range"
+										class="prop-slider"
+										[min]="def.min || 0"
+										[max]="def.max || 100"
+										[step]="def.step || 1"
+										[(ngModel)]="selectedItem.props[def.key]"
+									/>
+									<span class="range-val">{{ selectedItem.props[def.key] }}</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- ACTIONS -->
+						<div class="inspector-footer">
+							<button class="action-btn duplicate" (click)="duplicateComponent(selectedItem)">
+								<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+								Duplicate
+							</button>
+							<button class="action-btn remove" (click)="removeComponent(selectedItem.id)">
+								<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+								Delete
+							</button>
+						</div>
+					</div>
+
+					<!-- NO SELECTION PLACEHOLDER -->
+					<ng-template #noSelection>
+						<div class="no-selection-box">
+							<div class="empty-icon-ring">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+							</div>
+							<h4>No Component Selected</h4>
+							<p>Click on any component inside the mobile screen or in the tree below to configure options.</p>
+						</div>
+					</ng-template>
+				</div>
+			</div>
+
+			<!-- COLLAPSIBLE SECTION 2: TYPOGRAPHY & FONT -->
+			<div class="panel-collapse-section typography-section" [class.is-collapsed]="isTypographyCollapsed">
+				<div class="panel-collapse-header" (click)="toggleTypography()" title="Click to toggle Typography & Font Settings">
+					<div class="header-left">
+						<svg class="chevron-icon" [class.rotated]="!isTypographyCollapsed" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+							<polyline points="9 18 15 12 9 6"></polyline>
+						</svg>
+						<svg class="section-icon type-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polyline points="4 7 4 4 20 4 20 7"></polyline>
+							<line x1="9" y1="20" x2="15" y2="20"></line>
+							<line x1="12" y1="4" x2="12" y2="20"></line>
+						</svg>
+						<span class="section-title">Typography & Font</span>
+					</div>
+					<span class="section-badge font-badge">{{ currentFontBadge }}</span>
+				</div>
+
+				<div class="panel-collapse-body typography-body" *ngIf="!isTypographyCollapsed">
+					<!-- SCOPE SWITCHER (SELECTED COMPONENT VS GLOBAL SCREEN) -->
+					<div class="typo-section">
+						<div class="typo-scope-bar">
+							<button
+								class="scope-chip"
+								[class.active]="typographyScope === 'selected'"
+								(click)="typographyScope = 'selected'"
+								[disabled]="!selectedItem"
+								[title]="selectedItem ? 'Customize font for ' + selectedItem.name : 'No component selected'"
+							>
+								<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+								<span>Selected{{ selectedItem ? ': ' + selectedItem.name : '' }}</span>
+							</button>
+							<button
+								class="scope-chip"
+								[class.active]="typographyScope === 'global'"
+								(click)="typographyScope = 'global'"
+								title="Customize font for entire mobile screen"
+							>
+								<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+								<span>Global Screen</span>
+							</button>
+						</div>
+					</div>
+
+					<!-- FONT FAMILY -->
+					<div class="typo-section">
+						<label class="typo-label">Font family</label>
+						<select
+							class="typo-select"
+							[ngModel]="getCurrentFontFamily()"
+							(ngModelChange)="setFontFamily($event)"
+						>
+							<option *ngFor="let f of fontFamilies" [value]="f.value">
+								{{ f.name }} ({{ f.desc }})
+							</option>
+						</select>
+					</div>
+
+					<!-- FONT SIZE -->
+					<div class="typo-section" id="sketchFontSizeSection">
+						<div class="typo-label-row">
+							<label class="typo-label">Font size</label>
+							<span class="typo-val-tag">{{ getCurrentFontSize() }}px</span>
+						</div>
+						<div class="typo-slider-row">
+							<input
+								id="typoSliderInput"
+								type="range"
+								class="typo-slider"
+								min="10"
+								max="32"
+								step="1"
+								[ngModel]="getCurrentFontSize()"
+								(ngModelChange)="setFontSize($event)"
+							/>
+						</div>
+						<div class="typo-preset-chips">
+							<button
+								*ngFor="let s of fontSizePresets"
+								class="typo-chip"
+								[class.active]="getCurrentFontSize() === s"
+								(click)="setFontSize(s)"
+							>
+								{{ s }}px
+							</button>
+						</div>
+					</div>
+
+					<!-- FONT WEIGHT -->
+					<div class="typo-section">
+						<div class="typo-label-row">
+							<label class="typo-label">Font weight</label>
+							<span class="typo-val-tag">{{ getCurrentFontWeight() }}</span>
+						</div>
+						<div class="typo-weight-chips">
+							<button
+								*ngFor="let w of fontWeightPresets"
+								class="typo-chip weight-chip"
+								[class.active]="getCurrentFontWeight() === w.value"
+								(click)="setFontWeight(w.value)"
+							>
+								{{ w.label }}
+							</button>
+						</div>
+					</div>
+
+					<!-- ACTIONS: APPLY TO ALL / RESET -->
+					<div class="typo-actions-row">
+						<button class="typo-act-btn primary" (click)="applyFontToAll()" title="Apply current font & size to all components">
+							<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							<span>Apply to all</span>
+						</button>
+						<button class="typo-act-btn" (click)="resetTypography()" title="Reset typography back to Inter default">
+							<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+							<span>Reset</span>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- COLLAPSIBLE SECTION 3: COMPONENT TREE -->
+			<div class="panel-collapse-section tree-section" [class.is-collapsed]="isTreeCollapsed">
+				<div class="panel-collapse-header" (click)="toggleTree()" title="Click to toggle Component Tree">
+					<div class="header-left">
+						<svg class="chevron-icon" [class.rotated]="!isTreeCollapsed" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+							<polyline points="9 18 15 12 9 6"></polyline>
+						</svg>
+						<svg class="section-icon tree-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+							<polyline points="2 17 12 22 22 17"></polyline>
+							<polyline points="2 12 12 17 22 12"></polyline>
+						</svg>
+						<span class="section-title">Component Tree</span>
+					</div>
+					<span class="section-badge tree-badge">{{ placedComponents.length }}</span>
+				</div>
+
+				<div class="panel-collapse-body tree-body" *ngIf="!isTreeCollapsed">
+					<div
+						class="tree-node-list"
+						cdkDropList
+						[cdkDropListData]="placedComponents"
+						(cdkDropListDropped)="onTreeDrop()"
+					>
+						<div
+							*ngFor="let node of placedComponents; let idx = index"
+							class="tree-node-item"
+							[class.is-active]="selectedItem?.id === node.id"
+							cdkDrag
+							(click)="selectComponent(node, $event)"
+						>
+							<span class="tree-drag-handle" cdkDragHandle title="Drag to reorder">
+								<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="2"></circle><circle cx="16" cy="6" r="2"></circle><circle cx="8" cy="12" r="2"></circle><circle cx="16" cy="12" r="2"></circle><circle cx="8" cy="18" r="2"></circle><circle cx="16" cy="18" r="2"></circle></svg>
+							</span>
+							<span class="tree-node-index">{{ idx + 1 }}</span>
+							<div class="tree-node-info">
+								<span class="node-name">{{ node.name }}</span>
+								<span class="node-id">#{{ node.id }}</span>
+							</div>
+							<div class="tree-node-actions">
+								<button class="node-act-btn" (click)="moveComponent(idx, 'up', $event)" [disabled]="idx === 0" title="Move Up">
+									<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+								</button>
+								<button class="node-act-btn" (click)="moveComponent(idx, 'down', $event)" [disabled]="idx === placedComponents.length - 1" title="Move Down">
+									<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+								</button>
+								<button class="node-act-btn danger" (click)="removeComponent(node.id, $event)" title="Delete">
+									<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+								</button>
+							</div>
+						</div>
+						<div *ngIf="placedComponents.length === 0" class="tree-empty-state">
+							<span>No components in canvas</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+	</div>
+
+	<!-- CODE EXPORT MODAL -->
+	<div class="code-modal-backdrop" *ngIf="showGeneratedCodeModal" (click)="showGeneratedCodeModal = false">
+		<div class="code-modal-window" (click)="$event.stopPropagation()">
+			<div class="modal-header">
+				<div class="modal-title">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+					Generated Angular Template
+				</div>
+				<button class="close-btn" (click)="showGeneratedCodeModal = false">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+				</button>
+			</div>
+			<div class="modal-body">
+				<textarea class="code-textarea" readonly>{{ generatedCode }}</textarea>
+			</div>
+			<div class="modal-footer">
+				<button class="copy-code-btn" (click)="showGeneratedCodeModal = false">
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- CREATE NEW CUSTOM TEMPLATE MODAL -->
+	<div class="code-modal-backdrop" *ngIf="showNewTemplateModal" (click)="showNewTemplateModal = false">
+		<div class="new-template-modal-window" (click)="$event.stopPropagation()">
+			<div class="modal-header">
+				<div class="modal-title">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+					Create New Custom Template
+				</div>
+				<button class="close-btn" (click)="showNewTemplateModal = false">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p class="modal-intro">Start with an empty blank screen to design your customized mobile layout from scratch.</p>
+				<div class="form-row">
+					<label class="input-label">Template Name:</label>
+					<input
+						type="text"
+						class="template-name-input"
+						placeholder="e.g. Checkout Page, User Dashboard..."
+						[(ngModel)]="newTemplateName"
+						(keydown.enter)="confirmCreateTemplate()"
+						autofocus
+					/>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="modal-cancel-btn" (click)="showNewTemplateModal = false">Cancel</button>
+				<button class="modal-create-btn" (click)="confirmCreateTemplate()">
+					<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+					Create & Customize
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- RESPONSIVE MOBILE / TABLET BOTTOM NAVIGATION BAR (< 1024PX) -->
+	<nav class="mobile-nav-bottom-bar">
+		<button
+			class="mobile-tab-btn"
+			[class.active]="activeMobileTab === 'palette'"
+			(click)="activeMobileTab = 'palette'"
+		>
+			<div class="tab-icon-wrap">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<rect x="3" y="3" width="7" height="7"></rect>
+					<rect x="14" y="3" width="7" height="7"></rect>
+					<rect x="14" y="14" width="7" height="7"></rect>
+					<rect x="3" y="14" width="7" height="7"></rect>
+				</svg>
+				<span class="tab-badge" *ngIf="filteredCatalog.length">{{ filteredCatalog.length }}</span>
+			</div>
+			<span class="tab-text">Components</span>
+		</button>
+
+		<button
+			class="mobile-tab-btn"
+			[class.active]="activeMobileTab === 'canvas'"
+			(click)="activeMobileTab = 'canvas'"
+		>
+			<div class="tab-icon-wrap">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+					<line x1="12" y1="18" x2="12.01" y2="18"></line>
+				</svg>
+				<span class="tab-badge primary" *ngIf="placedComponents.length">{{ placedComponents.length }}</span>
+			</div>
+			<span class="tab-text">Canvas</span>
+		</button>
+
+		<button
+			class="mobile-tab-btn"
+			[class.active]="activeMobileTab === 'inspector'"
+			(click)="activeMobileTab = 'inspector'"
+		>
+			<div class="tab-icon-wrap">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<circle cx="12" cy="12" r="3"></circle>
+					<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+				</svg>
+				<span class="tab-badge accent" *ngIf="selectedItem">1</span>
+			</div>
+			<span class="tab-text">Inspector</span>
+		</button>
+	</nav>
+</div>

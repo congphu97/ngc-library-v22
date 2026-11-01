@@ -1,1 +1,32 @@
-{}
+{
+	"LABEL": {
+		"ITEMS": "Mục",
+		"LOADING_DATA": "Đang tải dữ liệu",
+		"RESULTS": "Kết quả"
+	},
+	"MESSAGE": {
+		"COPYRIGHT": "© {{ year }} {{ appName }}. Đã đăng ký bản quyền.<br>Thực hiện với ❤️ tại Sài Gòn.",
+		"COULD_NOT_LOAD_RESOURCES": "Xin lỗi, không thể tải tài nguyên!",
+		"COULD_NOT_LOAD_RESOURCES_DESCRIPTION": "Đã xảy ra lỗi không xác định.",
+		"DRAG_DROP_HERE": "Kéo và thả {{ name }} vào đây để thêm",
+		"NO_DATA": "Chưa có {{ name }} nào!",
+		"NO_RESULT_FOUND": "Không tìm thấy kết quả!",
+		"NO_RESULT_FOUND_DESCRIPTION": "Kiểm tra chính tả hoặc thử tìm kiếm khác.",
+		"SEEN_ALL": "Bạn đã xem hết",
+		"VERSION": "Phiên bản: {{ appVersion }}"
+	},
+	"VALIDATION_MESSAGE": {
+		"DISALLOW_SIMILAR_PASSWORD": "Mật khẩu mới quá giống mật khẩu hiện tại. Vui lòng thử mật khẩu khác.",
+		"EQUAL": "{{ field }} phải bằng {{ value }}.",
+		"INVALID": "Vui lòng nhập {{ field }} hợp lệ.",
+		"LENGTH": "{{ field }} phải có độ dài {{ value }} ký tự.",
+		"MATCH_PASSWORD": "Mật khẩu mới và xác nhận mật khẩu không khớp.",
+		"MAX": "{{ field }} phải nhỏ hơn hoặc bằng {{ max }}.",
+		"MAX_LESS_THAN": "{{ field }} phải nhỏ hơn {{ max }}.",
+		"MAXLENGTH": "{{ field }} phải có độ dài tối đa {{ value }} ký tự.",
+		"MIN": "{{ field }} phải lớn hơn hoặc bằng {{ min }}.",
+		"MIN_GREATER_THAN": "{{ field }} phải lớn hơn {{ min }}.",
+		"MINLENGTH": "{{ field }} phải có độ dài tối thiểu {{ value }} ký tự.",
+		"REQUIRED": "{{ field }} là <strong>bắt buộc</strong>."
+	}
+}

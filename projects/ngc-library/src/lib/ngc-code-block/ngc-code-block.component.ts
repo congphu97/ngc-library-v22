@@ -68,7 +68,8 @@ export class NgcCodeBlockComponent implements OnInit, AfterContentInit, AfterVie
   }
 
   highlight() {
-    if (this.code && this.codeElem) {
+    if (this.code && this.codeElem?.nativeElement) {
+      this.codeElem.nativeElement.textContent = this.code;
       hljs.highlightElement(this.codeElem.nativeElement);
     }
   }

@@ -157,8 +157,18 @@
 
 		.ngc-date-picker__time-input {
 			width: 90px;
+			height: 100%;
 			margin-left: 10px;
 			margin-right: 5px;
+			display: flex;
+			align-items: center;
+
+			.ngc-form-field-wrapper {
+				height: 100%;
+				width: 100%;
+				display: flex;
+				align-items: center;
+			}
 		}
 	}
 }

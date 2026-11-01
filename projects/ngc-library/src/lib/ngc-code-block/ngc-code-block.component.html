@@ -11,7 +11,7 @@
   </div>
   <div class="ngc-code-block-body">
     <!-- Case 1: code input is provided -->
-    <pre *ngIf="code"><code #codeElem [highlight]="code" [language]="language || 'typescript'"></code></pre>
+    <pre *ngIf="code"><code #codeElem [class]="'hljs language-' + (language || 'typescript')">{{ code }}</code></pre>
     
     <!-- Case 2: projected content is used -->
     <div class="projected-content" [style.display]="code ? 'none' : 'block'">

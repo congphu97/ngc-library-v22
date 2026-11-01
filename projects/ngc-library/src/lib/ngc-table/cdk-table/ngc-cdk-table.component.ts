@@ -3,10 +3,8 @@ import {
 	Input, ChangeDetectionStrategy, HostBinding
 } from '@angular/core';
 import {
-	CDK_TABLE, STICKY_POSITIONING_LISTENER, CdkTable,
-	_COALESCED_STYLE_SCHEDULER, _CoalescedStyleScheduler
+	CDK_TABLE, STICKY_POSITIONING_LISTENER, CdkTable
 } from '@angular/cdk/table';
-import { _DisposeViewRepeaterStrategy, _VIEW_REPEATER_STRATEGY } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
 
@@ -23,8 +21,6 @@ import { ScrollEvent, Unsubscriber, untilCmpDestroyed } from '../../core';
 	providers: [
 		{ provide: CdkTable, useExisting: NgcCdkTableComponent },
 		{ provide: CDK_TABLE, useExisting: NgcCdkTableComponent },
-		{ provide: _VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
-		{ provide: _COALESCED_STYLE_SCHEDULER, useClass: _CoalescedStyleScheduler },
 		{ provide: STICKY_POSITIONING_LISTENER, useValue: null },
 	],
 })

@@ -4,6 +4,7 @@
 	</div>
 	<div class="header-menu">
 		<button ngcButton class="menu-btn" routerLink="/components" (click)="onComponentClick()">Component</button>
+		<button ngcButton class="menu-btn" routerLink="/sketch">Mobile Sketch</button>
 		<button ngcButton class="menu-btn" routerLink="/contact">Contact</button>
 		<ngc-dropdown *ngIf="app" class="theme-dropdown" [ngModel]="app.activeTheme" (ngModelChange)="app.setTheme($event)" [canSetNone]="false" required>
 			<ngc-dropdown-item label="Default Theme" value="default" icon="palette"></ngc-dropdown-item>
