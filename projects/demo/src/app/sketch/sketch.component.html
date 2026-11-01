@@ -15,21 +15,21 @@
 
 		<div class="topbar-center">
 			<div class="device-switcher">
-				<button class="switch-btn" [class.active]="deviceFrame === 'iphone'" (click)="setDeviceFrame('iphone')">
+				<button class="switch-btn" [class.active]="deviceFrame === 'iphone'" (click)="setDeviceFrame('iphone')" title="iPhone 15">
 					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-					iPhone 15
+					<span class="switch-label">iPhone 15</span>
 				</button>
-				<button class="switch-btn" [class.active]="deviceFrame === 'pixel'" (click)="setDeviceFrame('pixel')">
+				<button class="switch-btn" [class.active]="deviceFrame === 'pixel'" (click)="setDeviceFrame('pixel')" title="Pixel 8">
 					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="3" ry="3"></rect><circle cx="12" cy="5" r="1"></circle></svg>
-					Pixel 8
+					<span class="switch-label">Pixel 8</span>
 				</button>
-				<button class="switch-btn" [class.active]="deviceFrame === 'ipad'" (click)="setDeviceFrame('ipad')">
+				<button class="switch-btn" [class.active]="deviceFrame === 'ipad'" (click)="setDeviceFrame('ipad')" title="iPad Mini">
 					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="2" width="18" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-					iPad Mini
+					<span class="switch-label">iPad Mini</span>
 				</button>
-				<button class="switch-btn" [class.active]="deviceFrame === 'web'" (click)="setDeviceFrame('web')" title="Switch to Desktop Web View">
+				<button class="switch-btn" [class.active]="deviceFrame === 'web'" (click)="setDeviceFrame('web')" title="Web Desktop">
 					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-					Web Desktop
+					<span class="switch-label">Web Desktop</span>
 				</button>
 			</div>
 

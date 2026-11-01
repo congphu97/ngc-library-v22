@@ -309,6 +309,9 @@ export class SketchComponent implements OnInit {
 	ngOnInit(): void {
 		this.loadPreset('login');
 		this.updateClock();
+		if (typeof window !== 'undefined' && window.innerWidth <= 480) {
+			this.canvasZoom = 75;
+		}
 	}
 
 	updateClock(): void {

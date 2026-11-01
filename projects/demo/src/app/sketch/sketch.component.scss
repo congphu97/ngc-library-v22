@@ -2740,7 +2740,6 @@
 
 	/* Single active panel on mobile/tablet */
 	.palette-panel,
-	.canvas-panel,
 	.canvas-area-wrapper,
 	.inspector-panel {
 		display: none !important;
@@ -2752,33 +2751,45 @@
 	}
 
 	.palette-panel.mobile-active,
-	.canvas-panel.mobile-active,
 	.canvas-area-wrapper.mobile-active,
 	.inspector-panel.mobile-active {
 		display: flex !important;
 	}
 
 	.canvas-area-wrapper {
+		position: relative !important;
+		overflow: hidden !important;
+
+		&.mobile-active {
+			display: flex !important;
+			flex-direction: column !important;
+		}
+
+		/* Canvas Panel inside active wrapper */
+		.canvas-panel {
+			display: flex !important;
+			flex: 1 1 100% !important;
+			width: 100% !important;
+			height: 100% !important;
+			padding: 16px 8px 120px !important;
+			align-items: flex-start !important;
+			justify-content: center !important;
+			overflow: auto !important;
+
+			.canvas-viewport {
+				display: flex;
+				justify-content: center;
+				padding-bottom: 60px;
+			}
+		}
+
 		.floating-canvas-toolbar {
 			bottom: 74px !important;
+			z-index: 120 !important;
 			max-width: calc(100vw - 20px);
 			overflow-x: auto;
 		}
 	}
-
-	/* Canvas Panel adjustments */
-	.canvas-panel {
-		padding: 16px 8px !important;
-		align-items: flex-start !important;
-		justify-content: center !important;
-		overflow-y: auto !important;
-
-		.canvas-viewport {
-			padding-bottom: 30px;
-		}
-	}
-
-
 
 	/* Dimension quick bar in topbar hidden on tablet */
 	.studio-topbar {
@@ -2786,51 +2797,70 @@
 			display: none !important;
 		}
 	}
-
-
 }
 
 @media (max-width: 768px) {
 	.studio-topbar {
-		padding: 0 10px !important;
+		padding: 0 8px !important;
 		height: 52px !important;
 
 		.topbar-left {
-			gap: 8px !important;
+			gap: 6px !important;
+			flex: 0 0 auto !important;
+
+			.back-home-btn {
+				padding: 5px 7px !important;
+				span {
+					display: none !important;
+				}
+			}
+
+			.topbar-divider {
+				display: none !important;
+			}
 
 			.studio-brand {
 				.brand-title {
 					display: none !important;
 				}
 			}
-
-			.preset-selector {
-				label {
-					display: none !important;
-				}
-
-				.preset-dropdown {
-					max-width: 120px !important;
-					padding: 3px 6px !important;
-					font-size: 12px !important;
-				}
-
-				.new-template-btn {
-					padding: 3px 6px !important;
-					font-size: 11px !important;
-				}
-			}
 		}
 
 		.topbar-center {
-			display: none !important;
+			display: flex !important;
+			justify-content: center !important;
+			flex: 1 !important;
+			padding: 0 4px;
+
+			.device-switcher {
+				padding: 2px !important;
+				gap: 2px !important;
+
+				.switch-btn {
+					padding: 5px 6px !important;
+
+					.switch-label {
+						display: none !important;
+					}
+
+					svg {
+						width: 13px;
+						height: 13px;
+					}
+				}
+			}
+
+			.dimension-quick-bar {
+				display: none !important;
+			}
 		}
 
 		.topbar-right {
-			gap: 5px !important;
+			gap: 4px !important;
+			flex: 0 0 auto !important;
 
 			.tool-btn {
-				padding: 4px 8px !important;
+				padding: 5px 7px !important;
 				font-size: 11px !important;
 
 				span {
@@ -2844,29 +2874,12 @@
 		}
 	}
 
-
-
-
-
 	.studio-body {
 		height: calc(100vh - 52px - 60px) !important;
-	}
-
-	/* Scale down phone simulator to fit mobile viewport naturally */
-	.phone-frame-shell {
-		transform: scale(0.85);
-		transform-origin: top center;
-		margin-bottom: -110px;
 	}
 }
 
 @media (max-width: 440px) {
-	.phone-frame-shell {
-		transform: scale(0.78);
-		transform-origin: top center;
-		margin-bottom: -160px;
-	}
-
 	.palette-panel {
 		.category-tabs {
 			padding: 4px 8px;
@@ -2879,24 +2892,10 @@
 		}
 	}
 
-
-
-
-
 	.inspector-panel {
 		.panel-collapse-section.tree-section .panel-collapse-body.tree-body {
 			max-height: 220px;
 		}
-	}
-
-
-}
-
-@media (max-width: 375px) {
-	.phone-frame-shell {
-		transform: scale(0.70);
-		transform-origin: top center;
-		margin-bottom: -220px;
 	}
 }
 
