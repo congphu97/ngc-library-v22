@@ -44,7 +44,7 @@ export class GuidelineOverviewComponent {
 			const label = item?.label;
 			if (!label) return;
 			const trimmed = label.trim();
-			const groupName = COMPONENT_GROUP_MAP[trimmed] || COMPONENT_GROUP_MAP[label] || 'Feedback';
+			const groupName = COMPONENT_GROUP_MAP[trimmed] || COMPONENT_GROUP_MAP[label] || 'Overlays & Feedback';
 			const overviewItem: OverviewItem = {
 				name: trimmed,
 				label: trimmed,
@@ -55,8 +55,8 @@ export class GuidelineOverviewComponent {
 			if (groupMap[groupName]) {
 				groupMap[groupName].push(overviewItem);
 			} else {
-				if (!groupMap['Feedback']) groupMap['Feedback'] = [];
-				groupMap['Feedback'].push(overviewItem);
+				if (!groupMap['Overlays & Feedback']) groupMap['Overlays & Feedback'] = [];
+				groupMap['Overlays & Feedback'].push(overviewItem);
 			}
 		});
 

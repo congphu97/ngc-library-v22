@@ -71,7 +71,7 @@ export class NgcTabGroupComponent implements OnChanges, OnDestroy, AfterContentI
 	@ViewChild( 'tabInkBar' ) public tabInkBar: ElementRef;
 	@ViewChildren( 'tabHeader' ) public tabHeaderList: QueryList<ElementRef>;
 
-	@ContentChildren( NgcTabComponent, { descendants: true } ) public tabItems: QueryList<NgcTabComponent>;
+	@ContentChildren( NgcTabComponent ) public tabItems: QueryList<NgcTabComponent>;
 
 	@Input() @CoerceCssPixel() public headerHeight: string;
 	@Input() @CoerceCssPixel() public contentPaddingVertical: string;

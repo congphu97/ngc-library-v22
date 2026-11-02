@@ -9,6 +9,46 @@ import {
 	PresetTemplate
 } from './sketch-catalog';
 
+export interface DevicePreset {
+	id: string;
+	name: string;
+	category: 'Mobile' | 'Foldables' | 'Tablets & Desktops' | 'Smart Displays' | 'Custom';
+	width: number;
+	height: number;
+	frameType: 'dynamic-island' | 'notch' | 'punch-hole' | 'home-button' | 'tablet' | 'web' | 'display' | 'custom';
+}
+
+export const DEVICE_PRESETS: DevicePreset[] = [
+	// Mobile
+	{ id: 'iphone18promax', name: 'iPhone 18 Pro Max', category: 'Mobile', width: 440, height: 956, frameType: 'dynamic-island' },
+	{ id: 'iphone18pro', name: 'iPhone 18 Pro', category: 'Mobile', width: 402, height: 874, frameType: 'dynamic-island' },
+	{ id: 'iphone18', name: 'iPhone 18', category: 'Mobile', width: 393, height: 852, frameType: 'dynamic-island' },
+	{ id: 'iphone16promax', name: 'iPhone 16 Pro Max', category: 'Mobile', width: 440, height: 956, frameType: 'dynamic-island' },
+	{ id: 'iphone16', name: 'iPhone 16', category: 'Mobile', width: 393, height: 852, frameType: 'dynamic-island' },
+	{ id: 'iphone13', name: 'iPhone 13 (Tai thỏ)', category: 'Mobile', width: 390, height: 844, frameType: 'notch' },
+	{ id: 'iphonese', name: 'iPhone SE', category: 'Mobile', width: 375, height: 667, frameType: 'home-button' },
+	{ id: 'pixel9pro', name: 'Pixel 9 Pro', category: 'Mobile', width: 412, height: 924, frameType: 'punch-hole' },
+	{ id: 'pixel9', name: 'Pixel 9', category: 'Mobile', width: 412, height: 924, frameType: 'punch-hole' },
+	{ id: 'pixel10', name: 'Pixel 10', category: 'Mobile', width: 412, height: 924, frameType: 'punch-hole' },
+	{ id: 'galaxy_a55', name: 'Samsung Galaxy A55', category: 'Mobile', width: 384, height: 834, frameType: 'punch-hole' },
+
+	// Foldables
+	{ id: 'pixel9pro_fold', name: 'Pixel 9 Pro Fold', category: 'Foldables', width: 800, height: 752, frameType: 'tablet' },
+	{ id: 'galaxy_zfold6', name: 'Galaxy Z Fold 6', category: 'Foldables', width: 768, height: 956, frameType: 'tablet' },
+
+	// Tablets & Desktops
+	{ id: 'ipad_mini', name: 'iPad Mini', category: 'Tablets & Desktops', width: 744, height: 1133, frameType: 'tablet' },
+	{ id: 'ipad_pro_13', name: 'iPad Pro 13', category: 'Tablets & Desktops', width: 1024, height: 1366, frameType: 'tablet' },
+	{ id: 'surface_pro_10', name: 'Surface Pro 10', category: 'Tablets & Desktops', width: 912, height: 1368, frameType: 'tablet' },
+	{ id: 'web_desktop', name: 'Web Desktop', category: 'Tablets & Desktops', width: 1280, height: 800, frameType: 'web' },
+
+	// Smart Displays
+	{ id: 'nest_hub_max', name: 'Nest Hub Max', category: 'Smart Displays', width: 1280, height: 800, frameType: 'display' },
+
+	// Responsive
+	{ id: 'responsive', name: 'Responsive', category: 'Custom', width: 440, height: 956, frameType: 'custom' },
+];
+
 @Component({
 	selector: 'app-sketch',
 	templateUrl: './sketch.component.html',
@@ -22,16 +62,20 @@ export class SketchComponent implements OnInit {
 	// Search & Filter
 	searchQuery: string = '';
 	selectedCategory: string = 'ALL';
-	categories: string[] = ['ALL', 'General', 'Layout', 'Navigation', 'Data Entry', 'Data Display', 'Feedback'];
+	categories: string[] = ['ALL', 'General', 'Layout', 'Navigation', 'Data Entry', 'Data Display', 'Overlays & Feedback'];
 
 	// Canvas State
 	placedComponents: PlacedComponent[] = [];
 	selectedItem: PlacedComponent | null = null;
 
 	// Device Frame Options
-	deviceFrame: 'iphone' | 'pixel' | 'ipad' | 'web' | 'custom' = 'iphone';
-	deviceCustomWidth: number = 380;
-	deviceCustomHeight: number = 780;
+	devicePresets: DevicePreset[] = DEVICE_PRESETS;
+	selectedDevice: DevicePreset = DEVICE_PRESETS[0];
+	deviceFrame: string = 'iphone18promax';
+	deviceCustomWidth: number = 440;
+	deviceCustomHeight: number = 956;
+	showDeviceMenu: boolean = false;
+
 	isMobileDark: boolean = false;
 	showGeneratedCodeModal: boolean = false;
 	generatedCode: string = '';
@@ -207,16 +251,77 @@ export class SketchComponent implements OnInit {
 	// Live Interactive Preview State
 	isPreviewMode: boolean = false;
 	previewComponents: PlacedComponent[] = [];
-	previewDeviceFrame: 'iphone' | 'pixel' | 'ipad' | 'web' | 'custom' = 'iphone';
-	previewDeviceWidth: number = 380;
-	previewDeviceHeight: number = 780;
+	selectedPreviewDevice: DevicePreset = DEVICE_PRESETS[0];
+	previewDeviceFrame: string = 'iphone18promax';
+	previewDeviceWidth: number = 440;
+	previewDeviceHeight: number = 956;
 	previewDark: boolean = false;
 	previewScale: number = 0.9;
 	previewToastMessage: string = '';
+	showPreviewDeviceMenu: boolean = false;
 	private toastTimer: any = null;
 
+	@HostListener('document:click', ['$event'])
+	onDocumentClick(event: MouseEvent): void {
+		const target = event.target as HTMLElement;
+		if (!target.closest('.device-menu-wrap')) {
+			this.showDeviceMenu = false;
+		}
+		if (!target.closest('.preview-device-menu-wrap')) {
+			this.showPreviewDeviceMenu = false;
+		}
+	}
+
+	toggleDeviceMenu(event: MouseEvent): void {
+		event.stopPropagation();
+		this.showDeviceMenu = !this.showDeviceMenu;
+	}
+
+	togglePreviewDeviceMenu(event: MouseEvent): void {
+		event.stopPropagation();
+		this.showPreviewDeviceMenu = !this.showPreviewDeviceMenu;
+	}
+
+	getDevicesByCategory(category: string): DevicePreset[] {
+		return this.devicePresets.filter(d => d.category === category);
+	}
+
+	selectDevice(device: DevicePreset): void {
+		this.selectedDevice = device;
+		this.deviceFrame = device.id;
+		this.deviceCustomWidth = device.width;
+		this.deviceCustomHeight = device.height;
+		this.showDeviceMenu = false;
+	}
+
+	selectDeviceById(id: string): void {
+		const dev = this.devicePresets.find(d => d.id === id);
+		if (dev) {
+			this.selectDevice(dev);
+		}
+	}
+
+	rotateOrientation(): void {
+		const temp = this.deviceCustomWidth;
+		this.deviceCustomWidth = this.deviceCustomHeight;
+		this.deviceCustomHeight = temp;
+	}
+
+	onDimensionManualChange(): void {
+		const match = this.devicePresets.find(d => d.width === this.deviceCustomWidth && d.height === this.deviceCustomHeight);
+		if (match) {
+			this.selectedDevice = match;
+			this.deviceFrame = match.id;
+		} else {
+			const resp = this.devicePresets.find(d => d.id === 'responsive')!;
+			this.selectedDevice = resp;
+			this.deviceFrame = 'responsive';
+		}
+	}
+
 	openPreviewMode(): void {
-		this.previewDeviceFrame = this.deviceFrame;
+		this.selectedPreviewDevice = this.selectedDevice;
+		this.previewDeviceFrame = this.selectedDevice.id;
 		this.previewDeviceWidth = this.deviceCustomWidth;
 		this.previewDeviceHeight = this.deviceCustomHeight;
 		this.previewDark = this.isMobileDark;
@@ -228,27 +333,35 @@ export class SketchComponent implements OnInit {
 	closePreviewMode(): void {
 		this.isPreviewMode = false;
 		this.previewToastMessage = '';
+		this.showPreviewDeviceMenu = false;
 		if (this.toastTimer) {
 			clearTimeout(this.toastTimer);
 		}
 	}
 
-	setPreviewDevice(frame: 'iphone' | 'pixel' | 'ipad' | 'web'): void {
-		this.previewDeviceFrame = frame;
-		if (frame === 'iphone') {
-			this.previewDeviceWidth = 380;
-			this.previewDeviceHeight = 780;
-		} else if (frame === 'pixel') {
-			this.previewDeviceWidth = 390;
-			this.previewDeviceHeight = 820;
-		} else if (frame === 'ipad') {
-			this.previewDeviceWidth = 740;
-			this.previewDeviceHeight = 980;
-		} else if (frame === 'web') {
-			this.previewDeviceWidth = 960;
-			this.previewDeviceHeight = 620;
-		}
+	selectPreviewDevice(device: DevicePreset): void {
+		this.selectedPreviewDevice = device;
+		this.previewDeviceFrame = device.id;
+		this.previewDeviceWidth = device.width;
+		this.previewDeviceHeight = device.height;
+		this.showPreviewDeviceMenu = false;
 		this.calculatePreviewScale();
+	}
+
+	rotatePreviewOrientation(): void {
+		const temp = this.previewDeviceWidth;
+		this.previewDeviceWidth = this.previewDeviceHeight;
+		this.previewDeviceHeight = temp;
+		this.calculatePreviewScale();
+	}
+
+	setPreviewDevice(frame: string): void {
+		const found = this.devicePresets.find(d => d.id === frame);
+		if (found) {
+			this.selectPreviewDevice(found);
+		} else {
+			this.previewDeviceFrame = frame;
+		}
 	}
 
 	calculatePreviewScale(): void {
@@ -615,20 +728,12 @@ export class SketchComponent implements OnInit {
 		return catalogItem ? catalogItem.propDefinitions : [];
 	}
 
-	setDeviceFrame(frame: 'iphone' | 'pixel' | 'ipad' | 'web' | 'custom'): void {
-		this.deviceFrame = frame;
-		if (frame === 'iphone') {
-			this.deviceCustomWidth = 380;
-			this.deviceCustomHeight = 780;
-		} else if (frame === 'pixel') {
-			this.deviceCustomWidth = 390;
-			this.deviceCustomHeight = 790;
-		} else if (frame === 'ipad') {
-			this.deviceCustomWidth = 580;
-			this.deviceCustomHeight = 780;
-		} else if (frame === 'web') {
-			this.deviceCustomWidth = 920;
-			this.deviceCustomHeight = 650;
+	setDeviceFrame(frame: string): void {
+		const found = this.devicePresets.find(d => d.id === frame);
+		if (found) {
+			this.selectDevice(found);
+		} else {
+			this.deviceFrame = frame;
 		}
 	}
 

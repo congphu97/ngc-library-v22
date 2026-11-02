@@ -65,7 +65,9 @@ export class NgcCalendarMonthViewComponent extends NgcCalendarViewBaseComponent 
 
 		this.endDate = this.startDate.clone().add( numberOfBlock - 1, 'd' ).endOf( 'd' );
 
-		this.periodChange.emit({ startDate: this.startDate, endDate: this.endDate });
+		Promise.resolve().then( () => {
+			this.periodChange.emit({ startDate: this.startDate, endDate: this.endDate });
+		} );
 
 		this.eventBlocks = _.map( _.range( numberOfBlock ), ( day: number ): NgcICalendarEventBlockExtra => {
 			const moment: Moment = this.startDate.clone().add( day, 'd' );
@@ -80,6 +82,9 @@ export class NgcCalendarMonthViewComponent extends NgcCalendarViewBaseComponent 
 				notInThisMonth	: !moment.isSame( this.viewDate, 'M' ),
 			};
 		} );
+
+		this._mapEvents();
+		this.cdRef.markForCheck();
 	}
 
 }

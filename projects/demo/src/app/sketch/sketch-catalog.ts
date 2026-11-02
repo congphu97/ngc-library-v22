@@ -16,7 +16,7 @@ export interface PropDefinition {
 export interface SketchCatalogItem {
 	type: string;
 	name: string;
-	category: 'General' | 'Layout' | 'Navigation' | 'Data Entry' | 'Data Display' | 'Feedback';
+	category: 'General' | 'Layout' | 'Navigation' | 'Data Entry' | 'Data Display' | 'Overlays & Feedback';
 	icon: string;
 	defaultProps: Record<string, any>;
 	propDefinitions: PropDefinition[];
@@ -88,7 +88,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'alert',
 		name: 'Alert',
-		category: 'Feedback',
+		category: 'Overlays & Feedback',
 		icon: 'warning',
 		defaultProps: {
 			message: 'Security Notice: Never share your one-time passwords with anyone.',
@@ -467,7 +467,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'confirm',
 		name: 'Confirm',
-		category: 'Feedback',
+		category: 'Overlays & Feedback',
 		icon: 'help',
 		defaultProps: {
 			title: 'Delete this project?',
@@ -551,11 +551,11 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'dialog',
 		name: 'Dialog',
-		category: 'Feedback',
+		category: 'Overlays & Feedback',
 		icon: 'message',
 		defaultProps: {
 			title: 'Permission Request',
-			content: 'Allow Mobile Sketch Simulator to access camera for barcode scanning?',
+			content: 'Allow Sketch Studio to access camera for barcode scanning?',
 			primaryAction: 'Allow Access',
 			secondaryAction: "Don't Allow",
 			width: '100%',
@@ -817,7 +817,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'loading',
 		name: 'Loading',
-		category: 'Feedback',
+		category: 'Overlays & Feedback',
 		icon: 'progress-auto',
 		defaultProps: {
 			message: 'Synchronizing database records...',
@@ -994,7 +994,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'popover',
 		name: 'Popover',
-		category: 'Feedback',
+		category: 'Overlays & Feedback',
 		icon: 'info',
 		defaultProps: {
 			title: 'Pro Tip',
@@ -1013,7 +1013,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'progress-bar',
 		name: 'Progress',
-		category: 'Feedback',
+		category: 'Overlays & Feedback',
 		icon: 'progress',
 		defaultProps: {
 			value: 65,
@@ -1198,7 +1198,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'skeleton',
 		name: 'Skeleton',
-		category: 'Feedback',
+		category: 'Overlays & Feedback',
 		icon: 'template',
 		defaultProps: {
 			shape: 'card',
@@ -1359,7 +1359,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'toast',
 		name: 'Toast',
-		category: 'Feedback',
+		category: 'Overlays & Feedback',
 		icon: 'bell-new',
 		defaultProps: {
 			title: 'Update Available',

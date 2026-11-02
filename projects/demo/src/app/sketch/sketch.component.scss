@@ -101,8 +101,168 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 12px;
+		gap: 10px;
 		flex-shrink: 0;
+
+		.device-menu-wrap,
+		.preview-device-menu-wrap {
+			position: relative;
+		}
+
+		.device-menu-trigger,
+		.preview-dev-trigger {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			height: 32px;
+			padding: 0 10px;
+			background: #ffffff;
+			border: 1px solid #cbd5e1;
+			border-radius: 6px;
+			font-size: 12.5px;
+			font-weight: 600;
+			color: #0f172a;
+			cursor: pointer;
+			transition: all 0.15s ease;
+
+			&:hover {
+				border-color: #94a3b8;
+				background: #f8fafc;
+			}
+
+			.device-icon {
+				display: flex;
+				align-items: center;
+				color: #2563eb;
+			}
+
+			.device-name {
+				font-weight: 600;
+			}
+
+			.device-dims-badge {
+				font-size: 11px;
+				font-weight: 500;
+				color: #64748b;
+				background: #f1f5f9;
+				padding: 1px 6px;
+				border-radius: 4px;
+			}
+
+			.chevron-arrow {
+				color: #94a3b8;
+				margin-left: 2px;
+			}
+		}
+
+		.topbar-tool-btn,
+		.preview-tool-btn {
+			width: 32px;
+			height: 32px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			background: #ffffff;
+			border: 1px solid #cbd5e1;
+			border-radius: 6px;
+			color: #475569;
+			cursor: pointer;
+			transition: all 0.15s ease;
+
+			&:hover {
+				background: #f1f5f9;
+				color: #0f172a;
+				border-color: #94a3b8;
+			}
+
+			&:active {
+				transform: scale(0.95);
+			}
+		}
+
+		.devtools-device-dropdown {
+			position: absolute;
+			top: calc(100% + 6px);
+			left: 0;
+			min-width: 270px;
+			max-height: 460px;
+			overflow-y: auto;
+			background: #ffffff;
+			border: 1px solid #cbd5e1;
+			border-radius: 8px;
+			box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
+			z-index: 1000;
+			padding: 4px 0;
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			animation: fadeInScale 0.15s ease forwards;
+
+			.dropdown-header-item,
+			.dropdown-device-item {
+				display: flex;
+				align-items: center;
+				padding: 6px 12px;
+				cursor: pointer;
+				font-size: 13px;
+				color: #202124;
+				transition: background 0.1s ease;
+				user-select: none;
+
+				.check-col {
+					width: 18px;
+					font-size: 13px;
+					font-weight: 700;
+					color: #1a73e8;
+					flex-shrink: 0;
+				}
+
+				.item-text {
+					flex: 1;
+					min-width: 0;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+
+				.item-dims {
+					font-size: 11px;
+					color: #5f6368;
+					margin-left: 12px;
+					flex-shrink: 0;
+				}
+
+				&:hover {
+					background: #1a73e8;
+					color: #ffffff;
+
+					.check-col {
+						color: #ffffff;
+					}
+
+					.item-dims {
+						color: rgba(255, 255, 255, 0.85);
+					}
+				}
+
+				&.active {
+					font-weight: 600;
+				}
+			}
+
+			.dropdown-group-label {
+				padding: 8px 12px 4px;
+				font-size: 11px;
+				font-weight: 700;
+				color: #5f6368;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+			}
+
+			.dropdown-divider {
+				height: 1px;
+				background: #e8eaed;
+				margin: 4px 0;
+			}
+		}
 
 		.device-switcher {
 			display: flex;
@@ -279,12 +439,12 @@
 	overflow: hidden;
 
 	.palette-template-section {
-		padding: 12px 14px;
+		padding: 14px 16px;
 		border-bottom: 1px solid #e2e8f0;
 		background: #f8fafc;
 		display: flex;
 		flex-direction: column;
-		gap: 8px;
+		gap: 10px;
 
 		.template-section-header {
 			display: flex;
@@ -294,15 +454,20 @@
 			.template-header-title {
 				display: flex;
 				align-items: center;
-				gap: 6px;
-				font-size: 11px;
-				font-weight: 700;
-				text-transform: uppercase;
-				letter-spacing: 0.5px;
-				color: #475569;
+				gap: 8px;
 
 				svg {
 					stroke: #2563eb;
+					flex-shrink: 0;
+				}
+
+				h3 {
+					margin: 0;
+					font-size: 14px;
+					font-weight: 700;
+					color: #0f172a;
+					letter-spacing: normal;
+					text-transform: none;
 				}
 			}
 
@@ -313,9 +478,9 @@
 				background: #2563eb;
 				color: #ffffff;
 				border: none;
-				padding: 3px 9px;
-				border-radius: 5px;
-				font-size: 11px;
+				padding: 4px 10px;
+				border-radius: 6px;
+				font-size: 11.5px;
 				font-weight: 600;
 				cursor: pointer;
 				transition: all 0.15s ease;
@@ -337,22 +502,33 @@
 		.template-select-row {
 			display: flex;
 			align-items: center;
-			gap: 6px;
+			gap: 8px;
 
 			.template-dropdown {
 				flex: 1;
 				min-width: 0;
-				height: 32px;
-				padding: 0 8px;
+				height: 36px;
+				padding: 0 34px 0 12px;
 				border: 1px solid #cbd5e1;
 				border-radius: 6px;
-				font-size: 12px;
+				font-size: 13px;
 				font-weight: 600;
-				background: #ffffff;
+				background-color: #ffffff;
+				background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+				background-repeat: no-repeat;
+				background-position: right 12px center;
+				background-size: 13px;
+				appearance: none;
+				-webkit-appearance: none;
+				-moz-appearance: none;
 				color: #0f172a;
 				cursor: pointer;
 				outline: none;
 				transition: all 0.15s ease;
+
+				&:hover {
+					border-color: #94a3b8;
+				}
 
 				&:focus {
 					border-color: #2563eb;
@@ -361,8 +537,8 @@
 			}
 
 			.tpl-act-btn {
-				width: 32px;
-				height: 32px;
+				width: 36px;
+				height: 36px;
 				padding: 0;
 				border-radius: 6px;
 				display: flex;
@@ -469,23 +645,38 @@
 	.category-tabs {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 4px;
-		padding: 0 16px 10px;
-		border-bottom: 1px solid #f1f5f9;
+		gap: 6px;
+		padding: 2px 16px 14px;
+		border-bottom: 1px solid #e2e8f0;
 
 		.cat-chip {
-			border: none;
-			background: #f1f5f9;
+			border: 1px solid #e2e8f0;
+			background: #f8fafc;
 			color: #64748b;
-			font-size: 11px;
+			font-size: 11.5px;
 			font-weight: 600;
-			padding: 3px 7px;
-			border-radius: 4px;
+			padding: 5px 11px;
+			border-radius: 6px;
 			cursor: pointer;
+			transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+			user-select: none;
+
+			&:hover {
+				background: #f1f5f9;
+				color: #0f172a;
+				border-color: #cbd5e1;
+				transform: translateY(-1px);
+			}
+
+			&:active {
+				transform: scale(0.96);
+			}
 
 			&.active {
 				background: #2563eb;
 				color: #ffffff;
+				border-color: #2563eb;
+				box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
 			}
 		}
 	}
@@ -919,42 +1110,172 @@
 	position: relative;
 	transition: width 0.2s ease, height 0.2s ease, transform 0.2s ease;
 
-	&.iphone {
+	&.dynamic-island,
+	&.iphone,
+	&.iphone18promax,
+	&.iphone18pro,
+	&.iphone18,
+	&.iphone16,
+	&.iphone16promax {
 		.phone-notch {
-			width: 100px;
-			height: 24px;
+			top: 18px !important;
+			width: 100px !important;
+			height: 24px !important;
+			border-radius: 20px !important;
+			background: #000000 !important;
 		}
 	}
 
+	&.notch,
+	&.iphone13 {
+		.phone-notch {
+			top: 10px !important;
+			width: 136px !important;
+			height: 26px !important;
+			border-radius: 0 0 16px 16px !important;
+			background: #000000 !important;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+			justify-content: center !important;
+			padding: 0 8px !important;
+			gap: 8px !important;
 
+			.speaker-slit {
+				width: 44px;
+				height: 3.5px;
+				background: #27272a;
+				border-radius: 2px;
+				border: 0.5px solid #3f3f46;
+			}
 
-	&.pixel {
+			.camera-lens {
+				width: 9px;
+				height: 9px;
+			}
+
+			.sensor {
+				width: 5px;
+				height: 5px;
+				display: block !important;
+			}
+		}
+	}
+
+	&.punch-hole,
+	&.pixel,
+	&.pixel9,
+	&.pixel9pro,
+	&.pixel10,
+	&.galaxy_a55 {
 		.phone-bezel {
-			border-radius: 40px !important;
+			border-radius: 38px !important;
 		}
 		.phone-notch {
-			width: 14px !important;
-			height: 14px !important;
+			width: 13px !important;
+			height: 13px !important;
 			border-radius: 50% !important;
 			top: 14px !important;
 			left: 50% !important;
 			transform: translateX(-50%) !important;
-			.sensor { display: none; }
+			background: #000000 !important;
+			justify-content: center !important;
+			padding: 0 !important;
+			gap: 0 !important;
+			.sensor, .speaker-slit { display: none !important; }
+			.camera-lens { width: 7px; height: 7px; }
 		}
 	}
 
-
-
-	&.ipad {
+	&.home-button,
+	&.iphonese {
 		.phone-bezel {
-			border-radius: 28px !important;
+			padding: 44px 12px 54px !important;
+			border-radius: 40px !important;
 		}
 		.phone-notch {
-			display: none;
+			top: 18px !important;
+			width: 60px !important;
+			height: 8px !important;
+			background: transparent !important;
+			justify-content: center !important;
+			padding: 0 !important;
+			.camera-lens {
+				width: 8px;
+				height: 8px;
+				margin-right: 10px;
+			}
+			.speaker-slit {
+				width: 40px;
+				height: 4px;
+				background: #334155;
+				border-radius: 2px;
+			}
+			.sensor { display: none !important; }
+		}
+		.se-home-button {
+			position: absolute;
+			bottom: 8px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			border: 2px solid #334155;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: #0f172a;
+			.home-button-ring {
+				width: 32px;
+				height: 32px;
+				border-radius: 50%;
+				border: 1px solid #475569;
+			}
 		}
 	}
 
-	&.web {
+	&.tablet,
+	&.ipad,
+	&.ipad_mini,
+	&.ipad_pro_13,
+	&.surface_pro_10,
+	&.pixel9pro_fold,
+	&.galaxy_zfold6 {
+		.phone-bezel {
+			border-radius: 24px !important;
+			padding: 12px !important;
+		}
+		.phone-notch {
+			top: 4px !important;
+			width: 10px !important;
+			height: 10px !important;
+			background: transparent !important;
+			padding: 0 !important;
+			justify-content: center !important;
+			.camera-lens { width: 6px; height: 6px; }
+			.sensor, .speaker-slit { display: none !important; }
+		}
+	}
+
+	&.display,
+	&.nest_hub_max {
+		.phone-bezel {
+			border-radius: 18px !important;
+			padding: 16px !important;
+			background: #f1f5f9 !important;
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), 0 0 0 1px #cbd5e1 !important;
+		}
+		.phone-notch {
+			top: 6px !important;
+			width: 10px !important;
+			height: 10px !important;
+			background: transparent !important;
+			.camera-lens { width: 6px; height: 6px; }
+			.sensor, .speaker-slit { display: none !important; }
+		}
+	}
+
+	&.web,
+	&.web_desktop {
 		.phone-bezel {
 			border-radius: 12px !important;
 			padding: 0 !important;
@@ -969,7 +1290,8 @@
 		}
 
 		.phone-notch,
-		.hw-button {
+		.hw-button,
+		.se-home-button {
 			display: none !important;
 		}
 
@@ -978,6 +1300,8 @@
 			flex: 1;
 
 			&.is-web-mode {
+				padding-top: 0 !important;
+
 				.screen-content-scroll {
 					padding: 16px 24px 30px;
 					gap: 16px;

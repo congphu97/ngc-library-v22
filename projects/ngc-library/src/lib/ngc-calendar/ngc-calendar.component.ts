@@ -2,7 +2,8 @@ import {
 	Component, EventEmitter, Input,
 	OnChanges, Output, SimpleChanges,
 	TemplateRef, ViewChild, ViewEncapsulation,
-	HostBinding, ChangeDetectionStrategy
+	HostBinding, ChangeDetectionStrategy,
+	ChangeDetectorRef
 } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
 import moment, { Moment } from 'moment-timezone';
@@ -62,6 +63,8 @@ export class NgcCalendarComponent implements OnChanges {
 	public startDate: Moment;
 	public endDate: Moment;
 
+	constructor( private _cdRef: ChangeDetectorRef ) {}
+
 	/**
 	 * @contructor
 	 */
@@ -79,10 +82,14 @@ export class NgcCalendarComponent implements OnChanges {
 	 * @return {void}
 	 */
 	public changeViewDate( viewDate: Moment = moment(), add?: number ) {
-		if ( viewDate.isSame( this.viewDate, 'd' ) && !add ) return;
-		if ( add ) viewDate.add( add, this.view );
+		if ( !add && viewDate.isSame( this.viewDate, 'd' ) && this.viewDate === viewDate ) return;
+		if ( add ) {
+			this.viewDate = this.viewDate.clone().add( add, this.view );
+		} else {
+			this.viewDate = viewDate.clone();
+		}
 
-		this.viewDate = viewDate.clone();
+		this._cdRef.markForCheck();
 	}
 
 	/**
@@ -93,9 +100,12 @@ export class NgcCalendarComponent implements OnChanges {
 		if ( this.view === view ) return;
 
 		this.view = view;
-		this.events = [];
+		if ( this.view === 'day' ) this.selectedIndex = 0;
+		else if ( this.view === 'week' ) this.selectedIndex = 1;
+		else if ( this.view === 'month' ) this.selectedIndex = 2;
 
-		this.changeViewDate( this.viewDate );
+		this.changeViewDate( this.viewDate.clone() );
+		this._cdRef.markForCheck();
 	}
 
 	/**

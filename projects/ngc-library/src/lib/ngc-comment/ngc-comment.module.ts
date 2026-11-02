@@ -8,6 +8,7 @@ import { NgcMenuModule } from '../ngc-menu';
 import { NgcTooltipModule } from '../ngc-tooltip';
 import { NgcEmojiPickerModule } from '../ngc-emoji-picker';
 import { NgcFilePickerModule } from '../ngc-file-picker';
+import { NgcAvatarPickerModule } from '../ngc-avatar-picker';
 
 import { NgcCommentBoxComponent } from './ngc-comment-box/ngc-comment-box.component';
 import { NgcCommentListComponent } from './ngc-comment-list/ngc-comment-list.component';
@@ -23,6 +24,7 @@ import { NgcReactionEmojiPipe } from './pipes/reaction-emoji.pipe';
 		CommonModule,
 		FormsModule,
 		NgcAvatarModule,
+		NgcAvatarPickerModule,
 		NgcIconModule,
 		NgcMenuModule,
 		NgcTooltipModule,

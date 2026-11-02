@@ -64,15 +64,24 @@
 
 <!-- Comment template -->
 <ng-template #commentTpl let-comment let-parent="parent">
-	<div class="ngc-comment-list-item" [class.ngc-comment-list-item--editing]="editingComment?.id === comment.id">
+	<div class="ngc-comment-list-item"
+		[class.ngc-comment-list-item--reply]="!!parent"
+		[class.ngc-comment-list-item--has-replies]="!parent && ((comment.replies?.length || 0) > 0 || replyingComment?.id === comment.id)"
+		[class.ngc-comment-list-item--editing]="editingComment?.id === comment.id">
 
-		<!-- Avatar -->
-		<ngc-avatar
-			class="ngc-comment-list-item__avatar"
-			size="36px"
-			[label]="comment.user?.name"
-			[avatar]="comment.user?.avatar">
-		</ngc-avatar>
+		<!-- Avatar & Thread Line Column -->
+		<div class="ngc-comment-list-item__avatar-col">
+			<ngc-avatar
+				class="ngc-comment-list-item__avatar"
+				[size]="parent ? '30px' : '36px'"
+				[label]="comment.user?.name"
+				[avatar]="comment.user?.avatar">
+			</ngc-avatar>
+			<div
+				class="ngc-comment-list-item__thread-line"
+				*ngIf="!parent && ((comment.replies?.length || 0) > 0 || replyingComment?.id === comment.id)">
+			</div>
+		</div>
 
 		<div class="ngc-comment-list-item__body">
 
@@ -107,62 +116,76 @@
 					</div>
 				</div>
 
-				<!-- Actions row -->
-				<div class="ngc-comment-list-item__actions">
-
-					<!-- Emoji reactions -->
+				<!-- Footer: Reactions pills + Action buttons -->
+				<div class="ngc-comment-list-item__footer">
+					<!-- Emoji reactions badges -->
 					<div class="ngc-comment-list-item__reactions" *ngIf="comment.reactions?.length">
 						<button
+							type="button"
 							class="ngc-comment-list-item__reaction-badge"
 							*ngFor="let r of comment.reactions"
 							[class.ngc-comment-list-item__reaction-badge--reacted]="r.reacted"
-							(click)="applyReaction(r.type, comment)">
-							<span>{{ REACTIONS | reactionEmoji:r.type }}</span>
-							<span>{{ r.count }}</span>
+							(click)="applyReaction(r.type, comment)"
+							[title]="r.count + ' ' + (REACTIONS | reactionEmoji:r.type)">
+							<span class="emoji">{{ REACTIONS | reactionEmoji:r.type }}</span>
+							<span class="count">{{ r.count }}</span>
 						</button>
 					</div>
 
-					<!-- Reaction trigger -->
-					<div class="ngc-comment-list-item__reaction-wrap">
-						<button
-							class="ngc-comment-list-item__action-btn"
-							(click)="toggleReactions(comment.id)">
-							😊
-						</button>
-						<div class="ngc-comment-list-item__reaction-picker" *ngIf="openReactionCommentId === comment.id">
+					<!-- Actions toolbar -->
+					<div class="ngc-comment-list-item__actions">
+						<!-- React trigger -->
+						<div class="ngc-comment-list-item__reaction-wrap">
 							<button
-								*ngFor="let r of REACTIONS"
-								class="ngc-comment-list-item__reaction-opt"
-								[title]="r.label"
-								(click)="applyReaction(r.type, comment)">
-								{{ r.emoji }}
+								type="button"
+								class="ngc-comment-list-item__action-btn"
+								(click)="toggleReactions(comment.id)"
+								title="Add reaction">
+								<ngc-icon name="emoji" size="13px"></ngc-icon>
+								<span>React</span>
 							</button>
+							<div class="ngc-comment-list-item__reaction-picker" *ngIf="openReactionCommentId === comment.id">
+								<button
+									*ngFor="let r of REACTIONS"
+									type="button"
+									class="ngc-comment-list-item__reaction-opt"
+									[title]="r.label"
+									(click)="applyReaction(r.type, comment)">
+									{{ r.emoji }}
+								</button>
+							</div>
 						</div>
+
+						<!-- Reply -->
+						<button
+							type="button"
+							class="ngc-comment-list-item__action-btn"
+							*ngIf="canComment && !parent"
+							(click)="setReplyComment(comment)">
+							<ngc-icon name="reply" size="13px"></ngc-icon>
+							<span>Reply</span>
+						</button>
+
+						<!-- Edit -->
+						<button
+							type="button"
+							class="ngc-comment-list-item__action-btn"
+							*ngIf="comment.editable"
+							(click)="setEditComment(comment)">
+							<ngc-icon name="edit" size="13px"></ngc-icon>
+							<span>Edit</span>
+						</button>
+
+						<!-- Delete -->
+						<button
+							type="button"
+							class="ngc-comment-list-item__action-btn ngc-comment-list-item__action-btn--danger"
+							*ngIf="comment.deletable"
+							(click)="deleteComment(comment, parent)">
+							<ngc-icon name="trash" size="13px"></ngc-icon>
+							<span>Delete</span>
+						</button>
 					</div>
-
-					<!-- Reply -->
-					<button
-						class="ngc-comment-list-item__action-btn"
-						*ngIf="canComment && !parent"
-						(click)="setReplyComment(comment)">
-						Reply
-					</button>
-
-					<!-- Edit -->
-					<button
-						class="ngc-comment-list-item__action-btn"
-						*ngIf="comment.editable"
-						(click)="setEditComment(comment)">
-						Edit
-					</button>
-
-					<!-- Delete -->
-					<button
-						class="ngc-comment-list-item__action-btn ngc-comment-list-item__action-btn--danger"
-						*ngIf="comment.deletable"
-						(click)="deleteComment(comment, parent)">
-						Delete
-					</button>
 				</div>
 			</ng-container>
 

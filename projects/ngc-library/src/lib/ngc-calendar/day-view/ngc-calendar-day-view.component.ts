@@ -42,7 +42,9 @@ export class NgcCalendarDayViewComponent extends NgcCalendarViewBaseComponent {
 		this.startDate = this.viewDate.clone().startOf( 'd' );
 		this.endDate = this.viewDate.clone().endOf( 'd' );
 
-		this.periodChange.emit({ startDate: this.startDate, endDate: this.endDate });
+		Promise.resolve().then( () => {
+			this.periodChange.emit({ startDate: this.startDate, endDate: this.endDate });
+		} );
 
 		const numberOfBlock: number = this.endDate.diff( this.startDate, 'h' ) + 1;
 
@@ -58,6 +60,9 @@ export class NgcCalendarDayViewComponent extends NgcCalendarViewBaseComponent {
 				isAdding		: false,
 			};
 		} );
+
+		this._mapEvents();
+		this.cdRef.markForCheck();
 	}
 
 }

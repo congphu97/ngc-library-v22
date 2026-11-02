@@ -61,7 +61,9 @@ export class NgcCalendarWeekViewComponent extends NgcCalendarViewBaseComponent {
 
 		this.endDate = this.startDate.clone().add( 6, 'd' ).endOf( 'd' );
 
-		this.periodChange.emit({ startDate: this.startDate, endDate: this.endDate });
+		Promise.resolve().then( () => {
+			this.periodChange.emit({ startDate: this.startDate, endDate: this.endDate });
+		} );
 
 		const numberOfBlock: number = this.endDate.diff( this.startDate, 'h' ) + 1;
 
@@ -84,6 +86,9 @@ export class NgcCalendarWeekViewComponent extends NgcCalendarViewBaseComponent {
 			hourBlock.showCurrentTime = this.currentTime.isSame( hourBlock.moment, 'h' )
 				&& this.currentTime.isBetween( this.startDate, this.endDate );
 		} );
+
+		this._mapEvents();
+		this.cdRef.markForCheck();
 	}
 
 }

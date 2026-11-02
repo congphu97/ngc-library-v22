@@ -193,3 +193,38 @@
 		}
 	}
 }
+
+.dark-theme {
+	.ngc-comment-box {
+		background: var(--ngc-color-neutral-background-canvas, #0d1117);
+		border-color: var(--ngc-color-neutral-border-default, #30363d);
+
+		&--sub {
+			background: var(--ngc-color-neutral-background-surface, #161b22);
+			border-color: var(--ngc-color-neutral-border-default, #30363d);
+		}
+
+		&__textarea {
+			color: var(--ngc-color-neutral-text-primary, #f0f6fc);
+
+			&::placeholder {
+				color: var(--ngc-color-neutral-text-tertiary, #8b949e);
+			}
+		}
+
+		&__toolbar-action:hover {
+			background: var(--ngc-color-neutral-background-surface, #161b22);
+			color: var(--ngc-color-neutral-text-primary, #f0f6fc);
+		}
+
+		&__btn-cancel:hover {
+			background: var(--ngc-color-neutral-background-surface, #161b22);
+		}
+
+		&__hint kbd {
+			background: var(--ngc-color-neutral-background-surface, #161b22);
+			border-color: var(--ngc-color-neutral-border-default, #30363d);
+			color: var(--ngc-color-neutral-text-secondary, #8b949e);
+		}
+	}
+}

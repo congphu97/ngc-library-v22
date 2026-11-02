@@ -1,21 +1,10 @@
-<!-- Emoji popup menu -->
-<ngc-menu #emojiMenu [title]="'Emoji'">
+<!-- Image picker popup menu (Avatar Picker) -->
+<ngc-menu #imageMenu [title]="'Add Image'" [width]="'450px'">
 	<ng-template ngcMenuContent>
-		<ngc-emoji-picker (picked)="onEmojiPicked($event); emojiMenu.close()"></ngc-emoji-picker>
-	</ng-template>
-</ngc-menu>
-
-<!-- Image picker popup menu -->
-<ngc-menu #imageMenu [title]="'Add Image'">
-	<ng-template ngcMenuContent>
-		<ngc-file-picker imageOnly multiSelect mode="inline" (picked)="onImagePicked($event); imageMenu.close()"></ngc-file-picker>
-	</ng-template>
-</ngc-menu>
-
-<!-- File attachment popup menu -->
-<ngc-menu #fileMenu [title]="'Add Attachment'">
-	<ng-template ngcMenuContent>
-		<ngc-file-picker multiSelect mode="inline" (picked)="onFilePicked($event); fileMenu.close()"></ngc-file-picker>
+		<ngc-avatar-picker
+			mode="photo"
+			(picked)="onAvatarImagePicked($event); imageMenu.close()">
+		</ngc-avatar-picker>
 	</ng-template>
 </ngc-menu>
 
@@ -29,7 +18,8 @@
 	</div>
 	<div class="ngc-comment-box__file-btn-add"
 		*ngIf="!maxImagePerComment || images.length < maxImagePerComment"
-		[ngcMenuTriggerFor]="imageMenu">
+		[ngcMenuTriggerFor]="imageMenu"
+		ngcTooltip="Add more images">
 		<ngc-icon name="image-plus" size="16px"></ngc-icon>
 	</div>
 </div>
@@ -61,12 +51,13 @@
 		<!-- Emoji -->
 		<div class="ngc-comment-box__toolbar-action"
 			position="above"
-			[ngcMenuTriggerFor]="emojiMenu"
+			ngcEmojiPicker
+			(picked)="onEmojiPicked($event)"
 			ngcTooltip="Emoji">
 			<ngc-icon name="emoji" size="18px"></ngc-icon>
 		</div>
 
-		<!-- Image attach -->
+		<!-- Image attach (Avatar Picker) -->
 		<div class="ngc-comment-box__toolbar-action"
 			*ngIf="!images?.length"
 			position="above"
@@ -79,7 +70,8 @@
 		<div class="ngc-comment-box__toolbar-action"
 			*ngIf="!attachments?.length"
 			position="above"
-			[ngcMenuTriggerFor]="fileMenu"
+			ngcFilePicker
+			(picked)="onFilePicked($event)"
 			ngcTooltip="Add Attachment">
 			<ngc-icon name="attachment" size="18px"></ngc-icon>
 		</div>

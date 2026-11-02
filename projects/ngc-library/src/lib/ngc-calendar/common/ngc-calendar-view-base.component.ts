@@ -32,8 +32,8 @@ export abstract class NgcCalendarViewBaseComponent implements OnChanges {
 	@Input() @CoerceBoolean() public activeState: boolean;
 	@Input() @CoerceBoolean() public creatable: boolean;
 	@Input() @CoerceBoolean() public displayHighlight: boolean;
-	@Input() @DefaultValue() public name: string = this.translateService.instant( 'NGC.NAME' );
-	@Input() @DefaultValue() public placeholder: string = this.translateService.instant( 'NGC.PLACEHOLDER.TYPE_NAME' );
+	@Input() @DefaultValue() public name: string = 'Name';
+	@Input() @DefaultValue() public placeholder: string = 'Type a name';
 	@Input() @CoerceArray() public events: NgcICalendarEvent[];
 	@Input() public selectedEventID: number;
 	@Input() public viewDate: Moment;
@@ -71,22 +71,29 @@ export abstract class NgcCalendarViewBaseComponent implements OnChanges {
 	 */
 	ngOnChanges( changes: SimpleChanges ) {
 		if ( changes.viewDate ) {
-			setTimeout( () => this.generatePeriod() );
+			this.generatePeriod();
+			this._mapEvents();
 			this._refreshNewEventInput();
+			this.cdRef.markForCheck();
 		}
 
 		if ( changes.events ) {
-			const eventsMap: IObject<NgcICalendarEvent[]> = _.groupBy( this.events, ( event: NgcICalendarEvent ): string =>
-				event?.moment?.format( this.indexBy )
-			);
-
-			_.forEach( this.eventBlocks, ( eventBlock: NgcICalendarEventBlock ) => {
-				eventBlock.seeMore = false;
-				eventBlock.events = [];
-
-				eventBlock.events.unshift( ...( eventsMap[ eventBlock.index ] || [] ) );
-			} );
+			this._mapEvents();
+			this.cdRef.markForCheck();
 		}
+	}
+
+	protected _mapEvents() {
+		if ( !this.eventBlocks?.length ) return;
+
+		const eventsMap: IObject<NgcICalendarEvent[]> = _.groupBy( this.events, ( event: NgcICalendarEvent ): string =>
+			event?.moment?.format( this.indexBy )
+		);
+
+		_.forEach( this.eventBlocks, ( eventBlock: NgcICalendarEventBlock ) => {
+			eventBlock.seeMore = false;
+			eventBlock.events = eventsMap[ eventBlock.index ] ? [ ...eventsMap[ eventBlock.index ] ] : [];
+		} );
 	}
 
 	/**

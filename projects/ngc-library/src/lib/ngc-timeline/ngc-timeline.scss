@@ -70,12 +70,12 @@
       }
 
       &--custom {
-        width: auto;
-        height: auto;
+        width: 22px;
+        height: 22px;
         border: none;
-        background-color: transparent !important;
-        border-radius: 0;
-        margin-top: 0;
+        background-color: var(--ngc-color-neutral-background-canvas, #ffffff) !important;
+        border-radius: 50%;
+        margin-top: 1px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -85,6 +85,12 @@
         &:hover {
           transform: none;
           box-shadow: none;
+        }
+
+        ngc-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
       }
     }

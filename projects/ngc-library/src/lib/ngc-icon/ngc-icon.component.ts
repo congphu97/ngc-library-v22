@@ -86,15 +86,47 @@ export class NgcIconComponent implements OnInit {
 		return isNaN(Number(s)) ? s : `${s}px`;
 	}
 
+	private static readonly IONIC_ALIASES: Record<string, string> = {
+		'check-circle': 'checkmark-circle',
+		'circle-check': 'checkmark-circle',
+		'checkmark-circle': 'checkmark-circle',
+		'alert-circle': 'alert-circle',
+		'warning-circle': 'alert-circle',
+		'close-circle': 'close-circle',
+		'circle-close': 'close-circle',
+		'info-circle': 'information-circle',
+		'information-circle': 'information-circle',
+		'help-circle': 'help-circle',
+		'sync': 'sync',
+		'refresh': 'refresh',
+		'time': 'time',
+		'trash-bin': 'trash-bin',
+		'document-text': 'document-text',
+		'sparkles': 'sparkles',
+		'chatbubble': 'chatbubble',
+	};
+
+	get ionicIconName(): string {
+		if (!this._name) return '';
+		const trimmed = this._name.trim();
+		if (NgcIconComponent.IONIC_ALIASES[trimmed]) {
+			return NgcIconComponent.IONIC_ALIASES[trimmed];
+		}
+		if (
+			trimmed.endsWith('-outline') ||
+			trimmed.endsWith('-sharp') ||
+			trimmed.endsWith('-fill') ||
+			trimmed.startsWith('logo-') ||
+			trimmed === 'sunny' ||
+			trimmed === 'moon'
+		) {
+			return trimmed;
+		}
+		return '';
+	}
+
 	get isIonic(): boolean {
-		return Boolean(
-			this._name && (
-				this._name.endsWith('-outline') ||
-				this._name.endsWith('-sharp') ||
-				this._name.endsWith('-fill') ||
-				this._name.startsWith('logo-')
-			)
-		);
+		return Boolean(this.ionicIconName);
 	}
 
 	get iconClass(): string {

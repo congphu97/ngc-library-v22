@@ -19,6 +19,40 @@
   width: 100%;
 
   ::ng-deep {
+    .ngc-button {
+      background-color: #ffffff;
+      border: 1px solid #d0d7de;
+      color: #24292f;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+      .ngc-button__content {
+        color: #24292f;
+      }
+
+      ngc-icon {
+        --icon-color: #57606a;
+      }
+
+      &:hover:not(.ngc-button--disabled) {
+        background-color: #f6f8fa;
+        border-color: #0969da;
+        color: #0969da;
+        box-shadow: 0 4px 12px rgba(9, 105, 218, 0.12);
+        transform: translateY(-1px);
+
+        .ngc-button__content {
+          color: #0969da;
+        }
+
+        ngc-icon {
+          --icon-color: #0969da;
+        }
+      }
+    }
+
     .navigator-btn-next {
       .ngc-button-wrapper {
         flex-direction: row-reverse;
@@ -33,5 +67,38 @@
 
   .guideline-navigator {
     border-top-color: #30363d;
+
+    ::ng-deep {
+      .ngc-button {
+        background-color: #161b22 !important;
+        border: 1px solid #30363d !important;
+        color: #f0f6fc !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+
+        .ngc-button__content {
+          color: #f0f6fc !important;
+        }
+
+        ngc-icon {
+          --icon-color: #8b949e !important;
+        }
+
+        &:hover:not(.ngc-button--disabled) {
+          background-color: #21262d !important;
+          border-color: #58a6ff !important;
+          color: #58a6ff !important;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 10px rgba(88, 166, 255, 0.2) !important;
+          transform: translateY(-1px);
+
+          .ngc-button__content {
+            color: #58a6ff !important;
+          }
+
+          ngc-icon {
+            --icon-color: #58a6ff !important;
+          }
+        }
+      }
+    }
   }
 }

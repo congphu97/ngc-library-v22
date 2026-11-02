@@ -4,7 +4,7 @@ export const COMPONENT_GROUP_ORDER: string[] = [
 	'Navigation',
 	'Data Entry',
 	'Data Display',
-	'Feedback',
+	'Overlays & Feedback',
 ];
 
 export const COMPONENT_GROUP_MAP: Record<string, string> = {
@@ -76,15 +76,15 @@ export const COMPONENT_GROUP_MAP: Record<string, string> = {
 	'Tree': 'Data Display',
 	'Truncate': 'Data Display',
 
-	// Feedback (8)
-	'Alert': 'Feedback',
-	'Confirm': 'Feedback',
-	'Dialog': 'Feedback',
-	'Loading': 'Feedback',
-	'Popover': 'Feedback',
-	'Progress': 'Feedback',
-	'Skeleton': 'Feedback',
-	'Toast': 'Feedback',
+	// Overlays & Feedback (8)
+	'Alert': 'Overlays & Feedback',
+	'Confirm': 'Overlays & Feedback',
+	'Dialog': 'Overlays & Feedback',
+	'Loading': 'Overlays & Feedback',
+	'Popover': 'Overlays & Feedback',
+	'Progress': 'Overlays & Feedback',
+	'Skeleton': 'Overlays & Feedback',
+	'Toast': 'Overlays & Feedback',
 };
 
 export const COMPONENT_ICON_MAP: Record<string, string> = {

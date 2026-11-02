@@ -47,7 +47,7 @@ export class GuidelineComponent implements OnInit, DoCheck {
 						const trimmed = label.trim();
 						(item as IObject).label = label;
 						(item as IObject).icon = COMPONENT_ICON_MAP[label] || COMPONENT_ICON_MAP[trimmed] || 'collection';
-						(item as IObject).category = COMPONENT_GROUP_MAP[label] || COMPONENT_GROUP_MAP[trimmed] || 'Feedback';
+						(item as IObject).category = COMPONENT_GROUP_MAP[label] || COMPONENT_GROUP_MAP[trimmed] || 'Overlays & Feedback';
 					}
 				});
 			}
@@ -259,15 +259,15 @@ export class GuidelineComponent implements OnInit, DoCheck {
 			if (!label) return;
 			const trimmed = label.trim();
 			(item as any).icon = COMPONENT_ICON_MAP[label] || COMPONENT_ICON_MAP[trimmed] || 'collection';
-			(item as any).category = COMPONENT_GROUP_MAP[label] || COMPONENT_GROUP_MAP[trimmed] || 'Feedback';
-			const groupName = COMPONENT_GROUP_MAP[label] || COMPONENT_GROUP_MAP[trimmed] || 'Feedback';
+			(item as any).category = COMPONENT_GROUP_MAP[label] || COMPONENT_GROUP_MAP[trimmed] || 'Overlays & Feedback';
+			const groupName = COMPONENT_GROUP_MAP[label] || COMPONENT_GROUP_MAP[trimmed] || 'Overlays & Feedback';
 			if (groupMap[groupName]) {
 				groupMap[groupName].push(item);
 			} else {
-				if (!groupMap['Feedback']) {
-					groupMap['Feedback'] = [];
+				if (!groupMap['Overlays & Feedback']) {
+					groupMap['Overlays & Feedback'] = [];
 				}
-				groupMap['Feedback'].push(item);
+				groupMap['Overlays & Feedback'].push(item);
 			}
 		});
 
@@ -320,7 +320,7 @@ export class GuidelineComponent implements OnInit, DoCheck {
 					const trimmed = label ? label.trim() : '';
 					(item as IObject).label = label;
 					(item as IObject).icon = COMPONENT_ICON_MAP[label] || COMPONENT_ICON_MAP[trimmed] || 'collection';
-					(item as IObject).category = COMPONENT_GROUP_MAP[label] || COMPONENT_GROUP_MAP[trimmed] || 'Feedback';
+					(item as IObject).category = COMPONENT_GROUP_MAP[label] || COMPONENT_GROUP_MAP[trimmed] || 'Overlays & Feedback';
 				});
 
 				this.componentList = [...this.compTemplatesArr];
@@ -331,9 +331,11 @@ export class GuidelineComponent implements OnInit, DoCheck {
 
 	public showGetStarted = false;
 	public showMcpDocs = false;
+	public showIntroduction = false;
 
 	get currentCompLabel(): string {
 		if (this.showOverview) return 'Overview';
+		if (this.showIntroduction) return 'Introduction';
 		if (this.showGetStarted) return 'Get Started';
 		if (this.showMcpDocs) return 'Model Context Protocol (MCP)';
 		return (this.currentCompTemplate as any)?.label || '';
@@ -347,15 +349,26 @@ export class GuidelineComponent implements OnInit, DoCheck {
 
 	public goOverview() {
 		this.showOverview = true;
+		this.showIntroduction = false;
 		this.showGetStarted = false;
 		this.showMcpDocs = false;
 		this.opened = false; // close drawer on mobile if needed
 		this._cdr.detectChanges();
 	}
 
+	public goIntroduction() {
+		this.showIntroduction = true;
+		this.showOverview = false;
+		this.showGetStarted = false;
+		this.showMcpDocs = false;
+		this.opened = false;
+		this._cdr.detectChanges();
+	}
+
 	public goGetStarted() {
 		this.showGetStarted = true;
 		this.showOverview = false;
+		this.showIntroduction = false;
 		this.showMcpDocs = false;
 		this.opened = false;
 		this._cdr.detectChanges();
@@ -364,6 +377,7 @@ export class GuidelineComponent implements OnInit, DoCheck {
 	public goMcpDocs() {
 		this.showMcpDocs = true;
 		this.showOverview = false;
+		this.showIntroduction = false;
 		this.showGetStarted = false;
 		this.opened = false;
 		this._cdr.detectChanges();
@@ -378,10 +392,21 @@ export class GuidelineComponent implements OnInit, DoCheck {
 		}
 	}
 
+	public onHeaderSearchSelect(compName: string) {
+		if (!compName) return;
+		const found = this.compTemplatesArr?.find(
+			c => c && (c as any).label?.toLowerCase().trim() === compName.toLowerCase().trim()
+		);
+		if (found) {
+			this.selectCompTemplate(found);
+		}
+	}
+
 	public selectCompTemplate(compTemplate: TemplateRef<any>) {
 		const index: number = _.indexOf(this.compTemplatesArr, compTemplate);
 
 		this.showOverview = false;
+		this.showIntroduction = false;
 		this.showGetStarted = false;
 		this.showMcpDocs = false;
 		this.currentCompTemplate = compTemplate;

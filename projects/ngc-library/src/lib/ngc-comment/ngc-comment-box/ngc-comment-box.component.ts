@@ -7,6 +7,7 @@ import {
 import { NgcICommentContent, NgcICommentFile, NgcIComment } from '../interfaces';
 import { NgcIFilePickerEvent } from '../../ngc-file-picker';
 import { NgcIEmojiData } from '../../ngc-emoji-picker';
+import { NgcIAvatarPickedEvent } from '../../ngc-avatar-picker';
 
 @Component({
 	standalone: false,
@@ -114,13 +115,29 @@ export class NgcCommentBoxComponent implements AfterViewInit, OnDestroy {
 	 * Handle file picked from ngc-file-picker
 	 */
 	public onFilePicked( event: NgcIFilePickerEvent ) {
-		const newFiles: NgcICommentFile[] = event.files.map( f => ({
-			name		: f.name,
-			size		: f.size,
-			url			: f.url,
-			previewUrl	: f[ '@previewUrl' ] || f.url,
-			type		: 'file',
-		}) );
+		if ( !event ) return;
+		let newFiles: NgcICommentFile[] = [];
+
+		if ( event.files?.length ) {
+			newFiles = event.files.filter( Boolean ).map( f => ({
+				name		: f.name || 'file',
+				size		: f.size || 0,
+				url			: f.url || ( f as any ).location || '',
+				previewUrl	: f[ '@previewUrl' ] || f.url || ( f as any ).location || '',
+				type		: 'file',
+			}) );
+		} else if ( event.localFiles?.length ) {
+			const filesArr: File[] = Array.from( event.localFiles as File[] );
+			newFiles = filesArr.map( f => ({
+				name		: f.name,
+				size		: f.size,
+				url			: URL.createObjectURL( f ),
+				previewUrl	: URL.createObjectURL( f ),
+				type		: 'file',
+			}) );
+		}
+
+		if ( !newFiles.length ) return;
 
 		this.attachments.unshift( ...newFiles );
 
@@ -132,16 +149,61 @@ export class NgcCommentBoxComponent implements AfterViewInit, OnDestroy {
 	}
 
 	/**
+	 * Handle image picked from ngc-avatar-picker
+	 */
+	public onAvatarImagePicked( event: NgcIAvatarPickedEvent ) {
+		if ( !event ) return;
+
+		const photoUrl: string = event.avatar?.photo
+			|| ( event.response as any )?.[ 0 ]?.location
+			|| ( event.file ? URL.createObjectURL( event.file ) : '' );
+
+		if ( !photoUrl ) return;
+
+		const newImage: NgcICommentFile = {
+			name		: 'photo_' + Date.now() + '.png',
+			size		: event.file?.size || 0,
+			url			: photoUrl,
+			previewUrl	: photoUrl,
+			type		: 'image',
+		};
+
+		this.images.unshift( newImage );
+
+		if ( this.maxImagePerComment ) {
+			this.images = this.images.slice( 0, this.maxImagePerComment );
+		}
+
+		this._cdr.markForCheck();
+	}
+
+	/**
 	 * Handle image picked from ngc-file-picker
 	 */
 	public onImagePicked( event: NgcIFilePickerEvent ) {
-		const newImages: NgcICommentFile[] = event.files.map( f => ({
-			name		: f.name,
-			size		: f.size,
-			url			: f.url,
-			previewUrl	: f[ '@previewUrl' ] || f.url,
-			type		: 'image',
-		}) );
+		if ( !event ) return;
+		let newImages: NgcICommentFile[] = [];
+
+		if ( event.files?.length ) {
+			newImages = event.files.filter( Boolean ).map( f => ({
+				name		: f.name || 'image',
+				size		: f.size || 0,
+				url			: f.url || ( f as any ).location || '',
+				previewUrl	: f[ '@previewUrl' ] || f.url || ( f as any ).location || '',
+				type		: 'image',
+			}) );
+		} else if ( event.localFiles?.length ) {
+			const filesArr: File[] = Array.from( event.localFiles as File[] );
+			newImages = filesArr.map( f => ({
+				name		: f.name,
+				size		: f.size,
+				url			: URL.createObjectURL( f ),
+				previewUrl	: URL.createObjectURL( f ),
+				type		: 'image',
+			}) );
+		}
+
+		if ( !newImages.length ) return;
 
 		this.images.unshift( ...newImages );
 

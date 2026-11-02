@@ -12,23 +12,29 @@
 		flex-direction: column;
 
 		.ngc-calendar-event-block__header {
-			z-index: -2;
 			position: relative;
+			display: flex;
+			align-items: center;
+			height: 20px;
 
 			&:before {
-				z-index: -3;
 				position: absolute;
 				top: 50%;
 				right: 0;
-				bottom: 0;
 				left: 0;
-				border-top: 1px solid $color-border;
+				border-top: 1px solid var(--ngc-color-neutral-border-default, #e4e4e7);
 				content: '';
+				z-index: 1;
 			}
 
 			span {
+				position: relative;
+				z-index: 2;
 				padding-right: 10px;
-				background-color: $color-white;
+				background-color: var(--ngc-color-neutral-background-base, #ffffff);
+				color: var(--ngc-color-neutral-text-secondary, #71717a);
+				font-size: 12px;
+				font-weight: 500;
 			}
 		}
 
@@ -42,7 +48,7 @@
 				flex-wrap: wrap;
 
 				.ngc-calendar-event-item-wrapper {
-					flex: 0 1 calc(100% / var(--max-event-per-hour));
+					flex: 0 1 calc(100% / var(--max-event-per-hour, 1));
 					margin-bottom: 10px;
 					padding-left: 10px;
 				}
@@ -57,17 +63,44 @@
 			}
 
 			.ngc-calendar-current-time {
-				z-index: -1;
 				position: absolute;
 				right: 0;
 				bottom: calc(100% - (var(--current-time) / 60 * 100 * 1%));
 				left: 0;
-				border-bottom: 2px solid var(--primary-color, $color-primary);
-				color: var(--primary-color, $color-primary);
+				border-bottom: 2px solid var(--ngc-color-primary-default, #6366f1);
+				color: var(--ngc-color-primary-default, #6366f1);
+				z-index: 3;
 
 				span {
+					position: relative;
+					z-index: 4;
 					padding-right: 5px;
-					background-color: $color-white;
+					background-color: var(--ngc-color-neutral-background-base, #ffffff);
+					font-size: 11px;
+					font-weight: 600;
+				}
+			}
+		}
+	}
+}
+
+.dark-theme {
+	.ngc-calendar-day-view {
+		.ngc-calendar-event-block {
+			.ngc-calendar-event-block__header {
+				&:before {
+					border-top-color: var(--ngc-color-neutral-border-default, #30363d);
+				}
+				span {
+					background-color: var(--ngc-color-neutral-background-canvas, #0d1117);
+					color: var(--ngc-color-neutral-text-secondary, #8b949e);
+				}
+			}
+			.ngc-calendar-current-time-block {
+				.ngc-calendar-current-time {
+					span {
+						background-color: var(--ngc-color-neutral-background-canvas, #0d1117);
+					}
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 <div class="guideline-layout" [class.dark-theme]="isDarkMode">
 	<guideline-header [isDarkMode]="isDarkMode" (toggleTheme)="onThemeToggle($event)"
-		(componentClick)="opened = true" (logoClick)="goOverview()"></guideline-header>
+		(componentClick)="opened = true" (logoClick)="goOverview()"
+		(selectComponent)="onHeaderSearchSelect($event)"></guideline-header>
 	<div class="guideline-main-content">
 		<ngc-drawer-container stretch>
 			<ngc-drawer [opened]="opened" width="270px" position="left" label="Menu" paddingVertical="0px"
@@ -8,13 +9,7 @@
 				<div class="sidebar-wrapper">
 					<ngc-scroll-bar class="sidebar-scroll-wrapper">
 						<div class="sidebar-inner-content">
-							<div class="sidebar-search-wrap">
-								<ngc-search-box [autoFocusOn]="autoFocusOn" [displayNotFound]="displayNotFound" #searchBox
-									searchKey="label" [data]="componentList">
-								</ngc-search-box>
-							</div>
-
-							<div class="sidebar-top-nav mt-10">
+							<div class="sidebar-top-nav">
 								<button class="sidebar-item-card content-component" [class.active]="showOverview" [class.content-component--active]="showOverview"
 									(click)="goOverview()" title="View all components overview">
 									<div class="item-icon-box">
@@ -23,7 +18,16 @@
 									<div class="item-info">
 										<span class="item-name">Overview</span>
 									</div>
-									<span class="item-badge">All</span>
+								</button>
+
+								<button class="sidebar-item-card content-component" [class.active]="showIntroduction" [class.content-component--active]="showIntroduction"
+									(click)="goIntroduction()" title="Introduction & Design System Overview">
+									<div class="item-icon-box">
+										<ngc-icon name="info" size="18px"></ngc-icon>
+									</div>
+									<div class="item-info">
+										<span class="item-name">Introduction</span>
+									</div>
 								</button>
 
 								<button class="sidebar-item-card content-component" [class.active]="showGetStarted" [class.content-component--active]="showGetStarted"
@@ -34,7 +38,6 @@
 									<div class="item-info">
 										<span class="item-name">Get Started</span>
 									</div>
-									<span class="item-badge">Docs</span>
 								</button>
 
 								<button class="sidebar-item-card content-component" [class.active]="showMcpDocs" [class.content-component--active]="showMcpDocs"
@@ -45,7 +48,6 @@
 									<div class="item-info">
 										<span class="item-name">MCP Server</span>
 									</div>
-									<span class="item-badge">AI</span>
 								</button>
 							</div>
 
@@ -58,8 +60,8 @@
 								<div class="sidebar-items-list">
 									<button *ngFor="let component of group.items" 
 										class="sidebar-item-card content-component" 
-										[class.active]="!showOverview && !showGetStarted && !showMcpDocs && currentCompLabel === component?.label"
-										[class.content-component--active]="!showOverview && !showGetStarted && !showMcpDocs && currentCompLabel === component?.label"
+										[class.active]="!showOverview && !showIntroduction && !showGetStarted && !showMcpDocs && currentCompLabel === component?.label"
+										[class.content-component--active]="!showOverview && !showIntroduction && !showGetStarted && !showMcpDocs && currentCompLabel === component?.label"
 										(click)="selectCompTemplate(component)"
 										[title]="component?.label">
 										<div class="item-icon-box">
@@ -103,9 +105,134 @@
 					
 					<guideline-overview *ngIf="showOverview" [components]="componentList" (selectComponent)="onOverviewSelect($event)"></guideline-overview>
 					
+					<!-- Detailed Introduction Page -->
+					<div *ngIf="showIntroduction" class="introduction-page p-20">
+						<div class="intro-hero-badge mb-15">
+							<span class="intro-pill">Angular 18+ Design System</span>
+							<span class="intro-version">v22.2.0</span>
+						</div>
+						
+						<h2 class="intro-main-title">Introduction to NGC Library</h2>
+						<p class="intro-lead-text">
+							<strong>NGC Library</strong> is a premium UI component library & enterprise-grade design system engineered specifically for modern Angular applications. It provides over <strong>65+ components</strong>, unified Design Tokens, optimized OnPush change detection, and native AI Context Protocol (MCP) integration.
+						</p>
+
+						<!-- Key Stats Grid -->
+						<div class="intro-stats-grid mb-35">
+							<div class="stat-card">
+								<div class="stat-number">65+</div>
+								<div class="stat-label">UI Components</div>
+								<div class="stat-desc">6 structured groups from General to Overlays & Feedback</div>
+							</div>
+							<div class="stat-card">
+								<div class="stat-number">100%</div>
+								<div class="stat-label">TypeScript & Angular 18+</div>
+								<div class="stat-desc">Full type safety with optimal OnPush change detection</div>
+							</div>
+							<div class="stat-card">
+								<div class="stat-number">Tokens</div>
+								<div class="stat-label">Design Tokens</div>
+								<div class="stat-desc">Semantic CSS variables supporting Dark & Light themes</div>
+							</div>
+							<div class="stat-card">
+								<div class="stat-number">MCP AI</div>
+								<div class="stat-label">AI Agent Ready</div>
+								<div class="stat-desc">Native support for Cursor, Claude, Antigravity, and Cline</div>
+							</div>
+						</div>
+
+						<!-- Core Values / Philosophy -->
+						<h3 class="intro-section-title mb-20">Design Philosophy & Core Values</h3>
+						<div class="intro-values-grid mb-35">
+							<div class="value-card">
+								<div class="value-icon"><ngc-icon name="board" size="20px"></ngc-icon></div>
+								<div class="value-title">Consistency</div>
+								<div class="value-desc">Every element — colors, border radius, typography scale, and shadows — derives from a unified Design Tokens system, delivering absolute visual consistency across applications.</div>
+							</div>
+							<div class="value-card">
+								<div class="value-icon"><ngc-icon name="progress-auto" size="20px"></ngc-icon></div>
+								<div class="value-title">Performance</div>
+								<div class="value-desc">Modular, tree-shakable architecture with OnPush ChangeDetection enabled across all components and virtual scrolling for heavy datasets.</div>
+							</div>
+							<div class="value-card">
+								<div class="value-icon"><ngc-icon name="code" size="20px"></ngc-icon></div>
+								<div class="value-title">Developer Experience (DX First)</div>
+								<div class="value-desc">Exhaustive API reference tables for all inputs and outputs, interactive code previews with 1-click copy, and strict TypeScript types.</div>
+							</div>
+							<div class="value-card">
+								<div class="value-icon"><ngc-icon name="api" size="20px"></ngc-icon></div>
+								<div class="value-title">AI-First Ready</div>
+								<div class="value-desc">Built-in Model Context Protocol (MCP) server allows AI assistants to understand component APIs and generate 100% accurate Angular code without hallucination.</div>
+							</div>
+						</div>
+
+						<!-- Component Ecosystem (6 Categories) -->
+						<h3 class="intro-section-title mb-20">Component Ecosystem (6 Categories)</h3>
+						<div class="intro-categories-grid mb-35">
+							<div class="cat-card">
+								<div class="cat-header">
+									<div class="cat-icon"><ngc-icon name="sliders" size="16px"></ngc-icon></div>
+									<span class="cat-title">General (6)</span>
+								</div>
+								<p class="cat-desc">Foundational atoms: Button, Clipboard, Color, Design Tokens, Icon, Typography.</p>
+							</div>
+							<div class="cat-card">
+								<div class="cat-header">
+									<div class="cat-icon"><ngc-icon name="grid" size="16px"></ngc-icon></div>
+									<span class="cat-title">Layout (11)</span>
+								</div>
+								<p class="cat-desc">Scaffolding containers: Grid, Page, Resize Panel, Sidebar, Drawer, Sheet, Accordion, Collapse, Divide, Scroll Bar.</p>
+							</div>
+							<div class="cat-card">
+								<div class="cat-header">
+									<div class="cat-icon"><ngc-icon name="chevron-right" size="16px"></ngc-icon></div>
+									<span class="cat-title">Navigation (5)</span>
+								</div>
+								<p class="cat-desc">User wayfinding: Breadcrumb, Menu, Navigation Menu, Pagination, Tabs.</p>
+							</div>
+							<div class="cat-card">
+								<div class="cat-header">
+									<div class="cat-icon"><ngc-icon name="form" size="16px"></ngc-icon></div>
+									<span class="cat-title">Data Entry (20)</span>
+								</div>
+								<p class="cat-desc">Rich input controls: Input, Form Field, Select, Checkbox, Radio, Switch, Date/Color/Avatar/File Picker, Textarea.</p>
+							</div>
+							<div class="cat-card">
+								<div class="cat-header">
+									<div class="cat-icon"><ngc-icon name="table" size="16px"></ngc-icon></div>
+									<span class="cat-title">Data Display (15)</span>
+								</div>
+								<p class="cat-desc">Data visualization: Table, Data Table, Card, Carousel, Code Block, Tree, Timeline, Tag, Avatar.</p>
+							</div>
+							<div class="cat-card">
+								<div class="cat-header">
+									<div class="cat-icon"><ngc-icon name="warning" size="16px"></ngc-icon></div>
+									<span class="cat-title">Overlays & Feedback (8)</span>
+								</div>
+								<p class="cat-desc">Feedback & overlays: Dialog, Alert, Toast, Popover, Progress, Loading, Skeleton, Confirm Modal.</p>
+							</div>
+						</div>
+
+						<!-- Quick Actions -->
+						<div class="intro-quick-links">
+							<button class="intro-action-btn primary" (click)="goOverview()">
+								<ngc-icon name="board" size="15px"></ngc-icon>
+								<span>Explore All Components (Overview)</span>
+							</button>
+							<button class="intro-action-btn" (click)="goGetStarted()">
+								<ngc-icon name="help" size="15px"></ngc-icon>
+								<span>Installation Guide (Get Started)</span>
+							</button>
+							<button class="intro-action-btn" (click)="goMcpDocs()">
+								<ngc-icon name="api" size="15px"></ngc-icon>
+								<span>Connect AI MCP Protocol</span>
+							</button>
+						</div>
+					</div>
+
 					<!-- Detailed Get Started Documentation Page -->
 					<div *ngIf="showGetStarted" class="get-started-page p-20" style="max-width: 900px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-						<h3 class="mb-15" style="font-size: 24px; font-weight: 700; color: #09090b; margin-top: 0;">Introduction</h3>
+						<h3 class="mb-15" style="font-size: 24px; font-weight: 700; color: #09090b; margin-top: 0;">Getting Started</h3>
 						<p style="font-size: 14px; color: #52525b; line-height: 1.6; margin-bottom: 25px;">
 							Welcome to the <strong>NGC Components Library</strong>. A collection of premium, reusable design system UI components built for modern Angular applications. Easy to integrate, clean, and highly customizable.
 						</p>
@@ -286,11 +413,11 @@ export class AppModule &#123; &#125;</code></pre>
 						</div>
 					</div>
 
-					<ng-container *ngIf="!showOverview && !showGetStarted && !showMcpDocs">
+					<ng-container *ngIf="!showOverview && !showIntroduction && !showGetStarted && !showMcpDocs">
 						<ng-container *ngTemplateOutlet="currentCompTemplate"></ng-container>
 					</ng-container>
 					
-					<div class="guideline-api-reference mt-40" *ngIf="!showOverview && !showGetStarted && !showMcpDocs && getComponentDocs(currentCompLabel) && (getComponentDocs(currentCompLabel).inputs?.length || getComponentDocs(currentCompLabel).outputs?.length)">
+					<div class="guideline-api-reference mt-40" *ngIf="!showOverview && !showIntroduction && !showGetStarted && !showMcpDocs && getComponentDocs(currentCompLabel) && (getComponentDocs(currentCompLabel).inputs?.length || getComponentDocs(currentCompLabel).outputs?.length)">
 						<h3 class="mb-20">API Reference</h3>
 						
 						<div class="mb-35" *ngIf="getComponentDocs(currentCompLabel).inputs?.length">
@@ -4277,7 +4404,7 @@ export class AppModule &#123; &#125;</code></pre>
 		<ngc-tab [label]="'Preview'">
 			<div style="max-width: 640px;">
 				<ngc-comment-list
-					canComment
+					[canComment]="true"
 					[userID]="99"
 					[comments]="commentData"
 					[limitReplies]="3">

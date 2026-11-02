@@ -1,7 +1,8 @@
 import {
 	Component, Input, Output, EventEmitter,
 	ViewEncapsulation, ChangeDetectionStrategy,
-	ChangeDetectorRef, OnChanges, SimpleChanges
+	ChangeDetectorRef, OnChanges, SimpleChanges,
+	HostListener
 } from '@angular/core';
 import {
 	NgcIComment, NgcICommentContent,
@@ -31,7 +32,16 @@ const REACTIONS: { type: NgcICommentReactionType; emoji: string; label: string }
 export class NgcCommentListComponent implements OnChanges {
 
 	@Input() public comments: NgcIComment[] = [];
-	@Input() public canComment: boolean = true;
+
+	private _canComment: boolean = true;
+	@Input()
+	public get canComment(): boolean {
+		return this._canComment;
+	}
+	public set canComment( value: any ) {
+		this._canComment = value !== false && value !== 'false';
+	}
+
 	@Input() public userID: number;
 	@Input() public maxFilePerComment: number;
 	@Input() public limitReplies: number = 2;
@@ -50,6 +60,16 @@ export class NgcCommentListComponent implements OnChanges {
 	public editingComment: NgcIComment | null = null;
 	public replyingComment: NgcIComment | null = null;
 	public openReactionCommentId: number | string | null = null;
+
+	@HostListener('document:click', ['$event'])
+	public onDocumentClick( event: MouseEvent ) {
+		if ( !this.openReactionCommentId ) return;
+		const target = event.target as HTMLElement;
+		if ( !target.closest('.ngc-comment-list-item__reaction-wrap') ) {
+			this.openReactionCommentId = null;
+			this._cdr.markForCheck();
+		}
+	}
 
 	constructor( private _cdr: ChangeDetectorRef ) {}
 
