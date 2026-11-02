@@ -51,14 +51,22 @@
       }
 
       &.dark-mode-btn {
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        gap: 6px;
+        justify-content: center;
+        padding: 0 !important;
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
         border-color: #30363d !important;
         background-color: rgba(255, 255, 255, 0.03) !important;
+        border-radius: 8px !important;
 
         ngc-icon {
           --icon-color: #f7df1e;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         &:hover {
@@ -66,20 +74,6 @@
           background-color: rgba(255, 255, 255, 0.08) !important;
         }
       }
-    }
-
-    .theme-dropdown {
-      width: 170px;
-      margin: 0 4px;
-      
-      --form-field-color: #30363d !important;
-      --form-field-text-color: #c9d1d9 !important;
-      --form-field-active-color: #8b949e !important;
-      --form-field-background-color: rgba(255, 255, 255, 0.03) !important;
-      --form-field-border-radius: 6px !important;
-      
-      font-size: 14px !important;
-      font-weight: $font-weight-semibold !important;
     }
   }
 }

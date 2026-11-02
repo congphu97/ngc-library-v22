@@ -91,6 +91,7 @@ export class SketchComponent implements OnInit {
 	canvasZoom: number = 100;
 	zoomLevels: number[] = [50, 75, 90, 100, 110, 125, 150];
 	showCanvasGrid: boolean = true;
+	isZenMode: boolean = false;
 
 	// Pan / Hand tool state (Figma style)
 	isSpacePressed: boolean = false;
@@ -141,6 +142,14 @@ export class SketchComponent implements OnInit {
 			this.setInteractionMode('select');
 		} else if (event.key === 'h' || event.key === 'H') {
 			this.setInteractionMode('hand');
+		} else if (event.key === 'Escape') {
+			if (this.isPreviewMode) {
+				this.closePreviewMode();
+			} else if (this.isZenMode) {
+				this.isZenMode = false;
+			}
+		} else if (event.key === '\\') {
+			this.toggleZenMode();
 		}
 	}
 
@@ -191,7 +200,114 @@ export class SketchComponent implements OnInit {
 		this.canvasInteractionMode = 'select';
 	}
 
+	toggleZenMode(): void {
+		this.isZenMode = !this.isZenMode;
+	}
+
+	// Live Interactive Preview State
+	isPreviewMode: boolean = false;
+	previewComponents: PlacedComponent[] = [];
+	previewDeviceFrame: 'iphone' | 'pixel' | 'ipad' | 'web' | 'custom' = 'iphone';
+	previewDeviceWidth: number = 380;
+	previewDeviceHeight: number = 780;
+	previewDark: boolean = false;
+	previewScale: number = 0.9;
+	previewToastMessage: string = '';
+	private toastTimer: any = null;
+
+	openPreviewMode(): void {
+		this.previewDeviceFrame = this.deviceFrame;
+		this.previewDeviceWidth = this.deviceCustomWidth;
+		this.previewDeviceHeight = this.deviceCustomHeight;
+		this.previewDark = this.isMobileDark;
+		this.previewComponents = JSON.parse(JSON.stringify(this.placedComponents));
+		this.calculatePreviewScale();
+		this.isPreviewMode = true;
+	}
+
+	closePreviewMode(): void {
+		this.isPreviewMode = false;
+		this.previewToastMessage = '';
+		if (this.toastTimer) {
+			clearTimeout(this.toastTimer);
+		}
+	}
+
+	setPreviewDevice(frame: 'iphone' | 'pixel' | 'ipad' | 'web'): void {
+		this.previewDeviceFrame = frame;
+		if (frame === 'iphone') {
+			this.previewDeviceWidth = 380;
+			this.previewDeviceHeight = 780;
+		} else if (frame === 'pixel') {
+			this.previewDeviceWidth = 390;
+			this.previewDeviceHeight = 820;
+		} else if (frame === 'ipad') {
+			this.previewDeviceWidth = 740;
+			this.previewDeviceHeight = 980;
+		} else if (frame === 'web') {
+			this.previewDeviceWidth = 960;
+			this.previewDeviceHeight = 620;
+		}
+		this.calculatePreviewScale();
+	}
+
+	calculatePreviewScale(): void {
+		if (typeof window === 'undefined') return;
+		const availHeight = window.innerHeight - 100; // minus topbar
+		const availWidth = window.innerWidth - 30;
+		const scaleY = availHeight / (this.previewDeviceHeight + 40);
+		const scaleX = availWidth / (this.previewDeviceWidth + 40);
+		const targetScale = Math.min(1, scaleY, scaleX);
+		this.previewScale = Math.max(0.45, Math.min(1, Math.round(targetScale * 100) / 100));
+	}
+
+	resetPreviewData(): void {
+		this.previewComponents = JSON.parse(JSON.stringify(this.placedComponents));
+		this.triggerPreviewToast('Reset all component data');
+	}
+
+	triggerPreviewToast(msg: string): void {
+		this.previewToastMessage = msg;
+		if (this.toastTimer) {
+			clearTimeout(this.toastTimer);
+		}
+		this.toastTimer = setTimeout(() => {
+			this.previewToastMessage = '';
+		}, 2500);
+	}
+
+	onPreviewBackdropClick(event: MouseEvent): void {
+		const target = event.target as HTMLElement;
+		if (target && target.classList.contains('preview-stage-viewport')) {
+			this.closePreviewMode();
+		}
+	}
+
+	onButtonClick(item: PlacedComponent, isInteractive: boolean): void {
+		if (isInteractive) {
+			this.triggerPreviewToast(`Button clicked: "${item.props.label || 'Button'}"`);
+		}
+	}
+
+	onNavBack(isInteractive: boolean): void {
+		if (isInteractive) {
+			this.triggerPreviewToast('Navigated back');
+		}
+	}
+
+	onNavAction(item: PlacedComponent, isInteractive: boolean): void {
+		if (isInteractive) {
+			this.triggerPreviewToast(`Action clicked: "${item.props.actionIcon || 'Action'}"`);
+		}
+	}
+
+	getPresetName(presetId: string): string {
+		const found = this.presets.find(p => p.id === presetId);
+		return found ? found.name : 'Custom Screen';
+	}
+
 	openAndFocusFontSize(): void {
+		this.isZenMode = false;
 		this.isTypographyCollapsed = false;
 		if (this.selectedItem) {
 			this.typographyScope = 'selected';

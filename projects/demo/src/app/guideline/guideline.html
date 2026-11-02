@@ -3,34 +3,74 @@
 		(componentClick)="opened = true" (logoClick)="goOverview()"></guideline-header>
 	<div class="guideline-main-content">
 		<ngc-drawer-container stretch>
-			<ngc-drawer [opened]="opened" width="250px" position="left" label="Menu" paddingVertical="20px"
-				paddingLeft="20px" [bgColor]="(isDarkMode ? 'darkGray.700' : 'WHITE') | color">
+			<ngc-drawer [opened]="opened" width="270px" position="left" label="Menu" paddingVertical="16px"
+				paddingLeft="12px" [bgColor]="(isDarkMode ? 'darkGray.700' : 'WHITE') | color">
 				<ngc-scroll-bar style="height: 100%; display: block;">
-					<div style="padding-right: 12px; padding-bottom: 30px;">
-						<ngc-search-box [autoFocusOn]="autoFocusOn" [displayNotFound]="displayNotFound" #searchBox
-							searchKey="label" [data]="componentList">
-						</ngc-search-box>
-						<div style="display: flex; flex-direction: column; gap: 2px;" class="mt-10">
-							<button class="content-component" [class.content-component--active]="showOverview"
-								(click)="goOverview()">Overview</button>
-							<button class="content-component" [class.content-component--active]="showGetStarted"
-								(click)="goGetStarted()">Get Started</button>
+					<div class="sidebar-inner-content">
+						<div class="sidebar-search-wrap">
+							<ngc-search-box [autoFocusOn]="autoFocusOn" [displayNotFound]="displayNotFound" #searchBox
+								searchKey="label" [data]="componentList">
+							</ngc-search-box>
 						</div>
 
-						<div *ngFor="let group of groupedSidebarComponents; let idx = index" class="mt-10">
+						<div class="sidebar-top-nav mt-10">
+							<button class="sidebar-item-card content-component" [class.active]="showOverview" [class.content-component--active]="showOverview"
+								(click)="goOverview()" title="View all components overview">
+								<div class="item-icon-box">
+									<ngc-icon name="board" size="18px"></ngc-icon>
+								</div>
+								<div class="item-info">
+									<span class="item-name">Overview</span>
+									<span class="item-cat">Dashboard & Directory</span>
+								</div>
+								<span class="item-badge">All</span>
+							</button>
+
+							<button class="sidebar-item-card content-component" [class.active]="showGetStarted" [class.content-component--active]="showGetStarted"
+								(click)="goGetStarted()" title="Get started and installation guide">
+								<div class="item-icon-box">
+									<ngc-icon name="help" size="18px"></ngc-icon>
+								</div>
+								<div class="item-info">
+									<span class="item-name">Get Started</span>
+									<span class="item-cat">Installation & Setup</span>
+								</div>
+								<span class="item-badge">Docs</span>
+							</button>
+						</div>
+
+						<div *ngFor="let group of groupedSidebarComponents; let idx = index" class="sidebar-group-section mt-12">
 							<div class="sidebar-group-divider" *ngIf="idx > 0"></div>
-							<div class="sidebar-group-title">{{ group.title }}</div>
-							<div style="display: flex; flex-direction: column; gap: 2px;">
+							<div class="sidebar-group-header">
+								<span class="group-title">{{ group.title }}</span>
+								<span class="group-count">{{ group.items.length }}</span>
+							</div>
+							<div class="sidebar-items-list">
 								<button *ngFor="let component of group.items" 
-									class="content-component" 
-									[class.content-component--active]="!showOverview && currentCompLabel === component?.label"
-									(click)="selectCompTemplate(component)">
-									{{component?.label}}
+									class="sidebar-item-card content-component" 
+									[class.active]="!showOverview && !showGetStarted && currentCompLabel === component?.label"
+									[class.content-component--active]="!showOverview && !showGetStarted && currentCompLabel === component?.label"
+									(click)="selectCompTemplate(component)"
+									[title]="component?.label">
+									<div class="item-icon-box">
+										<span *ngIf="component?.label === 'Color & Typography'" class="preview-aa">Aa</span>
+										<ngc-icon *ngIf="component?.label !== 'Color & Typography'" [name]="getComponentIcon(component?.label)" size="18px"></ngc-icon>
+									</div>
+									<div class="item-info">
+										<span class="item-name">{{ component?.label }}</span>
+										<span class="item-cat">{{ group.title }}</span>
+									</div>
+									<svg class="item-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+										<polyline points="9 18 15 12 9 6"></polyline>
+									</svg>
 								</button>
 							</div>
 						</div>
-						<div class="mt-20 pl-15" style="font-size: 12px; color: #a1a1aa;">
-							Version: 1.0.0
+
+						<div class="sidebar-footer-version">
+							<div class="footer-dot"></div>
+							<span class="footer-title">NGC Library</span>
+							<span class="version-tag">v2.2.0</span>
 						</div>
 					</div>
 				</ngc-scroll-bar>

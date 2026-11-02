@@ -33,16 +33,16 @@ const COMPONENT_ICON_MAP: Record<string, string> = {
 	'Clipboard'          : 'clipboard',
 	'Code Block'         : 'code-block',
 	'Collapse'           : 'minimize-left',
-	'Collapse Menu'      : 'menu',
+	'Collapse Menu'      : 'tree-list',
 	'Color Picker'       : 'pick-color',
 	'Color & Typography' : 'palette',
-	'Comment'            : 'message-circle',
+	'Comment'            : 'message',
 	'Confirm'            : 'help',
 	'Cropper'            : 'crop',
 	'Data Table'         : 'data-list',
 	'Date Picker'        : 'calendar-check',
-	'Dialog'             : 'message',
-	'Divide'             : 'minus',
+	'Dialog'             : 'id-card',
+	'Divide'             : 'division',
 	'Drawer'             : 'sidebar',
 	'Dropdown'           : 'dropdown',
 	'Emoji Picker'       : 'emoji',
@@ -56,19 +56,20 @@ const COMPONENT_ICON_MAP: Record<string, string> = {
 	'Loading'            : 'progress-auto',
 	'Member Picker'      : 'user-plus',
 	'Menu'               : 'more-vertical',
-	'Navigation Menu'    : 'menu',
-	'Page'               : 'collection',
+	'Navigation Menu'    : 'bulleted-list',
+	'Page'               : 'document',
 	'Pagination'         : 'more-horizontal',
 	'Phone Field'        : 'phone',
 	'Popover'            : 'info',
 	'Progress'           : 'progress',
-	'Radio Group'        : 'sliders',
+	'Radio Group'        : 'circle-check',
 	'Range Input'        : 'sliders',
-	'Resize'             : 'sliders',
-	'Scroll Bar'         : 'sliders',
+	'Resize'             : 'expand',
+	'Scroll Bar'         : 'move',
+	'Search Box'         : 'search',
 	'Search Box '        : 'search',
 	'Select'             : 'dropdown',
-	'Sheet'              : 'document',
+	'Sheet'              : 'template',
 	'Sidebar'            : 'sidebar',
 	'Skeleton'           : 'template',
 	'Switch'             : 'switch',
@@ -76,10 +77,10 @@ const COMPONENT_ICON_MAP: Record<string, string> = {
 	'Tabs'               : 'tab-plus',
 	'Tag'                : 'label',
 	'Textarea'           : 'long-text',
-	'Timeline'           : 'calendar',
+	'Timeline'           : 'time-schedule',
 	'Toast'              : 'bell-new',
 	'Tooltip'            : 'help',
-	'Tree'               : 'open-folder',
+	'Tree'               : 'hierachy',
 	'Truncate'           : 'more-horizontal',
 };
 
@@ -173,6 +174,18 @@ export class GuidelineComponent implements OnInit, DoCheck {
 			this._prevDataLength = currentLength;
 			this._prevSearchLength = searchLength;
 			
+			if (this.compTemplatesArr) {
+				_.forEach(this.compTemplatesArr, (item: TemplateRef<any>) => {
+					const label: string = (item as any).label || (item as IObject)._declarationTContainer?.attrs?.[1];
+					if (label) {
+						const trimmed = label.trim();
+						(item as IObject).label = label;
+						(item as IObject).icon = COMPONENT_ICON_MAP[label] || COMPONENT_ICON_MAP[trimmed] || 'collection';
+						(item as IObject).category = COMPONENT_GROUP_MAP[label] || COMPONENT_GROUP_MAP[trimmed] || 'Feedback';
+					}
+				});
+			}
+
 			this.groupedSidebarComponents = this.getGroupedComponents(
 				this.searchBox?.filteredData || this.compTemplatesArr
 			);
@@ -329,7 +342,10 @@ export class GuidelineComponent implements OnInit, DoCheck {
 		data.forEach(item => {
 			const label = (item as any)?.label;
 			if (!label) return;
-			const groupName = COMPONENT_GROUP_MAP[label] || 'Feedback';
+			const trimmed = label.trim();
+			(item as any).icon = COMPONENT_ICON_MAP[label] || COMPONENT_ICON_MAP[trimmed] || 'collection';
+			(item as any).category = COMPONENT_GROUP_MAP[label] || COMPONENT_GROUP_MAP[trimmed] || 'Feedback';
+			const groupName = COMPONENT_GROUP_MAP[label] || COMPONENT_GROUP_MAP[trimmed] || 'Feedback';
 			if (groupMap[groupName]) {
 				groupMap[groupName].push(item);
 			} else {
@@ -358,6 +374,16 @@ export class GuidelineComponent implements OnInit, DoCheck {
 			.filter(group => group.items.length > 0);
 	}
 
+	public getGroupIconClass(groupTitle: string): string {
+		return 'item-icon--mono';
+	}
+
+	public getComponentIcon(label: string): string {
+		if (!label) return 'collection';
+		const trimmed = label.trim();
+		return COMPONENT_ICON_MAP[label] || COMPONENT_ICON_MAP[trimmed] || 'collection';
+	}
+
 	ngAfterViewInit() {
 		this.currentCompTemplate = this.compTemplatesArr[this.selectedCompIndex];
 		
@@ -375,9 +401,11 @@ export class GuidelineComponent implements OnInit, DoCheck {
 			.subscribe(() => {
 				console.log('Comp templates', this.compTemplatesArr);
 				_.forEach(this.compTemplatesArr, (item: TemplateRef<any>) => {
-					const label: string = (item as IObject)._declarationTContainer.attrs[1];
+					const label: string = (item as IObject)._declarationTContainer?.attrs?.[1] || (item as any).label;
+					const trimmed = label ? label.trim() : '';
 					(item as IObject).label = label;
-					(item as IObject).icon = COMPONENT_ICON_MAP[label] || 'collection';
+					(item as IObject).icon = COMPONENT_ICON_MAP[label] || COMPONENT_ICON_MAP[trimmed] || 'collection';
+					(item as IObject).category = COMPONENT_GROUP_MAP[label] || COMPONENT_GROUP_MAP[trimmed] || 'Feedback';
 				});
 
 				this.componentList = [...this.compTemplatesArr];
