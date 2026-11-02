@@ -3,90 +3,96 @@
 		(componentClick)="opened = true" (logoClick)="goOverview()"></guideline-header>
 	<div class="guideline-main-content">
 		<ngc-drawer-container stretch>
-			<ngc-drawer [opened]="opened" width="270px" position="left" label="Menu" paddingVertical="16px"
-				paddingLeft="12px" [bgColor]="(isDarkMode ? 'darkGray.700' : 'WHITE') | color">
-				<ngc-scroll-bar style="height: 100%; display: block;">
-					<div class="sidebar-inner-content">
-						<div class="sidebar-search-wrap">
-							<ngc-search-box [autoFocusOn]="autoFocusOn" [displayNotFound]="displayNotFound" #searchBox
-								searchKey="label" [data]="componentList">
-							</ngc-search-box>
-						</div>
-
-						<div class="sidebar-top-nav mt-10">
-							<button class="sidebar-item-card content-component" [class.active]="showOverview" [class.content-component--active]="showOverview"
-								(click)="goOverview()" title="View all components overview">
-								<div class="item-icon-box">
-									<ngc-icon name="board" size="18px"></ngc-icon>
-								</div>
-								<div class="item-info">
-									<span class="item-name">Overview</span>
-									<span class="item-cat">Dashboard & Directory</span>
-								</div>
-								<span class="item-badge">All</span>
-							</button>
-
-							<button class="sidebar-item-card content-component" [class.active]="showGetStarted" [class.content-component--active]="showGetStarted"
-								(click)="goGetStarted()" title="Get started and installation guide">
-								<div class="item-icon-box">
-									<ngc-icon name="help" size="18px"></ngc-icon>
-								</div>
-								<div class="item-info">
-									<span class="item-name">Get Started</span>
-									<span class="item-cat">Installation & Setup</span>
-								</div>
-								<span class="item-badge">Docs</span>
-							</button>
-
-							<button class="sidebar-item-card content-component" [class.active]="showMcpDocs" [class.content-component--active]="showMcpDocs"
-								(click)="goMcpDocs()" title="Model Context Protocol (MCP) Server for AI Assistants">
-								<div class="item-icon-box">
-									<ngc-icon name="api" size="18px"></ngc-icon>
-								</div>
-								<div class="item-info">
-									<span class="item-name">MCP Server</span>
-									<span class="item-cat">AI Context Protocol</span>
-								</div>
-								<span class="item-badge">AI</span>
-							</button>
-						</div>
-
-						<div *ngFor="let group of groupedSidebarComponents; let idx = index" class="sidebar-group-section mt-12">
-							<div class="sidebar-group-divider" *ngIf="idx > 0"></div>
-							<div class="sidebar-group-header">
-								<span class="group-title">{{ group.title }}</span>
-								<span class="group-count">{{ group.items.length }}</span>
+			<ngc-drawer [opened]="opened" width="270px" position="left" label="Menu" paddingVertical="0px"
+				paddingLeft="0px" paddingRight="0px" [bgColor]="(isDarkMode ? 'darkGray.700' : 'WHITE') | color">
+				<div class="sidebar-wrapper">
+					<ngc-scroll-bar class="sidebar-scroll-wrapper">
+						<div class="sidebar-inner-content">
+							<div class="sidebar-search-wrap">
+								<ngc-search-box [autoFocusOn]="autoFocusOn" [displayNotFound]="displayNotFound" #searchBox
+									searchKey="label" [data]="componentList">
+								</ngc-search-box>
 							</div>
-							<div class="sidebar-items-list">
-								<button *ngFor="let component of group.items" 
-									class="sidebar-item-card content-component" 
-									[class.active]="!showOverview && !showGetStarted && !showMcpDocs && currentCompLabel === component?.label"
-									[class.content-component--active]="!showOverview && !showGetStarted && !showMcpDocs && currentCompLabel === component?.label"
-									(click)="selectCompTemplate(component)"
-									[title]="component?.label">
+
+							<div class="sidebar-top-nav mt-10">
+								<button class="sidebar-item-card content-component" [class.active]="showOverview" [class.content-component--active]="showOverview"
+									(click)="goOverview()" title="View all components overview">
 									<div class="item-icon-box">
-										<span *ngIf="component?.label === 'Color & Typography'" class="preview-aa">Aa</span>
-										<ngc-icon *ngIf="component?.label !== 'Color & Typography'" [name]="getComponentIcon(component?.label)" size="18px"></ngc-icon>
+										<ngc-icon name="board" size="18px"></ngc-icon>
 									</div>
 									<div class="item-info">
-										<span class="item-name">{{ component?.label }}</span>
-										<span class="item-cat">{{ group.title }}</span>
+										<span class="item-name">Overview</span>
 									</div>
-									<svg class="item-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-										<polyline points="9 18 15 12 9 6"></polyline>
-									</svg>
+									<span class="item-badge">All</span>
+								</button>
+
+								<button class="sidebar-item-card content-component" [class.active]="showGetStarted" [class.content-component--active]="showGetStarted"
+									(click)="goGetStarted()" title="Get started and installation guide">
+									<div class="item-icon-box">
+										<ngc-icon name="help" size="18px"></ngc-icon>
+									</div>
+									<div class="item-info">
+										<span class="item-name">Get Started</span>
+									</div>
+									<span class="item-badge">Docs</span>
+								</button>
+
+								<button class="sidebar-item-card content-component" [class.active]="showMcpDocs" [class.content-component--active]="showMcpDocs"
+									(click)="goMcpDocs()" title="Model Context Protocol (MCP) Server for AI Assistants">
+									<div class="item-icon-box">
+										<ngc-icon name="api" size="18px"></ngc-icon>
+									</div>
+									<div class="item-info">
+										<span class="item-name">MCP Server</span>
+									</div>
+									<span class="item-badge">AI</span>
 								</button>
 							</div>
-						</div>
 
-						<div class="sidebar-footer-version">
+							<div *ngFor="let group of groupedSidebarComponents; let idx = index" class="sidebar-group-section mt-12">
+								<div class="sidebar-group-divider" *ngIf="idx > 0"></div>
+								<div class="sidebar-group-header">
+									<span class="group-title">{{ group.title }}</span>
+									<span class="group-count">{{ group.items.length }}</span>
+								</div>
+								<div class="sidebar-items-list">
+									<button *ngFor="let component of group.items" 
+										class="sidebar-item-card content-component" 
+										[class.active]="!showOverview && !showGetStarted && !showMcpDocs && currentCompLabel === component?.label"
+										[class.content-component--active]="!showOverview && !showGetStarted && !showMcpDocs && currentCompLabel === component?.label"
+										(click)="selectCompTemplate(component)"
+										[title]="component?.label">
+										<div class="item-icon-box">
+											<span *ngIf="component?.label === 'Color & Typography' || component?.label === 'Typography'" class="preview-aa">Aa</span>
+											<ngc-icon *ngIf="component?.label !== 'Color & Typography' && component?.label !== 'Typography'" [name]="getComponentIcon(component?.label)" size="18px"></ngc-icon>
+										</div>
+										<div class="item-info">
+											<span class="item-name">{{ component?.label }}</span>
+										</div>
+										<svg class="item-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+											<polyline points="9 18 15 12 9 6"></polyline>
+										</svg>
+									</button>
+								</div>
+							</div>
+						</div>
+					</ngc-scroll-bar>
+
+					<div class="sidebar-sticky-footer">
+						<div class="footer-brand-row">
 							<div class="footer-dot"></div>
 							<span class="footer-title">NGC Library</span>
-							<span class="version-tag">v2.2.0</span>
+							<span class="version-tag">v22.2.0</span>
+						</div>
+						<div class="footer-author-row" (click)="goToContact()" title="Go to Contact Page">
+							<span class="author-label">Author:</span>
+							<span class="author-name">Trần Công Phú</span>
+							<svg class="author-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+								<polyline points="9 18 15 12 9 6"></polyline>
+							</svg>
 						</div>
 					</div>
-				</ngc-scroll-bar>
-
+				</div>
 			</ngc-drawer>
 
 			<ngc-drawer-content paddingVertical="20px" paddingHorizontal="20px">
@@ -263,17 +269,19 @@ export class AppModule &#123; &#125;</code></pre>
 
 						<h3 class="mb-15 mt-30" style="font-size: 20px; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7; padding-bottom: 8px;">5. Sample AI Prompts</h3>
 						<div class="mcp-prompt-examples mb-30">
-							<div class="prompt-item">
-								<span class="prompt-tag">Component Discovery</span>
-								<p class="prompt-text">"Does NGC Library have a component to display tabular data with sorting and pagination? Show me code examples."</p>
-							</div>
-							<div class="prompt-item">
-								<span class="prompt-tag">Screen Generation</span>
-								<p class="prompt-text">"Generate an Angular login component using NGC Library with Email, Password, Remember Me checkbox, and a Submit button."</p>
-							</div>
-							<div class="prompt-item">
-								<span class="prompt-tag">Design Tokens & Colors</span>
-								<p class="prompt-text">"What are the primary color palette and spacing variables defined in the NGC Library design tokens?"</p>
+							<div class="prompt-item" *ngFor="let p of [
+								{ tag: 'Component Discovery', text: 'Does NGC Library have a component to display tabular data with sorting and pagination? Show me code examples.' },
+								{ tag: 'Screen Generation', text: 'Generate an Angular login component using NGC Library with Email, Password, Remember Me checkbox, and a Submit button.' },
+								{ tag: 'Design Tokens & Colors', text: 'What are the primary color palette and spacing variables defined in the NGC Library design tokens?' }
+							]; let idx = index">
+								<div class="prompt-header">
+									<span class="prompt-tag">{{ p.tag }}</span>
+									<button class="prompt-copy-btn" [class.copied]="copiedPromptIndex === idx" (click)="copyPrompt(p.text, idx)" [title]="copiedPromptIndex === idx ? 'Copied to clipboard!' : 'Copy prompt'">
+										<ngc-icon [name]="copiedPromptIndex === idx ? 'checkmark-outline' : 'copy-outline'" size="13px"></ngc-icon>
+										<span>{{ copiedPromptIndex === idx ? 'Copied' : 'Copy' }}</span>
+									</button>
+								</div>
+								<p class="prompt-text">"{{ p.text }}"</p>
 							</div>
 						</div>
 					</div>
@@ -282,7 +290,7 @@ export class AppModule &#123; &#125;</code></pre>
 						<ng-container *ngTemplateOutlet="currentCompTemplate"></ng-container>
 					</ng-container>
 					
-					<div class="guideline-api-reference mt-40" *ngIf="!showOverview && !showMcpDocs && getComponentDocs(currentCompLabel) && (getComponentDocs(currentCompLabel).inputs?.length || getComponentDocs(currentCompLabel).outputs?.length)">
+					<div class="guideline-api-reference mt-40" *ngIf="!showOverview && !showGetStarted && !showMcpDocs && getComponentDocs(currentCompLabel) && (getComponentDocs(currentCompLabel).inputs?.length || getComponentDocs(currentCompLabel).outputs?.length)">
 						<h3 class="mb-20">API Reference</h3>
 						
 						<div class="mb-35" *ngIf="getComponentDocs(currentCompLabel).inputs?.length">
@@ -1809,7 +1817,7 @@ export class AppModule &#123; &#125;</code></pre>
 		</ngc-tab>
 	</ngc-tab-group>
 </ng-template>
-<ng-template #compTemplate label="Search Box ">
+<ng-template #compTemplate label="Search Box">
 	<h3 class="mb-20">Search Box</h3>
 	<p class="component-description">
 		<strong>Search Box</strong> renders input boxes for searching collections, complete with not-found templates, client-side auto-suggest lists, or server-side fetch suggestions.
@@ -2374,38 +2382,6 @@ export class AppModule &#123; &#125;</code></pre>
 			</div>
 		</ngc-tab>
 	</ngc-tab-group>
-
-	<h3 class="mb-20">API</h3>
-	<table class="guideline-table">
-		<thead>
-			<tr>
-				<th>Input</th>
-				<th>Type</th>
-				<th>Default</th>
-				<th>Description</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><code>name</code></td>
-				<td><code>string</code></td>
-				<td>—</td>
-				<td>Icon name. Icomoon by default; Ionic if suffix is <code>-outline</code>, <code>-sharp</code>, <code>-fill</code> or prefix <code>logo-</code></td>
-			</tr>
-			<tr>
-				<td><code>size</code></td>
-				<td><code>string</code></td>
-				<td><code>inherit</code></td>
-				<td>Icon font-size &amp; line-height (e.g. <code>20px</code>, <code>1.5rem</code>)</td>
-			</tr>
-			<tr>
-				<td><code>color</code></td>
-				<td><code>string</code></td>
-				<td><code>inherit</code></td>
-				<td>Icon color. Accepts any CSS color value or color pipe output</td>
-			</tr>
-		</tbody>
-	</table>
 </ng-template>
 
 <ng-template #compTemplate label="Member Picker">
@@ -3896,7 +3872,10 @@ export class AppModule &#123; &#125;</code></pre>
 		</ngc-tab>
 	</ngc-tab-group>
 </ng-template>
-<ng-template #compTemplate label="Color & Typography">
+<ng-template #compTemplate label="Color">
+	<p class="component-description">
+		<strong>Color</strong> defines the core palettes, semantic states, text colors, and borders of the NGC Design System.
+	</p>
 
 	<!-- System Color -->
 	<h3 class="mb-20">System Color</h3>
@@ -4022,7 +4001,7 @@ export class AppModule &#123; &#125;</code></pre>
 	<h3 class="mv-20">Color Palette</h3>
 	<div class="layout-row layout-align-start-center layout-wrap flex-noshrink">
 
-		<!-- Example for Blue -->
+		<!-- Blue -->
 		<div class="mb-10 mr-10 layout-column">
 			<div class="w-170 h-25 p-5" [style.backgroundColor]="'BLUE' | color:700">
 				<h6 class="text-center" [style.color]="'BLUE' | color:700 | contrast">
@@ -4041,39 +4020,47 @@ export class AppModule &#123; &#125;</code></pre>
 			</div>
 		</div>
 
-		<!-- Các màu khác tương tự: GREEN, YELLOW, RED, ORANGE, PURPLE, PINK, INDIGO, TEAL, MINT, DARK_GRAY, LIGHT_GRAY -->
-		<!-- Có thể tạo loop để render ngắn gọn hơn -->
-
 	</div>
+</ng-template>
 
-	<!-- Typography -->
-	<h3 class="mv-20">Typography</h3>
-	<div>
-		<div>Body 14px</div>
-		<a class="mt-20">Anchor 14px</a>
-		<label class="mt-20">Label 13px</label>
-		<h1 class="mt-20">h1 24px <span class="h1">&nbsp;24px</span></h1>
-		<h2 class="mt-20">h2 20px <span class="h2">&nbsp;20px</span></h2>
-		<h3 class="mt-20">h3 18px <span class="h3">&nbsp;18px</span></h3>
-		<h4 class="mt-20">h4 16px <span class="h4">&nbsp;16px</span></h4>
-		<h5 class="mt-20">h5 13px <span class="h5">&nbsp;13px</span></h5>
-		<h6 class="mt-20">h6 12px <span class="h6">&nbsp;12px</span></h6>
-		<wgc-code-block class="mt-20">Code</wgc-code-block>
+<ng-template #compTemplate label="Typography">
+	<p class="component-description">
+		<strong>Typography</strong> establishes the typographic scale, font hierarchy, and text styles used across the interface.
+	</p>
+
+	<!-- Typography Scale -->
+	<h3 class="mb-20">Typographic Scale</h3>
+	<div class="p-20" style="background: var(--ngc-color-neutral-background-surface, #fff); border: 1px solid var(--ngc-color-neutral-border-default, #e4e4e7); border-radius: 8px;">
+		<div style="font-size: 14px; margin-bottom: 12px;">Body 14px — Standard body text for paragraphs and content.</div>
+		<div style="margin-bottom: 12px;"><a style="font-size: 14px; color: var(--ngc-color-primary-default, #0a84ff); cursor: pointer;">Anchor 14px — Interactive link text</a></div>
+		<div style="margin-bottom: 12px;"><label style="font-size: 13px; font-weight: 500; color: var(--ngc-color-neutral-text-secondary, #71717a);">Label 13px — Form and input field descriptor</label></div>
+		<h1 class="mt-20" style="margin-bottom: 8px;">h1 24px <span style="font-size: 14px; opacity: 0.6; font-weight: 400;">— Page hero title</span></h1>
+		<h2 class="mt-15" style="margin-bottom: 8px;">h2 20px <span style="font-size: 14px; opacity: 0.6; font-weight: 400;">— Section header</span></h2>
+		<h3 class="mt-15" style="margin-bottom: 8px;">h3 18px <span style="font-size: 14px; opacity: 0.6; font-weight: 400;">— Subsection title</span></h3>
+		<h4 class="mt-15" style="margin-bottom: 8px;">h4 16px <span style="font-size: 14px; opacity: 0.6; font-weight: 400;">— Component title</span></h4>
+		<h5 class="mt-10" style="margin-bottom: 8px;">h5 13px <span style="font-size: 14px; opacity: 0.6; font-weight: 400;">— Small card header</span></h5>
+		<h6 class="mt-10" style="margin-bottom: 8px;">h6 12px <span style="font-size: 14px; opacity: 0.6; font-weight: 400;">— Micro badge title</span></h6>
 	</div>
 
 	<!-- Font Family -->
 	<h3 class="mv-20">Font Family</h3>
-	<div>Default: AvertaStdCY, Helvetica, sans-serif</div>
-	<div>Code: SourceCodePro, Helvetica, sans-serif</div>
+	<div class="layout-row layout-wrap">
+		<div class="mr-20 p-15" style="background: var(--ngc-color-neutral-background-surface, #fff); border: 1px solid var(--ngc-color-neutral-border-default, #e4e4e7); border-radius: 8px; min-width: 260px;">
+			<div style="font-weight: 700; margin-bottom: 6px;">Sans-Serif (Default)</div>
+			<code style="font-size: 12px;">Inter, AvertaStdCY, Helvetica, sans-serif</code>
+		</div>
+		<div class="p-15" style="background: var(--ngc-color-neutral-background-surface, #fff); border: 1px solid var(--ngc-color-neutral-border-default, #e4e4e7); border-radius: 8px; min-width: 260px;">
+			<div style="font-weight: 700; margin-bottom: 6px;">Monospace (Code)</div>
+			<code style="font-size: 12px;">Fira Code, SourceCodePro, monospace</code>
+		</div>
+	</div>
+</ng-template>
 
-	<!-- Design Token Panel -->
-	<h3 class="mv-20">Design Token Customizer</h3>
+<ng-template #compTemplate label="Design Tokens">
 	<p class="component-description">
-		Customize design tokens such as semantic colors, border radius, and spacing.
-		Click <strong>Get Token</strong> to export your token configuration as JSON.
+		<strong>Design Tokens</strong> are the visual design atoms of the NGC design system — including semantic colors, border radius, typography scale, spacing, and elevation shadows. Use the interactive customizer below to test configurations and export your tokens as JSON or CSS variables.
 	</p>
 	<ngc-design-token></ngc-design-token>
-
 </ng-template>
 
 <ng-template #compTemplate label="Tree">
@@ -4598,21 +4585,106 @@ export class AppModule &#123; &#125;</code></pre>
 <ng-template #compTemplate label="Page">
 	<h3 class="mb-20">Page</h3>
 	<p class="component-description">
-		<strong>Page</strong> provides a full-viewport layout shell with dedicated header and content projection areas, including built-in scrolling detection.
+		<strong>Page</strong> provides a full-viewport layout shell with dedicated header and content projection areas, including built-in scrolling detection, dynamic header elevations, and flexible padding configurations.
 	</p>
 	<h3 class="mb-20">Page Layout Example</h3>
 	<ngc-tab-group class="mb-20">
 		<ngc-tab [label]="'Preview'">
-			<div style="height: 300px; border: 1px solid var(--border-color, #e4e4e7); border-radius: 8px; overflow: hidden; position: relative;">
+			<div style="height: 480px; border: 1px solid var(--border-color, #e4e4e7); border-radius: 12px; overflow: hidden; position: relative; background: var(--surface-background, #f8fafc); box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);">
 				<ngc-page stretch>
-					<div ngcPageHeader class="p-15" style="border-bottom: 1px solid var(--border-color, #e4e4e7); background: var(--header-bg, #fff); display: flex; align-items: center; justify-content: space-between;">
-						<h4 style="margin: 0;">Dashboard Overview</h4>
-						<button ngcButton color="primary">Action</button>
+					<!-- Page Header with Divider & Padding -->
+					<div ngcPageHeader [divider]="true" paddingVertical="16" paddingHorizontal="24" style="background: var(--card-bg, #ffffff); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+						<div>
+							<div style="display: flex; align-items: center; gap: 10px;">
+								<h4 style="margin: 0; font-size: 18px; font-weight: 700; color: var(--text-color, #18181b);">Dashboard Overview</h4>
+								<span style="font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; background: rgba(34, 197, 94, 0.15); color: #16a34a;">Live</span>
+							</div>
+							<p style="margin: 4px 0 0 0; font-size: 13px; color: var(--text-secondary, #71717a);">Real-time monitoring and analytics workspace</p>
+						</div>
+						<div style="display: flex; align-items: center; gap: 8px;">
+							<button ngcBasicButton style="display: inline-flex; align-items: center; gap: 6px;">
+								<ngc-icon name="cloud-download-outline" size="16px"></ngc-icon>
+								<span>Export</span>
+							</button>
+							<button ngcButton color="primary" style="display: inline-flex; align-items: center; gap: 6px;">
+								<ngc-icon name="add-outline" size="16px"></ngc-icon>
+								<span>New Report</span>
+							</button>
+						</div>
 					</div>
-					<div ngcPageContent class="p-20">
-						<p>This is the page content area with built-in smooth scroll bar.</p>
-						<div *ngFor="let i of [1,2,3,4,5]" style="padding: 10px; margin-bottom: 8px; background: var(--surface-background, #f5f5f5); border-radius: 4px;">
-							Content block {{ i }}
+
+					<!-- Page Content with Built-in Padding -->
+					<div ngcPageContent paddingVertical="24" paddingHorizontal="24">
+						<!-- KPI Metric Cards Grid -->
+						<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px;">
+							<div style="background: var(--card-bg, #ffffff); border: 1px solid var(--border-color, #e4e4e7); border-radius: 10px; padding: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+								<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+									<span style="font-size: 13px; font-weight: 500; color: var(--text-secondary, #71717a);">Total Revenue</span>
+									<div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(59, 130, 246, 0.1); color: #2563eb; display: flex; align-items: center; justify-content: center;">
+										<ngc-icon name="trending-up-outline" size="18px"></ngc-icon>
+									</div>
+								</div>
+								<div style="font-size: 24px; font-weight: 700; color: var(--text-color, #18181b); margin-bottom: 6px;">$48,250.00</div>
+								<div style="font-size: 12px; color: #16a34a; font-weight: 600;">↑ +12.5% from last month</div>
+							</div>
+
+							<div style="background: var(--card-bg, #ffffff); border: 1px solid var(--border-color, #e4e4e7); border-radius: 10px; padding: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+								<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+									<span style="font-size: 13px; font-weight: 500; color: var(--text-secondary, #71717a);">Active Users</span>
+									<div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(168, 85, 247, 0.1); color: #9333ea; display: flex; align-items: center; justify-content: center;">
+										<ngc-icon name="people-outline" size="18px"></ngc-icon>
+									</div>
+								</div>
+								<div style="font-size: 24px; font-weight: 700; color: var(--text-color, #18181b); margin-bottom: 6px;">24,892</div>
+								<div style="font-size: 12px; color: #16a34a; font-weight: 600;">↑ +18.2% new signups</div>
+							</div>
+
+							<div style="background: var(--card-bg, #ffffff); border: 1px solid var(--border-color, #e4e4e7); border-radius: 10px; padding: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+								<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+									<span style="font-size: 13px; font-weight: 500; color: var(--text-secondary, #71717a);">Conversion Rate</span>
+									<div style="width: 32px; height: 32px; border-radius: 8px; background: rgba(34, 197, 94, 0.1); color: #16a34a; display: flex; align-items: center; justify-content: center;">
+										<ngc-icon name="checkmark-circle-outline" size="18px"></ngc-icon>
+									</div>
+								</div>
+								<div style="font-size: 24px; font-weight: 700; color: var(--text-color, #18181b); margin-bottom: 6px;">3.48%</div>
+								<div style="font-size: 12px; color: #2563eb; font-weight: 600;">+0.8% target reached</div>
+							</div>
+						</div>
+
+						<!-- Recent Transactions (Showcases custom smooth scrollbar) -->
+						<div style="background: var(--card-bg, #ffffff); border: 1px solid var(--border-color, #e4e4e7); border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+							<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+								<div>
+									<h5 style="margin: 0; font-size: 15px; font-weight: 600; color: var(--text-color, #18181b);">Recent Transactions</h5>
+									<p style="margin: 3px 0 0; font-size: 12px; color: var(--text-secondary, #71717a);">Scroll down to experience smooth scrollbar &amp; sticky header elevation</p>
+								</div>
+								<span style="font-size: 12px; font-weight: 500; color: var(--text-secondary, #71717a); padding: 3px 10px; border-radius: 6px; background: var(--surface-background, #f4f4f5);">Live Stream</span>
+							</div>
+
+							<div style="display: flex; flex-direction: column; gap: 10px;">
+								<div *ngFor="let item of [
+									{ title: 'Enterprise Annual License', user: 'Sarah Jenkins', time: '10m ago', amount: '+$4,200.00', status: 'Completed', color: '#16a34a' },
+									{ title: 'Pro Team Monthly Subscription', user: 'Alex Morgan', time: '35m ago', amount: '+$149.00', status: 'Completed', color: '#16a34a' },
+									{ title: 'Cloud Compute Expansion Pack', user: 'TechCorp Solutions', time: '1h ago', amount: '+$890.00', status: 'Processing', color: '#eab308' },
+									{ title: 'Additional Developer Seats (x5)', user: 'Design Studio Lab', time: '3h ago', amount: '+$350.00', status: 'Completed', color: '#16a34a' },
+									{ title: 'API High-Throughput Gateway', user: 'Fintech Systems Inc.', time: '5h ago', amount: '+$1,200.00', status: 'Completed', color: '#16a34a' },
+									{ title: 'Priority Support Retainer', user: 'Global Retail Corp', time: '1d ago', amount: '+$600.00', status: 'Completed', color: '#16a34a' }
+								]" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--surface-background, #f8fafc); border: 1px solid var(--border-color, #f1f5f9); border-radius: 8px;">
+									<div style="display: flex; align-items: center; gap: 12px;">
+										<div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(59, 130, 246, 0.12); color: #2563eb; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;">
+											{{ item.user.charAt(0) }}
+										</div>
+										<div>
+											<div style="font-size: 14px; font-weight: 600; color: var(--text-color, #18181b);">{{ item.title }}</div>
+											<div style="font-size: 12px; color: var(--text-secondary, #71717a);">{{ item.user }} • {{ item.time }}</div>
+										</div>
+									</div>
+									<div style="text-align: right;">
+										<div style="font-size: 14px; font-weight: 700; color: var(--text-color, #18181b);">{{ item.amount }}</div>
+										<div [style.color]="item.color" style="font-size: 11px; font-weight: 600;">{{ item.status }}</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</ngc-page>
@@ -4620,13 +4692,20 @@ export class AppModule &#123; &#125;</code></pre>
 		</ngc-tab>
 		<ngc-tab [label]="'Code'">
 			<ngc-code-block language="html">
-				<pre><code #codeContent>&lt;ngc-page stretch&gt;
-  &lt;div ngcPageHeader&gt;
+				<pre><code #codeContent>&lt;!-- Full Page Layout Shell --&gt;
+&lt;ngc-page stretch&gt;
+  &lt;!-- Dedicated Header with Divider and Custom Padding --&gt;
+  &lt;div ngcPageHeader [divider]="true" paddingVertical="16" paddingHorizontal="24"&gt;
     &lt;h4&gt;Dashboard Overview&lt;/h4&gt;
-    &lt;button ngcButton color="primary"&gt;Action&lt;/button&gt;
+    &lt;div class="header-actions"&gt;
+      &lt;button ngcBasicButton&gt;Export&lt;/button&gt;
+      &lt;button ngcButton color="primary"&gt;New Report&lt;/button&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
-  &lt;div ngcPageContent class="p-20"&gt;
-    &lt;p&gt;Main scrollable content&lt;/p&gt;
+
+  &lt;!-- Main Scrollable Content Area with Custom Padding Tokens --&gt;
+  &lt;div ngcPageContent paddingVertical="24" paddingHorizontal="24"&gt;
+    &lt;!-- Dashboard widgets, KPI cards, and data tables --&gt;
   &lt;/div&gt;
 &lt;/ngc-page&gt;</code></pre>
 			</ngc-code-block>

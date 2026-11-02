@@ -18,11 +18,15 @@ export class NgcResizableHandleComponent {
 
 	@HostListener('mousedown', ['$event'])
 	public onMouseDown(event: MouseEvent) {
+		event.preventDefault();
+		event.stopPropagation();
 		this.dragStart.emit(event);
 	}
 
 	@HostListener('touchstart', ['$event'])
 	public onTouchStart(event: TouchEvent) {
+		if (event.cancelable) event.preventDefault();
+		event.stopPropagation();
 		this.dragStart.emit(event);
 	}
 

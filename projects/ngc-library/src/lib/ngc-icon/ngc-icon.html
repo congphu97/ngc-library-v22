@@ -1,7 +1,17 @@
 <ng-container *ngIf="isIonic; else icomoonBlock">
-  <ion-icon [name]="name"></ion-icon>
+  <ion-icon 
+    [name]="name"
+    [style.color]="styleColor"
+    [style.font-size]="styleFontSize"
+    [style.width]="styleWidth"
+    [style.height]="styleHeight">
+  </ion-icon>
 </ng-container>
 <ng-template #icomoonBlock>
   <!-- Icomoon icon font (local) -->
-  <i [ngClass]='"icon-" + name'></i>
+  <i [ngClass]="iconClass"
+     [style.color]="styleColor"
+     [style.font-size]="styleFontSize"
+     [style.line-height]="styleLineHeight">
+  </i>
 </ng-template>

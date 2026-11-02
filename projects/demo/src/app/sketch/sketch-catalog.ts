@@ -387,7 +387,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'collapse-menu',
 		name: 'Collapse Menu',
-		category: 'Feedback',
+		category: 'Layout',
 		icon: 'list',
 		defaultProps: {
 			title: 'Navigation Menu Accordion',
@@ -488,7 +488,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'cropper',
 		name: 'Cropper',
-		category: 'Feedback',
+		category: 'Data Entry',
 		icon: 'crop',
 		defaultProps: {
 			aspectRatio: '1:1 (Square)',
@@ -595,7 +595,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'drawer',
 		name: 'Drawer',
-		category: 'Feedback',
+		category: 'Layout',
 		icon: 'sidebar',
 		defaultProps: {
 			title: 'Filter Products',
@@ -655,7 +655,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'file-picker',
 		name: 'File Picker',
-		category: 'Feedback',
+		category: 'Data Entry',
 		icon: 'attachment',
 		defaultProps: {
 			label: 'Upload Receipt / Invoice',
@@ -697,7 +697,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'grid',
 		name: 'Grid',
-		category: 'Feedback',
+		category: 'Layout',
 		icon: 'grid',
 		defaultProps: {
 			columns: 2,
@@ -755,7 +755,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'inline-input',
 		name: 'Inline Input',
-		category: 'Feedback',
+		category: 'Data Entry',
 		icon: 'edit',
 		defaultProps: {
 			label: 'Project Name',
@@ -934,7 +934,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'page',
 		name: 'Page',
-		category: 'Feedback',
+		category: 'Layout',
 		icon: 'collection',
 		defaultProps: {
 			title: 'Welcome Screen',
@@ -970,7 +970,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'phone-field',
 		name: 'Phone Field',
-		category: 'Feedback',
+		category: 'Data Entry',
 		icon: 'phone',
 		defaultProps: {
 			label: 'Phone Number',
@@ -1062,7 +1062,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'range-input',
 		name: 'Range Input',
-		category: 'Feedback',
+		category: 'Data Entry',
 		icon: 'sliders',
 		defaultProps: {
 			label: 'Price Range ($)',
@@ -1103,7 +1103,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'scroll-bar',
 		name: 'Scroll Bar',
-		category: 'Feedback',
+		category: 'Layout',
 		icon: 'sliders',
 		defaultProps: {
 			content: 'Smooth custom scroll container with tailored theme thumb and track styling.',
@@ -1290,7 +1290,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'tag',
 		name: 'Tag',
-		category: 'Feedback',
+		category: 'Data Display',
 		icon: 'label',
 		defaultProps: {
 			label: 'New Release',
@@ -1333,7 +1333,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'timeline-item',
 		name: 'Timeline',
-		category: 'Feedback',
+		category: 'Data Display',
 		icon: 'calendar',
 		defaultProps: {
 			stepNumber: 1,
@@ -1426,7 +1426,7 @@ export const SKETCH_CATALOG: SketchCatalogItem[] = [
 	{
 		type: 'truncate',
 		name: 'Truncate',
-		category: 'Feedback',
+		category: 'Data Display',
 		icon: 'more-horizontal',
 		defaultProps: {
 			text: 'Antigravity Design System provides an extensive suite of enterprise components engineered for maximum flexibility, consistent user experience, and rapid prototyping across desktop and mobile.',

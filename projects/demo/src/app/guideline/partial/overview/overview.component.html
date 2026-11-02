@@ -26,56 +26,12 @@
 					 class="guideline-overview__card"
 					 (click)="clickItem(item)">
 					
-					<!-- Interactive mini graphics representation -->
+					<!-- Consistent Icon Representation Matching Sidebar -->
 					<div class="guideline-overview__card-preview">
-						<ng-container [ngSwitch]="item.name">
-							<!-- Button Preview -->
-							<div *ngSwitchCase="'Button'" class="preview-graphics preview-graphics--btn">
-								<div class="g-btn g-btn--primary"></div>
-								<div class="g-btn g-btn--secondary"></div>
-							</div>
-							<!-- Icon Preview -->
-							<div *ngSwitchCase="'Icon'" class="preview-graphics preview-graphics--icon">
-								<span class="g-circle-dot"></span>
-								<span class="g-heart"></span>
-								<span class="g-star"></span>
-							</div>
-							<!-- Color & Typography -->
-							<div *ngSwitchCase="'Color & Typography'" class="preview-graphics preview-graphics--typo">
-								<span class="g-typo-aa">Aa</span>
-							</div>
-							<!-- Divide -->
-							<div *ngSwitchCase="'Divide'" class="preview-graphics preview-graphics--divider">
-								<div class="g-divider-line"></div>
-							</div>
-							<!-- Sidebar -->
-							<div *ngSwitchCase="'Sidebar'" class="preview-graphics preview-graphics--sidebar">
-								<div class="g-sidebar-layout">
-									<div class="g-sidebar-left"></div>
-									<div class="g-sidebar-right"></div>
-								</div>
-							</div>
-							<!-- Accordion -->
-							<div *ngSwitchCase="'Accordion'" class="preview-graphics preview-graphics--accordion">
-								<div class="g-acc-bar"></div>
-								<div class="g-acc-bar g-acc-bar--open"></div>
-							</div>
-							<!-- Navigation Menu -->
-							<div *ngSwitchCase="'Navigation Menu'" class="preview-graphics preview-graphics--nav">
-								<div class="g-nav-bar">
-									<span class="g-nav-dot"></span>
-									<span class="g-nav-dot"></span>
-								</div>
-							</div>
-							<!-- Form Field / Input -->
-							<div *ngSwitchCase="'Input'" class="preview-graphics preview-graphics--input">
-								<div class="g-input-field"></div>
-							</div>
-							<!-- Default fallback graphic -->
-							<div *ngSwitchDefault class="preview-graphics">
-								<ngc-icon [name]="item.icon" size="28px" class="g-fallback-icon"></ngc-icon>
-							</div>
-						</ng-container>
+						<div class="preview-graphics">
+							<span *ngIf="item.name === 'Typography' || item.name === 'Color & Typography'" class="g-typo-aa">Aa</span>
+							<ngc-icon *ngIf="item.name !== 'Typography' && item.name !== 'Color & Typography'" [name]="item.icon" size="32px" class="g-card-icon"></ngc-icon>
+						</div>
 					</div>
 
 					<div class="guideline-overview__card-info">

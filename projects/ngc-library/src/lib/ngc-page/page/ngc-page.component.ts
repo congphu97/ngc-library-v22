@@ -64,35 +64,35 @@ export class NgcPageComponent {
 	public isScrolling: boolean;
 
 	get headerPaddingTop(): string {
-		return this.pageHeader?.paddingTop || this.pageHeader?.paddingVertical;
+		return this.pageHeader?.paddingTop || this.pageHeader?.paddingVertical || this.pageHeader?.padding;
 	}
 
 	get headerPaddingBottom(): string {
-		return this.pageHeader?.paddingBottom || this.pageHeader?.paddingVertical;
+		return this.pageHeader?.paddingBottom || this.pageHeader?.paddingVertical || this.pageHeader?.padding;
 	}
 
 	get headerPaddingLeft(): string {
-		return this.pageHeader?.paddingLeft || this.pageHeader?.paddingHorizontal;
+		return this.pageHeader?.paddingLeft || this.pageHeader?.paddingHorizontal || this.pageHeader?.padding;
 	}
 
 	get headerPaddingRight(): string {
-		return this.pageHeader?.paddingRight || this.pageHeader?.paddingHorizontal;
+		return this.pageHeader?.paddingRight || this.pageHeader?.paddingHorizontal || this.pageHeader?.padding;
 	}
 
 	get contentPaddingTop(): string {
-		return this.pageContent?.paddingTop || this.pageContent?.paddingVertical;
+		return this.pageContent?.paddingTop || this.pageContent?.paddingVertical || this.pageContent?.padding;
 	}
 
 	get contentPaddingBottom(): string {
-		return this.pageContent?.paddingBottom || this.pageContent?.paddingVertical;
+		return this.pageContent?.paddingBottom || this.pageContent?.paddingVertical || this.pageContent?.padding;
 	}
 
 	get contentPaddingLeft(): string {
-		return this.pageContent?.paddingLeft || this.pageContent?.paddingHorizontal;
+		return this.pageContent?.paddingLeft || this.pageContent?.paddingHorizontal || this.pageContent?.padding;
 	}
 
 	get contentPaddingRight(): string {
-		return this.pageContent?.paddingRight || this.pageContent?.paddingHorizontal;
+		return this.pageContent?.paddingRight || this.pageContent?.paddingHorizontal || this.pageContent?.padding;
 	}
 
 }

@@ -409,15 +409,93 @@ export class NgcDesignTokenComponent implements OnInit, OnDestroy {
 		this._cdr.markForCheck();
 	}
 
+	public hasGeneratedTokens: boolean = false;
+	public tokenViewerTab: 'tokens' | 'css' = 'tokens';
+	public tokenCopied: boolean = false;
+
 	/**
-	 * Open dialog with JSON and CSS var output
+	 * Compile and show token output side-by-side
 	 */
+	public generateTokens(show: boolean = true) {
+		this.hasGeneratedTokens = show;
+		this._cdr.markForCheck();
+	}
+
 	public openTokenDialog() {
-		this._ngcDialogService.open( NgcDesignTokenDialogComponent, {
-			data     : { json: JSON.stringify( this._buildCssVarOutput(), null, 2 ) },
-			width    : '680px',
-			maxHeight: '90vh',
+		this.generateTokens(true);
+	}
+
+	public toggleTokenViewer(show?: boolean) {
+		this.hasGeneratedTokens = typeof show === 'boolean' ? show : !this.hasGeneratedTokens;
+		this._cdr.markForCheck();
+	}
+
+	public setTokenViewerTab(tab: 'tokens' | 'css') {
+		this.tokenViewerTab = tab;
+		this._cdr.markForCheck();
+	}
+
+	public copyTokenCode() {
+		const text = this.tokenViewerTab === 'tokens'
+			? JSON.stringify(this._buildToken(), null, 2)
+			: this._buildCssVarText();
+
+		if (navigator?.clipboard?.writeText) {
+			navigator.clipboard.writeText(text).then(() => {
+				this.tokenCopied = true;
+				this._cdr.markForCheck();
+				setTimeout(() => {
+					this.tokenCopied = false;
+					this._cdr.markForCheck();
+				}, 2000);
+			});
+		}
+	}
+
+	public getHighlightedCode(): string {
+		if (this.tokenViewerTab === 'tokens') {
+			const jsonString = JSON.stringify(this._buildToken(), null, 2);
+			return this.syntaxHighlightJson(jsonString);
+		} else {
+			return this.syntaxHighlightCss(this._buildCssVarText());
+		}
+	}
+
+	private _buildCssVarText(): string {
+		const lines = Object.entries(CSS_VAR_MAP).map(([tokenPath, cssVar]) => {
+			const field = this._tokenPathToField(tokenPath);
+			const val = field ? (this as any)[field] || DEFAULTS[tokenPath] : DEFAULTS[tokenPath];
+			return `  ${cssVar}: ${val};`;
 		});
+		return `:root {\n${lines.join('\n')}\n}`;
+	}
+
+	private syntaxHighlightJson(json: string): string {
+		json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+		return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, (match) => {
+			let cls = 'hl-number';
+			if (/^"/.test(match)) {
+				if (/:$/.test(match)) {
+					cls = 'hl-key';
+					return `<span class="${cls}">${match.replace(':', '')}</span>:`;
+				} else {
+					cls = 'hl-string';
+				}
+			} else if (/true|false/.test(match)) {
+				cls = 'hl-bool';
+			} else if (/null/.test(match)) {
+				cls = 'hl-null';
+			}
+			return `<span class="${cls}">${match}</span>`;
+		});
+	}
+
+	private syntaxHighlightCss(css: string): string {
+		css = css.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+		css = css.replace(/:root/g, '<span class="hl-selector">:root</span>');
+		css = css.replace(/(--[a-zA-Z0-9-_]+)\s*:/g, '<span class="hl-var">$1</span>:');
+		css = css.replace(/:\s*([^;]+);/g, ': <span class="hl-val">$1</span>;');
+		return css;
 	}
 
 	// ── Private ────────────────────────────────────────────────────────────────

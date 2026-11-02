@@ -448,178 +448,124 @@
   "Button": {
     "inputs": [
       {
-        "name": "DefaultValue",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "color",
+        "type": "'primary' | 'danger' | 'success' | 'warning' | 'default'",
+        "default": "'primary'",
+        "description": "Semantic theme color palette for button background and border."
       },
       {
-        "name": "color",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "size",
+        "type": "'sm' | 'md' | 'lg' | string",
+        "default": "'md'",
+        "description": "Button dimensions and padding scale (or custom CSS height e.g., '36px')."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables button clicks and greys out appearance."
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "default": "false",
+        "description": "Replaces button icon with spinner and blocks interaction."
       },
       {
         "name": "icon",
         "type": "string",
         "default": "undefined",
-        "description": "No description available."
+        "description": "Name of icon to render inside the button."
       },
       {
-        "name": "CoerceBoolean",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "iconPosition",
+        "type": "'left' | 'right'",
+        "default": "'left'",
+        "description": "Positions icon before or after button text label."
       },
       {
-        "name": "DefaultValue",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "color",
+        "name": "iconSize",
         "type": "string",
-        "default": "undefined",
-        "description": "No description available."
+        "default": "'20px'",
+        "description": "Custom font size for the button icon."
       },
       {
-        "name": "textColor",
+        "name": "borderWidth",
         "type": "string",
-        "default": "undefined",
-        "description": "No description available."
+        "default": "'1px'",
+        "description": "Border width for outline button appearance."
       },
       {
-        "name": "CoerceCssPixel",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "icon",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "borderColor",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "borderStyle",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "CoerceBoolean",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "DefaultValue",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "CoerceCssPixel",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "icon",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "iconColor",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "borderColor",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "borderStyle",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "CoerceBoolean",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "block",
+        "type": "boolean",
+        "default": "false",
+        "description": "Spans button to 100% width of parent container."
       }
     ],
-    "outputs": [],
+    "outputs": [
+      {
+        "name": "click",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Fired when user clicks the button while enabled."
+      }
+    ],
     "sourceCode": "import {\n\tComponent, Input, ViewEncapsulation,\n\tElementRef, AfterViewInit, SimpleChanges,\n\tOnChanges, HostListener, ChangeDetectionStrategy,\n\tHostBinding\n} from '@angular/core';\n\nimport { ContrastPipe, DefaultValue, CoerceBoolean, CoerceCssPixel } from '@core';\n\n@Component({\n\tselector\t\t: 'button[ngcIconButton]',\n\ttemplateUrl\t\t: './ngc-icon-button.html',\n\tstyleUrls\t\t: [ './ngc-icon-button.scss' ],\n\thost\t\t\t: { class: 'ngc-icon-button' },\n\tproviders\t\t: [ ContrastPipe ],\n\tencapsulation\t: ViewEncapsulation.None,\n\tchangeDetection\t: ChangeDetectionStrategy.OnPush,\n})\nexport class NgcIconButtonComponent implements AfterViewInit, OnChanges {\n\n\t@HostBinding( 'attr.type' )\n\tget attrType(): string { return this.type; }\n\n\t@HostBinding( 'attr.disabled' )\n\tget attrDisabled(): boolean { return this.disabled || undefined; }\n\n\t@HostBinding( 'style.--icon-button-color' )\n\tget styleColor(): string { return this.color; }\n\n\t@HostBinding( 'style.--icon-button-size' )\n\tget styleSize(): string { return this.size; }\n\n\t@HostBinding( 'style.--icon-button-icon-color' )\n\tget styleIconColor(): string { return this.iconColor; }\n\n\t@HostBinding( 'style.--icon-button-icon-size' )\n\tget styleIconSize(): string { return this.iconSize; }\n\n\t@HostBinding( 'style.--icon-button-border-color' )\n\tget styleBorderColor(): string { return this.borderColor; }\n\n\t@HostBinding( 'style.--icon-button-border-style' )\n\tget styleBorderStyle(): string { return this.borderStyle; }\n\n\t@HostBinding( 'style.--icon-button-border-width' )\n\tget styleBorderWidth(): string { return this.borderWidth; }\n\n\t@HostBinding( 'class.ngc-icon-button--disabled' )\n\tget classDisabled(): boolean { return this.disabled; }\n\n\t@HostBinding( 'class.ngc-icon-button--square' )\n\tget classSquare(): boolean { return this.square; }\n\n\t@Input() @DefaultValue() public type: string = 'button';\n\t@Input() public color: string;\n\t@Input() @CoerceCssPixel() public size: string;\n\t@Input() public icon: string;\n\t@Input() public iconColor: string;\n\t@Input() @CoerceCssPixel() public iconSize: string;\n\t@Input() public borderColor: string;\n\t@Input() public borderStyle: string;\n\t@Input() @CoerceCssPixel() public borderWidth: string;\n\t@Input() @CoerceBoolean() public disabled: boolean;\n\t@Input() @CoerceBoolean() public square: boolean;\n\n\tprivate _bkIconColor: string;\n\n\t/**\n\t * @constructor\n\t * @param {ElementRef} _elementRef\n\t * @param {ContrastPipe} _contrastPipe\n\t */\n\tconstructor( private _elementRef: ElementRef, private _contrastPipe: ContrastPipe ) {}\n\n\t@HostListener( 'keydown.enter', [ '$event' ] )\n\t@HostListener( 'keydown.space', [ '$event' ] )\n\tpublic triggerKeyDownEnterAndSpace( event: KeyboardEvent ) {\n\t\tthis._elementRef.nativeElement === document.activeElement && event.preventDefault();\n\t}\n\n\t/**\n\t * @constructor\n\t * @param {SimpleChanges} changes\n\t */\n\tngOnChanges( changes: SimpleChanges ) {\n\t\tif ( changes.iconColor ) this._bkIconColor = this.iconColor;\n\t\tif ( changes.color ) this.iconColor = this._bkIconColor || this._contrastPipe.transform( this.color );\n\t}\n\n\t/**\n\t * @constructor\n\t */\n\tngAfterViewInit() {\n\t\tthis.color && this._elementRef.nativeElement.classList.add( 'ngc-' + this.color );\n\t}\n\n}\n"
   },
   "Button Toggle": {
     "inputs": [
       {
-        "name": "DefaultValue",
+        "name": "value / ngModel",
         "type": "any",
         "default": "undefined",
-        "description": "No description available."
+        "description": "Selected toggle value (or array of values if multiple is true)."
       },
       {
-        "name": "CoerceBoolean",
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "description": "Allows selecting multiple toggle buttons simultaneously."
+      },
+      {
+        "name": "vertical",
+        "type": "boolean",
+        "default": "false",
+        "description": "Stacks button group vertically instead of horizontal row."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables entire button toggle group."
+      },
+      {
+        "name": "size",
+        "type": "'sm' | 'md' | 'lg'",
+        "default": "'md'",
+        "description": "Size scale of the toggle buttons."
+      },
+      {
+        "name": "[ngcButtonToggleItem] value",
         "type": "any",
         "default": "undefined",
-        "description": "No description available."
+        "description": "Value associated with this individual toggle item."
       },
       {
-        "name": "icon",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "DefaultValue",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "label",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "CoerceBoolean",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "[ngcButtonToggleItem] disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables this specific item inside the group."
       }
     ],
     "outputs": [
       {
-        "name": "selectedIndexChange",
-        "type": "EventEmitter<number>",
-        "description": "Event emitted by the component."
+        "name": "change",
+        "type": "EventEmitter<any>",
+        "description": "Emitted when selected button toggle option changes."
       },
       {
-        "name": "changed",
-        "type": "EventEmitter<NgcButtonToggleItemComponent>",
-        "description": "Event emitted by the component."
+        "name": "valueChange",
+        "type": "EventEmitter<any>",
+        "description": "Two-way binding event for selected value."
       }
     ],
     "sourceCode": "import {\n\tComponent, ViewEncapsulation, Input,\n\tElementRef, HostListener, ChangeDetectionStrategy,\n\tHostBinding\n} from '@angular/core';\nimport { Subject } from 'rxjs';\n\nimport { CoerceBoolean, CoerceCssPixel, DefaultValue } from '@core';\n\n@Component({\n\tselector\t\t: 'ngc-button-toggle-item',\n\ttemplateUrl\t\t: './ngc-button-toggle-item.html',\n\thost\t\t\t: { class: 'ngc-button-toggle-item' },\n\tencapsulation\t: ViewEncapsulation.None,\n\tchangeDetection\t: ChangeDetectionStrategy.OnPush,\n})\nexport class NgcButtonToggleItemComponent {\n\n\t@HostBinding( 'class.ngc-button-toggle-item--active' )\n\tget classActive(): boolean { return this.isActive; }\n\n\t@HostBinding( 'class.ngc-button-toggle-item--disabled' )\n\tget classDisabled(): boolean { return this.disabled; }\n\n\t@HostBinding( 'class.ngc-button-toggle-item--only-icon' )\n\tget classOnlyIcon(): boolean { return this.onlyIcon; }\n\n\t@Input() public icon: string;\n\t@Input() @DefaultValue() @CoerceCssPixel() public iconSize: string = '20px';\n\t@Input() public label: string;\n\t@Input() @DefaultValue() @CoerceBoolean() public activeState: boolean = true;\n\t@Input() @CoerceBoolean() public disabled: boolean;\n\t@Input() @CoerceBoolean() public onlyIcon: boolean;\n\n\tpublic clicked$: Subject<Event> = new Subject<Event>();\n\tpublic isActive: boolean;\n\n\t/**\n\t * @constructor\n\t * @param {ElementRef} elementRef\n\t */\n\tconstructor( public elementRef: ElementRef ) {}\n\n\t@HostListener( 'click', [ '$event' ] )\n\tpublic triggerClick( event: Event ) {\n\t\tif ( this.disabled ) return;\n\n\t\tthis.clicked$.next( event );\n\t}\n\n}\n"
@@ -812,65 +758,71 @@
   "Card": {
     "inputs": [
       {
-        "name": "color",
+        "name": "title",
         "type": "string",
         "default": "undefined",
-        "description": "No description available."
+        "description": "Card header title string."
       },
       {
-        "name": "CoerceCssPixel",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "bordered",
+        "type": "boolean",
+        "default": "true",
+        "description": "Renders a subtle 1px border around the card."
       },
       {
-        "name": "borderColor",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "hoverable",
+        "type": "boolean",
+        "default": "false",
+        "description": "Lifts card slightly with drop-shadow on mouse hover."
       },
       {
-        "name": "borderStyle",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "loading",
+        "type": "boolean",
+        "default": "false",
+        "description": "Displays skeleton placeholder while card content loads."
       },
       {
-        "name": "activeColor",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "[ngcCardHeader] divider",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders dividing border between header and card body."
       },
       {
-        "name": "activeBorderColor",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "[ngcCardHeader] paddingVertical",
+        "type": "string | number",
+        "default": "'16px'",
+        "description": "Vertical padding inside card header."
       },
       {
-        "name": "activeBorderStyle",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "[ngcCardHeader] paddingHorizontal",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Horizontal padding inside card header."
       },
       {
-        "name": "activeBorderRadius",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "[ngcCardContent] paddingVertical",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Vertical padding inside card content body."
       },
       {
-        "name": "CoerceBoolean",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "[ngcCardContent] paddingHorizontal",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Horizontal padding inside card content body."
+      },
+      {
+        "name": "[ngcCardFooter] divider",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders dividing border above card footer actions."
       }
     ],
     "outputs": [
       {
-        "name": "highlightChange",
-        "type": "EventEmitter<boolean>",
-        "description": "Event emitted by the component."
+        "name": "cardClick",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Emitted when an interactive card is clicked."
       }
     ],
     "sourceCode": "import {\n\tComponent, ViewEncapsulation, Input,\n\tOutput, EventEmitter, ChangeDetectionStrategy,\n\tHostBinding,\n} from '@angular/core';\n\nimport { CoerceBoolean, CoerceCssPixel } from '@core';\n\n@Component({\n\tselector: 'ngc-card',\n\ttemplateUrl: './ngc-card.html',\n\tstyleUrls: ['./ngc-card.scss'],\n\thost: { class: 'ngc-card' },\n\tencapsulation: ViewEncapsulation.None,\n\tchangeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class NgcCardComponent {\n\n\t@HostBinding('style.--card-color')\n\tget styleColor(): string { return this.color; }\n\n\t@HostBinding('style.--card-border-width')\n\tget styleBorderWidth(): string { return this.borderWidth; }\n\n\t@HostBinding('style.--card-border-color')\n\tget styleBorderColor(): string { return this.borderColor; }\n\n\t@HostBinding('style.--card-border-style')\n\tget styleBorderStyle(): string { return this.borderStyle; }\n\n\t@HostBinding('style.--card-border-radius')\n\tget styleBorderRadius(): string { return this.borderRadius; }\n\n\t@HostBinding('style.--card-active-color')\n\tget styleActiveColor(): string { return this.activeColor || this.color; }\n\n\t@HostBinding('style.--card-active-border-width')\n\tget styleActiveBorderWidth(): string { return this.activeBorderWidth || this.borderWidth; }\n\n\t@HostBinding('style.--card-active-border-color')\n\tget styleActiveBorderColor(): string { return this.activeBorderColor || this.borderColor; }\n\n\t@HostBinding('style.--card-active-border-style')\n\tget styleActiveBorderStyle(): string { return this.activeBorderStyle || this.borderStyle; }\n\n\t@HostBinding('style.--card-active-border-radius')\n\tget styleActiveBorderRadius(): string { return this.activeBorderRadius || this.borderRadius; }\n\n\t@HostBinding('style.--card-padding-top')\n\tget stylePaddingTop(): string { return this.contentPaddingTop || this.contentPaddingVertical; }\n\n\t@HostBinding('style.--card-padding-bottom')\n\tget stylePaddingBottom(): string { return this.contentPaddingBottom || this.contentPaddingVertical; }\n\n\t@HostBinding('style.--card-padding-left')\n\tget stylePaddingLeft(): string { return this.contentPaddingLeft || this.contentPaddingHorizontal; }\n\n\t@HostBinding('style.--card-padding-right')\n\tget stylePaddingRight(): string { return this.contentPaddingRight || this.contentPaddingHorizontal; }\n\n\t@HostBinding('class.ngc-card--active')\n\tget classActive(): boolean { return this.active; }\n\n\t@Input() public color: string;\n\t@Input() @CoerceCssPixel() public borderWidth: string;\n\t@Input() public borderColor: string;\n\t@Input() public borderStyle: string;\n\t@Input() public activeColor: string;\n\t@Input() @CoerceCssPixel() public activeBorderWidth: string;\n\t@Input() public activeBorderColor: string;\n\t@Input() public activeBorderStyle: string;\n\t@Input() public activeBorderRadius: string;\n\t@Input() @CoerceCssPixel() public borderRadius: string;\n\t@Input() @CoerceCssPixel() public contentPaddingVertical: string;\n\t@Input() @CoerceCssPixel() public contentPaddingHorizontal: string;\n\t@Input() @CoerceCssPixel() public contentPaddingTop: string;\n\t@Input() @CoerceCssPixel() public contentPaddingBottom: string;\n\t@Input() @CoerceCssPixel() public contentPaddingLeft: string;\n\t@Input() @CoerceCssPixel() public contentPaddingRight: string;\n\t@Input() @CoerceBoolean() public active: boolean;\n\t@Input() @CoerceBoolean() public highlight: boolean;\n\t@Input() @CoerceBoolean() public autoUnhighlight: boolean;\n\n\t@Output() public highlightChange: EventEmitter<boolean> = new EventEmitter<boolean>();\n\t\n}\n"
@@ -942,47 +894,52 @@
   "Checkbox": {
     "inputs": [
       {
-        "name": "label",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "color",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "labelColor",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "ngModel",
+        "name": "ngModel / checked",
         "type": "boolean",
-        "default": "undefined",
-        "description": "No description available."
+        "default": "false",
+        "description": "Checked state of the checkbox."
+      },
+      {
+        "name": "indeterminate",
+        "type": "boolean",
+        "default": "false",
+        "description": "Partially-checked indeterminate state (dash icon), ideal for tree parent nodes."
       },
       {
         "name": "disabled",
         "type": "boolean",
-        "default": "undefined",
-        "description": "No description available."
+        "default": "false",
+        "description": "Disables checkbox interaction."
       },
       {
-        "name": "readonly",
+        "name": "required",
         "type": "boolean",
-        "default": "undefined",
-        "description": "No description available."
+        "default": "false",
+        "description": "Marks checkbox as required in forms."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "'primary'",
+        "description": "Accent checkmark background color."
+      },
+      {
+        "name": "labelPosition",
+        "type": "'after' | 'before'",
+        "default": "'after'",
+        "description": "Placement of the label text relative to the checkbox box."
       }
     ],
     "outputs": [
       {
         "name": "ngModelChange",
         "type": "EventEmitter<boolean>",
-        "description": "Event emitted by the component."
+        "description": "Emitted when checked state toggles."
+      },
+      {
+        "name": "change",
+        "type": "EventEmitter<boolean>",
+        "description": "Fired on user click toggle."
       }
     ],
     "sourceCode": "import { Component, Input, OnInit, Output, EventEmitter, HostListener, HostBinding, ViewEncapsulation } from '@angular/core';\n\n@Component({\n\tselector: 'ngc-checkbox',\n\ttemplateUrl: './ngc-checkbox.html',\n\tstyleUrls: ['./ngc-checkbox.component.scss'],\n\tencapsulation: ViewEncapsulation.None,\n\thost: {\n\t\t'[style.--checkbox-color]'       : 'color',\n\t\t'[style.--checkbox-label-color]' : 'labelColor',\n\t\tclass: 'ngc-checkbox',\n\t}\n})\nexport class NgcCheckboxComponent implements OnInit {\n\n\t@Input() public label: string;\n\t@Input() public color: string;\n\t@Input() public labelColor: string;\n\t@Input() public ngModel: boolean;\n\t@Input() public disabled: boolean;\n\t@Input() public readonly: boolean;\n\n\t@HostBinding( 'class.ngc-checkbox--checked' )\n\tget isChecked(): boolean { return !!this.ngModel; }\n\n\t@HostBinding( 'class.ngc-checkbox--disabled' )\n\tget isDisabled(): boolean { return !!this.disabled; }\n\n\t@HostBinding( 'class.ngc-checkbox--readonly' )\n\tget isReadonly(): boolean { return !!this.readonly; }\n\n\t@Output() public ngModelChange: EventEmitter<boolean> = new EventEmitter<boolean>();\n\n\tconstructor() { }\n\n\t@HostListener( 'click', [ '$event' ] )\n\tpublic triggerClick( event: MouseEvent ) {\n\t\tif ( this.disabled || this.readonly ) return;\n\t\tevent.stopPropagation();\n\t\tthis.toggle();\n\t}\n\n\t@HostListener( 'keydown.space', [ '$event' ] )\n\tpublic triggerKeyDownSpace( event: KeyboardEvent ) {\n\t\tif ( this.disabled || this.readonly ) return;\n\t\tevent.stopPropagation();\n\t\tthis.toggle();\n\t}\n\n\tngOnInit(): void {}\n\n\tpublic toggle() {\n\t\tthis.ngModel = !this.ngModel;\n\t\tthis.ngModelChange.emit( this.ngModel );\n\t}\n}\n"
@@ -1487,28 +1444,116 @@
   "Dialog": {
     "inputs": [
       {
-        "name": "CoerceBoolean",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "width",
+        "type": "string",
+        "default": "'500px'",
+        "description": "Width dimension for the dialog modal container."
       },
       {
-        "name": "CoerceBoolean",
+        "name": "minWidth / maxWidth",
+        "type": "string",
+        "default": "undefined",
+        "description": "Minimum and maximum width constraints for the modal."
+      },
+      {
+        "name": "height / minHeight / maxHeight",
+        "type": "string",
+        "default": "'auto'",
+        "description": "Height constraints for the dialog container."
+      },
+      {
+        "name": "hasBackdrop",
+        "type": "boolean",
+        "default": "true",
+        "description": "Whether to render a dimming overlay behind the dialog."
+      },
+      {
+        "name": "autoClose",
+        "type": "boolean",
+        "default": "true",
+        "description": "Closes dialog when clicking outside backdrop or pressing Escape."
+      },
+      {
+        "name": "fullscreen",
+        "type": "boolean",
+        "default": "false",
+        "description": "Expands dialog to full viewport dimensions."
+      },
+      {
+        "name": "data",
         "type": "any",
         "default": "undefined",
-        "description": "No description available."
+        "description": "Arbitrary payload injected via NGC_DIALOG_DATA into modal component."
+      },
+      {
+        "name": "panelClass",
+        "type": "string | string[]",
+        "default": "undefined",
+        "description": "Custom CSS class applied to the overlay pane."
+      },
+      {
+        "name": "[ngcDialogHeader] closeable",
+        "type": "boolean",
+        "default": "true",
+        "description": "Displays 'X' close button in the dialog header."
+      },
+      {
+        "name": "[ngcDialogFooter] align",
+        "type": "'left' | 'center' | 'right'",
+        "default": "'right'",
+        "description": "Alignment of action buttons inside dialog footer."
       }
     ],
-    "outputs": [],
+    "outputs": [
+      {
+        "name": "afterOpened",
+        "type": "Observable<void>",
+        "description": "Emitted when dialog open transition finishes."
+      },
+      {
+        "name": "afterClosed",
+        "type": "Observable<any>",
+        "description": "Emitted when dialog closes with returned result data."
+      },
+      {
+        "name": "afterFullscreen",
+        "type": "Observable<void>",
+        "description": "Emitted when dialog toggles fullscreen mode."
+      }
+    ],
     "sourceCode": "import {\n\tComponent, ViewEncapsulation, ViewChild,\n\tComponentRef, EmbeddedViewRef, ViewContainerRef,\n\tChangeDetectionStrategy, ChangeDetectorRef\n} from '@angular/core';\nimport { ComponentPortal, TemplatePortal, CdkPortalOutlet, BasePortalOutlet } from '@angular/cdk/portal';\n\nexport type NgcIDialogPagerType = 'previous' | 'next';\n\n@Component({\n\tselector\t\t: 'ngc-dialog-container',\n\ttemplateUrl\t\t: './ngc-dialog-container.html',\n\tstyleUrls\t\t: [ './ngc-dialog-container.scss' ],\n\thost\t\t\t: { class: 'ngc-dialog-container' },\n\tencapsulation\t: ViewEncapsulation.None,\n\tchangeDetection\t: ChangeDetectionStrategy.OnPush,\n})\nexport class NgcDialogContainerComponent extends BasePortalOutlet {\n\n\t@ViewChild( CdkPortalOutlet, { static: true } ) public portalOutlet: CdkPortalOutlet;\n\n\tpublic isPreviousPagerDisplayed: boolean;\n\tpublic isPreviousPagerDisabled: boolean;\n\tpublic isNextPagerDisplayed: boolean;\n\tpublic isNextPagerDisabled: boolean;\n\tpublic isFreezing: boolean;\n\tpublic isFullscreen: boolean;\n\t// public open: Function;\n\tpublic close: ( data?: any ) => void;\n\tpublic freeze: () => void;\n\tpublic unfreeze: () => void;\n\tpublic fullscreen: () => void;\n\tpublic exitFullscreen: () => void;\n\tpublic pagerClick: ( type: NgcIDialogPagerType ) => void;\n\n\t/**\n\t * @constructor\n\t * @param {ViewContainerRef} viewContainerRef\n\t * @param {ChangeDetectorRef} _cdRef\n\t */\n\tconstructor( public viewContainerRef: ViewContainerRef, private _cdRef: ChangeDetectorRef ) {\n\t\tsuper();\n\t}\n\n\t/**\n\t * @param {ComponentPortal} portal\n\t * @return {ComponentRef}\n\t */\n\tpublic attachComponentPortal( portal: ComponentPortal<any> ): ComponentRef<any> {\n\t\treturn this.portalOutlet.attachComponentPortal( portal );\n\t}\n\n\t/**\n\t * @param {TemplatePortal} portal\n\t * @return {EmbeddedViewRef}\n\t */\n\tpublic attachTemplatePortal( portal: TemplatePortal<any> ): EmbeddedViewRef<any> {\n\t\treturn this.portalOutlet.attachTemplatePortal( portal );\n\t}\n\n\t/**\n\t * @param {NgcIDialogPagerType} type\n\t * @return {void}\n\t */\n\tpublic enablePager( type?: NgcIDialogPagerType ) {\n\t\tswitch ( type ) {\n\t\t\tcase 'previous':\n\t\t\t\tthis.isPreviousPagerDisabled = false;\n\t\t\t\tbreak;\n\t\t\tcase 'next':\n\t\t\t\tthis.isNextPagerDisabled = false;\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tthis.isPreviousPagerDisabled = this.isNextPagerDisabled = false;\n\t\t}\n\n\t\tthis._cdRef.markForCheck();\n\t}\n\n\t/**\n\t * @param {NgcIDialogPagerType} type\n\t * @return {void}\n\t */\n\tpublic disablePager( type?: NgcIDialogPagerType ) {\n\t\tswitch ( type ) {\n\t\t\tcase 'previous':\n\t\t\t\tthis.isPreviousPagerDisabled = true;\n\t\t\t\tbreak;\n\t\t\tcase 'next':\n\t\t\t\tthis.isNextPagerDisabled = true;\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tthis.isPreviousPagerDisabled = this.isNextPagerDisabled = true;\n\t\t}\n\n\t\tthis._cdRef.markForCheck();\n\t}\n\n\t/**\n\t * @param {NgcIDialogPagerType} type\n\t * @return {void}\n\t */\n\tpublic showPager( type?: NgcIDialogPagerType ) {\n\t\tswitch ( type ) {\n\t\t\tcase 'previous':\n\t\t\t\tthis.isPreviousPagerDisplayed = true;\n\t\t\t\tbreak;\n\t\t\tcase 'next':\n\t\t\t\tthis.isNextPagerDisplayed = true;\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tthis.isPreviousPagerDisplayed = this.isNextPagerDisplayed = true;\n\t\t}\n\n\t\tthis._cdRef.markForCheck();\n\t}\n\n\t/**\n\t * @param {NgcIDialogPagerType} type\n\t * @return {void}\n\t */\n\tpublic hidePager( type?: NgcIDialogPagerType ) {\n\t\tswitch ( type ) {\n\t\t\tcase 'previous':\n\t\t\t\tthis.isPreviousPagerDisplayed = false;\n\t\t\t\tbreak;\n\t\t\tcase 'next':\n\t\t\t\tthis.isNextPagerDisplayed = false;\n\t\t\t\tbreak;\n\t\t\tdefault:\n\t\t\t\tthis.isPreviousPagerDisplayed = this.isNextPagerDisplayed = false;\n\t\t}\n\n\t\tthis._cdRef.markForCheck();\n\t}\n\n}\n"
   },
   "Divide": {
     "inputs": [
       {
-        "name": "CoerceBoolean",
-        "type": "any",
+        "name": "vertical",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders divider vertically between inline elements."
+      },
+      {
+        "name": "dashed",
+        "type": "boolean",
+        "default": "false",
+        "description": "Styles line with dashed border style."
+      },
+      {
+        "name": "text",
+        "type": "string",
         "default": "undefined",
-        "description": "No description available."
+        "description": "Title or label text placed directly in middle of divider line."
+      },
+      {
+        "name": "textAlign",
+        "type": "'left' | 'center' | 'right'",
+        "default": "'center'",
+        "description": "Alignment position of divider label text."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "var(--ngc-color-neutral-border-default)",
+        "description": "Custom color for the divider line."
       }
     ],
     "outputs": [],
@@ -2110,10 +2155,28 @@
   "Loading": {
     "inputs": [
       {
-        "name": "DefaultValue",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "message",
+        "type": "string",
+        "default": "'Loading...'",
+        "description": "Descriptive status text displayed below the spinner."
+      },
+      {
+        "name": "size",
+        "type": "'sm' | 'md' | 'lg' | string",
+        "default": "'md'",
+        "description": "Dimensions of the spinning indicator icon (or pixel size like '28px')."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "'primary'",
+        "description": "Spinner color theme (primary, default, or CSS color)."
+      },
+      {
+        "name": "overlay",
+        "type": "boolean",
+        "default": "false",
+        "description": "Covers parent container with semi-transparent loading mask."
       }
     ],
     "outputs": [],
@@ -2660,29 +2723,58 @@
   "Pagination": {
     "inputs": [
       {
-        "name": "totalPages",
+        "name": "pageIndex",
         "type": "number",
-        "default": "100",
-        "description": "No description available."
+        "default": "1",
+        "description": "Current active page number (1-based)."
+      },
+      {
+        "name": "pageSize",
+        "type": "number",
+        "default": "10",
+        "description": "Number of items displayed per page."
+      },
+      {
+        "name": "total",
+        "type": "number",
+        "default": "0",
+        "description": "Total number of items in dataset."
+      },
+      {
+        "name": "pageSizeOptions",
+        "type": "number[]",
+        "default": "[10, 20, 50, 100]",
+        "description": "Page size choices available in the page-size selector."
+      },
+      {
+        "name": "showSizeChanger",
+        "type": "boolean",
+        "default": "true",
+        "description": "Displays dropdown allowing user to change pageSize."
+      },
+      {
+        "name": "showQuickJumper",
+        "type": "boolean",
+        "default": "false",
+        "description": "Displays text input allowing user to jump directly to page number."
       },
       {
         "name": "disabled",
         "type": "boolean",
         "default": "false",
-        "description": "No description available."
-      },
-      {
-        "name": "currentPage",
-        "type": "number",
-        "default": "1",
-        "description": "No description available."
+        "description": "Disables all pagination buttons."
       }
     ],
     "outputs": [
       {
         "name": "pageChange",
-        "type": "EventEmitter<any>",
-        "description": "Event emitted by the component."
+        "type": "EventEmitter<number>",
+        "description": "Emitted when user navigates to a new page."
+      },
+      {
+        "name": "pageSizeChange",
+        "type": "EventEmitter<number>",
+        "description": "Emitted when user selects a different page size."
       }
     ],
     "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\n\n@Component({\n  selector: 'ngc-pagination',\n  templateUrl: './ngc-pagination.component.html',\n  styleUrls: ['./ngc-pagination.component.scss']\n})\nexport class NgcPaginationComponent implements OnInit {\n  @Input() totalPages: number = 100;\n  @Input() disabled: boolean = false;\n  @Input() currentPage: number = 1;\n\n  @Output() pageChange = new EventEmitter<number>();\n\n  visiblePages: (number | null)[] = [];\n\n  ngOnInit() {\n    this.updateVisiblePages();\n  }\n\n  goToPreviousPage() {\n    if (this.currentPage > 1) {\n      this.currentPage--;\n      this.updateVisiblePages();\n      this.pageChange.emit(this.currentPage);\n    }\n  }\n\n  goToNextPage() {\n    if (this.currentPage < this.totalPages) {\n      this.currentPage++;\n      this.updateVisiblePages();\n      this.pageChange.emit(this.currentPage);\n    }\n  }\n\n  goToPage(page: number) {\n    if (page !== this.currentPage && page !== null) {\n      this.currentPage = page;\n      this.updateVisiblePages();\n      this.pageChange.emit(this.currentPage);\n    }\n  }\n\n  updateVisiblePages() {\n    let pages: (number | null)[] = [];\n\n    // Always show first page\n    pages = [...pages, 1];\n\n    const left = Math.max(2, this.currentPage - 1);\n    const right = Math.min(this.totalPages - 1, this.currentPage + 1);\n\n    // Show left ellipsis if needed\n    if (left > 2) {\n      pages = [...pages, null ]; // \"..]\"\n    }\n\n    // Add middle pages\n    for (let i = left; i <= right; i++) {\n      pages = [...pages, i];\n    }\n\n    // Show right ellipsis if needed\n    if (right < this.totalPages - 1) {\n      pages = [...pages, null]; // \"..]\"\n    }\n\n    // Always show last page if more than 1\n    if (this.totalPages > 1) {\n      pages = [...pages, this.totalPages];\n    }\n\n    this.visiblePages = pages;\n  }\n\n}\n"
@@ -2872,161 +2964,77 @@
     ],
     "sourceCode": "import {\n\tComponent, Input, ContentChildren,\n\tQueryList, AfterContentInit, ViewEncapsulation,\n\tforwardRef, SimpleChanges, OnChanges,\n\tHostListener, Output, EventEmitter,\n\tChangeDetectionStrategy, HostBinding\n} from '@angular/core';\nimport { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\nimport { startWith, takeUntil } from 'rxjs/operators';\nimport _ from 'lodash';\n\nimport { Unsubscriber, CoerceBoolean, DefaultValue, untilCmpDestroyed } from '@core';\nimport { NgcRadioComponent } from '../ngc-radio/ngc-radio.component';\n\nexport type NgcRadioGroupDirection = 'vertical' | 'horizontal';\n\n@Unsubscriber()\n@Component({\n\tselector\t\t: 'ngc-radio-group',\n\ttemplateUrl\t\t: './ngc-radio-group.html',\n\tstyleUrls\t\t: [ './ngc-radio-group.scss' ],\n\thost\t\t\t: { class: 'ngc-radio-group' },\n\tencapsulation\t: ViewEncapsulation.None,\n\tchangeDetection\t: ChangeDetectionStrategy.OnPush,\n\tproviders: [{\n\t\tprovide\t\t: NG_VALUE_ACCESSOR,\n\t\tuseExisting\t: forwardRef( () => NgcRadioGroupComponent ),\n\t\tmulti\t\t: true,\n\t}],\n})\nexport class NgcRadioGroupComponent implements OnChanges, AfterContentInit, ControlValueAccessor {\n\n\t@HostBinding( 'class.ngc-radio-group--vertical' )\n\tget classVertical(): boolean { return this.direction === 'vertical'; }\n\n\t@HostBinding( 'class.ngc-radio-group--horizontal' )\n\tget classHorizontal(): boolean { return this.direction === 'horizontal'; }\n\n\t@ContentChildren( NgcRadioComponent, { descendants: true } ) public radioList: QueryList<NgcRadioComponent>;\n\n\t@Input() public ngModel: any;\n\t@Input() public label: any;\n\t@Input() public disableControl: boolean;\n\t@Input() @CoerceBoolean() public disabled: boolean;\n\t@Input() @CoerceBoolean() public readonly: boolean;\n\t@Input() @CoerceBoolean() public required: boolean;\n\t@Input() @DefaultValue() public direction: NgcRadioGroupDirection = 'vertical';\n\t@Input() public formControl: FormControl;\n\n\t@Output() public ngModelChange: EventEmitter<any> = new EventEmitter<any>();\n\n\tprivate _innerValue: any;\n\n\t@HostListener( 'click', [ '$event' ] )\n\tpublic triggerClick( event: MouseEvent ) {\n\t\tif ( this.disabled || this.disableControl || this.readonly || !this.formControl ) return;\n\n\t\tevent.stopPropagation();\n\t\tthis.formControl.markAsTouched();\n\t}\n\n\t/**\n\t * @constructor\n\t * @param {any} value\n\t */\n\tpublic writeValue( value: any ) {\n\t\tif ( value === this._innerValue ) return;\n\n\t\tthis._innerValue = value;\n\t}\n\n\t/**\n\t * @constructor\n\t * @param {Function} fn\n\t */\n\tpublic registerOnChange( fn: Function ) {\n\t\tthis._onChangeCallback = fn;\n\t}\n\n\t/**\n\t * @constructor\n\t * @param {Function} fn\n\t */\n\tpublic registerOnTouched( fn: Function ) {\n\t\tthis._onTouchedCallback = fn;\n\t}\n\n\t/**\n\t * @constructor\n\t * @param {SimpleChanges} changes\n\t */\n\tngOnChanges( changes: SimpleChanges ) {\n\t\tif ( !changes.ngModel ) return;\n\n\t\t_.forEach( this.radioList?.toArray(), ( item: NgcRadioComponent ) => {\n\t\t\titem.checked = item.value !== undefined && item.value === this.ngModel;\n\t\t} );\n\t}\n\n\t/**\n\t * @constructor\n\t */\n\tngAfterContentInit() {\n\t\tthis.radioList\n\t\t.changes\n\t\t.pipe(\n\t\t\tstartWith( this.radioList ),\n\t\t\tuntilCmpDestroyed( this )\n\t\t)\n\t\t.subscribe( ( items: QueryList<NgcRadioComponent> ) => {\n\t\t\tconst itemArr: NgcRadioComponent[] = items?.toArray();\n\n\t\t\t_.forEach( itemArr, ( item: NgcRadioComponent, index: number ) => {\n\t\t\t\titem.checked = item.value !== undefined && item.value === this.ngModel;\n\t\t\t\titem.disabled = item.disabled || this.disabled || this.disableControl;\n\t\t\t\titem.readonly = item.readonly || this.readonly;\n\n\t\t\t\titem\n\t\t\t\t.checkedChange\n\t\t\t\t.pipe(\n\t\t\t\t\ttakeUntil( this.radioList.changes ),\n\t\t\t\t\tuntilCmpDestroyed( this )\n\t\t\t\t)\n\t\t\t\t.subscribe( ( checked: boolean ) => {\n\t\t\t\t\tif ( !checked ) {\n\t\t\t\t\t\titem.checked = true;\n\t\t\t\t\t\treturn;\n\t\t\t\t\t}\n\n\t\t\t\t\tthis._innerValue = this.ngModel = item.value;\n\n\t\t\t\t\t_.forEach( itemArr, ( _item: NgcRadioComponent, _index: number ) => {\n\t\t\t\t\t\t_item.checked = index === _index;\n\t\t\t\t\t} );\n\t\t\t\t\tthis._onTouchedCallback();\n\t\t\t\t\tthis._onChangeCallback( this._innerValue );\n\t\t\t\t} );\n\t\t\t} );\n\t\t} );\n\t}\n\n\tprivate _onTouchedCallback: Function = () => {};\n\tprivate _onChangeCallback: Function = ( _v: any ) => {};\n\n}\n"
   },
-  "Search Box ": {
-    "inputs": [
-      {
-        "name": "data",
-        "type": "any[]",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "suggestion",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "ngModel",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "name",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "label",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "placeholder",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "DefaultValue",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "suffixIcon",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "CoerceBoolean",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "disableControl",
-        "type": "boolean",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "notFoundData",
-        "type": "INotFoundData",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "formControl",
-        "type": "FormControl",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "filterPredicate",
-        "type": "( data: any, searchQuery: string, searchKey?: string )",
-        "default": "> boolean",
-        "description": "No description available."
-      }
-    ],
-    "outputs": [
-      {
-        "name": "ngModelChange",
-        "type": "EventEmitter<string>",
-        "description": "Event emitted by the component."
-      },
-      {
-        "name": "searching",
-        "type": "EventEmitter<string>",
-        "description": "Event emitted by the component."
-      },
-      {
-        "name": "cleared",
-        "type": "EventEmitter<Event>",
-        "description": "Event emitted by the component."
-      },
-      {
-        "name": "filtered",
-        "type": "EventEmitter<any[]>",
-        "description": "Event emitted by the component."
-      },
-      {
-        "name": "suggested",
-        "type": "EventEmitter<any>",
-        "description": "Event emitted by the component."
-      },
-      {
-        "name": "prefixIconClicked",
-        "type": "EventEmitter<void>",
-        "description": "Event emitted by the component."
-      },
-      {
-        "name": "suffixIconClicked",
-        "type": "EventEmitter<void>",
-        "description": "Event emitted by the component."
-      },
-      {
-        "name": "input",
-        "type": "EventEmitter<Event>",
-        "description": "Event emitted by the component."
-      },
-      {
-        "name": "focus",
-        "type": "EventEmitter<Event>",
-        "description": "Event emitted by the component."
-      },
-      {
-        "name": "blur",
-        "type": "EventEmitter<Event>",
-        "description": "Event emitted by the component."
-      }
-    ],
-    "sourceCode": "import {\n\tComponent, ViewEncapsulation, Input,\n\tOutput, EventEmitter, OnChanges,\n\tSimpleChanges, ChangeDetectionStrategy, ElementRef,\n\tViewChild, OnDestroy, ChangeDetectorRef,\n\tTemplateRef\n} from '@angular/core';\nimport { Subject, isObservable } from 'rxjs';\nimport { debounceTime, distinctUntilChanged } from 'rxjs/operators';\nimport { FormControl } from '@angular/forms';\nimport _ from 'lodash';\n\nimport {\n\tUnsubscriber, DefaultValue, CoerceBoolean,\n\tCoerceNumber, untilCmpDestroyed, INotFoundData\n} from '@core';\nimport { CONSTANT as APP_CONSTANT } from '@resources';\n\nimport { NgcIFormFieldAppearance, NgcIFormFieldErrorDisplayMode } from '../ngc-form-field';\nimport { NgcMenuTriggerForDirective } from '../ngc-menu';\n\n@Unsubscriber()\n@Component({\n\tselector\t\t: 'ngc-search-box',\n\ttemplateUrl\t\t: './ngc-search-box.html',\n\tstyleUrls\t\t: [ './ngc-search-box.scss' ],\n\thost\t\t\t: { class: 'ngc-search-box' },\n\tencapsulation\t: ViewEncapsulation.None,\n\tchangeDetection\t: ChangeDetectionStrategy.OnPush,\n})\nexport class NgcSearchBoxComponent implements OnChanges, OnDestroy {\n\n\t@ViewChild( NgcMenuTriggerForDirective, { static: true } ) public menuTrigger: NgcMenuTriggerForDirective;\n\t@ViewChild( 'notFoundTemplate', { static: true } ) public notFoundTemplate: TemplateRef<any>;\n\n\t@Input() public data: any[];\n\t@Input() public suggestion: any;\n\t@Input() public ngModel: string;\n\t@Input() public name: string;\n\t@Input() public label: string;\n\t@Input() public placeholder: string;\n\t@Input() @DefaultValue() public prefixIcon: string = 'search';\n\t@Input() public suffixIcon: string;\n\t@Input() @DefaultValue() public searchKey: string = 'name';\n\t@Input() @DefaultValue() public fieldName: string = 'name';\n\t@Input() @DefaultValue() public fieldDescription: string = 'description';\n\t@Input() @DefaultValue() public fieldImage: string = 'image';\n\t@Input() @DefaultValue() public fieldAvatar: string = 'avatar';\n\t@Input() @DefaultValue() @CoerceNumber() public itemSize: number = 54;\n\t@Input() @DefaultValue() @CoerceNumber() public debounceTime: number = 400;\n\t@Input() @DefaultValue() @CoerceBoolean() public trim: boolean = true;\n\t@Input() @CoerceBoolean() public displayNotFound: boolean;\n\t@Input() public disableControl: boolean;\n\t@Input() @CoerceBoolean() public disabled: boolean;\n\t@Input() @CoerceBoolean() public readonly: boolean;\n\t@Input() @CoerceBoolean() public required: boolean;\n\t@Input() @CoerceBoolean() public autoFocusOn: boolean;\n\t@Input() @CoerceBoolean() public autoReset: boolean;\n\t@Input() public notFoundData: INotFoundData;\n\t@Input() public formControl: FormControl;\n\t@Input() @DefaultValue() public appearance: NgcIFormFieldAppearance = 'default';\n\t@Input() @DefaultValue() public errorDisplayMode: NgcIFormFieldErrorDisplayMode = 'default';\n\t@Input() public filterPredicate: ( data: any, searchQuery: string, searchKey?: string ) => boolean;\n\n\t@Output() public ngModelChange: EventEmitter<string> = new EventEmitter<string>();\n\t@Output() public searching: EventEmitter<string> = new EventEmitter<string>();\n\t@Output() public cleared: EventEmitter<Event> = new EventEmitter<Event>();\n\t@Output() public filtered: EventEmitter<any[]> = new EventEmitter<any[]>();\n\t@Output() public suggested: EventEmitter<any> = new EventEmitter<any>();\n\t@Output() public prefixIconClicked: EventEmitter<void> = new EventEmitter<void>();\n\t@Output() public suffixIconClicked: EventEmitter<void> = new EventEmitter<void>();\n\t@Output() public input: EventEmitter<Event> = new EventEmitter<Event>();\n\t@Output() public focus: EventEmitter<Event> = new EventEmitter<Event>();\n\t@Output() public blur: EventEmitter<Event> = new EventEmitter<Event>();\n\n\tpublic searchQuery: string;\n\tpublic focusing: boolean;\n\tpublic focusIndex: number = 0;\n\tpublic filteredData: any[];\n\tpublic suggestionData: any[];\n\n\tprivate _searchUpdated$: Subject<string> = new Subject<string>();\n\n\tget useVirtualScroll(): boolean {\n\t\treturn this.suggestionData?.length >= APP_CONSTANT.USE_VIRTUAL_SCROLL_WITH;\n\t}\n\n\t/**\n\t * @constructor\n\t * @param {ElementRef} elementRef\n\t * @param {ChangeDetectorRef} _cdRef\n\t */\n\tconstructor( public elementRef: ElementRef, private _cdRef: ChangeDetectorRef ) {\n\t\tthis._searchUpdated$\n\t\t.pipe(\n\t\t\tdebounceTime( this.debounceTime ),\n\t\t\tdistinctUntilChanged(),\n\t\t\tuntilCmpDestroyed( this )\n\t\t)\n\t\t.subscribe( ( value: string ) => {\n\t\t\tthis.searching.emit( value );\n\n\t\t\t// Start filter\n\t\t\tthis._filter();\n\n\t\t\t// Start suggest\n\t\t\tthis.focusing && this._suggest();\n\t\t} );\n\t}\n\n\t/**\n\t * @constructor\n\t */\n\tngOnDestroy() {\n\t\tthis._searchUpdated$.complete();\n\t}\n\n\t/**\n\t * @constructor\n\t * @param {SimpleChanges} changes\n\t */\n\tngOnChanges( changes: SimpleChanges ) {\n\t\tchanges.data && this._filter();\n\t\tchanges.ngModel && this.ngModel !== undefined && this.onSearch( this.ngModel );\n\t}\n\n\t/**\n\t * @param {string} searchQuery\n\t * @return {void}\n\t */\n\tpublic onSearch( searchQuery: string ) {\n\t\tthis.searchQuery = searchQuery || '';\n\n\t\tthis._searchUpdated$.next( this.searchQuery );\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic onClear( event: Event ) {\n\t\tthis.clear( event );\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic onInput( event: Event ) {\n\t\tthis.input.emit( event );\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic onFocus( event: Event ) {\n\t\tthis.focusing = true;\n\n\t\tthis.focus.emit( event );\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic onBlur( event: Event ) {\n\t\tthis.focusing = false;\n\n\t\tthis.blur.emit( event );\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic clear( event?: Event ) {\n\t\tthis.ngModel = this.searchQuery = '';\n\n\t\tthis._searchUpdated$.next( this.searchQuery );\n\t\tthis.ngModelChange.emit( this.ngModel );\n\t\tthis.filtered.emit( this.data );\n\t\tthis.cleared.emit( event );\n\t\tthis._cdRef.markForCheck();\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @param {number} index\n\t * @return {void}\n\t */\n\tpublic chooseSuggestItem( event: Event, index: number ) {\n\t\tif ( !this.suggestionData ) return;\n\n\t\tconst item: any = this.suggestionData[ index ];\n\n\t\tif ( !item ) return;\n\n\t\tevent.stopPropagation();\n\t\tevent.preventDefault();\n\n\t\tthis.ngModel = _.get( item, this.searchKey || this.fieldName );\n\n\t\tthis._searchUpdated$.next( this.searchQuery );\n\t\tthis.ngModelChange.emit( this.ngModel );\n\t\tthis.suggested.emit( item );\n\t\tthis.menuTrigger.close();\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic focusPreviousSuggestItem( event: Event ) {\n\t\tif ( !this.suggestionData ) return;\n\n\t\tevent.stopPropagation();\n\t\tevent.preventDefault();\n\n\t\tthis.focusIndex = this.focusIndex > 0 ? this.focusIndex - 1 : 0;\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic focusNextSuggestItem( event: Event ) {\n\t\tif ( !this.suggestionData ) return;\n\n\t\tevent.stopPropagation();\n\t\tevent.preventDefault();\n\n\t\tconst length: number = this.suggestionData?.length - 1;\n\n\t\tthis.focusIndex = this.focusIndex < length ? this.focusIndex + 1 : length;\n\t}\n\n\t/**\n\t * @return {void}\n\t */\n\tprivate _toggleMenu() {\n\t\tthis.searchQuery && this.suggestionData?.length\n\t\t\t? this.menuTrigger.open()\n\t\t\t: this.menuTrigger.close();\n\t}\n\n\t/**\n\t * @return {void}\n\t */\n\tprivate _filter() {\n\t\tif ( this.searchQuery ) {\n\t\t\tthis.filteredData = _.filter( this.data, this._filterPredicate.bind( this ) );\n\t\t} else {\n\t\t\tthis.filteredData = _.clone( this.data );\n\t\t}\n\n\t\tthis.filtered.emit( this.filteredData );\n\t\tthis._cdRef.markForCheck();\n\t}\n\n\t/**\n\t * @return {void}\n\t */\n\tprivate _suggest() {\n\t\tif ( !this.suggestion ) return;\n\n\t\tconst suggestion: any = this.suggestion( this.searchQuery );\n\t\tconsole.log({suggestion}, 'searchQuery:', this.searchQuery, 'menuTrigger:', this.menuTrigger);\n\t\tif ( isObservable( suggestion ) ) {\n\t\t\tsuggestion\n\t\t\t.pipe( untilCmpDestroyed( this ) )\n\t\t\t.subscribe( ( data: any[] ) => {\n\t\t\t\tthis.suggestionData = data;\n\t\t\t\tconsole.log('async suggestionData updated:', this.suggestionData);\n\t\t\t\tthis._toggleMenu();\n\t\t\t\tthis._cdRef.markForCheck();\n\t\t\t} );\n\t\t\treturn;\n\t\t}\n\n\t\tthis.suggestionData = suggestion;\n\t\tconsole.log('sync suggestionData updated:', this.suggestionData);\n\t\tthis._toggleMenu();\n\t\tthis._cdRef.markForCheck();\n\t}\n\n\t/**\n\t * @param {any} item\n\t * @return {boolean}\n\t */\n\tprivate _filterPredicate( item: any ): boolean {\n\t\treturn _.isFunction( this.filterPredicate )\n\t\t\t? this.filterPredicate( item, this.searchQuery, this.searchKey )\n\t\t\t:_.search(\n\t\t\t\tthis.searchKey ? _.get( item, this.searchKey ) : item,\n\t\t\t\tthis.searchQuery\n\t\t\t);\n\t};\n\n}\n"
-  },
   "Select": {
     "inputs": [
       {
         "name": "options",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
+        "type": "NgcSelectOption[]",
+        "default": "[]",
+        "description": "Array of option objects or values to render in the select dropdown list."
       },
       {
-        "name": "selectedValue",
+        "name": "ngModel / value",
         "type": "any",
         "default": "undefined",
-        "description": "No description available."
+        "description": "Two-way bound selected value or array of selected values in multiple mode."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "'Select option'",
+        "description": "Placeholder text rendered when no option is selected."
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "description": "Enables multi-selection mode with chips or comma-separated summary."
+      },
+      {
+        "name": "searchable",
+        "type": "boolean",
+        "default": "false",
+        "description": "Enables search filter input inside the select dropdown."
+      },
+      {
+        "name": "clearable",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders a clear button to deselect active value."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables opening dropdown and selecting options."
+      },
+      {
+        "name": "compareWith",
+        "type": "(o1: any, o2: any) => boolean",
+        "default": "(o1, o2) => o1 === o2",
+        "description": "Custom comparison function for matching complex object values."
       }
     ],
     "outputs": [
       {
         "name": "selectionChange",
         "type": "EventEmitter<any>",
-        "description": "Event emitted by the component."
+        "description": "Emitted when a user chooses or changes selected option."
+      },
+      {
+        "name": "opened",
+        "type": "EventEmitter<void>",
+        "description": "Fired when the select dropdown popup is opened."
+      },
+      {
+        "name": "closed",
+        "type": "EventEmitter<void>",
+        "description": "Fired when the select dropdown popup is closed."
+      },
+      {
+        "name": "search",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when user types search query in filter box."
       }
     ],
     "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\n\n@Component({\n  selector: 'ngc-select',\n  templateUrl: './ngc-select.component.html',\n  styleUrls: ['./ngc-select.component.scss']\n})\nexport class NgcSelectComponent implements OnInit {\n\n  @Input() options: { label: string; value: any }[] = [];\n  @Input() selectedValue: any;\n  @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();\n  \n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n  valueChange(newValue: any) {\n    this.selectionChange.emit(newValue);\n  } \n}\n"
@@ -3088,28 +3096,34 @@
   "Skeleton": {
     "inputs": [
       {
+        "name": "active",
+        "type": "boolean",
+        "default": "true",
+        "description": "Enables shimmering pulse animation on placeholder blocks."
+      },
+      {
+        "name": "shape",
+        "type": "'text' | 'circle' | 'rect' | 'avatar' | 'button'",
+        "default": "'text'",
+        "description": "Geometric shape of the skeleton placeholder."
+      },
+      {
+        "name": "count",
+        "type": "number",
+        "default": "1",
+        "description": "Number of skeleton rows to generate in series."
+      },
+      {
         "name": "width",
-        "type": "string | number",
+        "type": "string",
         "default": "'100%'",
-        "description": "No description available."
+        "description": "Width dimension of skeleton block."
       },
       {
         "name": "height",
-        "type": "string | number",
-        "default": "'20px'",
-        "description": "No description available."
-      },
-      {
-        "name": "borderRadius",
         "type": "string",
-        "default": "'4px'",
-        "description": "No description available."
-      },
-      {
-        "name": "circle",
-        "type": "boolean",
-        "default": "false",
-        "description": "No description available."
+        "default": "'16px'",
+        "description": "Height dimension of skeleton block."
       }
     ],
     "outputs": [],
@@ -3236,70 +3250,70 @@
   "Tabs": {
     "inputs": [
       {
-        "name": "label",
+        "name": "selectedIndex",
+        "type": "number",
+        "default": "0",
+        "description": "Active tab index (0-based)."
+      },
+      {
+        "name": "headerHeight",
+        "type": "string | number",
+        "default": "'40px'",
+        "description": "Height of the tab header buttons bar."
+      },
+      {
+        "name": "contentPaddingVertical",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Vertical padding for projected tab content."
+      },
+      {
+        "name": "contentPaddingHorizontal",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Horizontal padding for projected tab content."
+      },
+      {
+        "name": "contentPaddingTop / contentPaddingBottom",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Individual top/bottom padding for tab content."
+      },
+      {
+        "name": "contentPaddingLeft / contentPaddingRight",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Individual left/right padding for tab content."
+      },
+      {
+        "name": "dynamicHeight",
+        "type": "boolean",
+        "default": "false",
+        "description": "Animates container height to match current active tab content."
+      },
+      {
+        "name": "[ngcTab] label",
         "type": "string",
         "default": "undefined",
-        "description": "No description available."
+        "description": "Text title displayed on tab trigger button."
       },
       {
-        "name": "icon",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "class",
-        "type": "string",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "AliasOf",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "CoerceBoolean",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "CoerceCssPixel",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "DefaultValue",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "CoerceBoolean",
-        "type": "any",
-        "default": "undefined",
-        "description": "No description available."
-      },
-      {
-        "name": "scrollBarMode",
-        "type": "INgcScrollBarMode",
-        "default": "undefined",
-        "description": "No description available."
+        "name": "[ngcTab] disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables clicking on this specific tab."
       }
     ],
     "outputs": [
       {
         "name": "selectedIndexChange",
         "type": "EventEmitter<number>",
-        "description": "Event emitted by the component."
+        "description": "Emitted when active tab index changes."
       },
       {
-        "name": "tabChanged",
+        "name": "selectedTabChange",
         "type": "EventEmitter<NgcTabComponent>",
-        "description": "Event emitted by the component."
+        "description": "Emitted with the newly activated NgcTab component instance."
       }
     ],
     "sourceCode": "import {\n\tComponent, ViewEncapsulation, ContentChildren,\n\tQueryList, Input, ElementRef,\n\tViewChild, Output, EventEmitter,\n\tViewChildren, OnChanges, SimpleChanges,\n\tAfterContentInit, AfterViewInit, OnDestroy,\n\tChangeDetectionStrategy, HostBinding, ChangeDetectorRef\n} from '@angular/core';\nimport { Observable, merge } from 'rxjs';\nimport { startWith, takeUntil, switchMap } from 'rxjs/operators';\nimport ResizeObserver from 'resize-observer-polyfill';\nimport _ from 'lodash';\n\nimport {\n\tDetectScrollDirective, Unsubscriber, CoerceBoolean,\n\tCoerceNumber, DefaultValue, CoerceCssPixel,\n\tuntilCmpDestroyed\n} from '@core';\nimport { NgcScrollBarDirective, INgcScrollBarMode } from '../../ngc-scroll-bar';\nimport { NgcTabComponent } from '../tab/ngc-tab.component';\n\nexport interface NgcIBeforeTabChangeEvent {\n\ttabGroup: NgcTabGroupComponent;\n\ttabIndex: number;\n}\n\nexport type NgcITabAlignment = 'left' | 'right' | 'center';\n\n@Unsubscriber()\n@Component({\n\tselector\t\t: 'ngc-tab-group',\n\ttemplateUrl\t\t: './ngc-tab-group.html',\n\tstyleUrls\t\t: [ './ngc-tab-group.scss' ],\n\thost\t\t\t: { class: 'ngc-tab-group' },\n\tencapsulation\t: ViewEncapsulation.None,\n\tchangeDetection\t: ChangeDetectionStrategy.OnPush,\n})\nexport class NgcTabGroupComponent implements OnChanges, OnDestroy, AfterContentInit, AfterViewInit {\n\n\t@HostBinding( 'style.--tab-group-header-height' )\n\tget styleHeaderHeight(): string { return this.headerHeight; }\n\n\t@HostBinding( 'style.--tab-group-content-padding-top' )\n\tget styleContentPaddingTop(): string { return this.contentPaddingTop || this.contentPaddingVertical; }\n\n\t@HostBinding( 'style.--tab-group-content-padding-bottom' )\n\tget styleContentPaddingBottom(): string { return this.contentPaddingBottom || this.contentPaddingVertical; }\n\n\t@HostBinding( 'style.--tab-group-content-padding-left' )\n\tget styleContentPaddingLeft(): string { return this.contentPaddingLeft || this.contentPaddingHorizontal; }\n\n\t@HostBinding( 'style.--tab-group-content-padding-right' )\n\tget styleContentPaddingRight(): string { return this.contentPaddingRight || this.contentPaddingHorizontal; }\n\n\t@HostBinding( 'class.ngc-tab-group--stretch' )\n\tget classStretch(): boolean { return this.stretch; }\n\n\t@HostBinding( 'class.ngc-tab-group--left' )\n\tget classLeft(): boolean { return this.alignment === 'left'; }\n\n\t@HostBinding( 'class.ngc-tab-group--right' )\n\tget classRight(): boolean { return this.alignment === 'right'; }\n\n\t@HostBinding( 'class.ngc-tab-group--center' )\n\tget classCenter(): boolean { return this.alignment === 'center'; }\n\n\t@ViewChild( DetectScrollDirective ) public scroller: DetectScrollDirective;\n\t@ViewChild( NgcScrollBarDirective ) public scrollBar: NgcScrollBarDirective;\n\t@ViewChild( 'tabGroupHeader' ) public tabGroupHeader: ElementRef;\n\t@ViewChild( 'tabInkBar' ) public tabInkBar: ElementRef;\n\t@ViewChildren( 'tabHeader' ) public tabHeaderList: QueryList<ElementRef>;\n\n\t@ContentChildren( NgcTabComponent, { descendants: true } ) public tabItems: QueryList<NgcTabComponent>;\n\n\t@Input() @CoerceCssPixel() public headerHeight: string;\n\t@Input() @CoerceCssPixel() public contentPaddingVertical: string;\n\t@Input() @CoerceCssPixel() public contentPaddingHorizontal: string;\n\t@Input() @CoerceCssPixel() public contentPaddingTop: string;\n\t@Input() @CoerceCssPixel() public contentPaddingBottom: string;\n\t@Input() @CoerceCssPixel() public contentPaddingLeft: string;\n\t@Input() @CoerceCssPixel() public contentPaddingRight: string;\n\t@Input() @DefaultValue() @CoerceNumber() public selectedIndex: number = 0;\n\t@Input() @DefaultValue() @CoerceBoolean() public hasScrollBar: boolean = true;\n\t@Input() @CoerceBoolean() public stretch: boolean;\n\t@Input() @CoerceBoolean() public stretchTab: boolean;\n\t@Input() @CoerceBoolean() public headerVerticalDivider: boolean;\n\t@Input() @DefaultValue() @CoerceBoolean() public headerHorizontalDivider: boolean = true;\n\t@Input() @CoerceBoolean() public alwaysOnDisplay: boolean;\n\t@Input() @CoerceBoolean() public noTabContent: boolean;\n\t@Input() @DefaultValue() public alignment: NgcITabAlignment = 'left';\n\t@Input() public scrollBarMode: INgcScrollBarMode;\n\n\t@Output() public selectedIndexChange: EventEmitter<number> = new EventEmitter<number>();\n\t@Output() public tabChanged: EventEmitter<NgcTabComponent> = new EventEmitter<NgcTabComponent>();\n\n\tpublic items: NgcTabComponent[];\n\n\tprivate _tabHeaderItems: ElementRef<any>[];\n\tprivate _resizeObserver: ResizeObserver = new ResizeObserver( () => this._initInkBarThrottle( this.selectedIndex ) );\n\tprivate _initInkBarThrottle: ReturnType<typeof _.throttle>\n\t\t= _.throttle( this._initInkBar.bind( this ), 200, { leading: false } );\n\n\t/**\n\t * @constructor\n\t * @param {ElementRef} _elementRef\n\t * @param {ChangeDetectorRef} _cdRef\n\t */\n\tconstructor( private _elementRef: ElementRef, private _cdRef: ChangeDetectorRef ) {}\n\n\t/**\n\t * @constructor\n\t * @param {SimpleChanges} changes\n\t */\n\tngOnChanges( changes: SimpleChanges ) {\n\t\tif ( !changes.selectedIndex ) return;\n\n\t\tthis.select( this.selectedIndex );\n\t}\n\n\t/**\n\t * @constructor\n\t */\n\tngOnDestroy() {\n\t\tthis._resizeObserver.disconnect();\n\t}\n\n\t/**\n\t * @constructor\n\t */\n\tngAfterViewInit() {\n\t\tthis.tabHeaderList.changes\n\t\t.pipe(\n\t\t\tstartWith( this.tabHeaderList ),\n\t\t\tuntilCmpDestroyed( this )\n\t\t)\n\t\t.subscribe( ( items: QueryList<ElementRef<any>[]> ) => {\n\t\t\tthis._tabHeaderItems = ( items as IObject )?._results;\n\n\t\t\tthis._initInkBarThrottle( this.selectedIndex );\n\t\t} );\n\n\t\tthis.select( this.selectedIndex );\n\t}\n\n\t/**\n\t * @constructor\n\t */\n\tngAfterContentInit() {\n\t\tthis.tabItems.changes\n\t\t.pipe(\n\t\t\tstartWith( this.tabItems ),\n\t\t\tswitchMap( ( items: QueryList<NgcTabComponent> ) => {\n\t\t\t\tconst obs: Observable<any>[] = [];\n\n\t\t\t\tthis.items = _.map( ( items as IObject )?._results, ( item: NgcTabComponent ) => {\n\t\t\t\t\tobs.push(\n\t\t\t\t\t\titem.changes$\n\t\t\t\t\t\t.pipe( takeUntil( this.tabItems.changes ) )\n\t\t\t\t\t);\n\n\t\t\t\t\treturn item;\n\t\t\t\t} );\n\n\t\t\t\tthis._cdRef.markForCheck();\n\n\t\t\t\treturn merge( ...obs );\n\t\t\t} ),\n\t\t\tuntilCmpDestroyed( this )\n\t\t)\n\t\t.subscribe( () => {\n\t\t\tthis._initInkBarThrottle( this.selectedIndex );\n\t\t\tthis._cdRef.markForCheck();\n\t\t} );\n\n\t\t// Element for which to observe height and width\n\t\tthis._resizeObserver.observe( this._elementRef.nativeElement );\n\t}\n\n\t/**\n\t * @param {number} index\n\t * @return {void}\n\t */\n\tpublic select( index: number ) {\n\t\tif ( !_.isFinite( index ) || !this.items?.length ) return;\n\n\t\tif ( this.selectedIndex !== index ) {\n\t\t\tthis.selectedIndex = index;\n\n\t\t\tthis.tabChanged.emit( this.items[ this.selectedIndex ] );\n\t\t\tthis.selectedIndexChange.emit( this.selectedIndex );\n\t\t}\n\n\t\tthis.scrollBar?.reset();\n\t\tthis._initInkBarThrottle( index );\n\t}\n\n\t/**\n\t * @param {number} index\n\t * @return {void}\n\t */\n\tprivate _initInkBar( index: number ) {\n\t\tif ( !this.tabInkBar ) return;\n\n\t\tconst tabHeaderItems: ElementRef[] = this._tabHeaderItems;\n\t\tlet width: number = 0;\n\t\tlet left: number = 0;\n\n\t\tif ( tabHeaderItems?.length ) {\n\t\t\tif ( index < 0 ) index = 0;\n\t\t\telse if ( index > tabHeaderItems.length - 1 ) index = tabHeaderItems.length - 1;\n\n\t\t\tconst selectedTab: ElementRef<any> = tabHeaderItems[ index ];\n\n\t\t\twidth = selectedTab?.nativeElement.clientWidth || 0;\n\n\t\t\tif ( width ) {\n\t\t\t\tleft = tabHeaderItems[ 0 ].nativeElement.offsetLeft || 0;\n\n\t\t\t\tfor ( let i: number = 0; i < index; i++ ) {\n\t\t\t\t\tleft += tabHeaderItems[ i ].nativeElement.clientWidth || 0;\n\t\t\t\t}\n\n\t\t\t\tselectedTab?.nativeElement.scrollIntoView({ block: 'center', inline: 'nearest' });\n\t\t\t}\n\t\t}\n\n\t\tthis.tabInkBar.nativeElement.style.width = `${width}px`;\n\t\tthis.tabInkBar.nativeElement.style.left = `${left}px`;\n\t}\n\n}\n"
@@ -3543,5 +3557,1286 @@
     ],
     "outputs": [],
     "sourceCode": "import {\n\tComponent, ElementRef, ViewEncapsulation,\n\tViewChild, TemplateRef, ChangeDetectorRef,\n\tInput, ChangeDetectionStrategy, NgZone\n} from '@angular/core';\n\nimport { DefaultValue, CoerceCssPixel, CoerceBoolean } from '@core';\n\nexport type NGCITooltipTheme = 'default' | 'light';\nexport type NGCITooltipPosition = 'above' | 'below' | 'before' | 'after';\nexport type NGCITooltipDirection = 'start' | 'end' | 'center';\n\n@Component({\n\tselector\t\t: 'ngc-tooltip',\n\ttemplateUrl\t\t: './ngc-tooltip.html',\n\tstyleUrls\t\t: [ './ngc-tooltip.scss' ],\n\tencapsulation\t: ViewEncapsulation.None,\n\tchangeDetection\t: ChangeDetectionStrategy.OnPush,\n})\nexport class NgcTooltipComponent {\n\n\t@ViewChild( TemplateRef, { static: true } ) public templateRef: TemplateRef<any>;\n\n\t@Input() public color: string;\n\t@Input() public backdropClass: string;\n\t@Input() @CoerceCssPixel() public width: string;\n\t@Input() @CoerceCssPixel() public minWidth: string;\n\t@Input() @CoerceCssPixel() public maxWidth: string;\n\t@Input() @CoerceCssPixel() public height: string;\n\t@Input() @CoerceCssPixel() public minHeight: string;\n\t@Input() @CoerceCssPixel() public maxHeight: string;\n\t@Input() @CoerceBoolean() public messageOnly: boolean;\n\t@Input() @DefaultValue() public theme: NGCITooltipTheme = 'default';\n\n\tpublic message: string;\n\tpublic close: ( event?: MouseEvent ) => void;\n\tpublic classList: IObject<boolean> = {};\n\n\tprivate _previousPanelClass: string;\n\n\t@Input( 'class' )\n\tset panelClass( classes: string ) {\n\t\tconst previousPanelClass: string = this._previousPanelClass;\n\n\t\tpreviousPanelClass?.split( ' ' ).forEach( ( className: string ) => {\n\t\t\tthis.classList[ className ] = false;\n\t\t} );\n\n\t\tthis._previousPanelClass = classes;\n\n\t\tclasses?.split( ' ' ).forEach( ( className: string ) => {\n\t\t\tthis.classList[ className ] = true;\n\t\t} );\n\n\t\tthis._elementRef.nativeElement.className = '';\n\t}\n\n\tget nativeElement(): HTMLElement {\n\t\treturn this._elementRef.nativeElement;\n\t}\n\n\t/**\n\t * @constructor\n\t * @param {ElementRef} _elementRef\n\t * @param {ChangeDetectorRef} _cdRef\n\t * @param {NgZone} _ngZone\n\t */\n\tconstructor( private _elementRef: ElementRef, private _cdRef: ChangeDetectorRef, private _ngZone: NgZone ) {}\n\n\t/**\n\t * @param {NGCITooltipPosition} position\n\t * @param {NGCITooltipDirection} direction\n\t * @return {void}\n\t */\n\tpublic setPositionClasses( position: NGCITooltipPosition, direction?: NGCITooltipDirection ) {\n\t\tthis._ngZone.runGuarded( () => {\n\t\t\tthis.classList[ 'ngc-tooltip--above' ] = position === 'above';\n\t\t\tthis.classList[ 'ngc-tooltip--below' ] = position === 'below';\n\t\t\tthis.classList[ 'ngc-tooltip--before' ] = position === 'before';\n\t\t\tthis.classList[ 'ngc-tooltip--after' ] = position === 'after';\n\t\t\tthis.classList[ 'ngc-tooltip--dir-start' ] = direction === 'start';\n\t\t\tthis.classList[ 'ngc-tooltip--dir-end' ] = direction === 'end';\n\t\t\tthis.classList[ 'ngc-tooltip--message-only' ] = this.messageOnly;\n\t\t\tthis.classList[ 'ngc-tooltip--light-theme' ] = this.theme === 'light';\n\n\t\t\tthis.markForCheck();\n\t\t} );\n\t}\n\n\t/**\n\t * @return {void}\n\t */\n\tpublic reattach() {\n\t\tthis._cdRef.reattach();\n\t}\n\n\t/**\n\t * @return {void}\n\t */\n\tpublic detach() {\n\t\tthis._cdRef.detach();\n\t}\n\n\t/**\n\t * @return {void}\n\t */\n\tpublic markForCheck() {\n\t\tthis._cdRef.markForCheck();\n\t}\n\n\t/**\n\t * @return {void}\n\t */\n\tpublic detectChanges() {\n\t\tthis._cdRef.detectChanges();\n\t}\n\n}\n"
+  },
+  "Page": {
+    "inputs": [
+      {
+        "name": "stretch",
+        "type": "boolean",
+        "default": "false",
+        "description": "Expands layout shell to 100% of container or viewport width and height (100vw / 100vh)."
+      },
+      {
+        "name": "suppressScrollX",
+        "type": "boolean",
+        "default": "false",
+        "description": "Suppresses horizontal scrolling inside the content area."
+      },
+      {
+        "name": "suppressScrollY",
+        "type": "boolean",
+        "default": "false",
+        "description": "Suppresses vertical scrolling inside the content area."
+      },
+      {
+        "name": "scrollBarMode",
+        "type": "'auto' | 'hover' | 'always' | 'hidden'",
+        "default": "'auto'",
+        "description": "Visibility mode for the built-in smooth scrollbar."
+      },
+      {
+        "name": "[ngcPageHeader] divider",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders a bottom border divider between the header and scrollable content area."
+      },
+      {
+        "name": "[ngcPageHeader] padding",
+        "type": "string | number",
+        "default": "—",
+        "description": "Shorthand padding for all sides of the header (e.g. '16px' or 16)."
+      },
+      {
+        "name": "[ngcPageHeader] paddingVertical",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Top and bottom padding for the page header."
+      },
+      {
+        "name": "[ngcPageHeader] paddingHorizontal",
+        "type": "string | number",
+        "default": "'30px'",
+        "description": "Left and right padding for the page header."
+      },
+      {
+        "name": "[ngcPageHeader] paddingTop / paddingBottom",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Individual top / bottom padding for the page header."
+      },
+      {
+        "name": "[ngcPageHeader] paddingLeft / paddingRight",
+        "type": "string | number",
+        "default": "'30px'",
+        "description": "Individual left / right padding for the page header."
+      },
+      {
+        "name": "[ngcPageContent] padding",
+        "type": "string | number",
+        "default": "—",
+        "description": "Shorthand padding for all sides of the content area (e.g. '24px' or 24)."
+      },
+      {
+        "name": "[ngcPageContent] paddingVertical",
+        "type": "string | number",
+        "default": "'24px'",
+        "description": "Top and bottom padding for the page content area."
+      },
+      {
+        "name": "[ngcPageContent] paddingHorizontal",
+        "type": "string | number",
+        "default": "'30px'",
+        "description": "Left and right padding for the page content area."
+      },
+      {
+        "name": "[ngcPageContent] paddingTop / paddingBottom",
+        "type": "string | number",
+        "default": "'24px'",
+        "description": "Individual top / bottom padding for the page content area."
+      },
+      {
+        "name": "[ngcPageContent] paddingLeft / paddingRight",
+        "type": "string | number",
+        "default": "'30px'",
+        "description": "Individual left / right padding for the page content area."
+      }
+    ],
+    "outputs": [],
+    "sourceCode": ""
+  },
+  "Input": {
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "string | number",
+        "default": "undefined",
+        "description": "Two-way data binding value for the input field."
+      },
+      {
+        "name": "formControl",
+        "type": "FormControl",
+        "default": "undefined",
+        "description": "Angular Reactive Forms FormControl instance bound to the input."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": "undefined",
+        "description": "Unique identifier name for the input element in forms."
+      },
+      {
+        "name": "type",
+        "type": "'text' | 'password' | 'email' | 'number' | 'tel' | 'url'",
+        "default": "'text'",
+        "description": "Native HTML input type."
+      },
+      {
+        "name": "textSize",
+        "type": "string",
+        "default": "'14px'",
+        "description": "Custom font size for the input text (e.g., '14px', '16px')."
+      },
+      {
+        "name": "alignment",
+        "type": "'left' | 'center' | 'right'",
+        "default": "'left'",
+        "description": "Text alignment inside the input field."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Whether the input is non-interactive and disabled."
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
+        "description": "Whether the input value is read-only."
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "default": "false",
+        "description": "Whether the field is required for form validation."
+      },
+      {
+        "name": "clearable",
+        "type": "boolean",
+        "default": "false",
+        "description": "Shows a one-click clear button when the input has text."
+      },
+      {
+        "name": "trim",
+        "type": "boolean",
+        "default": "true",
+        "description": "Automatically trims leading and trailing whitespace on change."
+      },
+      {
+        "name": "min / max",
+        "type": "number",
+        "default": "undefined",
+        "description": "Minimum and maximum numerical bounds when type is 'number'."
+      },
+      {
+        "name": "convertType",
+        "type": "'number' | 'lowercase' | 'uppercase'",
+        "default": "undefined",
+        "description": "Automatic type coercion or casing conversion on input."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<any>",
+        "description": "Emitted whenever the input value changes."
+      },
+      {
+        "name": "changed",
+        "type": "EventEmitter<any>",
+        "description": "Emitted on value commit (blur or enter key)."
+      },
+      {
+        "name": "cleared",
+        "type": "EventEmitter<any>",
+        "description": "Emitted when the clear icon button is clicked."
+      },
+      {
+        "name": "saved",
+        "type": "EventEmitter<any>",
+        "description": "Emitted when inline input save button is triggered."
+      },
+      {
+        "name": "cancelled",
+        "type": "EventEmitter<any>",
+        "description": "Emitted when inline input cancel button is triggered."
+      },
+      {
+        "name": "pasted",
+        "type": "EventEmitter<ClipboardEvent>",
+        "description": "Emitted when content is pasted into the input field."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Drawer": {
+    "inputs": [
+      {
+        "name": "opened",
+        "type": "boolean",
+        "default": "false",
+        "description": "Controls visibility and expansion state of the drawer."
+      },
+      {
+        "name": "position",
+        "type": "'left' | 'right' | 'top' | 'bottom'",
+        "default": "'left'",
+        "description": "Anchor edge from which the drawer slides out."
+      },
+      {
+        "name": "mode",
+        "type": "'over' | 'push' | 'side'",
+        "default": "'side'",
+        "description": "Display behavior: 'over' overlays content with backdrop, 'push' shifts main content, 'side' shares layout."
+      },
+      {
+        "name": "width",
+        "type": "string | number",
+        "default": "'280px'",
+        "description": "Width dimension of the drawer panel."
+      },
+      {
+        "name": "hasBackdrop",
+        "type": "boolean",
+        "default": "true",
+        "description": "Renders a dimming backdrop overlay behind the drawer."
+      },
+      {
+        "name": "closeOnBackdropClick",
+        "type": "boolean",
+        "default": "true",
+        "description": "Automatically closes the drawer when clicking outside onto the backdrop."
+      },
+      {
+        "name": "hasDivider",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders a dividing border line between the drawer and content."
+      },
+      {
+        "name": "bgColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "Custom background color for the drawer body."
+      },
+      {
+        "name": "paddingVertical",
+        "type": "string | number",
+        "default": "undefined",
+        "description": "Top and bottom padding for drawer content."
+      },
+      {
+        "name": "paddingHorizontal",
+        "type": "string | number",
+        "default": "undefined",
+        "description": "Left and right padding for drawer content."
+      },
+      {
+        "name": "[ngcDrawerContainer] stretch",
+        "type": "boolean",
+        "default": "false",
+        "description": "Expands the drawer container to 100% width and height of viewport."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "openedChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when the drawer opens or closes."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Sheet": {
+    "inputs": [
+      {
+        "name": "opened",
+        "type": "boolean",
+        "default": "false",
+        "description": "Controls visibility of the bottom sheet overlay."
+      },
+      {
+        "name": "hasBackdrop",
+        "type": "boolean",
+        "default": "true",
+        "description": "Whether to render a semi-transparent backdrop behind the sheet."
+      },
+      {
+        "name": "closeOnBackdropClick",
+        "type": "boolean",
+        "default": "true",
+        "description": "Automatically dismiss the sheet when clicking the backdrop."
+      },
+      {
+        "name": "height",
+        "type": "string | number",
+        "default": "'auto'",
+        "description": "Explicit height or max-height for the sheet panel."
+      },
+      {
+        "name": "width",
+        "type": "string | number",
+        "default": "'100%'",
+        "description": "Width dimension for the sheet panel."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "openedChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when the sheet open state toggles."
+      },
+      {
+        "name": "dismissed",
+        "type": "EventEmitter<void>",
+        "description": "Emitted when the sheet is closed or dismissed by user."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Navigation Menu": {
+    "inputs": [
+      {
+        "name": "items",
+        "type": "NgcNavigationMenuItem[]",
+        "default": "[]",
+        "description": "Hierarchical navigation item definitions including labels, icons, routes, and nested submenus."
+      },
+      {
+        "name": "collapsed",
+        "type": "boolean",
+        "default": "false",
+        "description": "Collapses the menu into an icon-only compact rail navigation."
+      },
+      {
+        "name": "mode",
+        "type": "'vertical' | 'horizontal' | 'inline'",
+        "default": "'vertical'",
+        "description": "Layout orientation of the navigation menu."
+      },
+      {
+        "name": "theme",
+        "type": "'light' | 'dark'",
+        "default": "'light'",
+        "description": "Visual theme styling for navigation items."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "itemClick",
+        "type": "EventEmitter<NgcNavigationMenuItem>",
+        "description": "Fired when a navigation item or link is clicked."
+      },
+      {
+        "name": "collapsedChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when sidebar rail collapse toggle changes."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Timeline": {
+    "inputs": [
+      {
+        "name": "alternate",
+        "type": "boolean",
+        "default": "false",
+        "description": "Alternates timeline entries on both sides of the center axis."
+      },
+      {
+        "name": "horizontal",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders timeline nodes horizontally left-to-right."
+      },
+      {
+        "name": "[ngcTimelineItem] color",
+        "type": "string",
+        "default": "'primary'",
+        "description": "Dot indicator color: primary, success, warning, danger, or custom CSS color."
+      },
+      {
+        "name": "[ngcTimelineItem] time",
+        "type": "string",
+        "default": "undefined",
+        "description": "Timestamp or date text displayed alongside the milestone."
+      },
+      {
+        "name": "[ngcTimelineItem] selected",
+        "type": "boolean",
+        "default": "false",
+        "description": "Highlights the timeline item as the currently active step."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "itemClick",
+        "type": "EventEmitter<any>",
+        "description": "Emitted when a timeline milestone item is clicked."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "File Picker": {
+    "inputs": [
+      {
+        "name": "fileAccept",
+        "type": "string",
+        "default": "'*/*'",
+        "description": "Allowed MIME types or file extension patterns (e.g., 'image/*', '.pdf,.docx')."
+      },
+      {
+        "name": "multiSelect",
+        "type": "boolean",
+        "default": "true",
+        "description": "Allows picking multiple files simultaneously."
+      },
+      {
+        "name": "imageOnly",
+        "type": "boolean",
+        "default": "false",
+        "description": "Restricts picker to image formats only with thumbnail previews."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables file picker triggering."
+      },
+      {
+        "name": "googleDriveMimeTypes",
+        "type": "string[]",
+        "default": "[]",
+        "description": "Specific Google Drive file types enabled for cloud picking."
+      },
+      {
+        "name": "dropboxExtensions",
+        "type": "string[]",
+        "default": "[]",
+        "description": "Allowed file extensions for Dropbox cloud import."
+      },
+      {
+        "name": "oneDriveExtensions",
+        "type": "string[]",
+        "default": "[]",
+        "description": "Allowed file extensions for Microsoft OneDrive cloud import."
+      },
+      {
+        "name": "position",
+        "type": "'above' | 'below' | 'before' | 'after'",
+        "default": "'below'",
+        "description": "Dropdown overlay position relative to trigger button."
+      },
+      {
+        "name": "hasBackdrop",
+        "type": "boolean",
+        "default": "true",
+        "description": "Renders overlay backdrop when picker menu is open."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "picked",
+        "type": "EventEmitter<NgcIFilePickerEvent>",
+        "description": "Emitted when user selects local files or cloud storage documents."
+      },
+      {
+        "name": "opened",
+        "type": "EventEmitter<Event>",
+        "description": "Fired when the cloud picker modal or menu opens."
+      },
+      {
+        "name": "closed",
+        "type": "EventEmitter<Event>",
+        "description": "Fired when the file picker overlay closes."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Grid": {
+    "inputs": [
+      {
+        "name": "itemsPerRow",
+        "type": "number",
+        "default": "6",
+        "description": "Number of grid columns to display per row."
+      },
+      {
+        "name": "stretch",
+        "type": "boolean",
+        "default": "false",
+        "description": "Stretches grid container to 100% of available viewport area."
+      },
+      {
+        "name": "activeColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "Selection outline and highlight accent color for active items."
+      },
+      {
+        "name": "scrollBarMode",
+        "type": "INgcScrollBarMode",
+        "default": "'auto'",
+        "description": "Scrollbar mode for overflow within grid container."
+      },
+      {
+        "name": "[ngcGridItem] id",
+        "type": "number | string",
+        "default": "undefined",
+        "description": "Unique identifier for the grid item."
+      },
+      {
+        "name": "[ngcGridItem] active",
+        "type": "boolean",
+        "default": "false",
+        "description": "Sets selection state for the individual grid card."
+      },
+      {
+        "name": "[ngcGridItem] draggable",
+        "type": "boolean",
+        "default": "false",
+        "description": "Enables drag-and-drop reordering for this grid item."
+      },
+      {
+        "name": "[ngcGridItem] disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables interaction on this item."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "itemsSelected",
+        "type": "EventEmitter<NgcGridItemComponent[]>",
+        "description": "Emitted when user selects or lasso-selects items in the grid."
+      },
+      {
+        "name": "itemMoved",
+        "type": "EventEmitter<NgcIGridItemMoved>",
+        "description": "Emitted when an item is dragged and dropped into a new position."
+      },
+      {
+        "name": "loadMore",
+        "type": "EventEmitter<boolean>",
+        "description": "Fired when user scrolls to bottom of grid for infinite pagination."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Inline Input": {
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "string",
+        "default": "undefined",
+        "description": "Two-way bound data value for the editable text."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "'Click to edit'",
+        "description": "Placeholder text rendered when value is empty."
+      },
+      {
+        "name": "editing",
+        "type": "boolean",
+        "default": "false",
+        "description": "Programmatically toggles between read-only display and edit mode."
+      },
+      {
+        "name": "autoSave",
+        "type": "boolean",
+        "default": "true",
+        "description": "Automatically saves on blur or pressing Enter."
+      },
+      {
+        "name": "trim",
+        "type": "boolean",
+        "default": "true",
+        "description": "Trims whitespace from input value upon saving."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables inline clicking to edit."
+      },
+      {
+        "name": "validate",
+        "type": "boolean",
+        "default": "false",
+        "description": "Enforces non-empty string validation before confirming save."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when the bound value changes."
+      },
+      {
+        "name": "saved",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when changes are successfully committed."
+      },
+      {
+        "name": "cancelled",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when editing is cancelled and original value restored."
+      },
+      {
+        "name": "editingChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when edit state toggles."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Phone Field": {
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "NgcIPhoneField",
+        "default": "undefined",
+        "description": "Two-way bound object containing phone number, country code, and dial code."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "'Phone Number'",
+        "description": "Label text displayed above the phone input."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "undefined",
+        "description": "Input placeholder formatted to selected country example."
+      },
+      {
+        "name": "preferredCountries",
+        "type": "string[]",
+        "default": "['vn', 'us', 'gb', 'sg']",
+        "description": "List of ISO country codes pinned to top of country dropdown."
+      },
+      {
+        "name": "onlyCountries",
+        "type": "string[]",
+        "default": "[]",
+        "description": "Restricts country selector to an allowed subset of countries."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables input and country selection."
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "default": "false",
+        "description": "Validates that phone number is complete and mandatory."
+      },
+      {
+        "name": "appearance",
+        "type": "'default' | 'outline' | 'filled'",
+        "default": "'default'",
+        "description": "Visual border styling for the phone field."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<NgcIPhoneField>",
+        "description": "Emitted when user types or updates phone details."
+      },
+      {
+        "name": "countryChange",
+        "type": "EventEmitter<NgcICountry>",
+        "description": "Emitted when user selects a different country from the dropdown."
+      },
+      {
+        "name": "focus",
+        "type": "EventEmitter<FocusEvent>",
+        "description": "Emitted on phone input focus."
+      },
+      {
+        "name": "blur",
+        "type": "EventEmitter<FocusEvent>",
+        "description": "Emitted on phone input blur."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Range Input": {
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "number[]",
+        "default": "[0, 100]",
+        "description": "Two-way bound array holding [startValue, endValue] range bounds."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "Field label displayed above range inputs."
+      },
+      {
+        "name": "startRangeName",
+        "type": "string",
+        "default": "'From'",
+        "description": "Label for the start range numeric input."
+      },
+      {
+        "name": "endRangeName",
+        "type": "string",
+        "default": "'To'",
+        "description": "Label for the end range numeric input."
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "default": "0",
+        "description": "Minimum allowed number bound."
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "default": "100",
+        "description": "Maximum allowed number bound."
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "default": "1",
+        "description": "Step increment value for sliders and stepper inputs."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables range interaction."
+      },
+      {
+        "name": "appearance",
+        "type": "'default' | 'outline' | 'filled'",
+        "default": "'default'",
+        "description": "Visual container appearance for the dual inputs."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<number[]>",
+        "description": "Emitted when start or end range value changes."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Scroll Bar": {
+    "inputs": [
+      {
+        "name": "mode",
+        "type": "'auto' | 'hover' | 'always' | 'hidden' | 'overlay'",
+        "default": "'overlay'",
+        "description": "Display behavior of custom scrollbar thumb: 'hover' shows on mouseover, 'always' stays visible, 'overlay' floats above content."
+      },
+      {
+        "name": "suppressScrollX",
+        "type": "boolean",
+        "default": "false",
+        "description": "Suppresses horizontal scrolling track and behavior."
+      },
+      {
+        "name": "suppressScrollY",
+        "type": "boolean",
+        "default": "false",
+        "description": "Suppresses vertical scrolling track and behavior."
+      },
+      {
+        "name": "suppress",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables custom scrollbar completely and reverts to native browser scroll."
+      },
+      {
+        "name": "suppressMode",
+        "type": "'visible' | 'hidden'",
+        "default": "'visible'",
+        "description": "Visual overflow state when scroll is suppressed."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "viewPortChanged",
+        "type": "EventEmitter<any>",
+        "description": "Fired when visible scroll container viewport dimensions change."
+      },
+      {
+        "name": "inViewPort",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when a designated viewport child item enters or leaves visible scroll area."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Comment": {
+    "inputs": [
+      {
+        "name": "comments",
+        "type": "NgcIComment[]",
+        "default": "[]",
+        "description": "List of comment objects including author, avatar, timestamp, message body, attachments, and nested replies."
+      },
+      {
+        "name": "canComment",
+        "type": "boolean",
+        "default": "true",
+        "description": "Enables comment submission box for the current user."
+      },
+      {
+        "name": "userID",
+        "type": "number | string",
+        "default": "undefined",
+        "description": "Current logged-in user ID for permissions check (editing/deleting own comments)."
+      },
+      {
+        "name": "maxFilePerComment",
+        "type": "number",
+        "default": "5",
+        "description": "Maximum number of file attachments allowed per comment."
+      },
+      {
+        "name": "maxImagePerComment",
+        "type": "number",
+        "default": "5",
+        "description": "Maximum number of image attachments allowed per comment."
+      },
+      {
+        "name": "limitReplies",
+        "type": "number",
+        "default": "2",
+        "description": "Initial number of visible threaded replies before 'Show more' is displayed."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "'Write a comment...'",
+        "description": "Placeholder text inside the comment editor textarea."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "commentCreated",
+        "type": "EventEmitter<NgcICommentCreateEvent>",
+        "description": "Emitted when user submits a new comment or threaded reply."
+      },
+      {
+        "name": "commentUpdated",
+        "type": "EventEmitter<NgcICommentUpdateEvent>",
+        "description": "Emitted when user saves an edited comment."
+      },
+      {
+        "name": "commentDeleted",
+        "type": "EventEmitter<NgcICommentDeleteEvent>",
+        "description": "Emitted when user removes a comment."
+      },
+      {
+        "name": "reactionUpdated",
+        "type": "EventEmitter<NgcICommentReactionEvent>",
+        "description": "Emitted when an emoji reaction (thumbs-up, heart, etc.) is toggled."
+      },
+      {
+        "name": "commentsLoadMore",
+        "type": "EventEmitter<void>",
+        "description": "Fired when user clicks to load earlier comments."
+      },
+      {
+        "name": "repliesLoadMore",
+        "type": "EventEmitter<NgcIComment>",
+        "description": "Fired when user requests to expand hidden thread replies."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Cropper": {
+    "inputs": [
+      {
+        "name": "image",
+        "type": "string | Blob",
+        "default": "undefined",
+        "description": "Image source URL or Blob file to crop."
+      },
+      {
+        "name": "circle",
+        "type": "boolean",
+        "default": "false",
+        "description": "Enables circular crop mask, ideal for profile avatars."
+      },
+      {
+        "name": "options",
+        "type": "Cropper.Options",
+        "default": "undefined",
+        "description": "Underlying Cropper.js options (aspectRatio, viewMode, guides, zoomable, etc.)."
+      },
+      {
+        "name": "width",
+        "type": "string",
+        "default": "'100%'",
+        "description": "Container canvas width."
+      },
+      {
+        "name": "height",
+        "type": "string",
+        "default": "'400px'",
+        "description": "Container canvas height."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "init",
+        "type": "EventEmitter<NgcCropperComponent>",
+        "description": "Fired when image is loaded and cropper engine is ready."
+      },
+      {
+        "name": "cropped",
+        "type": "EventEmitter<NgcICroppedEvent>",
+        "description": "Emitted with cropped canvas data URL, Blob, and crop coordinates."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Truncate": {
+    "inputs": [
+      {
+        "name": "limitLine",
+        "type": "number",
+        "default": "2",
+        "description": "Number of lines of text to display before adding ellipsis."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables multi-line clamping, showing full text."
+      },
+      {
+        "name": "tooltip",
+        "type": "boolean",
+        "default": "true",
+        "description": "Automatically renders full text in tooltip on hover when truncated."
+      },
+      {
+        "name": "[ngcBlockTruncate] length",
+        "type": "number",
+        "default": "undefined",
+        "description": "Maximum character count limit for single line string truncation."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "truncated",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted with true if text overflows and gets truncated."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Confirm": {
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string",
+        "default": "'Confirm Action'",
+        "description": "Header title of the confirmation modal dialog."
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "default": "undefined",
+        "description": "Descriptive prompt explaining the consequences of the action."
+      },
+      {
+        "name": "confirmButtonText",
+        "type": "string",
+        "default": "'Confirm'",
+        "description": "Label text on the positive confirmation button."
+      },
+      {
+        "name": "cancelButtonText",
+        "type": "string",
+        "default": "'Cancel'",
+        "description": "Label text on the cancel / dismiss button."
+      },
+      {
+        "name": "confirmButtonColor",
+        "type": "'primary' | 'danger' | 'warning' | 'success'",
+        "default": "'primary'",
+        "description": "Theme color on the confirmation button (use 'danger' for destructive actions)."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": "undefined",
+        "description": "Header alert icon displayed above the confirmation dialog."
+      },
+      {
+        "name": "hasBackdrop",
+        "type": "boolean",
+        "default": "true",
+        "description": "Renders modal backdrop overlay."
+      },
+      {
+        "name": "autoClose",
+        "type": "boolean",
+        "default": "true",
+        "description": "Dismisses dialog automatically when clicking outside or pressing Escape."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "confirmed",
+        "type": "Observable<boolean>",
+        "description": "Resolves with true when confirmed, false when cancelled."
+      }
+    ],
+    "sourceCode": ""
+  },
+  "Color": {
+    "inputs": [
+      {
+        "name": "--ngc-color-primary-default",
+        "type": "CSS Color Variable",
+        "default": "#0a84ff",
+        "description": "Main brand accent color used across buttons, active states, and highlights."
+      },
+      {
+        "name": "--ngc-color-success-default",
+        "type": "CSS Color Variable",
+        "default": "#34c759",
+        "description": "Semantic success color for badges, progress bars, and positive states."
+      },
+      {
+        "name": "--ngc-color-warning-default",
+        "type": "CSS Color Variable",
+        "default": "#ff9f0a",
+        "description": "Semantic warning color for caution alerts and pending actions."
+      },
+      {
+        "name": "--ngc-color-danger-default",
+        "type": "CSS Color Variable",
+        "default": "#ff453a",
+        "description": "Semantic danger color for errors, destructive buttons, and delete confirms."
+      },
+      {
+        "name": "--ngc-color-neutral-border-default",
+        "type": "CSS Color Variable",
+        "default": "#e4e4e7",
+        "description": "Standard border and divider color across cards, inputs, and tables."
+      },
+      {
+        "name": "--ngc-color-surface-default",
+        "type": "CSS Color Variable",
+        "default": "#ffffff",
+        "description": "Card, modal, and drawer canvas surface background color."
+      }
+    ],
+    "outputs": [],
+    "sourceCode": ""
+  },
+  "Typography": {
+    "inputs": [
+      {
+        "name": "font-family",
+        "type": "CSS Font Token",
+        "default": "Inter, -apple-system, sans-serif",
+        "description": "Primary modern typeface stack used across all NGC components."
+      },
+      {
+        "name": "Heading H1–H6",
+        "type": "Classes (.h1 to .h6)",
+        "default": "32px / 24px / 20px / 18px / 16px / 14px",
+        "description": "Structured typographic scale for headings with proportional line-heights and 600/700 font weights."
+      },
+      {
+        "name": "Body Text",
+        "type": "Classes (.text-sm, .text-base, .text-lg)",
+        "default": "13px / 14px / 16px",
+        "description": "Standard body font sizes with optimized line-height for readability."
+      },
+      {
+        "name": "Text Weights",
+        "type": "Classes (.text-regular, .text-medium, .text-semibold, .text-bold)",
+        "default": "400 / 500 / 600 / 700",
+        "description": "Standardized font weights across UI elements."
+      }
+    ],
+    "outputs": [],
+    "sourceCode": ""
+  },
+  "Design Tokens": {
+    "inputs": [
+      {
+        "name": "--ngc-radius-300 / 400 / 500",
+        "type": "Radius Tokens",
+        "default": "6px / 8px / 12px",
+        "description": "Standard border radius scale for buttons, inputs, cards, and modal dialogs."
+      },
+      {
+        "name": "--ngc-shadow-sm / md / lg",
+        "type": "Elevation Shadow Tokens",
+        "default": "CSS Box Shadows",
+        "description": "Layered depth shadows for cards, dropdowns, and overlays."
+      },
+      {
+        "name": "--ngc-spacing-1 to 12",
+        "type": "Spacing Scale",
+        "default": "4px, 8px, 12px, 16px, 20px, 24px, 32px, 48px",
+        "description": "Consistent 4px/8px-based spacing grid for margins and paddings."
+      },
+      {
+        "name": "--ngc-transition-default",
+        "type": "Animation Token",
+        "default": "0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+        "description": "Standard smooth transition easing applied across interactive components."
+      }
+    ],
+    "outputs": [],
+    "sourceCode": ""
+  },
+  "Search Box": {
+    "inputs": [
+      {
+        "name": "data",
+        "type": "any[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "suggestion",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "ngModel",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "suffixIcon",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "disableControl",
+        "type": "boolean",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "notFoundData",
+        "type": "INotFoundData",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "formControl",
+        "type": "FormControl",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "filterPredicate",
+        "type": "( data: any, searchQuery: string, searchKey?: string )",
+        "default": "> boolean",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "searching",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "cleared",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "filtered",
+        "type": "EventEmitter<any[]>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "suggested",
+        "type": "EventEmitter<any>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "prefixIconClicked",
+        "type": "EventEmitter<void>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "suffixIconClicked",
+        "type": "EventEmitter<void>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "input",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "focus",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "blur",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "sourceCode": "import {\n\tComponent, ViewEncapsulation, Input,\n\tOutput, EventEmitter, OnChanges,\n\tSimpleChanges, ChangeDetectionStrategy, ElementRef,\n\tViewChild, OnDestroy, ChangeDetectorRef,\n\tTemplateRef\n} from '@angular/core';\nimport { Subject, isObservable } from 'rxjs';\nimport { debounceTime, distinctUntilChanged } from 'rxjs/operators';\nimport { FormControl } from '@angular/forms';\nimport _ from 'lodash';\n\nimport {\n\tUnsubscriber, DefaultValue, CoerceBoolean,\n\tCoerceNumber, untilCmpDestroyed, INotFoundData\n} from '@core';\nimport { CONSTANT as APP_CONSTANT } from '@resources';\n\nimport { NgcIFormFieldAppearance, NgcIFormFieldErrorDisplayMode } from '../ngc-form-field';\nimport { NgcMenuTriggerForDirective } from '../ngc-menu';\n\n@Unsubscriber()\n@Component({\n\tselector\t\t: 'ngc-search-box',\n\ttemplateUrl\t\t: './ngc-search-box.html',\n\tstyleUrls\t\t: [ './ngc-search-box.scss' ],\n\thost\t\t\t: { class: 'ngc-search-box' },\n\tencapsulation\t: ViewEncapsulation.None,\n\tchangeDetection\t: ChangeDetectionStrategy.OnPush,\n})\nexport class NgcSearchBoxComponent implements OnChanges, OnDestroy {\n\n\t@ViewChild( NgcMenuTriggerForDirective, { static: true } ) public menuTrigger: NgcMenuTriggerForDirective;\n\t@ViewChild( 'notFoundTemplate', { static: true } ) public notFoundTemplate: TemplateRef<any>;\n\n\t@Input() public data: any[];\n\t@Input() public suggestion: any;\n\t@Input() public ngModel: string;\n\t@Input() public name: string;\n\t@Input() public label: string;\n\t@Input() public placeholder: string;\n\t@Input() @DefaultValue() public prefixIcon: string = 'search';\n\t@Input() public suffixIcon: string;\n\t@Input() @DefaultValue() public searchKey: string = 'name';\n\t@Input() @DefaultValue() public fieldName: string = 'name';\n\t@Input() @DefaultValue() public fieldDescription: string = 'description';\n\t@Input() @DefaultValue() public fieldImage: string = 'image';\n\t@Input() @DefaultValue() public fieldAvatar: string = 'avatar';\n\t@Input() @DefaultValue() @CoerceNumber() public itemSize: number = 54;\n\t@Input() @DefaultValue() @CoerceNumber() public debounceTime: number = 400;\n\t@Input() @DefaultValue() @CoerceBoolean() public trim: boolean = true;\n\t@Input() @CoerceBoolean() public displayNotFound: boolean;\n\t@Input() public disableControl: boolean;\n\t@Input() @CoerceBoolean() public disabled: boolean;\n\t@Input() @CoerceBoolean() public readonly: boolean;\n\t@Input() @CoerceBoolean() public required: boolean;\n\t@Input() @CoerceBoolean() public autoFocusOn: boolean;\n\t@Input() @CoerceBoolean() public autoReset: boolean;\n\t@Input() public notFoundData: INotFoundData;\n\t@Input() public formControl: FormControl;\n\t@Input() @DefaultValue() public appearance: NgcIFormFieldAppearance = 'default';\n\t@Input() @DefaultValue() public errorDisplayMode: NgcIFormFieldErrorDisplayMode = 'default';\n\t@Input() public filterPredicate: ( data: any, searchQuery: string, searchKey?: string ) => boolean;\n\n\t@Output() public ngModelChange: EventEmitter<string> = new EventEmitter<string>();\n\t@Output() public searching: EventEmitter<string> = new EventEmitter<string>();\n\t@Output() public cleared: EventEmitter<Event> = new EventEmitter<Event>();\n\t@Output() public filtered: EventEmitter<any[]> = new EventEmitter<any[]>();\n\t@Output() public suggested: EventEmitter<any> = new EventEmitter<any>();\n\t@Output() public prefixIconClicked: EventEmitter<void> = new EventEmitter<void>();\n\t@Output() public suffixIconClicked: EventEmitter<void> = new EventEmitter<void>();\n\t@Output() public input: EventEmitter<Event> = new EventEmitter<Event>();\n\t@Output() public focus: EventEmitter<Event> = new EventEmitter<Event>();\n\t@Output() public blur: EventEmitter<Event> = new EventEmitter<Event>();\n\n\tpublic searchQuery: string;\n\tpublic focusing: boolean;\n\tpublic focusIndex: number = 0;\n\tpublic filteredData: any[];\n\tpublic suggestionData: any[];\n\n\tprivate _searchUpdated$: Subject<string> = new Subject<string>();\n\n\tget useVirtualScroll(): boolean {\n\t\treturn this.suggestionData?.length >= APP_CONSTANT.USE_VIRTUAL_SCROLL_WITH;\n\t}\n\n\t/**\n\t * @constructor\n\t * @param {ElementRef} elementRef\n\t * @param {ChangeDetectorRef} _cdRef\n\t */\n\tconstructor( public elementRef: ElementRef, private _cdRef: ChangeDetectorRef ) {\n\t\tthis._searchUpdated$\n\t\t.pipe(\n\t\t\tdebounceTime( this.debounceTime ),\n\t\t\tdistinctUntilChanged(),\n\t\t\tuntilCmpDestroyed( this )\n\t\t)\n\t\t.subscribe( ( value: string ) => {\n\t\t\tthis.searching.emit( value );\n\n\t\t\t// Start filter\n\t\t\tthis._filter();\n\n\t\t\t// Start suggest\n\t\t\tthis.focusing && this._suggest();\n\t\t} );\n\t}\n\n\t/**\n\t * @constructor\n\t */\n\tngOnDestroy() {\n\t\tthis._searchUpdated$.complete();\n\t}\n\n\t/**\n\t * @constructor\n\t * @param {SimpleChanges} changes\n\t */\n\tngOnChanges( changes: SimpleChanges ) {\n\t\tchanges.data && this._filter();\n\t\tchanges.ngModel && this.ngModel !== undefined && this.onSearch( this.ngModel );\n\t}\n\n\t/**\n\t * @param {string} searchQuery\n\t * @return {void}\n\t */\n\tpublic onSearch( searchQuery: string ) {\n\t\tthis.searchQuery = searchQuery || '';\n\n\t\tthis._searchUpdated$.next( this.searchQuery );\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic onClear( event: Event ) {\n\t\tthis.clear( event );\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic onInput( event: Event ) {\n\t\tthis.input.emit( event );\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic onFocus( event: Event ) {\n\t\tthis.focusing = true;\n\n\t\tthis.focus.emit( event );\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic onBlur( event: Event ) {\n\t\tthis.focusing = false;\n\n\t\tthis.blur.emit( event );\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic clear( event?: Event ) {\n\t\tthis.ngModel = this.searchQuery = '';\n\n\t\tthis._searchUpdated$.next( this.searchQuery );\n\t\tthis.ngModelChange.emit( this.ngModel );\n\t\tthis.filtered.emit( this.data );\n\t\tthis.cleared.emit( event );\n\t\tthis._cdRef.markForCheck();\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @param {number} index\n\t * @return {void}\n\t */\n\tpublic chooseSuggestItem( event: Event, index: number ) {\n\t\tif ( !this.suggestionData ) return;\n\n\t\tconst item: any = this.suggestionData[ index ];\n\n\t\tif ( !item ) return;\n\n\t\tevent.stopPropagation();\n\t\tevent.preventDefault();\n\n\t\tthis.ngModel = _.get( item, this.searchKey || this.fieldName );\n\n\t\tthis._searchUpdated$.next( this.searchQuery );\n\t\tthis.ngModelChange.emit( this.ngModel );\n\t\tthis.suggested.emit( item );\n\t\tthis.menuTrigger.close();\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic focusPreviousSuggestItem( event: Event ) {\n\t\tif ( !this.suggestionData ) return;\n\n\t\tevent.stopPropagation();\n\t\tevent.preventDefault();\n\n\t\tthis.focusIndex = this.focusIndex > 0 ? this.focusIndex - 1 : 0;\n\t}\n\n\t/**\n\t * @param {Event} event\n\t * @return {void}\n\t */\n\tpublic focusNextSuggestItem( event: Event ) {\n\t\tif ( !this.suggestionData ) return;\n\n\t\tevent.stopPropagation();\n\t\tevent.preventDefault();\n\n\t\tconst length: number = this.suggestionData?.length - 1;\n\n\t\tthis.focusIndex = this.focusIndex < length ? this.focusIndex + 1 : length;\n\t}\n\n\t/**\n\t * @return {void}\n\t */\n\tprivate _toggleMenu() {\n\t\tthis.searchQuery && this.suggestionData?.length\n\t\t\t? this.menuTrigger.open()\n\t\t\t: this.menuTrigger.close();\n\t}\n\n\t/**\n\t * @return {void}\n\t */\n\tprivate _filter() {\n\t\tif ( this.searchQuery ) {\n\t\t\tthis.filteredData = _.filter( this.data, this._filterPredicate.bind( this ) );\n\t\t} else {\n\t\t\tthis.filteredData = _.clone( this.data );\n\t\t}\n\n\t\tthis.filtered.emit( this.filteredData );\n\t\tthis._cdRef.markForCheck();\n\t}\n\n\t/**\n\t * @return {void}\n\t */\n\tprivate _suggest() {\n\t\tif ( !this.suggestion ) return;\n\n\t\tconst suggestion: any = this.suggestion( this.searchQuery );\n\t\tconsole.log({suggestion}, 'searchQuery:', this.searchQuery, 'menuTrigger:', this.menuTrigger);\n\t\tif ( isObservable( suggestion ) ) {\n\t\t\tsuggestion\n\t\t\t.pipe( untilCmpDestroyed( this ) )\n\t\t\t.subscribe( ( data: any[] ) => {\n\t\t\t\tthis.suggestionData = data;\n\t\t\t\tconsole.log('async suggestionData updated:', this.suggestionData);\n\t\t\t\tthis._toggleMenu();\n\t\t\t\tthis._cdRef.markForCheck();\n\t\t\t} );\n\t\t\treturn;\n\t\t}\n\n\t\tthis.suggestionData = suggestion;\n\t\tconsole.log('sync suggestionData updated:', this.suggestionData);\n\t\tthis._toggleMenu();\n\t\tthis._cdRef.markForCheck();\n\t}\n\n\t/**\n\t * @param {any} item\n\t * @return {boolean}\n\t */\n\tprivate _filterPredicate( item: any ): boolean {\n\t\treturn _.isFunction( this.filterPredicate )\n\t\t\t? this.filterPredicate( item, this.searchQuery, this.searchKey )\n\t\t\t:_.search(\n\t\t\t\tthis.searchKey ? _.get( item, this.searchKey ) : item,\n\t\t\t\tthis.searchQuery\n\t\t\t);\n\t};\n\n}\n"
   }
 }

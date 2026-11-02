@@ -1,4 +1,8 @@
-import { Component, Input, ContentChildren, QueryList, AfterContentInit, ElementRef, ViewEncapsulation } from '@angular/core';
+import { 
+	Component, Input, ContentChildren, QueryList, AfterContentInit, 
+	ElementRef, ViewEncapsulation, NgZone, ChangeDetectorRef, OnDestroy 
+} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { NgcResizablePanelComponent } from './ngc-resizable-panel.component';
 import { NgcResizableHandleComponent } from './ngc-resizable-handle.component';
 
@@ -14,7 +18,7 @@ import { NgcResizableHandleComponent } from './ngc-resizable-handle.component';
 		'[class.ngc-resizable-container--vertical]': 'direction === "vertical"',
 	}
 })
-export class NgcResizableContainerComponent implements AfterContentInit {
+export class NgcResizableContainerComponent implements AfterContentInit, OnDestroy {
 
 	@Input() public direction: 'horizontal' | 'vertical' = 'horizontal';
 
@@ -22,22 +26,54 @@ export class NgcResizableContainerComponent implements AfterContentInit {
 	@ContentChildren(NgcResizableHandleComponent) public handles: QueryList<NgcResizableHandleComponent>;
 
 	private activeDragIndex: number = -1;
-	private startPosition: number = 0;
-	private startSizes: number[] = [];
+	private startMinPos: number = 0;
+	private startTotalPx: number = 0;
+	private startTotalPct: number = 0;
+	private activePrevPanel: NgcResizablePanelComponent | null = null;
+	private activeNextPanel: NgcResizablePanelComponent | null = null;
 
-	constructor(private el: ElementRef) {}
+	private rafId: number | null = null;
+	private pendingEvent: MouseEvent | TouchEvent | null = null;
+	private handleSubs: Subscription[] = [];
+
+	constructor(
+		private el: ElementRef<HTMLElement>,
+		private ngZone: NgZone,
+		private cdr: ChangeDetectorRef
+	) {}
 
 	public ngAfterContentInit() {
-		// Initialize panel sizes
+		this.initializeSizes();
 		setTimeout(() => {
 			this.initializeSizes();
 		});
 
-		// Listen to handle drag events
+		this.bindHandleEvents();
+		this.handles.changes.subscribe(() => {
+			this.bindHandleEvents();
+		});
+	}
+
+	public ngOnDestroy() {
+		this.cleanupHandleSubs();
+		if (this.rafId !== null) {
+			cancelAnimationFrame(this.rafId);
+			this.rafId = null;
+		}
+	}
+
+	private cleanupHandleSubs() {
+		this.handleSubs.forEach(sub => sub.unsubscribe());
+		this.handleSubs = [];
+	}
+
+	private bindHandleEvents() {
+		this.cleanupHandleSubs();
 		this.handles.forEach((handle, index) => {
-			handle.dragStart.subscribe((event: MouseEvent | TouchEvent) => {
+			const sub = handle.dragStart.subscribe((event: MouseEvent | TouchEvent) => {
 				this.onDragStart(index, event);
 			});
+			this.handleSubs.push(sub);
 		});
 	}
 
@@ -63,7 +99,7 @@ export class NgcResizableContainerComponent implements AfterContentInit {
 			if (panel.size === undefined) {
 				panel.size = panel.defaultSize !== undefined ? panel.defaultSize : defaultDistributedSize;
 			}
-			panel.updateSize(this.direction);
+			panel.setSize(panel.size);
 		});
 	}
 
@@ -71,88 +107,131 @@ export class NgcResizableContainerComponent implements AfterContentInit {
 		const panelsArray = this.panels.toArray();
 		if (panelsArray.length < 2 || handleIndex >= panelsArray.length - 1) return;
 
+		const prevPanel = panelsArray[handleIndex];
+		const nextPanel = panelsArray[handleIndex + 1];
+		if (!prevPanel || !nextPanel) return;
+
 		this.activeDragIndex = handleIndex;
-		this.startPosition = this.getPosition(event);
-		this.startSizes = panelsArray.map(p => p.size || 0);
+		this.activePrevPanel = prevPanel;
+		this.activeNextPanel = nextPanel;
 
-		// Register global drag move/end listeners
-		const onMove = (e: MouseEvent | TouchEvent) => this.onDragMove(e);
-		const onEnd = () => {
-			document.removeEventListener('mousemove', onMove);
-			document.removeEventListener('mouseup', onEnd);
-			document.removeEventListener('touchmove', onMove);
-			document.removeEventListener('touchend', onEnd);
-			this.handles.toArray()[handleIndex].isDragging = false;
-		};
+		const isH = this.direction === 'horizontal';
+		const prevRect = prevPanel.elementRef.nativeElement.getBoundingClientRect();
+		const nextRect = nextPanel.elementRef.nativeElement.getBoundingClientRect();
 
-		document.addEventListener('mousemove', onMove);
-		document.addEventListener('mouseup', onEnd);
-		document.addEventListener('touchmove', onMove, { passive: false });
-		document.addEventListener('touchend', onEnd);
-		this.handles.toArray()[handleIndex].isDragging = true;
+		this.startMinPos = isH ? prevRect.left : prevRect.top;
+		const maxPos = isH ? nextRect.right : nextRect.bottom;
+		this.startTotalPx = maxPos - this.startMinPos;
+		this.startTotalPct = (prevPanel.size || 0) + (nextPanel.size || 0);
+
+		if (this.startTotalPx <= 0) return;
+
+		const handle = this.handles.toArray()[handleIndex];
+		if (handle) handle.isDragging = true;
+
+		this.el.nativeElement.classList.add('ngc-resizable-container--dragging');
+		document.body.style.userSelect = 'none';
+		document.body.style.cursor = isH ? 'col-resize' : 'row-resize';
+
+		// Run drag listeners OUTSIDE Angular to avoid Zone.js change detection spam on every mousemove pixel
+		this.ngZone.runOutsideAngular(() => {
+			const onMove = (e: MouseEvent | TouchEvent) => this.onDragMove(e);
+			const onEnd = () => {
+				document.removeEventListener('mousemove', onMove);
+				document.removeEventListener('mouseup', onEnd);
+				document.removeEventListener('touchmove', onMove);
+				document.removeEventListener('touchend', onEnd);
+
+				if (this.rafId !== null) {
+					cancelAnimationFrame(this.rafId);
+					this.rafId = null;
+				}
+
+				this.el.nativeElement.classList.remove('ngc-resizable-container--dragging');
+				document.body.style.userSelect = '';
+				document.body.style.cursor = '';
+
+				if (handle) handle.isDragging = false;
+				this.activeDragIndex = -1;
+				this.activePrevPanel = null;
+				this.activeNextPanel = null;
+
+				// Trigger single change detection update at the end of dragging
+				this.ngZone.run(() => {
+					this.cdr.markForCheck();
+				});
+			};
+
+			document.addEventListener('mousemove', onMove, { passive: false });
+			document.addEventListener('mouseup', onEnd);
+			document.addEventListener('touchmove', onMove, { passive: false });
+			document.addEventListener('touchend', onEnd);
+		});
 	}
 
 	private onDragMove(event: MouseEvent | TouchEvent) {
 		if (this.activeDragIndex === -1) return;
-		event.preventDefault();
+		if (event.cancelable) event.preventDefault();
 
-		const panelsArray = this.panels.toArray();
-		const prevPanel = panelsArray[this.activeDragIndex];
-		const nextPanel = panelsArray[this.activeDragIndex + 1];
-		if (!prevPanel || !nextPanel) return;
+		this.pendingEvent = event;
+		if (this.rafId === null) {
+			this.rafId = requestAnimationFrame(() => {
+				this.rafId = null;
+				if (this.pendingEvent) {
+					this.updateSizesFromEvent(this.pendingEvent);
+				}
+			});
+		}
+	}
 
-		const currentPosition = this.getPosition(event);
-		const deltaPx = currentPosition - this.startPosition;
+	private updateSizesFromEvent(event: MouseEvent | TouchEvent) {
+		if (this.activeDragIndex === -1 || !this.activePrevPanel || !this.activeNextPanel) return;
+		if (this.startTotalPx <= 0) return;
 
-		// Calculate total container size in pixels
-		const rect = this.el.nativeElement.getBoundingClientRect();
-		const containerSizePx = this.direction === 'horizontal' ? rect.width : rect.height;
-		if (containerSizePx === 0) return;
+		const currentPos = this.getPosition(event);
+		const offsetPx = currentPos - this.startMinPos;
+		let fraction = offsetPx / this.startTotalPx;
 
-		// Convert delta px to percentage
-		const deltaPct = (deltaPx / containerSizePx) * 100;
+		// Clamp fraction between 0 and 1
+		fraction = Math.max(0, Math.min(1, fraction));
 
-		const prevStartSize = this.startSizes[this.activeDragIndex];
-		const nextStartSize = this.startSizes[this.activeDragIndex + 1];
-		const totalSize = prevStartSize + nextStartSize;
-
-		let newPrevSize = prevStartSize + deltaPct;
-		let newNextSize = nextStartSize - deltaPct;
+		let proposedPrevSize = this.startTotalPct * fraction;
+		let proposedNextSize = this.startTotalPct - proposedPrevSize;
 
 		// Enforce min/max limits
-		const prevMin = prevPanel.minSize !== undefined ? prevPanel.minSize : 0;
-		const prevMax = prevPanel.maxSize !== undefined ? prevPanel.maxSize : 100;
-		const nextMin = nextPanel.minSize !== undefined ? nextPanel.minSize : 0;
-		const nextMax = nextPanel.maxSize !== undefined ? nextPanel.maxSize : 100;
+		const prevMin = this.activePrevPanel.minSize !== undefined ? this.activePrevPanel.minSize : 0;
+		const prevMax = this.activePrevPanel.maxSize !== undefined ? this.activePrevPanel.maxSize : 100;
+		const nextMin = this.activeNextPanel.minSize !== undefined ? this.activeNextPanel.minSize : 0;
+		const nextMax = this.activeNextPanel.maxSize !== undefined ? this.activeNextPanel.maxSize : 100;
 
-		if (newPrevSize < prevMin) {
-			newPrevSize = prevMin;
-			newNextSize = totalSize - prevMin;
-		} else if (newPrevSize > prevMax) {
-			newPrevSize = prevMax;
-			newNextSize = totalSize - prevMax;
+		if (proposedPrevSize < prevMin) {
+			proposedPrevSize = prevMin;
+			proposedNextSize = this.startTotalPct - prevMin;
+		} else if (proposedPrevSize > prevMax) {
+			proposedPrevSize = prevMax;
+			proposedNextSize = this.startTotalPct - prevMax;
 		}
 
-		if (newNextSize < nextMin) {
-			newNextSize = nextMin;
-			newPrevSize = totalSize - nextMin;
-		} else if (newNextSize > nextMax) {
-			newNextSize = nextMax;
-			newPrevSize = totalSize - nextMax;
+		if (proposedNextSize < nextMin) {
+			proposedNextSize = nextMin;
+			proposedPrevSize = this.startTotalPct - nextMin;
+		} else if (proposedNextSize > nextMax) {
+			proposedNextSize = nextMax;
+			proposedPrevSize = this.startTotalPct - nextMax;
 		}
 
-		prevPanel.size = newPrevSize;
-		nextPanel.size = newNextSize;
-
-		prevPanel.updateSize(this.direction);
-		nextPanel.updateSize(this.direction);
+		this.activePrevPanel.setSize(proposedPrevSize);
+		this.activeNextPanel.setSize(proposedNextSize);
 	}
 
 	private getPosition(event: MouseEvent | TouchEvent): number {
-		if ('touches' in event) {
+		if ('touches' in event && event.touches && event.touches.length > 0) {
 			return this.direction === 'horizontal' ? event.touches[0].clientX : event.touches[0].clientY;
 		}
-		return this.direction === 'horizontal' ? event.clientX : event.clientY;
+		if ('changedTouches' in event && event.changedTouches && event.changedTouches.length > 0) {
+			return this.direction === 'horizontal' ? event.changedTouches[0].clientX : event.changedTouches[0].clientY;
+		}
+		return this.direction === 'horizontal' ? (event as MouseEvent).clientX : (event as MouseEvent).clientY;
 	}
 
 }

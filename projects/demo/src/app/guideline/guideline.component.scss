@@ -93,7 +93,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 8px;
+  padding: 6px 10px;
+  min-height: 38px;
   background: transparent;
   border: 1px solid transparent;
   border-radius: 8px;
@@ -111,10 +112,6 @@
 
     .item-name {
       color: #09090b;
-    }
-
-    .item-cat {
-      color: #52525b;
     }
 
     .item-icon-box {
@@ -147,10 +144,6 @@
       font-weight: 600 !important;
     }
 
-    .item-cat {
-      color: #a1a1aa !important;
-    }
-
     .item-icon-box {
       background-color: #27272a !important;
       border-color: #3f3f46 !important;
@@ -180,9 +173,9 @@
   }
 
   .item-icon-box {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -192,7 +185,7 @@
     border: 1px solid #e4e4e7;
 
     ngc-icon {
-      font-size: 17px !important;
+      font-size: 15px !important;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -200,7 +193,7 @@
     }
 
     .preview-aa {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       line-height: 1;
@@ -212,26 +205,16 @@
     flex: 1;
     min-width: 0;
     display: flex;
-    flex-direction: column;
+    align-items: center;
 
     .item-name {
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 500;
       color: #18181b;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       transition: color 0.15s ease;
-    }
-
-    .item-cat {
-      font-size: 10px;
-      font-weight: 500;
-      color: #71717a;
-      margin-top: 1px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
   }
 
@@ -256,37 +239,105 @@
   }
 }
 
-.sidebar-footer-version {
+.sidebar-wrapper {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 24px;
-  padding: 10px 8px 4px;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.sidebar-scroll-wrapper {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  display: block;
+}
+
+.sidebar-sticky-footer {
+  flex: 0 0 auto;
+  padding: 10px 14px 12px;
+  background: inherit;
   border-top: 1px dashed #e4e4e7;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+  box-sizing: border-box;
 
-  .footer-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #71717a;
+  .footer-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .footer-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #71717a;
+    }
+
+    .footer-title {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #71717a;
+    }
+
+    .version-tag {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: monospace;
+      padding: 1px 6px;
+      background: #f4f4f5;
+      border: 1px solid #e4e4e7;
+      color: #52525b;
+      border-radius: 4px;
+    }
   }
 
-  .footer-title {
-    font-size: 11px;
-    font-weight: 600;
-    color: #71717a;
-  }
+  .footer-author-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 4px 6px;
+    margin: 0 -6px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    user-select: none;
 
-  .version-tag {
-    margin-left: auto;
-    font-size: 10px;
-    font-weight: 700;
-    font-family: monospace;
-    padding: 1px 6px;
-    background: #f4f4f5;
-    border: 1px solid #e4e4e7;
-    color: #52525b;
-    border-radius: 4px;
+    .author-label {
+      color: #71717a;
+      font-weight: 500;
+    }
+
+    .author-name {
+      color: #18181b;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+
+    .author-arrow {
+      margin-left: auto;
+      color: #a1a1aa;
+      transition: transform 0.15s ease, color 0.15s ease;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.04);
+      .author-name {
+        color: #0a84ff;
+      }
+      .author-arrow {
+        color: #0a84ff;
+        transform: translateX(2px);
+      }
+    }
   }
 }
 
@@ -420,6 +471,14 @@
       border-radius: 8px;
       background: #f4f4f5;
       border: 1px solid #e4e4e7;
+      transition: all 0.2s ease;
+
+      .prompt-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
+      }
 
       .prompt-tag {
         font-size: 11px;
@@ -428,15 +487,43 @@
         color: #71717a;
         letter-spacing: 0.05em;
         display: inline-block;
-        margin-bottom: 4px;
+      }
+
+      .prompt-copy-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #52525b;
+        background: #ffffff;
+        border: 1px solid #e4e4e7;
+        padding: 3px 8px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        line-height: 1;
+
+        &:hover {
+          background: #f4f4f5;
+          color: #18181b;
+          border-color: #d4d4d8;
+        }
+
+        &.copied {
+          color: #16a34a;
+          border-color: #86efac;
+          background: #f0fdf4;
+        }
       }
 
       .prompt-text {
         font-size: 13.5px;
         color: #18181b;
         margin: 0;
-        font-style: italic;
+        font-style: normal;
         line-height: 1.5;
+        font-weight: 400;
       }
     }
   }
@@ -650,10 +737,6 @@
           color: #c9d1d9 !important;
         }
 
-        .item-cat {
-          color: #6e7681 !important;
-        }
-
         .item-badge {
           background: #161b22 !important;
           border: 1px solid #30363d !important;
@@ -670,10 +753,6 @@
 
           .item-name {
             color: #f0f6fc !important;
-          }
-
-          .item-cat {
-            color: #8b949e !important;
           }
 
           .item-icon-box {
@@ -704,10 +783,6 @@
             font-weight: 700 !important;
           }
 
-          .item-cat {
-            color: #8b949e !important;
-          }
-
           .item-icon-box {
             background: #ffffff !important;
             border-color: #ffffff !important;
@@ -736,22 +811,48 @@
         }
       }
 
-      .sidebar-footer-version {
+      .sidebar-sticky-footer {
         border-top-color: #21262d !important;
 
-        .footer-dot {
-          background-color: #8b949e !important;
-          box-shadow: none !important;
+        .footer-brand-row {
+          .footer-dot {
+            background-color: #8b949e !important;
+            box-shadow: none !important;
+          }
+
+          .footer-title {
+            color: #8b949e !important;
+          }
+
+          .version-tag {
+            background: #161b22 !important;
+            border-color: #30363d !important;
+            color: #8b949e !important;
+          }
         }
 
-        .footer-title {
-          color: #8b949e !important;
-        }
+        .footer-author-row {
+          .author-label {
+            color: #8b949e !important;
+          }
 
-        .version-tag {
-          background: #161b22 !important;
-          border: 1px solid #30363d !important;
-          color: #8b949e !important;
+          .author-name {
+            color: #f0f6fc !important;
+          }
+
+          .author-arrow {
+            color: #8b949e !important;
+          }
+
+          &:hover {
+            background: #161b22 !important;
+            .author-name {
+              color: #58a6ff !important;
+            }
+            .author-arrow {
+              color: #58a6ff !important;
+            }
+          }
         }
       }
     }
@@ -867,6 +968,23 @@
 
           .prompt-tag {
             color: #8b949e !important;
+          }
+
+          .prompt-copy-btn {
+            background: #21262d !important;
+            border-color: #30363d !important;
+            color: #c9d1d9 !important;
+
+            &:hover {
+              background: #30363d !important;
+              color: #f0f6fc !important;
+            }
+
+            &.copied {
+              background: rgba(35, 134, 54, 0.2) !important;
+              border-color: #238636 !important;
+              color: #3fb950 !important;
+            }
           }
 
           .prompt-text {

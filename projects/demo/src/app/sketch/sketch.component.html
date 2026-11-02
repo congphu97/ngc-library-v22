@@ -126,10 +126,10 @@
 					title="Click to add to canvas"
 				>
 					<div class="card-icon">
-						<!-- Special Aa preview for Color & Typography (like in Overview) -->
-						<span *ngIf="item.name === 'Color & Typography'" class="preview-aa">Aa</span>
+						<!-- Special Aa preview for Typography (like in Overview) -->
+						<span *ngIf="item.name === 'Color & Typography' || item.name === 'Typography'" class="preview-aa">Aa</span>
 						<!-- NgcIcon matching Overview -->
-						<ngc-icon *ngIf="item.name !== 'Color & Typography'" [name]="item.icon" size="18px"></ngc-icon>
+						<ngc-icon *ngIf="item.name !== 'Color & Typography' && item.name !== 'Typography'" [name]="item.icon" size="18px"></ngc-icon>
 					</div>
 					<div class="card-info">
 						<span class="card-name">{{ item.name }}</span>

@@ -4,7 +4,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { NgcToastService } from '@app/@ngc/ngc-toast/toast/ngc-toast.service';
 import { startWith } from 'rxjs/operators';
 import _ from 'lodash';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import moment, { Moment } from 'moment';
 import { COLOR } from '@app/@resources';
 import { NgcICalendarEvent } from '@app/@ngc/ngc-calendar';
@@ -153,12 +153,61 @@ export class GuidelineComponent implements OnInit, DoCheck {
 
 	constructor(
 		private _route: ActivatedRoute,
+		private _router: Router,
 		private _ngcToastService: NgcToastService,
 		private _cdr: ChangeDetectorRef,
 		private _ngcDialogService: NgcDialogService,
 		private _ngcConfirmService: NgcConfirmService,
 		public appComponent: AppComponent,
 	) { };
+
+	public goToContact() {
+		this._router.navigate(['/contact']);
+	}
+
+	public copiedPromptIndex: number = -1;
+	private _copyTimeout: any;
+
+	public copyPrompt(text: string, index: number) {
+		const cleanText = text.replace(/^"|"$/g, '').trim();
+		if (navigator.clipboard && navigator.clipboard.writeText) {
+			navigator.clipboard.writeText(cleanText).then(() => {
+				this.onCopySuccess(index);
+			}).catch(() => {
+				this.fallbackCopy(cleanText, index);
+			});
+		} else {
+			this.fallbackCopy(cleanText, index);
+		}
+	}
+
+	private onCopySuccess(index: number) {
+		this.copiedPromptIndex = index;
+		this._ngcToastService.success('Prompt copied to clipboard!');
+		clearTimeout(this._copyTimeout);
+		this._copyTimeout = setTimeout(() => {
+			this.copiedPromptIndex = -1;
+			this._cdr.detectChanges();
+		}, 2000);
+		this._cdr.detectChanges();
+	}
+
+	private fallbackCopy(text: string, index: number) {
+		const textarea = document.createElement('textarea');
+		textarea.value = text;
+		textarea.style.position = 'fixed';
+		textarea.style.opacity = '0';
+		document.body.appendChild(textarea);
+		textarea.focus();
+		textarea.select();
+		try {
+			document.execCommand('copy');
+			this.onCopySuccess(index);
+		} catch (err) {
+			console.error('Failed to copy', err);
+		}
+		document.body.removeChild(textarea);
+	}
 
 	ngOnInit() {
 		this.isDarkMode = document.body.classList.contains('dark-theme');

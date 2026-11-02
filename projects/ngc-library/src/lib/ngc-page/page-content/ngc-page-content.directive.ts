@@ -6,6 +6,7 @@ import { CoerceCssPixel } from '../../core';
 	standalone: false, selector: '[ngcPageContent]', exportAs: 'ngcPageContent' })
 export class NgcPageContentDirective {
 
+	@Input() @CoerceCssPixel() public padding: string;
 	@Input() @CoerceCssPixel() public paddingVertical: string;
 	@Input() @CoerceCssPixel() public paddingHorizontal: string;
 	@Input() @CoerceCssPixel() public paddingTop: string;

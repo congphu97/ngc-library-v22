@@ -1,14 +1,18 @@
+<div class="ngc-design-token__layout">
 <div class="ngc-design-token__panel">
 
 	<!-- Header -->
 	<div class="ngc-design-token__header">
 		<span class="ngc-design-token__title">Design Tokens</span>
 		<div class="ngc-design-token__header-actions">
-			<button class="ngc-design-token__reset-btn" (click)="resetTokens()"
+			<button type="button" class="ngc-design-token__reset-btn" (click)="resetTokens()"
 				title="Reset to defaults">
 				<ngc-icon name="rotate-ccw" size="13"></ngc-icon>
 			</button>
-			<ngc-icon class="ngc-design-token__icon" name="palette" size="16"></ngc-icon>
+			<button type="button" class="ngc-design-token__reset-btn" [class.active]="hasGeneratedTokens"
+				(click)="generateTokens()" title="Get Tokens">
+				<ngc-icon name="code" size="13"></ngc-icon>
+			</button>
 		</div>
 	</div>
 
@@ -492,10 +496,79 @@
 	<ngc-divider class="mt-12"></ngc-divider>
 	<div class="ngc-design-token__footer">
 		<button ngcButton type="primary" class="ngc-design-token__get-btn"
-			(click)="openTokenDialog()">
+			[class.ngc-design-token__get-btn--active]="hasGeneratedTokens"
+			(click)="generateTokens()">
+			<ngc-icon [name]="hasGeneratedTokens ? 'check' : 'code-block'" size="14"></ngc-icon>
+			{{ hasGeneratedTokens ? 'Tokens Active' : 'Get Token' }}
+		</button>
+	</div>
+
+</div>
+
+<!-- ── Right Panel: Side-by-Side Live Token Code Viewer (Always Visible) ── -->
+<div class="ngc-design-token__viewer">
+	<!-- Placeholder State: When user hasn't clicked Get Token yet -->
+	<div class="ngc-design-token__viewer-placeholder" *ngIf="!hasGeneratedTokens">
+		<div class="placeholder-icon-box">
+			<ngc-icon name="code-block" size="36"></ngc-icon>
+		</div>
+		<h4 class="placeholder-title">Ready to Export Design Tokens</h4>
+		<p class="placeholder-desc">
+			Click the <strong>Get Token</strong> button to compile and inspect your design tokens live as a clean JSON structure or CSS Custom Properties.
+		</p>
+		<button type="button" class="placeholder-btn" (click)="generateTokens()">
 			<ngc-icon name="code-block" size="14"></ngc-icon>
 			Get Token
 		</button>
+		<div class="placeholder-hints">
+			<span class="hint-item"><ngc-icon name="palette" size="12"></ngc-icon> Semantic & primitive token map</span>
+			<span class="hint-item"><ngc-icon name="check" size="12"></ngc-icon> Live real-time sync with controls</span>
+			<span class="hint-item"><ngc-icon name="clipboard" size="12"></ngc-icon> 1-click clipboard export</span>
+		</div>
 	</div>
+
+	<!-- Active State: When user has clicked Get Token -->
+	<ng-container *ngIf="hasGeneratedTokens">
+		<div class="ngc-design-token__viewer-header">
+			<div class="ngc-design-token__viewer-tabs">
+				<button type="button" class="ngc-design-token__viewer-tab-btn"
+					[class.ngc-design-token__viewer-tab-btn--active]="tokenViewerTab === 'tokens'"
+					(click)="setTokenViewerTab('tokens')">
+					<ngc-icon name="code-block" size="13"></ngc-icon>
+					JSON Tokens
+				</button>
+				<button type="button" class="ngc-design-token__viewer-tab-btn"
+					[class.ngc-design-token__viewer-tab-btn--active]="tokenViewerTab === 'css'"
+					(click)="setTokenViewerTab('css')">
+					<ngc-icon name="palette" size="13"></ngc-icon>
+					CSS Variables
+				</button>
+			</div>
+
+			<div class="ngc-design-token__viewer-actions">
+				<button type="button" class="ngc-design-token__viewer-btn" [class.copied]="tokenCopied"
+					(click)="copyTokenCode()" [title]="tokenCopied ? 'Copied to clipboard!' : 'Copy to clipboard'">
+					<ngc-icon [name]="tokenCopied ? 'check' : 'clipboard'" size="13"></ngc-icon>
+					<span>{{ tokenCopied ? 'Copied!' : (tokenViewerTab === 'tokens' ? 'Copy JSON' : 'Copy CSS') }}</span>
+				</button>
+				<button type="button" class="ngc-design-token__viewer-close" (click)="hasGeneratedTokens = false" title="Reset view">
+					<ngc-icon name="rotate-ccw" size="12"></ngc-icon>
+				</button>
+			</div>
+		</div>
+
+		<div class="ngc-design-token__viewer-body">
+			<pre class="ngc-design-token__viewer-code" [innerHTML]="getHighlightedCode()"></pre>
+		</div>
+
+		<div class="ngc-design-token__viewer-footer">
+			<span class="live-badge">
+				<span class="live-dot"></span>
+				Live Sync Active
+			</span>
+			<span class="hint-text">Updates dynamically as you tweak tokens</span>
+		</div>
+	</ng-container>
+</div>
 
 </div>

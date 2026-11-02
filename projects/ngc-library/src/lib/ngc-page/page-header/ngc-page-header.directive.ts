@@ -6,6 +6,7 @@ import { CoerceCssPixel, CoerceBoolean } from '../../core';
 	standalone: false, selector: '[ngcPageHeader]', exportAs: 'ngcPageHeader' })
 export class NgcPageHeaderDirective {
 
+	@Input() @CoerceCssPixel() public padding: string;
 	@Input() @CoerceCssPixel() public paddingVertical: string;
 	@Input() @CoerceCssPixel() public paddingHorizontal: string;
 	@Input() @CoerceCssPixel() public paddingTop: string;

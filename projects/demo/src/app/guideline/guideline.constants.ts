@@ -8,11 +8,14 @@ export const COMPONENT_GROUP_ORDER: string[] = [
 ];
 
 export const COMPONENT_GROUP_MAP: Record<string, string> = {
-	// General (4)
+	// General (6)
 	'Button': 'General',
 	'Clipboard': 'General',
+	'Color': 'General',
 	'Color & Typography': 'General',
+	'Design Tokens': 'General',
 	'Icon': 'General',
+	'Typography': 'General',
 
 	// Layout (11)
 	'Accordion': 'Layout',
@@ -52,7 +55,6 @@ export const COMPONENT_GROUP_MAP: Record<string, string> = {
 	'Radio Group': 'Data Entry',
 	'Range Input': 'Data Entry',
 	'Search Box': 'Data Entry',
-	'Search Box ': 'Data Entry',
 	'Select': 'Data Entry',
 	'Switch': 'Data Entry',
 	'Textarea': 'Data Entry',
@@ -102,6 +104,7 @@ export const COMPONENT_ICON_MAP: Record<string, string> = {
 	'Code Block'         : 'code-block',
 	'Collapse'           : 'minimize-left',
 	'Collapse Menu'      : 'tree-list',
+	'Color'              : 'palette',
 	'Color Picker'       : 'pick-color',
 	'Color & Typography' : 'palette',
 	'Comment'            : 'message',
@@ -109,15 +112,16 @@ export const COMPONENT_ICON_MAP: Record<string, string> = {
 	'Cropper'            : 'crop',
 	'Data Table'         : 'data-list',
 	'Date Picker'        : 'calendar-check',
+	'Design Tokens'      : 'code',
 	'Dialog'             : 'id-card',
-	'Divide'             : 'division',
+	'Divide'             : 'minus',
 	'Drawer'             : 'sidebar',
 	'Dropdown'           : 'dropdown',
 	'Emoji Picker'       : 'emoji',
 	'File Picker'        : 'attachment',
 	'Form Field'         : 'form',
 	'Grid'               : 'grid',
-	'Icon'               : 'image',
+	'Icon'               : 'star',
 	'Inline Input'       : 'edit',
 	'Input'              : 'text-input',
 	'List'               : 'list',
@@ -150,14 +154,18 @@ export const COMPONENT_ICON_MAP: Record<string, string> = {
 	'Tooltip'            : 'help',
 	'Tree'               : 'hierachy',
 	'Truncate'           : 'more-horizontal',
+	'Typography'         : 'typography',
 };
 
 export const COMPONENT_DESC_MAP: Record<string, string> = {
 	// General
 	'Button': 'Interactive action trigger with multiple variants and loading states',
 	'Clipboard': 'Copy-to-clipboard trigger button with success feedback',
+	'Color': 'System color palettes, semantic colors, text, and border variables',
 	'Color & Typography': 'Design system tokens, color palettes, and typographic scale',
+	'Design Tokens': 'Interactive theme token customizer and JSON configuration',
 	'Icon': 'Semantic SVG/font icon library for interfaces and buttons',
+	'Typography': 'Typographic scale, font families, headings, and hierarchy',
 
 	// Layout
 	'Accordion': 'Vertically stacked expandable and collapsible disclosure panels',

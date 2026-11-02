@@ -3,29 +3,46 @@
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	position: relative;
+	box-sizing: border-box;
+
+	&--dragging {
+		user-select: none !important;
+		-webkit-user-select: none !important;
+
+		.ngc-resizable-panel {
+			pointer-events: none !important;
+			user-select: none !important;
+			-webkit-user-select: none !important;
+		}
+	}
 
 	&--horizontal {
 		flex-direction: row;
 
 		> .ngc-resizable-handle {
-			width: 8px;
+			width: 10px;
 			cursor: col-resize;
-			margin: 0 -4px;
+			margin: 0 -5px;
 			z-index: 10;
 			position: relative;
 			height: 100%;
+			flex: 0 0 10px;
+			user-select: none;
+			touch-action: none;
 
 			.ngc-resizable-handle__line {
 				width: 2px;
 				height: 100%;
 				margin: 0 auto;
 				background-color: var(--ngc-color-neutral-border-default, #e4e4e7);
-				transition: background-color 0.2s ease;
+				transition: background-color 0.15s ease;
 			}
 
 			&:hover, &.ngc-resizable-handle--dragging {
 				.ngc-resizable-handle__line {
-					background-color: var(--ngc-color-primary-default, #111);
+					background-color: var(--ngc-color-primary-default, #0a84ff);
+					width: 3px;
 				}
 			}
 		}
@@ -35,24 +52,28 @@
 		flex-direction: column;
 
 		> .ngc-resizable-handle {
-			height: 8px;
+			height: 10px;
 			cursor: row-resize;
-			margin: -4px 0;
+			margin: -5px 0;
 			z-index: 10;
 			position: relative;
 			width: 100%;
+			flex: 0 0 10px;
+			user-select: none;
+			touch-action: none;
 
 			.ngc-resizable-handle__line {
 				height: 2px;
 				width: 100%;
 				margin: auto 0;
 				background-color: var(--ngc-color-neutral-border-default, #e4e4e7);
-				transition: background-color 0.2s ease;
+				transition: background-color 0.15s ease;
 			}
 
 			&:hover, &.ngc-resizable-handle--dragging {
 				.ngc-resizable-handle__line {
-					background-color: var(--ngc-color-primary-default, #111);
+					background-color: var(--ngc-color-primary-default, #0a84ff);
+					height: 3px;
 				}
 			}
 		}
@@ -63,4 +84,7 @@
 	display: block;
 	overflow: auto;
 	box-sizing: border-box;
+	flex: 0 0 auto;
+	min-width: 0;
+	min-height: 0;
 }

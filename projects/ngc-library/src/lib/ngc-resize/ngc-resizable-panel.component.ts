@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, HostBinding } from '@angular/core';
+import { Component, Input, ViewEncapsulation, HostBinding, ElementRef } from '@angular/core';
 
 @Component({
 	standalone: false,
@@ -18,8 +18,27 @@ export class NgcResizablePanelComponent {
 	@HostBinding('style.flex-basis.%')
 	public size: number;
 
+	@HostBinding('style.flex-grow')
+	public flexGrow = '0';
+
+	@HostBinding('style.flex-shrink')
+	public flexShrink = '0';
+
+	constructor(public elementRef: ElementRef<HTMLElement>) {}
+
+	public setSize(val: number) {
+		this.size = val;
+		if (this.elementRef?.nativeElement) {
+			this.elementRef.nativeElement.style.flexBasis = `${val}%`;
+			this.elementRef.nativeElement.style.flexGrow = '0';
+			this.elementRef.nativeElement.style.flexShrink = '0';
+		}
+	}
+
 	public updateSize(_direction: 'horizontal' | 'vertical') {
-		// Flex basis handles size dynamically in both horizontal (row) and vertical (column) layouts.
+		if (this.size !== undefined) {
+			this.setSize(this.size);
+		}
 	}
 
 }

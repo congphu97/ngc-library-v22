@@ -1,599 +1,5226 @@
 [
   {
-    "name": "Button",
-    "category": "General",
-    "module": "NgcButtonModule",
-    "selector": "button[ngcButton], button[ngcBasicButton], button[ngcOutlineButton]",
-    "description": "Modern interactive button with multiple appearance styles (primary, outline, basic, danger) and sizes.",
+    "name": "Accordion",
+    "category": "Layout",
+    "module": "NgcAccordionModule",
+    "selector": "ngc-accordion",
+    "description": "Vertically stacked expandable and collapsible disclosure panels",
     "inputs": [
+      {
+        "name": "cdkDrag",
+        "type": "CdkDrag",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "cdkDragDisabled",
+        "type": "boolean",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
       {
         "name": "color",
         "type": "string",
-        "default": "primary",
-        "description": "Color theme: primary, danger, success, default"
+        "default": "undefined",
+        "description": "No description available."
       },
       {
-        "name": "disabled",
-        "type": "boolean",
-        "default": "false",
-        "description": "Whether the button is disabled"
+        "name": "textColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
       },
       {
-        "name": "size",
-        "type": "sm | md | lg",
-        "default": "md",
-        "description": "Button size dimensions"
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
       }
     ],
     "outputs": [
       {
-        "name": "click",
-        "type": "EventEmitter<MouseEvent>",
-        "description": "Fired when clicked"
+        "name": "expandedChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Event emitted by the component."
       }
     ],
-    "templateExample": "<button ngcButton color=\"primary\" (click)=\"onAction()\">Submit</button>\n<button ngcOutlineButton color=\"default\">Cancel</button>",
-    "tsExample": "import { NgcButtonModule } from \"ngc-library\";\n\n@Component({\n  imports: [NgcButtonModule],\n  templateUrl: \"./example.component.html\"\n})\nexport class ExampleComponent {\n  onAction() { console.log(\"Clicked\"); }\n}"
+    "templateExample": "<ngc-accordion></ngc-accordion>",
+    "tsExample": "import { NgcAccordionModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcAccordionModule],\n  template: `<ngc-accordion></ngc-accordion>`\n})\nexport class AccordionExampleComponent {}"
   },
   {
     "name": "Alert",
     "category": "Feedback",
     "module": "NgcAlertModule",
     "selector": "ngc-alert",
-    "description": "Alert banner for displaying important status, warnings, errors, and system feedback.",
+    "description": "Prominent feedback message banner for status updates",
     "inputs": [
       {
-        "name": "type",
-        "type": "info | success | warning | danger",
-        "default": "info",
-        "description": "Severity type of alert"
-      },
-      {
-        "name": "title",
+        "name": "color",
         "type": "string",
-        "default": "\"\"",
-        "description": "Alert headline title"
+        "default": "undefined",
+        "description": "No description available."
       },
       {
-        "name": "dismissible",
-        "type": "boolean",
-        "default": "true",
-        "description": "Show close/dismiss button"
+        "name": "textColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "background",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "borderColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
       }
     ],
     "outputs": [
-      {
-        "name": "close",
-        "type": "EventEmitter<void>",
-        "description": "Fired when dismissed"
-      }
-    ],
-    "templateExample": "<ngc-alert type=\"warning\" title=\"Warning Notice\" [dismissible]=\"true\">\n  Please verify your settings before proceeding.\n</ngc-alert>",
-    "tsExample": "import { NgcAlertModule } from \"ngc-library\";"
-  },
-  {
-    "name": "Accordion",
-    "category": "Layout",
-    "module": "NgcExpansionPanelModule",
-    "selector": "ngc-expansion-panel, ngc-expansion-panel-header",
-    "description": "Collapsible accordion panels with custom headers, toggles, and expandable content bodies.",
-    "inputs": [
-      {
-        "name": "expanded",
-        "type": "boolean",
-        "default": "false",
-        "description": "Initial expand state"
-      },
-      {
-        "name": "disabled",
-        "type": "boolean",
-        "default": "false",
-        "description": "Prevent toggling"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "opened",
-        "type": "EventEmitter<void>",
-        "description": "Fired when opened"
-      },
       {
         "name": "closed",
         "type": "EventEmitter<void>",
-        "description": "Fired when closed"
+        "description": "Event emitted by the component."
       }
     ],
-    "templateExample": "<ngc-expansion-panel [expanded]=\"true\">\n  <ngc-expansion-panel-header>Panel Title</ngc-expansion-panel-header>\n  <p>Panel content body...</p>\n</ngc-expansion-panel>",
-    "tsExample": "import { NgcExpansionPanelModule } from \"ngc-library\";"
-  },
-  {
-    "name": "Card",
-    "category": "Data Display",
-    "module": "NgcCardModule",
-    "selector": "ngc-card, ngc-card-header, ngc-card-content, ngc-card-footer",
-    "description": "Card container with header, content body, actions, and customizable elevation borders.",
-    "inputs": [
-      {
-        "name": "elevation",
-        "type": "number",
-        "default": "1",
-        "description": "Shadow depth (0-4)"
-      },
-      {
-        "name": "bordered",
-        "type": "boolean",
-        "default": "true",
-        "description": "Show card border"
-      }
-    ],
-    "outputs": [],
-    "templateExample": "<ngc-card>\n  <div class=\"ngc-card__header\">Card Title</div>\n  <div class=\"ngc-card__body\">Card description and details.</div>\n  <div class=\"ngc-card__footer\">\n    <button ngcButton>Action</button>\n  </div>\n</ngc-card>",
-    "tsExample": "import { NgcCardModule } from \"ngc-library\";"
-  },
-  {
-    "name": "Data Table",
-    "category": "Data Display",
-    "module": "NGCTableModule",
-    "selector": "ngc-table, ngc-cdk-table",
-    "description": "High performance data table with sorting, filtering, row selection, virtual scrolling and pagination.",
-    "inputs": [
-      {
-        "name": "dataSource",
-        "type": "any[] | NgcCdkTableDataSource",
-        "default": "[]",
-        "description": "Table rows data"
-      },
-      {
-        "name": "columns",
-        "type": "string[]",
-        "default": "[]",
-        "description": "Displayed column keys"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "rowClick",
-        "type": "EventEmitter<any>",
-        "description": "Fired on row click"
-      }
-    ],
-    "templateExample": "<ngc-table [dataSource]=\"users\">\n  <!-- column templates -->\n</ngc-table>",
-    "tsExample": "import { NGCTableModule } from \"ngc-library\";"
-  },
-  {
-    "name": "Dialog",
-    "category": "Feedback",
-    "module": "NgcDialogModule",
-    "selector": "NgcDialogService",
-    "description": "Programmatic modal dialog service to open popup windows, forms, and custom components.",
-    "inputs": [],
-    "outputs": [],
-    "templateExample": "<!-- Opened via NgcDialogService in TypeScript -->",
-    "tsExample": "import { NgcDialogService } from \"ngc-library\";\n\nconstructor(private dialog: NgcDialogService) {}\n\nopenModal() {\n  this.dialog.open(MyDialogComponent, { width: \"450px\" });\n}"
-  },
-  {
-    "name": "Date Picker",
-    "category": "Data Entry",
-    "module": "NgcDatePickerModule",
-    "selector": "ngc-date-picker",
-    "description": "Calendar date picker supporting single date, range selection, time picker, and formats.",
-    "inputs": [
-      {
-        "name": "ngModel",
-        "type": "Moment | string",
-        "default": "null",
-        "description": "Two-way date binding"
-      },
-      {
-        "name": "minDate",
-        "type": "Moment",
-        "default": "null",
-        "description": "Earliest selectable date"
-      },
-      {
-        "name": "maxDate",
-        "type": "Moment",
-        "default": "null",
-        "description": "Latest selectable date"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "ngModelChange",
-        "type": "EventEmitter<Moment>",
-        "description": "Fired when date changes"
-      }
-    ],
-    "templateExample": "<ngc-date-picker [(ngModel)]=\"selectedDate\" placeholder=\"Select date\"></ngc-date-picker>",
-    "tsExample": "import { NgcDatePickerModule } from \"ngc-library\";"
-  },
-  {
-    "name": "Toast",
-    "category": "Feedback",
-    "module": "NgcToastModule",
-    "selector": "NgcToastService",
-    "description": "Global notification toast service supporting success, info, warning, and error alerts.",
-    "inputs": [],
-    "outputs": [],
-    "templateExample": "<!-- Triggered via NgcToastService in TypeScript -->",
-    "tsExample": "import { NgcToastService } from \"ngc-library\";\n\nconstructor(private toast: NgcToastService) {}\n\nnotify() {\n  this.toast.show(\"Saved!\", \"Your changes were saved successfully.\", { type: \"success\" });\n}"
-  },
-  {
-    "name": "Form Field",
-    "category": "Data Entry",
-    "module": "NgcFormFieldModule",
-    "selector": "ngc-form-field",
-    "description": "Form field wrapper providing floating labels, hint messages, validation errors, and prefixes/suffixes.",
-    "inputs": [
-      {
-        "name": "label",
-        "type": "string",
-        "default": "\"\"",
-        "description": "Field label"
-      },
-      {
-        "name": "required",
-        "type": "boolean",
-        "default": "false",
-        "description": "Show required asterisk"
-      }
-    ],
-    "outputs": [],
-    "templateExample": "<ngc-form-field label=\"Email Address\" [required]=\"true\">\n  <input ngcInput type=\"email\" [(ngModel)]=\"email\" placeholder=\"user@example.com\" />\n</ngc-form-field>",
-    "tsExample": "import { NgcFormFieldModule } from \"ngc-library\";"
-  },
-  {
-    "name": "Dropdown",
-    "category": "Data Entry",
-    "module": "NgcDropdownModule",
-    "selector": "ngc-dropdown, ngc-dropdown-item",
-    "description": "Select dropdown menu with icon support, search filtering, and multiple choice options.",
-    "inputs": [
-      {
-        "name": "ngModel",
-        "type": "any",
-        "default": "null",
-        "description": "Selected value"
-      },
-      {
-        "name": "canSetNone",
-        "type": "boolean",
-        "default": "true",
-        "description": "Allow unselecting"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "ngModelChange",
-        "type": "EventEmitter<any>",
-        "description": "Value change event"
-      }
-    ],
-    "templateExample": "<ngc-dropdown [(ngModel)]=\"selectedCategory\">\n  <ngc-dropdown-item label=\"Electronics\" value=\"elec\" icon=\"computer\"></ngc-dropdown-item>\n  <ngc-dropdown-item label=\"Clothing\" value=\"cloth\" icon=\"tag\"></ngc-dropdown-item>\n</ngc-dropdown>",
-    "tsExample": "import { NgcDropdownModule } from \"ngc-library\";"
-  },
-  {
-    "name": "Badge",
-    "category": "Data Display",
-    "module": "NgcBadgeModule",
-    "selector": "ngc-badge",
-    "description": "Small numeric or status badge indicator attached to elements or inline.",
-    "inputs": [
-      {
-        "name": "content",
-        "type": "string | number",
-        "default": "\"\"",
-        "description": "Badge display text"
-      },
-      {
-        "name": "color",
-        "type": "primary | success | danger | warning",
-        "default": "primary",
-        "description": "Badge color"
-      }
-    ],
-    "outputs": [],
-    "templateExample": "<ngc-badge content=\"New\" color=\"success\"></ngc-badge>",
-    "tsExample": "import { NgcBadgeModule } from \"ngc-library\";"
+    "templateExample": "<ngc-alert></ngc-alert>",
+    "tsExample": "import { NgcAlertModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcAlertModule],\n  template: `<ngc-alert></ngc-alert>`\n})\nexport class AlertExampleComponent {}"
   },
   {
     "name": "Avatar",
     "category": "Data Display",
     "module": "NgcAvatarModule",
     "selector": "ngc-avatar",
-    "description": "User profile image with initials fallback, online status dot, and custom dimensions.",
+    "description": "User profile picture or initials fallback badge",
     "inputs": [
       {
-        "name": "src",
+        "name": "label",
         "type": "string",
-        "default": "\"\"",
-        "description": "Image URL"
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "labelColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "defaultPhoto",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "errorPhoto",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "scrolling",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-avatar></ngc-avatar>",
+    "tsExample": "import { NgcAvatarModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcAvatarModule],\n  template: `<ngc-avatar></ngc-avatar>`\n})\nexport class AvatarExampleComponent {}"
+  },
+  {
+    "name": "Avatar Picker",
+    "category": "Data Entry",
+    "module": "NgcAvatarPickerModule",
+    "selector": "ngc-avatar-picker",
+    "description": "Interactive avatar image selection and upload modal",
+    "inputs": [
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "photo",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "scrolling",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "picked",
+        "type": "EventEmitter<NgcIAvatarPickedEvent>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-avatar-picker></ngc-avatar-picker>",
+    "tsExample": "import { NgcAvatarPickerModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcAvatarPickerModule],\n  template: `<ngc-avatar-picker></ngc-avatar-picker>`\n})\nexport class AvatarPickerExampleComponent {}"
+  },
+  {
+    "name": "Badge",
+    "category": "Data Display",
+    "module": "NgcBadgeModule",
+    "selector": "ngc-badge",
+    "description": "Small numeric or status badge for counts and indicators",
+    "inputs": [
+      {
+        "name": "count",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "background",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "textColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "AliasOf",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-badge></ngc-badge>",
+    "tsExample": "import { NgcBadgeModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcBadgeModule],\n  template: `<ngc-badge></ngc-badge>`\n})\nexport class BadgeExampleComponent {}"
+  },
+  {
+    "name": "Breadcrumb",
+    "category": "Navigation",
+    "module": "NgcBreadcrumbModule",
+    "selector": "ngc-breadcrumb",
+    "description": "Sequential route navigation links showing hierarchy trail",
+    "inputs": [
+      {
+        "name": "commands",
+        "type": "any[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "extras",
+        "type": "NavigationExtras",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "truncate",
+        "type": "boolean",
+        "default": "true",
+        "description": "No description available."
+      },
+      {
+        "name": "truncateLimitLine",
+        "type": "number",
+        "default": "1",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "navigated",
+        "type": "EventEmitter<void>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-breadcrumb></ngc-breadcrumb>",
+    "tsExample": "import { NgcBreadcrumbModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcBreadcrumbModule],\n  template: `<ngc-breadcrumb></ngc-breadcrumb>`\n})\nexport class BreadcrumbExampleComponent {}"
+  },
+  {
+    "name": "Button",
+    "category": "General",
+    "module": "NgcButtonModule",
+    "selector": "ngc-button",
+    "description": "Interactive action trigger with multiple variants and loading states",
+    "inputs": [
+      {
+        "name": "color",
+        "type": "'primary' | 'danger' | 'success' | 'warning' | 'default'",
+        "default": "'primary'",
+        "description": "Semantic theme color palette for button background and border."
+      },
+      {
+        "name": "size",
+        "type": "'sm' | 'md' | 'lg' | string",
+        "default": "'md'",
+        "description": "Button dimensions and padding scale (or custom CSS height e.g., '36px')."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables button clicks and greys out appearance."
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "default": "false",
+        "description": "Replaces button icon with spinner and blocks interaction."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": "undefined",
+        "description": "Name of icon to render inside the button."
+      },
+      {
+        "name": "iconPosition",
+        "type": "'left' | 'right'",
+        "default": "'left'",
+        "description": "Positions icon before or after button text label."
+      },
+      {
+        "name": "iconSize",
+        "type": "string",
+        "default": "'20px'",
+        "description": "Custom font size for the button icon."
+      },
+      {
+        "name": "borderWidth",
+        "type": "string",
+        "default": "'1px'",
+        "description": "Border width for outline button appearance."
+      },
+      {
+        "name": "block",
+        "type": "boolean",
+        "default": "false",
+        "description": "Spans button to 100% width of parent container."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "click",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Fired when user clicks the button while enabled."
+      }
+    ],
+    "templateExample": "<ngc-button></ngc-button>",
+    "tsExample": "import { NgcButtonModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcButtonModule],\n  template: `<ngc-button></ngc-button>`\n})\nexport class ButtonExampleComponent {}"
+  },
+  {
+    "name": "Button Toggle",
+    "category": "Data Entry",
+    "module": "NgcButtonToggleModule",
+    "selector": "ngc-button-toggle",
+    "description": "Exclusive or multiple option segmented button group",
+    "inputs": [
+      {
+        "name": "value / ngModel",
+        "type": "any",
+        "default": "undefined",
+        "description": "Selected toggle value (or array of values if multiple is true)."
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "description": "Allows selecting multiple toggle buttons simultaneously."
+      },
+      {
+        "name": "vertical",
+        "type": "boolean",
+        "default": "false",
+        "description": "Stacks button group vertically instead of horizontal row."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables entire button toggle group."
+      },
+      {
+        "name": "size",
+        "type": "'sm' | 'md' | 'lg'",
+        "default": "'md'",
+        "description": "Size scale of the toggle buttons."
+      },
+      {
+        "name": "[ngcButtonToggleItem] value",
+        "type": "any",
+        "default": "undefined",
+        "description": "Value associated with this individual toggle item."
+      },
+      {
+        "name": "[ngcButtonToggleItem] disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables this specific item inside the group."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "change",
+        "type": "EventEmitter<any>",
+        "description": "Emitted when selected button toggle option changes."
+      },
+      {
+        "name": "valueChange",
+        "type": "EventEmitter<any>",
+        "description": "Two-way binding event for selected value."
+      }
+    ],
+    "templateExample": "<ngc-button-toggle></ngc-button-toggle>",
+    "tsExample": "import { NgcButtonToggleModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcButtonToggleModule],\n  template: `<ngc-button-toggle></ngc-button-toggle>`\n})\nexport class ButtonToggleExampleComponent {}"
+  },
+  {
+    "name": "Calendar",
+    "category": "Data Display",
+    "module": "NgcCalendarModule",
+    "selector": "ngc-calendar",
+    "description": "Interactive monthly calendar view with event markings",
+    "inputs": [
+      {
+        "name": "nameFormControl",
+        "type": "UntypedFormControl",
+        "default": "new UntypedFormControl(",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceArray",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "selectedEventID",
+        "type": "number",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "viewDate",
+        "type": "Moment",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "eventTemplate",
+        "type": "TemplateRef<any>",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "actionMenu",
+        "type": "TemplateRef<any>",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "searchBox",
+        "type": "NgcSearchBoxComponent",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "nameFormControl",
+        "type": "UntypedFormControl",
+        "default": "new UntypedFormControl(",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceNumber",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceArray",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "firstWeekDay",
+        "type": "NgcICalendarWeekDay",
+        "default": "undefined",
+        "description": "No description available."
       },
       {
         "name": "name",
         "type": "string",
-        "default": "\"\"",
-        "description": "Full name for initials"
+        "default": "undefined",
+        "description": "No description available."
       },
       {
-        "name": "size",
+        "name": "placeholder",
         "type": "string",
-        "default": "40px",
-        "description": "Avatar diameter"
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "view",
+        "type": "NgcICalendarView",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "eventTemplate",
+        "type": "TemplateRef<any>",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "actionMenu",
+        "type": "TemplateRef<any>",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "searchBox",
+        "type": "NgcSearchBoxComponent",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
       }
     ],
-    "outputs": [],
-    "templateExample": "<ngc-avatar src=\"assets/avatar.jpg\" name=\"Alex Tran\" size=\"48px\"></ngc-avatar>",
-    "tsExample": "import { NgcAvatarModule } from \"ngc-library\";"
+    "outputs": [
+      {
+        "name": "eventCreate",
+        "type": "EventEmitter<NgcICalendarEventCreate>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "selectedEventIDChange",
+        "type": "EventEmitter<number>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "periodChange",
+        "type": "EventEmitter<NgcICalendarPeriod>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "eventChange",
+        "type": "EventEmitter<NgcICalendarEventChange>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "eventCreate",
+        "type": "EventEmitter<NgcICalendarEventCreate>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "selectedEventIDChange",
+        "type": "EventEmitter<number>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "periodChange",
+        "type": "EventEmitter<NgcICalendarPeriod>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "eventChange",
+        "type": "EventEmitter<NgcICalendarEventChange>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-calendar></ngc-calendar>",
+    "tsExample": "import { NgcCalendarModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcCalendarModule],\n  template: `<ngc-calendar></ngc-calendar>`\n})\nexport class CalendarExampleComponent {}"
   },
   {
-    "name": "Tabs",
-    "category": "Navigation",
-    "module": "NgcTabsModule",
-    "selector": "ngc-tab-group, ngc-tab",
-    "description": "Tabbed navigation container with smooth slide animations and dynamic content projection.",
+    "name": "Card",
+    "category": "Data Display",
+    "module": "NgcCardModule",
+    "selector": "ngc-card",
+    "description": "Content container card with header, body, and footer slots",
     "inputs": [
       {
-        "name": "selectedIndex",
+        "name": "title",
+        "type": "string",
+        "default": "undefined",
+        "description": "Card header title string."
+      },
+      {
+        "name": "bordered",
+        "type": "boolean",
+        "default": "true",
+        "description": "Renders a subtle 1px border around the card."
+      },
+      {
+        "name": "hoverable",
+        "type": "boolean",
+        "default": "false",
+        "description": "Lifts card slightly with drop-shadow on mouse hover."
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "default": "false",
+        "description": "Displays skeleton placeholder while card content loads."
+      },
+      {
+        "name": "[ngcCardHeader] divider",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders dividing border between header and card body."
+      },
+      {
+        "name": "[ngcCardHeader] paddingVertical",
+        "type": "string | number",
+        "default": "'16px'",
+        "description": "Vertical padding inside card header."
+      },
+      {
+        "name": "[ngcCardHeader] paddingHorizontal",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Horizontal padding inside card header."
+      },
+      {
+        "name": "[ngcCardContent] paddingVertical",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Vertical padding inside card content body."
+      },
+      {
+        "name": "[ngcCardContent] paddingHorizontal",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Horizontal padding inside card content body."
+      },
+      {
+        "name": "[ngcCardFooter] divider",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders dividing border above card footer actions."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "cardClick",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Emitted when an interactive card is clicked."
+      }
+    ],
+    "templateExample": "<ngc-card></ngc-card>",
+    "tsExample": "import { NgcCardModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcCardModule],\n  template: `<ngc-card></ngc-card>`\n})\nexport class CardExampleComponent {}"
+  },
+  {
+    "name": "Carousel",
+    "category": "Data Display",
+    "module": "NgcCarouselModule",
+    "selector": "ngc-carousel",
+    "description": "Touch-friendly image and card carousel with autoplay",
+    "inputs": [
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "interval",
         "type": "number",
-        "default": "0",
-        "description": "Active tab index"
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "positionX",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "positionY",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "mode",
+        "type": "NgcICarouselMode",
+        "default": "undefined",
+        "description": "No description available."
       }
     ],
     "outputs": [
       {
         "name": "selectedIndexChange",
         "type": "EventEmitter<number>",
-        "description": "Tab changed"
-      }
-    ],
-    "templateExample": "<ngc-tab-group>\n  <ngc-tab label=\"Overview\">Content 1</ngc-tab>\n  <ngc-tab label=\"Analytics\">Content 2</ngc-tab>\n</ngc-tab-group>",
-    "tsExample": "import { NgcTabsModule } from \"ngc-library\";"
-  },
-  {
-    "name": "Drawer",
-    "category": "Layout",
-    "module": "NgcDrawerModule",
-    "selector": "ngc-drawer-container, ngc-drawer, ngc-drawer-content",
-    "description": "Side navigation drawer that can slide in from left or right, overlay or push layout.",
-    "inputs": [
-      {
-        "name": "opened",
-        "type": "boolean",
-        "default": "false",
-        "description": "Drawer visibility"
+        "description": "Event emitted by the component."
       },
       {
-        "name": "position",
-        "type": "left | right",
-        "default": "left",
-        "description": "Slide direction"
-      },
-      {
-        "name": "width",
-        "type": "string",
-        "default": "260px",
-        "description": "Drawer width"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "openedChange",
+        "name": "fullscreen",
         "type": "EventEmitter<boolean>",
-        "description": "State change"
-      }
-    ],
-    "templateExample": "<ngc-drawer-container stretch>\n  <ngc-drawer [opened]=\"isMenuOpen\" position=\"left\" width=\"260px\">\n    <!-- Sidebar content -->\n  </ngc-drawer>\n  <ngc-drawer-content>\n    <!-- Main content -->\n  </ngc-drawer-content>\n</ngc-drawer-container>",
-    "tsExample": "import { NgcDrawerModule } from \"ngc-library\";"
-  },
-  {
-    "name": "Switch",
-    "category": "Data Entry",
-    "module": "NgcSwitchModule",
-    "selector": "ngc-switch",
-    "description": "Toggle switcher for binary on/off states with smooth sliding knob animation.",
-    "inputs": [
-      {
-        "name": "ngModel",
-        "type": "boolean",
-        "default": "false",
-        "description": "Toggle value"
+        "description": "Event emitted by the component."
       },
       {
-        "name": "disabled",
-        "type": "boolean",
-        "default": "false",
-        "description": "Disabled state"
+        "name": "closed",
+        "type": "EventEmitter<void>",
+        "description": "Event emitted by the component."
       }
     ],
-    "outputs": [
-      {
-        "name": "ngModelChange",
-        "type": "EventEmitter<boolean>",
-        "description": "Value changed"
-      }
-    ],
-    "templateExample": "<ngc-switch [(ngModel)]=\"enableNotifications\" label=\"Notifications\"></ngc-switch>",
-    "tsExample": "import { NgcSwitchModule } from \"ngc-library\";"
+    "templateExample": "<ngc-carousel></ngc-carousel>",
+    "tsExample": "import { NgcCarouselModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcCarouselModule],\n  template: `<ngc-carousel></ngc-carousel>`\n})\nexport class CarouselExampleComponent {}"
   },
   {
     "name": "Checkbox",
     "category": "Data Entry",
     "module": "NgcCheckboxModule",
     "selector": "ngc-checkbox",
-    "description": "Checkbox input supporting checked, unchecked, indeterminate states, and custom labels.",
+    "description": "Form checkbox control for binary and indeterminate states",
     "inputs": [
       {
-        "name": "ngModel",
+        "name": "ngModel / checked",
         "type": "boolean",
         "default": "false",
-        "description": "Checked value"
+        "description": "Checked state of the checkbox."
       },
       {
-        "name": "label",
+        "name": "indeterminate",
+        "type": "boolean",
+        "default": "false",
+        "description": "Partially-checked indeterminate state (dash icon), ideal for tree parent nodes."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables checkbox interaction."
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "default": "false",
+        "description": "Marks checkbox as required in forms."
+      },
+      {
+        "name": "color",
         "type": "string",
-        "default": "\"\"",
-        "description": "Label text"
+        "default": "'primary'",
+        "description": "Accent checkmark background color."
+      },
+      {
+        "name": "labelPosition",
+        "type": "'after' | 'before'",
+        "default": "'after'",
+        "description": "Placement of the label text relative to the checkbox box."
       }
     ],
     "outputs": [
       {
         "name": "ngModelChange",
         "type": "EventEmitter<boolean>",
-        "description": "State changed"
+        "description": "Emitted when checked state toggles."
+      },
+      {
+        "name": "change",
+        "type": "EventEmitter<boolean>",
+        "description": "Fired on user click toggle."
       }
     ],
-    "templateExample": "<ngc-checkbox [(ngModel)]=\"rememberMe\">Remember my login</ngc-checkbox>",
-    "tsExample": "import { NgcCheckboxModule } from \"ngc-library\";"
+    "templateExample": "<ngc-checkbox></ngc-checkbox>",
+    "tsExample": "import { NgcCheckboxModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcCheckboxModule],\n  template: `<ngc-checkbox></ngc-checkbox>`\n})\nexport class CheckboxExampleComponent {}"
   },
   {
-    "name": "Radio Group",
-    "category": "Data Entry",
-    "module": "NgcRadioModule",
-    "selector": "ngc-radio-group, ngc-radio",
-    "description": "Radio button choice group for single selection among multiple mutually exclusive options.",
+    "name": "Clipboard",
+    "category": "General",
+    "module": "NgcClipboardModule",
+    "selector": "ngc-clipboard",
+    "description": "Copy-to-clipboard trigger button with success feedback",
     "inputs": [
       {
-        "name": "ngModel",
-        "type": "any",
-        "default": "null",
-        "description": "Selected value"
+        "name": "ngcClipboardCopy",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "copiedMessage",
+        "type": "string",
+        "default": "'Copied'",
+        "description": "No description available."
+      },
+      {
+        "name": "displayTime",
+        "type": "number",
+        "default": "1500",
+        "description": "No description available."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "undefined",
+        "description": "No description available."
       }
     ],
     "outputs": [
       {
-        "name": "ngModelChange",
-        "type": "EventEmitter<any>",
-        "description": "Value changed"
+        "name": "copied",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Event emitted by the component."
       }
     ],
-    "templateExample": "<ngc-radio-group [(ngModel)]=\"plan\">\n  <ngc-radio value=\"free\">Free</ngc-radio>\n  <ngc-radio value=\"pro\">Pro</ngc-radio>\n</ngc-radio-group>",
-    "tsExample": "import { NgcRadioModule } from \"ngc-library\";"
-  },
-  {
-    "name": "Skeleton",
-    "category": "Feedback",
-    "module": "NgcSkeletonModule",
-    "selector": "ngc-skeleton",
-    "description": "Pulsing placeholder skeleton loader mimicking text lines, circles, and blocks.",
-    "inputs": [
-      {
-        "name": "shape",
-        "type": "text | circle | rect",
-        "default": "text",
-        "description": "Placeholder shape"
-      },
-      {
-        "name": "width",
-        "type": "string",
-        "default": "100%",
-        "description": "Width"
-      },
-      {
-        "name": "height",
-        "type": "string",
-        "default": "16px",
-        "description": "Height"
-      }
-    ],
-    "outputs": [],
-    "templateExample": "<ngc-skeleton shape=\"circle\" width=\"40px\" height=\"40px\"></ngc-skeleton>\n<ngc-skeleton shape=\"text\" width=\"70%\"></ngc-skeleton>",
-    "tsExample": "import { NgcSkeletonModule } from \"ngc-library\";"
-  },
-  {
-    "name": "Progress",
-    "category": "Feedback",
-    "module": "NgcProgressBarModule",
-    "selector": "ngc-progress-bar",
-    "description": "Progress indicator bar with determinate percentage, buffer values, and indeterminate modes.",
-    "inputs": [
-      {
-        "name": "value",
-        "type": "number",
-        "default": "0",
-        "description": "Progress percentage (0-100)"
-      },
-      {
-        "name": "mode",
-        "type": "determinate | indeterminate",
-        "default": "determinate",
-        "description": "Bar mode"
-      }
-    ],
-    "outputs": [],
-    "templateExample": "<ngc-progress-bar [value]=\"uploadProgress\" mode=\"determinate\"></ngc-progress-bar>",
-    "tsExample": "import { NgcProgressBarModule } from \"ngc-library\";"
-  },
-  {
-    "name": "Breadcrumb",
-    "category": "Navigation",
-    "module": "NgcBreadcrumbModule",
-    "selector": "ngc-breadcrumb, ngc-breadcrumb-item",
-    "description": "Breadcrumb trail for page hierarchy routing and navigational context.",
-    "inputs": [
-      {
-        "name": "separator",
-        "type": "string",
-        "default": "\"/\"",
-        "description": "Divider character or icon"
-      }
-    ],
-    "outputs": [],
-    "templateExample": "<ngc-breadcrumb>\n  <ngc-breadcrumb-item routerLink=\"/\">Home</ngc-breadcrumb-item>\n  <ngc-breadcrumb-item routerLink=\"/settings\">Settings</ngc-breadcrumb-item>\n  <ngc-breadcrumb-item [active]=\"true\">Security</ngc-breadcrumb-item>\n</ngc-breadcrumb>",
-    "tsExample": "import { NgcBreadcrumbModule } from \"ngc-library\";"
+    "templateExample": "<ngc-clipboard></ngc-clipboard>",
+    "tsExample": "import { NgcClipboardModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcClipboardModule],\n  template: `<ngc-clipboard></ngc-clipboard>`\n})\nexport class ClipboardExampleComponent {}"
   },
   {
     "name": "Code Block",
     "category": "Data Display",
     "module": "NgcCodeBlockModule",
     "selector": "ngc-code-block",
-    "description": "Syntax-highlighted code viewer supporting TypeScript, HTML, CSS, JSON, bash, and auto-copy.",
+    "description": "Syntax-highlighted code viewer with one-click copy button",
     "inputs": [
       {
         "name": "code",
         "type": "string",
-        "default": "\"\"",
-        "description": "Source code text"
+        "default": "undefined",
+        "description": "import { Component, ContentChild, ElementRef, AfterContentInit, Input } from '"
+      },
+      {
+        "name": "codeTemplate",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
       },
       {
         "name": "language",
-        "type": "string",
-        "default": "typescript",
-        "description": "Language for syntax highlighting"
+        "type": "any",
+        "default": "'typescript'",
+        "description": "No description available."
       }
     ],
     "outputs": [],
-    "templateExample": "<ngc-code-block [code]=\"snippet\" language=\"typescript\"></ngc-code-block>",
-    "tsExample": "import { NgcCodeBlockModule } from \"ngc-library\";"
+    "templateExample": "<ngc-code-block></ngc-code-block>",
+    "tsExample": "import { NgcCodeBlockModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcCodeBlockModule],\n  template: `<ngc-code-block></ngc-code-block>`\n})\nexport class CodeBlockExampleComponent {}"
+  },
+  {
+    "name": "Collapse",
+    "category": "Layout",
+    "module": "NgcCollapseModule",
+    "selector": "ngc-collapse",
+    "description": "Simple toggleable collapsible content section",
+    "inputs": [
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "iconCollapse",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "borderColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "borderStyle",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "activeColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "activeBorderColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "activeBorderStyle",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "activeBorderRadius",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "highlightChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-collapse></ngc-collapse>",
+    "tsExample": "import { NgcCollapseModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcCollapseModule],\n  template: `<ngc-collapse></ngc-collapse>`\n})\nexport class CollapseExampleComponent {}"
+  },
+  {
+    "name": "Collapse Menu",
+    "category": "Layout",
+    "module": "NgcCollapseMenuModule",
+    "selector": "ngc-collapse-menu",
+    "description": "Hierarchical folding sidebar menu with sub-navigation",
+    "inputs": [
+      {
+        "name": "groupTitle",
+        "type": "string",
+        "default": "'Platform'",
+        "description": "Optional group title small text shown at the top of the menu."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": "'Playground'",
+        "description": "Main title string label for the collapse menu header."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": "'code-block'",
+        "description": "Left icon name to display on the collapse menu header."
+      },
+      {
+        "name": "expanded",
+        "type": "boolean",
+        "default": "true",
+        "description": "Whether the collapse sub-menu items are visible initially."
+      },
+      {
+        "name": "activeItemLabel",
+        "type": "string",
+        "default": "''",
+        "description": "Active item label name to highlight a sub-item externally."
+      },
+      {
+        "name": "items",
+        "type": "NgcCollapseMenuItem[]",
+        "default": "[]",
+        "description": "Array list of nested sub-menu items containing label and links."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "selectItem",
+        "type": "EventEmitter<NgcCollapseMenuItem>",
+        "description": "Event emitted when a sub-menu item link is clicked."
+      }
+    ],
+    "templateExample": "<ngc-collapse-menu></ngc-collapse-menu>",
+    "tsExample": "import { NgcCollapseMenuModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcCollapseMenuModule],\n  template: `<ngc-collapse-menu></ngc-collapse-menu>`\n})\nexport class CollapseMenuExampleComponent {}"
+  },
+  {
+    "name": "Color",
+    "category": "General",
+    "module": "NgcColorModule",
+    "selector": "ngc-color",
+    "description": "System color palettes, semantic colors, text, and border variables",
+    "inputs": [
+      {
+        "name": "--ngc-color-primary-default",
+        "type": "CSS Color Variable",
+        "default": "#0a84ff",
+        "description": "Main brand accent color used across buttons, active states, and highlights."
+      },
+      {
+        "name": "--ngc-color-success-default",
+        "type": "CSS Color Variable",
+        "default": "#34c759",
+        "description": "Semantic success color for badges, progress bars, and positive states."
+      },
+      {
+        "name": "--ngc-color-warning-default",
+        "type": "CSS Color Variable",
+        "default": "#ff9f0a",
+        "description": "Semantic warning color for caution alerts and pending actions."
+      },
+      {
+        "name": "--ngc-color-danger-default",
+        "type": "CSS Color Variable",
+        "default": "#ff453a",
+        "description": "Semantic danger color for errors, destructive buttons, and delete confirms."
+      },
+      {
+        "name": "--ngc-color-neutral-border-default",
+        "type": "CSS Color Variable",
+        "default": "#e4e4e7",
+        "description": "Standard border and divider color across cards, inputs, and tables."
+      },
+      {
+        "name": "--ngc-color-surface-default",
+        "type": "CSS Color Variable",
+        "default": "#ffffff",
+        "description": "Card, modal, and drawer canvas surface background color."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-color></ngc-color>",
+    "tsExample": "import { NgcColorModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcColorModule],\n  template: `<ngc-color></ngc-color>`\n})\nexport class ColorExampleComponent {}"
+  },
+  {
+    "name": "Color Picker",
+    "category": "Data Entry",
+    "module": "NgcColorPickerModule",
+    "selector": "ngc-color-picker",
+    "description": "HEX and RGB color selection tool with preset swatches",
+    "inputs": [
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "AliasOf",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "pickedColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "pickedColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceNumber",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "originX",
+        "type": "HorizontalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "originY",
+        "type": "VerticalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "overlayX",
+        "type": "HorizontalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "overlayY",
+        "type": "VerticalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "colorChange",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "picked",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "pickedColorChange",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "opened",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "closed",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "picked",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "backdropPress",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "pickedColorChange",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-color-picker></ngc-color-picker>",
+    "tsExample": "import { NgcColorPickerModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcColorPickerModule],\n  template: `<ngc-color-picker></ngc-color-picker>`\n})\nexport class ColorPickerExampleComponent {}"
+  },
+  {
+    "name": "Comment",
+    "category": "Data Display",
+    "module": "NgcCommentModule",
+    "selector": "ngc-comment",
+    "description": "Threaded comment block with author, timestamp, and actions",
+    "inputs": [
+      {
+        "name": "comments",
+        "type": "NgcIComment[]",
+        "default": "[]",
+        "description": "List of comment objects including author, avatar, timestamp, message body, attachments, and nested replies."
+      },
+      {
+        "name": "canComment",
+        "type": "boolean",
+        "default": "true",
+        "description": "Enables comment submission box for the current user."
+      },
+      {
+        "name": "userID",
+        "type": "number | string",
+        "default": "undefined",
+        "description": "Current logged-in user ID for permissions check (editing/deleting own comments)."
+      },
+      {
+        "name": "maxFilePerComment",
+        "type": "number",
+        "default": "5",
+        "description": "Maximum number of file attachments allowed per comment."
+      },
+      {
+        "name": "maxImagePerComment",
+        "type": "number",
+        "default": "5",
+        "description": "Maximum number of image attachments allowed per comment."
+      },
+      {
+        "name": "limitReplies",
+        "type": "number",
+        "default": "2",
+        "description": "Initial number of visible threaded replies before 'Show more' is displayed."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "'Write a comment...'",
+        "description": "Placeholder text inside the comment editor textarea."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "commentCreated",
+        "type": "EventEmitter<NgcICommentCreateEvent>",
+        "description": "Emitted when user submits a new comment or threaded reply."
+      },
+      {
+        "name": "commentUpdated",
+        "type": "EventEmitter<NgcICommentUpdateEvent>",
+        "description": "Emitted when user saves an edited comment."
+      },
+      {
+        "name": "commentDeleted",
+        "type": "EventEmitter<NgcICommentDeleteEvent>",
+        "description": "Emitted when user removes a comment."
+      },
+      {
+        "name": "reactionUpdated",
+        "type": "EventEmitter<NgcICommentReactionEvent>",
+        "description": "Emitted when an emoji reaction (thumbs-up, heart, etc.) is toggled."
+      },
+      {
+        "name": "commentsLoadMore",
+        "type": "EventEmitter<void>",
+        "description": "Fired when user clicks to load earlier comments."
+      },
+      {
+        "name": "repliesLoadMore",
+        "type": "EventEmitter<NgcIComment>",
+        "description": "Fired when user requests to expand hidden thread replies."
+      }
+    ],
+    "templateExample": "<ngc-comment></ngc-comment>",
+    "tsExample": "import { NgcCommentModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcCommentModule],\n  template: `<ngc-comment></ngc-comment>`\n})\nexport class CommentExampleComponent {}"
+  },
+  {
+    "name": "Confirm",
+    "category": "Feedback",
+    "module": "NgcConfirmModule",
+    "selector": "ngc-confirm",
+    "description": "Confirmation modal dialog with confirm and cancel triggers",
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string",
+        "default": "'Confirm Action'",
+        "description": "Header title of the confirmation modal dialog."
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "default": "undefined",
+        "description": "Descriptive prompt explaining the consequences of the action."
+      },
+      {
+        "name": "confirmButtonText",
+        "type": "string",
+        "default": "'Confirm'",
+        "description": "Label text on the positive confirmation button."
+      },
+      {
+        "name": "cancelButtonText",
+        "type": "string",
+        "default": "'Cancel'",
+        "description": "Label text on the cancel / dismiss button."
+      },
+      {
+        "name": "confirmButtonColor",
+        "type": "'primary' | 'danger' | 'warning' | 'success'",
+        "default": "'primary'",
+        "description": "Theme color on the confirmation button (use 'danger' for destructive actions)."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": "undefined",
+        "description": "Header alert icon displayed above the confirmation dialog."
+      },
+      {
+        "name": "hasBackdrop",
+        "type": "boolean",
+        "default": "true",
+        "description": "Renders modal backdrop overlay."
+      },
+      {
+        "name": "autoClose",
+        "type": "boolean",
+        "default": "true",
+        "description": "Dismisses dialog automatically when clicking outside or pressing Escape."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "confirmed",
+        "type": "Observable<boolean>",
+        "description": "Resolves with true when confirmed, false when cancelled."
+      }
+    ],
+    "templateExample": "<ngc-confirm></ngc-confirm>",
+    "tsExample": "import { NgcConfirmModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcConfirmModule],\n  template: `<ngc-confirm></ngc-confirm>`\n})\nexport class ConfirmExampleComponent {}"
+  },
+  {
+    "name": "Cropper",
+    "category": "Data Entry",
+    "module": "NgcCropperModule",
+    "selector": "ngc-cropper",
+    "description": "Interactive image cropper with ratio constraints and zoom",
+    "inputs": [
+      {
+        "name": "image",
+        "type": "string | Blob",
+        "default": "undefined",
+        "description": "Image source URL or Blob file to crop."
+      },
+      {
+        "name": "circle",
+        "type": "boolean",
+        "default": "false",
+        "description": "Enables circular crop mask, ideal for profile avatars."
+      },
+      {
+        "name": "options",
+        "type": "Cropper.Options",
+        "default": "undefined",
+        "description": "Underlying Cropper.js options (aspectRatio, viewMode, guides, zoomable, etc.)."
+      },
+      {
+        "name": "width",
+        "type": "string",
+        "default": "'100%'",
+        "description": "Container canvas width."
+      },
+      {
+        "name": "height",
+        "type": "string",
+        "default": "'400px'",
+        "description": "Container canvas height."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "init",
+        "type": "EventEmitter<NgcCropperComponent>",
+        "description": "Fired when image is loaded and cropper engine is ready."
+      },
+      {
+        "name": "cropped",
+        "type": "EventEmitter<NgcICroppedEvent>",
+        "description": "Emitted with cropped canvas data URL, Blob, and crop coordinates."
+      }
+    ],
+    "templateExample": "<ngc-cropper></ngc-cropper>",
+    "tsExample": "import { NgcCropperModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcCropperModule],\n  template: `<ngc-cropper></ngc-cropper>`\n})\nexport class CropperExampleComponent {}"
+  },
+  {
+    "name": "Data Table",
+    "category": "Data Display",
+    "module": "NgcDataTableModule",
+    "selector": "ngc-data-table",
+    "description": "Feature-rich data table with sorting, filtering, and paging",
+    "inputs": [
+      {
+        "name": "scrolling",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "list",
+        "type": "any[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "textContent",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "type",
+        "type": "NgcIExcelCellType",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "scrolling",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "textContentChange",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "focus",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "blur",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-data-table></ngc-data-table>",
+    "tsExample": "import { NgcDataTableModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcDataTableModule],\n  template: `<ngc-data-table></ngc-data-table>`\n})\nexport class DataTableExampleComponent {}"
+  },
+  {
+    "name": "Date Picker",
+    "category": "Data Entry",
+    "module": "NgcDatePickerModule",
+    "selector": "ngc-date-picker",
+    "description": "Calendar dropdown input for single date selection",
+    "inputs": [
+      {
+        "name": "pickedDate",
+        "type": "Moment | Moment[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "maxDateRange",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "minDate",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "maxDate",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "timeFormat",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "weekStart",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "maxDateRange",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceNumber",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "originX",
+        "type": "HorizontalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "originY",
+        "type": "VerticalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "overlayX",
+        "type": "HorizontalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "overlayY",
+        "type": "VerticalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "pickedDate",
+        "type": "Moment | Moment[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "minDate",
+        "type": "Moment",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "maxDate",
+        "type": "Moment",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "picked",
+        "type": "EventEmitter<NgcIDatePickerPickedEvent>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "opened",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "closed",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "picked",
+        "type": "EventEmitter<NgcIDatePickerPickedEvent>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "backdropPress",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-date-picker></ngc-date-picker>",
+    "tsExample": "import { NgcDatePickerModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcDatePickerModule],\n  template: `<ngc-date-picker></ngc-date-picker>`\n})\nexport class DatePickerExampleComponent {}"
+  },
+  {
+    "name": "Design Tokens",
+    "category": "General",
+    "module": "NgcDesignTokensModule",
+    "selector": "ngc-design-tokens",
+    "description": "Interactive theme token customizer and JSON configuration",
+    "inputs": [
+      {
+        "name": "--ngc-radius-300 / 400 / 500",
+        "type": "Radius Tokens",
+        "default": "6px / 8px / 12px",
+        "description": "Standard border radius scale for buttons, inputs, cards, and modal dialogs."
+      },
+      {
+        "name": "--ngc-shadow-sm / md / lg",
+        "type": "Elevation Shadow Tokens",
+        "default": "CSS Box Shadows",
+        "description": "Layered depth shadows for cards, dropdowns, and overlays."
+      },
+      {
+        "name": "--ngc-spacing-1 to 12",
+        "type": "Spacing Scale",
+        "default": "4px, 8px, 12px, 16px, 20px, 24px, 32px, 48px",
+        "description": "Consistent 4px/8px-based spacing grid for margins and paddings."
+      },
+      {
+        "name": "--ngc-transition-default",
+        "type": "Animation Token",
+        "default": "0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+        "description": "Standard smooth transition easing applied across interactive components."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-design-tokens></ngc-design-tokens>",
+    "tsExample": "import { NgcDesignTokensModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcDesignTokensModule],\n  template: `<ngc-design-tokens></ngc-design-tokens>`\n})\nexport class DesignTokensExampleComponent {}"
+  },
+  {
+    "name": "Dialog",
+    "category": "Feedback",
+    "module": "NgcDialogModule",
+    "selector": "ngc-dialog",
+    "description": "Modal dialog window for focused user interactions",
+    "inputs": [
+      {
+        "name": "width",
+        "type": "string",
+        "default": "'500px'",
+        "description": "Width dimension for the dialog modal container."
+      },
+      {
+        "name": "minWidth / maxWidth",
+        "type": "string",
+        "default": "undefined",
+        "description": "Minimum and maximum width constraints for the modal."
+      },
+      {
+        "name": "height / minHeight / maxHeight",
+        "type": "string",
+        "default": "'auto'",
+        "description": "Height constraints for the dialog container."
+      },
+      {
+        "name": "hasBackdrop",
+        "type": "boolean",
+        "default": "true",
+        "description": "Whether to render a dimming overlay behind the dialog."
+      },
+      {
+        "name": "autoClose",
+        "type": "boolean",
+        "default": "true",
+        "description": "Closes dialog when clicking outside backdrop or pressing Escape."
+      },
+      {
+        "name": "fullscreen",
+        "type": "boolean",
+        "default": "false",
+        "description": "Expands dialog to full viewport dimensions."
+      },
+      {
+        "name": "data",
+        "type": "any",
+        "default": "undefined",
+        "description": "Arbitrary payload injected via NGC_DIALOG_DATA into modal component."
+      },
+      {
+        "name": "panelClass",
+        "type": "string | string[]",
+        "default": "undefined",
+        "description": "Custom CSS class applied to the overlay pane."
+      },
+      {
+        "name": "[ngcDialogHeader] closeable",
+        "type": "boolean",
+        "default": "true",
+        "description": "Displays 'X' close button in the dialog header."
+      },
+      {
+        "name": "[ngcDialogFooter] align",
+        "type": "'left' | 'center' | 'right'",
+        "default": "'right'",
+        "description": "Alignment of action buttons inside dialog footer."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "afterOpened",
+        "type": "Observable<void>",
+        "description": "Emitted when dialog open transition finishes."
+      },
+      {
+        "name": "afterClosed",
+        "type": "Observable<any>",
+        "description": "Emitted when dialog closes with returned result data."
+      },
+      {
+        "name": "afterFullscreen",
+        "type": "Observable<void>",
+        "description": "Emitted when dialog toggles fullscreen mode."
+      }
+    ],
+    "templateExample": "<ngc-dialog></ngc-dialog>",
+    "tsExample": "import { NgcDialogModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcDialogModule],\n  template: `<ngc-dialog></ngc-dialog>`\n})\nexport class DialogExampleComponent {}"
+  },
+  {
+    "name": "Divide",
+    "category": "Layout",
+    "module": "NgcDivideModule",
+    "selector": "ngc-divide",
+    "description": "Visual separation line with support for labels and dashed borders",
+    "inputs": [
+      {
+        "name": "vertical",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders divider vertically between inline elements."
+      },
+      {
+        "name": "dashed",
+        "type": "boolean",
+        "default": "false",
+        "description": "Styles line with dashed border style."
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "default": "undefined",
+        "description": "Title or label text placed directly in middle of divider line."
+      },
+      {
+        "name": "textAlign",
+        "type": "'left' | 'center' | 'right'",
+        "default": "'center'",
+        "description": "Alignment position of divider label text."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "var(--ngc-color-neutral-border-default)",
+        "description": "Custom color for the divider line."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-divide></ngc-divide>",
+    "tsExample": "import { NgcDivideModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcDivideModule],\n  template: `<ngc-divide></ngc-divide>`\n})\nexport class DivideExampleComponent {}"
+  },
+  {
+    "name": "Drawer",
+    "category": "Layout",
+    "module": "NgcDrawerModule",
+    "selector": "ngc-drawer",
+    "description": "Slide-out overlay drawer container for contextual panels",
+    "inputs": [
+      {
+        "name": "opened",
+        "type": "boolean",
+        "default": "false",
+        "description": "Controls visibility and expansion state of the drawer."
+      },
+      {
+        "name": "position",
+        "type": "'left' | 'right' | 'top' | 'bottom'",
+        "default": "'left'",
+        "description": "Anchor edge from which the drawer slides out."
+      },
+      {
+        "name": "mode",
+        "type": "'over' | 'push' | 'side'",
+        "default": "'side'",
+        "description": "Display behavior: 'over' overlays content with backdrop, 'push' shifts main content, 'side' shares layout."
+      },
+      {
+        "name": "width",
+        "type": "string | number",
+        "default": "'280px'",
+        "description": "Width dimension of the drawer panel."
+      },
+      {
+        "name": "hasBackdrop",
+        "type": "boolean",
+        "default": "true",
+        "description": "Renders a dimming backdrop overlay behind the drawer."
+      },
+      {
+        "name": "closeOnBackdropClick",
+        "type": "boolean",
+        "default": "true",
+        "description": "Automatically closes the drawer when clicking outside onto the backdrop."
+      },
+      {
+        "name": "hasDivider",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders a dividing border line between the drawer and content."
+      },
+      {
+        "name": "bgColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "Custom background color for the drawer body."
+      },
+      {
+        "name": "paddingVertical",
+        "type": "string | number",
+        "default": "undefined",
+        "description": "Top and bottom padding for drawer content."
+      },
+      {
+        "name": "paddingHorizontal",
+        "type": "string | number",
+        "default": "undefined",
+        "description": "Left and right padding for drawer content."
+      },
+      {
+        "name": "[ngcDrawerContainer] stretch",
+        "type": "boolean",
+        "default": "false",
+        "description": "Expands the drawer container to 100% width and height of viewport."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "openedChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when the drawer opens or closes."
+      }
+    ],
+    "templateExample": "<ngc-drawer></ngc-drawer>",
+    "tsExample": "import { NgcDrawerModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcDrawerModule],\n  template: `<ngc-drawer></ngc-drawer>`\n})\nexport class DrawerExampleComponent {}"
+  },
+  {
+    "name": "Dropdown",
+    "category": "Data Entry",
+    "module": "NgcDropdownModule",
+    "selector": "ngc-dropdown",
+    "description": "Selectable dropdown list with filtering and search support",
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "searchPlaceholder",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "disableControl",
+        "type": "boolean",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "formControl",
+        "type": "FormControl",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "appearance",
+        "type": "NgcIFormFieldAppearance",
+        "default": "'default'",
+        "description": "No description available."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "dotColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "class",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "value",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "context",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "dotColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "class",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<any>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "changed",
+        "type": "EventEmitter<any>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "opened",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "closed",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "loadMore",
+        "type": "EventEmitter<boolean>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-dropdown></ngc-dropdown>",
+    "tsExample": "import { NgcDropdownModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcDropdownModule],\n  template: `<ngc-dropdown></ngc-dropdown>`\n})\nexport class DropdownExampleComponent {}"
+  },
+  {
+    "name": "Emoji Picker",
+    "category": "Data Entry",
+    "module": "NgcEmojiPickerModule",
+    "selector": "ngc-emoji-picker",
+    "description": "Categorized emoji selector for text fields and comments",
+    "inputs": [
+      {
+        "name": "emoji",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceNumber",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "originX",
+        "type": "HorizontalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "originY",
+        "type": "VerticalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "overlayX",
+        "type": "HorizontalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "overlayY",
+        "type": "VerticalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "picked",
+        "type": "EventEmitter<NgcIEmojiData>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "opened",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "closed",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "picked",
+        "type": "EventEmitter<NgcIEmojiData>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "backdropPress",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-emoji-picker></ngc-emoji-picker>",
+    "tsExample": "import { NgcEmojiPickerModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcEmojiPickerModule],\n  template: `<ngc-emoji-picker></ngc-emoji-picker>`\n})\nexport class EmojiPickerExampleComponent {}"
+  },
+  {
+    "name": "File Picker",
+    "category": "Data Entry",
+    "module": "NgcFilePickerModule",
+    "selector": "ngc-file-picker",
+    "description": "Drag-and-drop file upload picker with file validation",
+    "inputs": [
+      {
+        "name": "fileAccept",
+        "type": "string",
+        "default": "'*/*'",
+        "description": "Allowed MIME types or file extension patterns (e.g., 'image/*', '.pdf,.docx')."
+      },
+      {
+        "name": "multiSelect",
+        "type": "boolean",
+        "default": "true",
+        "description": "Allows picking multiple files simultaneously."
+      },
+      {
+        "name": "imageOnly",
+        "type": "boolean",
+        "default": "false",
+        "description": "Restricts picker to image formats only with thumbnail previews."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables file picker triggering."
+      },
+      {
+        "name": "googleDriveMimeTypes",
+        "type": "string[]",
+        "default": "[]",
+        "description": "Specific Google Drive file types enabled for cloud picking."
+      },
+      {
+        "name": "dropboxExtensions",
+        "type": "string[]",
+        "default": "[]",
+        "description": "Allowed file extensions for Dropbox cloud import."
+      },
+      {
+        "name": "oneDriveExtensions",
+        "type": "string[]",
+        "default": "[]",
+        "description": "Allowed file extensions for Microsoft OneDrive cloud import."
+      },
+      {
+        "name": "position",
+        "type": "'above' | 'below' | 'before' | 'after'",
+        "default": "'below'",
+        "description": "Dropdown overlay position relative to trigger button."
+      },
+      {
+        "name": "hasBackdrop",
+        "type": "boolean",
+        "default": "true",
+        "description": "Renders overlay backdrop when picker menu is open."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "picked",
+        "type": "EventEmitter<NgcIFilePickerEvent>",
+        "description": "Emitted when user selects local files or cloud storage documents."
+      },
+      {
+        "name": "opened",
+        "type": "EventEmitter<Event>",
+        "description": "Fired when the cloud picker modal or menu opens."
+      },
+      {
+        "name": "closed",
+        "type": "EventEmitter<Event>",
+        "description": "Fired when the file picker overlay closes."
+      }
+    ],
+    "templateExample": "<ngc-file-picker></ngc-file-picker>",
+    "tsExample": "import { NgcFilePickerModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcFilePickerModule],\n  template: `<ngc-file-picker></ngc-file-picker>`\n})\nexport class FilePickerExampleComponent {}"
+  },
+  {
+    "name": "Form Field",
+    "category": "Data Entry",
+    "module": "NgcFormFieldModule",
+    "selector": "ngc-form-field",
+    "description": "Accessible form input wrapper with label, hint, and error messages",
+    "inputs": [
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "dotColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "ngModel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceNumber",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "disableControl",
+        "type": "boolean",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "formControl",
+        "type": "FormControl",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "convertType",
+        "type": "NgcIFormFieldConvertType",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "timeFormat",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "dotColorChange",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<any>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "changed",
+        "type": "EventEmitter<any>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "saved",
+        "type": "EventEmitter<any>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "cancelled",
+        "type": "EventEmitter<any>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "cleared",
+        "type": "EventEmitter<any>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "pasted",
+        "type": "EventEmitter<ClipboardEvent>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "converted",
+        "type": "EventEmitter<NgcIFormFieldConvertedEvent>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-form-field></ngc-form-field>",
+    "tsExample": "import { NgcFormFieldModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcFormFieldModule],\n  template: `<ngc-form-field></ngc-form-field>`\n})\nexport class FormFieldExampleComponent {}"
+  },
+  {
+    "name": "Grid",
+    "category": "Layout",
+    "module": "NgcGridModule",
+    "selector": "ngc-grid",
+    "description": "Responsive multi-column grid layout system",
+    "inputs": [
+      {
+        "name": "itemsPerRow",
+        "type": "number",
+        "default": "6",
+        "description": "Number of grid columns to display per row."
+      },
+      {
+        "name": "stretch",
+        "type": "boolean",
+        "default": "false",
+        "description": "Stretches grid container to 100% of available viewport area."
+      },
+      {
+        "name": "activeColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "Selection outline and highlight accent color for active items."
+      },
+      {
+        "name": "scrollBarMode",
+        "type": "INgcScrollBarMode",
+        "default": "'auto'",
+        "description": "Scrollbar mode for overflow within grid container."
+      },
+      {
+        "name": "[ngcGridItem] id",
+        "type": "number | string",
+        "default": "undefined",
+        "description": "Unique identifier for the grid item."
+      },
+      {
+        "name": "[ngcGridItem] active",
+        "type": "boolean",
+        "default": "false",
+        "description": "Sets selection state for the individual grid card."
+      },
+      {
+        "name": "[ngcGridItem] draggable",
+        "type": "boolean",
+        "default": "false",
+        "description": "Enables drag-and-drop reordering for this grid item."
+      },
+      {
+        "name": "[ngcGridItem] disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables interaction on this item."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "itemsSelected",
+        "type": "EventEmitter<NgcGridItemComponent[]>",
+        "description": "Emitted when user selects or lasso-selects items in the grid."
+      },
+      {
+        "name": "itemMoved",
+        "type": "EventEmitter<NgcIGridItemMoved>",
+        "description": "Emitted when an item is dragged and dropped into a new position."
+      },
+      {
+        "name": "loadMore",
+        "type": "EventEmitter<boolean>",
+        "description": "Fired when user scrolls to bottom of grid for infinite pagination."
+      }
+    ],
+    "templateExample": "<ngc-grid></ngc-grid>",
+    "tsExample": "import { NgcGridModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcGridModule],\n  template: `<ngc-grid></ngc-grid>`\n})\nexport class GridExampleComponent {}"
   },
   {
     "name": "Icon",
     "category": "General",
     "module": "NgcIconModule",
     "selector": "ngc-icon",
-    "description": "Vector icon component using premium Icomoon font library with customizable size and color.",
+    "description": "Semantic SVG/font icon library for interfaces and buttons",
     "inputs": [
       {
         "name": "name",
         "type": "string",
-        "default": "\"\"",
-        "description": "Icon name (e.g. check, user, settings, calendar)"
-      },
-      {
-        "name": "size",
-        "type": "string",
-        "default": "16px",
-        "description": "Font size / dimension"
+        "default": "undefined",
+        "description": "No description available."
       },
       {
         "name": "color",
         "type": "string",
-        "default": "inherit",
-        "description": "CSS color"
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
       }
     ],
     "outputs": [],
-    "templateExample": "<ngc-icon name=\"check\" size=\"20px\" color=\"#10b981\"></ngc-icon>",
-    "tsExample": "import { NgcIconModule } from \"ngc-library\";"
+    "templateExample": "<ngc-icon></ngc-icon>",
+    "tsExample": "import { NgcIconModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcIconModule],\n  template: `<ngc-icon></ngc-icon>`\n})\nexport class IconExampleComponent {}"
+  },
+  {
+    "name": "Inline Input",
+    "category": "Data Entry",
+    "module": "NgcInlineInputModule",
+    "selector": "ngc-inline-input",
+    "description": "Click-to-edit inline text field with instant save confirmation",
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "string",
+        "default": "undefined",
+        "description": "Two-way bound data value for the editable text."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "'Click to edit'",
+        "description": "Placeholder text rendered when value is empty."
+      },
+      {
+        "name": "editing",
+        "type": "boolean",
+        "default": "false",
+        "description": "Programmatically toggles between read-only display and edit mode."
+      },
+      {
+        "name": "autoSave",
+        "type": "boolean",
+        "default": "true",
+        "description": "Automatically saves on blur or pressing Enter."
+      },
+      {
+        "name": "trim",
+        "type": "boolean",
+        "default": "true",
+        "description": "Trims whitespace from input value upon saving."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables inline clicking to edit."
+      },
+      {
+        "name": "validate",
+        "type": "boolean",
+        "default": "false",
+        "description": "Enforces non-empty string validation before confirming save."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when the bound value changes."
+      },
+      {
+        "name": "saved",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when changes are successfully committed."
+      },
+      {
+        "name": "cancelled",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when editing is cancelled and original value restored."
+      },
+      {
+        "name": "editingChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when edit state toggles."
+      }
+    ],
+    "templateExample": "<ngc-inline-input></ngc-inline-input>",
+    "tsExample": "import { NgcInlineInputModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcInlineInputModule],\n  template: `<ngc-inline-input></ngc-inline-input>`\n})\nexport class InlineInputExampleComponent {}"
+  },
+  {
+    "name": "Input",
+    "category": "Data Entry",
+    "module": "NgcInputModule",
+    "selector": "ngc-input",
+    "description": "Single-line text input field with prefix and suffix support",
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "string | number",
+        "default": "undefined",
+        "description": "Two-way data binding value for the input field."
+      },
+      {
+        "name": "formControl",
+        "type": "FormControl",
+        "default": "undefined",
+        "description": "Angular Reactive Forms FormControl instance bound to the input."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": "undefined",
+        "description": "Unique identifier name for the input element in forms."
+      },
+      {
+        "name": "type",
+        "type": "'text' | 'password' | 'email' | 'number' | 'tel' | 'url'",
+        "default": "'text'",
+        "description": "Native HTML input type."
+      },
+      {
+        "name": "textSize",
+        "type": "string",
+        "default": "'14px'",
+        "description": "Custom font size for the input text (e.g., '14px', '16px')."
+      },
+      {
+        "name": "alignment",
+        "type": "'left' | 'center' | 'right'",
+        "default": "'left'",
+        "description": "Text alignment inside the input field."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Whether the input is non-interactive and disabled."
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "default": "false",
+        "description": "Whether the input value is read-only."
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "default": "false",
+        "description": "Whether the field is required for form validation."
+      },
+      {
+        "name": "clearable",
+        "type": "boolean",
+        "default": "false",
+        "description": "Shows a one-click clear button when the input has text."
+      },
+      {
+        "name": "trim",
+        "type": "boolean",
+        "default": "true",
+        "description": "Automatically trims leading and trailing whitespace on change."
+      },
+      {
+        "name": "min / max",
+        "type": "number",
+        "default": "undefined",
+        "description": "Minimum and maximum numerical bounds when type is 'number'."
+      },
+      {
+        "name": "convertType",
+        "type": "'number' | 'lowercase' | 'uppercase'",
+        "default": "undefined",
+        "description": "Automatic type coercion or casing conversion on input."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<any>",
+        "description": "Emitted whenever the input value changes."
+      },
+      {
+        "name": "changed",
+        "type": "EventEmitter<any>",
+        "description": "Emitted on value commit (blur or enter key)."
+      },
+      {
+        "name": "cleared",
+        "type": "EventEmitter<any>",
+        "description": "Emitted when the clear icon button is clicked."
+      },
+      {
+        "name": "saved",
+        "type": "EventEmitter<any>",
+        "description": "Emitted when inline input save button is triggered."
+      },
+      {
+        "name": "cancelled",
+        "type": "EventEmitter<any>",
+        "description": "Emitted when inline input cancel button is triggered."
+      },
+      {
+        "name": "pasted",
+        "type": "EventEmitter<ClipboardEvent>",
+        "description": "Emitted when content is pasted into the input field."
+      }
+    ],
+    "templateExample": "<ngc-input></ngc-input>",
+    "tsExample": "import { NgcInputModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcInputModule],\n  template: `<ngc-input></ngc-input>`\n})\nexport class InputExampleComponent {}"
+  },
+  {
+    "name": "List",
+    "category": "Data Display",
+    "module": "NgcListModule",
+    "selector": "ngc-list",
+    "description": "Structured vertical list container for item collections",
+    "inputs": [
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceNumber",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "activeColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "scrollBarMode",
+        "type": "INgcScrollBarMode",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "searchBox",
+        "type": "NgcSearchBoxComponent",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceNumber",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "dotColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "class",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "AliasOf",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "loadMore",
+        "type": "EventEmitter<boolean>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "itemsMoved",
+        "type": "EventEmitter<NgcIListItemMoved[]>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "saved",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "cancelled",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "editing",
+        "type": "EventEmitter<boolean>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "labelChange",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "dotColorChange",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "highlightChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "click",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "focus",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "blur",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-list></ngc-list>",
+    "tsExample": "import { NgcListModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcListModule],\n  template: `<ngc-list></ngc-list>`\n})\nexport class ListExampleComponent {}"
+  },
+  {
+    "name": "Loading",
+    "category": "Feedback",
+    "module": "NgcLoadingModule",
+    "selector": "ngc-loading",
+    "description": "Spinner and loading indicator for async operations",
+    "inputs": [
+      {
+        "name": "message",
+        "type": "string",
+        "default": "'Loading...'",
+        "description": "Descriptive status text displayed below the spinner."
+      },
+      {
+        "name": "size",
+        "type": "'sm' | 'md' | 'lg' | string",
+        "default": "'md'",
+        "description": "Dimensions of the spinning indicator icon (or pixel size like '28px')."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "'primary'",
+        "description": "Spinner color theme (primary, default, or CSS color)."
+      },
+      {
+        "name": "overlay",
+        "type": "boolean",
+        "default": "false",
+        "description": "Covers parent container with semi-transparent loading mask."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-loading></ngc-loading>",
+    "tsExample": "import { NgcLoadingModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcLoadingModule],\n  template: `<ngc-loading></ngc-loading>`\n})\nexport class LoadingExampleComponent {}"
+  },
+  {
+    "name": "Member Picker",
+    "category": "Data Entry",
+    "module": "NgcMemberPickerModule",
+    "selector": "ngc-member-picker",
+    "description": "User and teammate search picker for collaboration",
+    "inputs": [
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "scrolling",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "member",
+        "type": "NgcIMember",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "searchBox",
+        "type": "NgcSearchBoxComponent",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "scrolling",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "context",
+        "type": "IObject",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "selected",
+        "type": "number[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "selectedMembers",
+        "type": "NgcIMember[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "includesStatus",
+        "type": "NgcIMemberStatus[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "members",
+        "type": "NgcIMember[] | Observable<NgcIMember[]> | Function",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "overlayY",
+        "type": "VerticalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "panelClass",
+        "type": "string | string[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceNumber",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "scrolling",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "context",
+        "type": "IObject",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "selected",
+        "type": "number[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "selectedMembers",
+        "type": "NgcIMember[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "includesStatus",
+        "type": "NgcIMemberStatus[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "members",
+        "type": "NgcIMember[] | Observable<NgcIMember[]> | Function",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "originX",
+        "type": "HorizontalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "originY",
+        "type": "VerticalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "overlayX",
+        "type": "HorizontalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "viewDetail",
+        "type": "EventEmitter<NgcIMember>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "opened",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "closed",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "viewDetail",
+        "type": "EventEmitter<NgcIMember>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "added",
+        "type": "EventEmitter<NgcIMember[]>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "removed",
+        "type": "EventEmitter<NgcIMember[]>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "selectedChange",
+        "type": "EventEmitter<number[]>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "selectedMembersChange",
+        "type": "EventEmitter<NgcIMember[]>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "backdropPress",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "opened",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "closed",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "added",
+        "type": "EventEmitter<NgcIMember[]>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "removed",
+        "type": "EventEmitter<NgcIMember[]>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "viewDetail",
+        "type": "EventEmitter<NgcIMember>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "selectedChange",
+        "type": "EventEmitter<number[]>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "selectedMembersChange",
+        "type": "EventEmitter<NgcIMember[]>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-member-picker></ngc-member-picker>",
+    "tsExample": "import { NgcMemberPickerModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcMemberPickerModule],\n  template: `<ngc-member-picker></ngc-member-picker>`\n})\nexport class MemberPickerExampleComponent {}"
+  },
+  {
+    "name": "Menu",
+    "category": "Navigation",
+    "module": "NgcMenuModule",
+    "selector": "ngc-menu",
+    "description": "Contextual action dropdown menu anchored to triggers",
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "backdropClass",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "scrollBarMode",
+        "type": "INgcScrollBarMode",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "class",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "class",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "class",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "class",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "class",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "iconColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "dotColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "panelClass",
+        "type": "string | string[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceNumber",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "originX",
+        "type": "HorizontalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "originY",
+        "type": "VerticalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "overlayX",
+        "type": "HorizontalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "overlayY",
+        "type": "VerticalConnectionPos",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "menuData",
+        "type": "IObject",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "ngcMenuTriggerFor",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "opened",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "closed",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "backdropPress",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "loadMore",
+        "type": "EventEmitter<boolean>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "activeChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "click",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "focus",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "blur",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "menuInit",
+        "type": "EventEmitter<NgcMenuTriggerForDirective>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "menuOpened",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "menuClosed",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "menuBackdropPress",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-menu></ngc-menu>",
+    "tsExample": "import { NgcMenuModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcMenuModule],\n  template: `<ngc-menu></ngc-menu>`\n})\nexport class MenuExampleComponent {}"
+  },
+  {
+    "name": "Navigation Menu",
+    "category": "Navigation",
+    "module": "NgcNavigationMenuModule",
+    "selector": "ngc-navigation-menu",
+    "description": "Accessible top-level navigation bar with dropdown sub-menus",
+    "inputs": [
+      {
+        "name": "items",
+        "type": "NgcNavigationMenuItem[]",
+        "default": "[]",
+        "description": "Hierarchical navigation item definitions including labels, icons, routes, and nested submenus."
+      },
+      {
+        "name": "collapsed",
+        "type": "boolean",
+        "default": "false",
+        "description": "Collapses the menu into an icon-only compact rail navigation."
+      },
+      {
+        "name": "mode",
+        "type": "'vertical' | 'horizontal' | 'inline'",
+        "default": "'vertical'",
+        "description": "Layout orientation of the navigation menu."
+      },
+      {
+        "name": "theme",
+        "type": "'light' | 'dark'",
+        "default": "'light'",
+        "description": "Visual theme styling for navigation items."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "itemClick",
+        "type": "EventEmitter<NgcNavigationMenuItem>",
+        "description": "Fired when a navigation item or link is clicked."
+      },
+      {
+        "name": "collapsedChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when sidebar rail collapse toggle changes."
+      }
+    ],
+    "templateExample": "<ngc-navigation-menu></ngc-navigation-menu>",
+    "tsExample": "import { NgcNavigationMenuModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcNavigationMenuModule],\n  template: `<ngc-navigation-menu></ngc-navigation-menu>`\n})\nexport class NavigationMenuExampleComponent {}"
+  },
+  {
+    "name": "Page",
+    "category": "Layout",
+    "module": "NgcPageModule",
+    "selector": "ngc-page",
+    "description": "Full-page layout scaffold with header, sidebar, and content body",
+    "inputs": [
+      {
+        "name": "stretch",
+        "type": "boolean",
+        "default": "false",
+        "description": "Expands layout shell to 100% of container or viewport width and height (100vw / 100vh)."
+      },
+      {
+        "name": "suppressScrollX",
+        "type": "boolean",
+        "default": "false",
+        "description": "Suppresses horizontal scrolling inside the content area."
+      },
+      {
+        "name": "suppressScrollY",
+        "type": "boolean",
+        "default": "false",
+        "description": "Suppresses vertical scrolling inside the content area."
+      },
+      {
+        "name": "scrollBarMode",
+        "type": "'auto' | 'hover' | 'always' | 'hidden'",
+        "default": "'auto'",
+        "description": "Visibility mode for the built-in smooth scrollbar."
+      },
+      {
+        "name": "[ngcPageHeader] divider",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders a bottom border divider between the header and scrollable content area."
+      },
+      {
+        "name": "[ngcPageHeader] padding",
+        "type": "string | number",
+        "default": "—",
+        "description": "Shorthand padding for all sides of the header (e.g. '16px' or 16)."
+      },
+      {
+        "name": "[ngcPageHeader] paddingVertical",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Top and bottom padding for the page header."
+      },
+      {
+        "name": "[ngcPageHeader] paddingHorizontal",
+        "type": "string | number",
+        "default": "'30px'",
+        "description": "Left and right padding for the page header."
+      },
+      {
+        "name": "[ngcPageHeader] paddingTop / paddingBottom",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Individual top / bottom padding for the page header."
+      },
+      {
+        "name": "[ngcPageHeader] paddingLeft / paddingRight",
+        "type": "string | number",
+        "default": "'30px'",
+        "description": "Individual left / right padding for the page header."
+      },
+      {
+        "name": "[ngcPageContent] padding",
+        "type": "string | number",
+        "default": "—",
+        "description": "Shorthand padding for all sides of the content area (e.g. '24px' or 24)."
+      },
+      {
+        "name": "[ngcPageContent] paddingVertical",
+        "type": "string | number",
+        "default": "'24px'",
+        "description": "Top and bottom padding for the page content area."
+      },
+      {
+        "name": "[ngcPageContent] paddingHorizontal",
+        "type": "string | number",
+        "default": "'30px'",
+        "description": "Left and right padding for the page content area."
+      },
+      {
+        "name": "[ngcPageContent] paddingTop / paddingBottom",
+        "type": "string | number",
+        "default": "'24px'",
+        "description": "Individual top / bottom padding for the page content area."
+      },
+      {
+        "name": "[ngcPageContent] paddingLeft / paddingRight",
+        "type": "string | number",
+        "default": "'30px'",
+        "description": "Individual left / right padding for the page content area."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-page></ngc-page>",
+    "tsExample": "import { NgcPageModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcPageModule],\n  template: `<ngc-page></ngc-page>`\n})\nexport class PageExampleComponent {}"
+  },
+  {
+    "name": "Pagination",
+    "category": "Navigation",
+    "module": "NgcPaginationModule",
+    "selector": "ngc-pagination",
+    "description": "Page index controls and pagination for large datasets",
+    "inputs": [
+      {
+        "name": "pageIndex",
+        "type": "number",
+        "default": "1",
+        "description": "Current active page number (1-based)."
+      },
+      {
+        "name": "pageSize",
+        "type": "number",
+        "default": "10",
+        "description": "Number of items displayed per page."
+      },
+      {
+        "name": "total",
+        "type": "number",
+        "default": "0",
+        "description": "Total number of items in dataset."
+      },
+      {
+        "name": "pageSizeOptions",
+        "type": "number[]",
+        "default": "[10, 20, 50, 100]",
+        "description": "Page size choices available in the page-size selector."
+      },
+      {
+        "name": "showSizeChanger",
+        "type": "boolean",
+        "default": "true",
+        "description": "Displays dropdown allowing user to change pageSize."
+      },
+      {
+        "name": "showQuickJumper",
+        "type": "boolean",
+        "default": "false",
+        "description": "Displays text input allowing user to jump directly to page number."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables all pagination buttons."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "pageChange",
+        "type": "EventEmitter<number>",
+        "description": "Emitted when user navigates to a new page."
+      },
+      {
+        "name": "pageSizeChange",
+        "type": "EventEmitter<number>",
+        "description": "Emitted when user selects a different page size."
+      }
+    ],
+    "templateExample": "<ngc-pagination></ngc-pagination>",
+    "tsExample": "import { NgcPaginationModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcPaginationModule],\n  template: `<ngc-pagination></ngc-pagination>`\n})\nexport class PaginationExampleComponent {}"
+  },
+  {
+    "name": "Phone Field",
+    "category": "Data Entry",
+    "module": "NgcPhoneFieldModule",
+    "selector": "ngc-phone-field",
+    "description": "International telephone input with country flag and dial code",
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "NgcIPhoneField",
+        "default": "undefined",
+        "description": "Two-way bound object containing phone number, country code, and dial code."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "'Phone Number'",
+        "description": "Label text displayed above the phone input."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "undefined",
+        "description": "Input placeholder formatted to selected country example."
+      },
+      {
+        "name": "preferredCountries",
+        "type": "string[]",
+        "default": "['vn', 'us', 'gb', 'sg']",
+        "description": "List of ISO country codes pinned to top of country dropdown."
+      },
+      {
+        "name": "onlyCountries",
+        "type": "string[]",
+        "default": "[]",
+        "description": "Restricts country selector to an allowed subset of countries."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables input and country selection."
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "default": "false",
+        "description": "Validates that phone number is complete and mandatory."
+      },
+      {
+        "name": "appearance",
+        "type": "'default' | 'outline' | 'filled'",
+        "default": "'default'",
+        "description": "Visual border styling for the phone field."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<NgcIPhoneField>",
+        "description": "Emitted when user types or updates phone details."
+      },
+      {
+        "name": "countryChange",
+        "type": "EventEmitter<NgcICountry>",
+        "description": "Emitted when user selects a different country from the dropdown."
+      },
+      {
+        "name": "focus",
+        "type": "EventEmitter<FocusEvent>",
+        "description": "Emitted on phone input focus."
+      },
+      {
+        "name": "blur",
+        "type": "EventEmitter<FocusEvent>",
+        "description": "Emitted on phone input blur."
+      }
+    ],
+    "templateExample": "<ngc-phone-field></ngc-phone-field>",
+    "tsExample": "import { NgcPhoneFieldModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcPhoneFieldModule],\n  template: `<ngc-phone-field></ngc-phone-field>`\n})\nexport class PhoneFieldExampleComponent {}"
+  },
+  {
+    "name": "Popover",
+    "category": "Feedback",
+    "module": "NgcPopoverModule",
+    "selector": "ngc-popover",
+    "description": "Floating interactive popover container anchored to elements",
+    "inputs": [
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "backdropClass",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "class",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-popover></ngc-popover>",
+    "tsExample": "import { NgcPopoverModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcPopoverModule],\n  template: `<ngc-popover></ngc-popover>`\n})\nexport class PopoverExampleComponent {}"
+  },
+  {
+    "name": "Progress",
+    "category": "Feedback",
+    "module": "NgcProgressModule",
+    "selector": "ngc-progress",
+    "description": "Determinate and indeterminate progress bar indicator",
+    "inputs": [
+      {
+        "name": "min",
+        "type": "number",
+        "default": "0",
+        "description": "No description available."
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "value",
+        "type": "number",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "mode",
+        "type": "IProgressBarMode",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "statusText",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "labelText",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-progress></ngc-progress>",
+    "tsExample": "import { NgcProgressModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcProgressModule],\n  template: `<ngc-progress></ngc-progress>`\n})\nexport class ProgressExampleComponent {}"
+  },
+  {
+    "name": "Radio Group",
+    "category": "Data Entry",
+    "module": "NgcRadioGroupModule",
+    "selector": "ngc-radio-group",
+    "description": "Single-selection radio button group for form choices",
+    "inputs": [
+      {
+        "name": "value",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "bgColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "labelColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "ngModel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "label",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "disableControl",
+        "type": "boolean",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "formControl",
+        "type": "FormControl",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "checkedChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<any>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-radio-group></ngc-radio-group>",
+    "tsExample": "import { NgcRadioGroupModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcRadioGroupModule],\n  template: `<ngc-radio-group></ngc-radio-group>`\n})\nexport class RadioGroupExampleComponent {}"
+  },
+  {
+    "name": "Range Input",
+    "category": "Data Entry",
+    "module": "NgcRangeInputModule",
+    "selector": "ngc-range-input",
+    "description": "Dual-handle range slider for numeric boundaries",
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "number[]",
+        "default": "[0, 100]",
+        "description": "Two-way bound array holding [startValue, endValue] range bounds."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "Field label displayed above range inputs."
+      },
+      {
+        "name": "startRangeName",
+        "type": "string",
+        "default": "'From'",
+        "description": "Label for the start range numeric input."
+      },
+      {
+        "name": "endRangeName",
+        "type": "string",
+        "default": "'To'",
+        "description": "Label for the end range numeric input."
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "default": "0",
+        "description": "Minimum allowed number bound."
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "default": "100",
+        "description": "Maximum allowed number bound."
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "default": "1",
+        "description": "Step increment value for sliders and stepper inputs."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables range interaction."
+      },
+      {
+        "name": "appearance",
+        "type": "'default' | 'outline' | 'filled'",
+        "default": "'default'",
+        "description": "Visual container appearance for the dual inputs."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<number[]>",
+        "description": "Emitted when start or end range value changes."
+      }
+    ],
+    "templateExample": "<ngc-range-input></ngc-range-input>",
+    "tsExample": "import { NgcRangeInputModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcRangeInputModule],\n  template: `<ngc-range-input></ngc-range-input>`\n})\nexport class RangeInputExampleComponent {}"
+  },
+  {
+    "name": "Resize",
+    "category": "Layout",
+    "module": "NgcResizeModule",
+    "selector": "ngc-resize",
+    "description": "Interactive draggable resizable panels and splitter dividers",
+    "inputs": [
+      {
+        "name": "direction",
+        "type": "'horizontal' | 'vertical'",
+        "default": "'horizontal'",
+        "description": "Direction of panel layout. 'horizontal' stacks panels side-by-side (row). 'vertical' stacks panels top-to-bottom (column)."
+      },
+      {
+        "name": "defaultSize",
+        "type": "number",
+        "default": "undefined",
+        "description": "[Panel] Initial size of the panel in percentage (0–100). Unconfigured panels split remaining space equally."
+      },
+      {
+        "name": "minSize",
+        "type": "number",
+        "default": "0",
+        "description": "[Panel] Minimum allowed size in percentage that the panel can be dragged down to."
+      },
+      {
+        "name": "maxSize",
+        "type": "number",
+        "default": "100",
+        "description": "[Panel] Maximum allowed size in percentage that the panel can be dragged up to."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-resize></ngc-resize>",
+    "tsExample": "import { NgcResizeModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcResizeModule],\n  template: `<ngc-resize></ngc-resize>`\n})\nexport class ResizeExampleComponent {}"
+  },
+  {
+    "name": "Scroll Bar",
+    "category": "Layout",
+    "module": "NgcScrollBarModule",
+    "selector": "ngc-scroll-bar",
+    "description": "Custom styled cross-browser smooth scrollbar wrapper",
+    "inputs": [
+      {
+        "name": "mode",
+        "type": "'auto' | 'hover' | 'always' | 'hidden' | 'overlay'",
+        "default": "'overlay'",
+        "description": "Display behavior of custom scrollbar thumb: 'hover' shows on mouseover, 'always' stays visible, 'overlay' floats above content."
+      },
+      {
+        "name": "suppressScrollX",
+        "type": "boolean",
+        "default": "false",
+        "description": "Suppresses horizontal scrolling track and behavior."
+      },
+      {
+        "name": "suppressScrollY",
+        "type": "boolean",
+        "default": "false",
+        "description": "Suppresses vertical scrolling track and behavior."
+      },
+      {
+        "name": "suppress",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables custom scrollbar completely and reverts to native browser scroll."
+      },
+      {
+        "name": "suppressMode",
+        "type": "'visible' | 'hidden'",
+        "default": "'visible'",
+        "description": "Visual overflow state when scroll is suppressed."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "viewPortChanged",
+        "type": "EventEmitter<any>",
+        "description": "Fired when visible scroll container viewport dimensions change."
+      },
+      {
+        "name": "inViewPort",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when a designated viewport child item enters or leaves visible scroll area."
+      }
+    ],
+    "templateExample": "<ngc-scroll-bar></ngc-scroll-bar>",
+    "tsExample": "import { NgcScrollBarModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcScrollBarModule],\n  template: `<ngc-scroll-bar></ngc-scroll-bar>`\n})\nexport class ScrollBarExampleComponent {}"
+  },
+  {
+    "name": "Search Box",
+    "category": "Data Entry",
+    "module": "NgcSearchBoxModule",
+    "selector": "ngc-search-box",
+    "description": "Debounced search input with clear button and loading indicator",
+    "inputs": [
+      {
+        "name": "data",
+        "type": "any[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "suggestion",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "ngModel",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "suffixIcon",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "disableControl",
+        "type": "boolean",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "notFoundData",
+        "type": "INotFoundData",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "formControl",
+        "type": "FormControl",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "filterPredicate",
+        "type": "( data: any, searchQuery: string, searchKey?: string )",
+        "default": "> boolean",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "searching",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "cleared",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "filtered",
+        "type": "EventEmitter<any[]>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "suggested",
+        "type": "EventEmitter<any>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "prefixIconClicked",
+        "type": "EventEmitter<void>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "suffixIconClicked",
+        "type": "EventEmitter<void>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "input",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "focus",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "blur",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-search-box></ngc-search-box>",
+    "tsExample": "import { NgcSearchBoxModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcSearchBoxModule],\n  template: `<ngc-search-box></ngc-search-box>`\n})\nexport class SearchBoxExampleComponent {}"
+  },
+  {
+    "name": "Select",
+    "category": "Data Entry",
+    "module": "NgcSelectModule",
+    "selector": "ngc-select",
+    "description": "Custom select menu with single/multiple choice options",
+    "inputs": [
+      {
+        "name": "options",
+        "type": "NgcSelectOption[]",
+        "default": "[]",
+        "description": "Array of option objects or values to render in the select dropdown list."
+      },
+      {
+        "name": "ngModel / value",
+        "type": "any",
+        "default": "undefined",
+        "description": "Two-way bound selected value or array of selected values in multiple mode."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "'Select option'",
+        "description": "Placeholder text rendered when no option is selected."
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "description": "Enables multi-selection mode with chips or comma-separated summary."
+      },
+      {
+        "name": "searchable",
+        "type": "boolean",
+        "default": "false",
+        "description": "Enables search filter input inside the select dropdown."
+      },
+      {
+        "name": "clearable",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders a clear button to deselect active value."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables opening dropdown and selecting options."
+      },
+      {
+        "name": "compareWith",
+        "type": "(o1: any, o2: any) => boolean",
+        "default": "(o1, o2) => o1 === o2",
+        "description": "Custom comparison function for matching complex object values."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "selectionChange",
+        "type": "EventEmitter<any>",
+        "description": "Emitted when a user chooses or changes selected option."
+      },
+      {
+        "name": "opened",
+        "type": "EventEmitter<void>",
+        "description": "Fired when the select dropdown popup is opened."
+      },
+      {
+        "name": "closed",
+        "type": "EventEmitter<void>",
+        "description": "Fired when the select dropdown popup is closed."
+      },
+      {
+        "name": "search",
+        "type": "EventEmitter<string>",
+        "description": "Emitted when user types search query in filter box."
+      }
+    ],
+    "templateExample": "<ngc-select></ngc-select>",
+    "tsExample": "import { NgcSelectModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcSelectModule],\n  template: `<ngc-select></ngc-select>`\n})\nexport class SelectExampleComponent {}"
+  },
+  {
+    "name": "Sheet",
+    "category": "Layout",
+    "module": "NgcSheetModule",
+    "selector": "ngc-sheet",
+    "description": "Bottom sheet and slide-up dialog container for mobile-friendly UX",
+    "inputs": [
+      {
+        "name": "opened",
+        "type": "boolean",
+        "default": "false",
+        "description": "Controls visibility of the bottom sheet overlay."
+      },
+      {
+        "name": "hasBackdrop",
+        "type": "boolean",
+        "default": "true",
+        "description": "Whether to render a semi-transparent backdrop behind the sheet."
+      },
+      {
+        "name": "closeOnBackdropClick",
+        "type": "boolean",
+        "default": "true",
+        "description": "Automatically dismiss the sheet when clicking the backdrop."
+      },
+      {
+        "name": "height",
+        "type": "string | number",
+        "default": "'auto'",
+        "description": "Explicit height or max-height for the sheet panel."
+      },
+      {
+        "name": "width",
+        "type": "string | number",
+        "default": "'100%'",
+        "description": "Width dimension for the sheet panel."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "openedChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted when the sheet open state toggles."
+      },
+      {
+        "name": "dismissed",
+        "type": "EventEmitter<void>",
+        "description": "Emitted when the sheet is closed or dismissed by user."
+      }
+    ],
+    "templateExample": "<ngc-sheet></ngc-sheet>",
+    "tsExample": "import { NgcSheetModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcSheetModule],\n  template: `<ngc-sheet></ngc-sheet>`\n})\nexport class SheetExampleComponent {}"
+  },
+  {
+    "name": "Sidebar",
+    "category": "Layout",
+    "module": "NgcSidebarModule",
+    "selector": "ngc-sidebar",
+    "description": "Collapsible desktop navigation sidebar container",
+    "inputs": [
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "bgColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "openedChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-sidebar></ngc-sidebar>",
+    "tsExample": "import { NgcSidebarModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcSidebarModule],\n  template: `<ngc-sidebar></ngc-sidebar>`\n})\nexport class SidebarExampleComponent {}"
+  },
+  {
+    "name": "Skeleton",
+    "category": "Feedback",
+    "module": "NgcSkeletonModule",
+    "selector": "ngc-skeleton",
+    "description": "Animated placeholder skeleton wireframes for content loading",
+    "inputs": [
+      {
+        "name": "active",
+        "type": "boolean",
+        "default": "true",
+        "description": "Enables shimmering pulse animation on placeholder blocks."
+      },
+      {
+        "name": "shape",
+        "type": "'text' | 'circle' | 'rect' | 'avatar' | 'button'",
+        "default": "'text'",
+        "description": "Geometric shape of the skeleton placeholder."
+      },
+      {
+        "name": "count",
+        "type": "number",
+        "default": "1",
+        "description": "Number of skeleton rows to generate in series."
+      },
+      {
+        "name": "width",
+        "type": "string",
+        "default": "'100%'",
+        "description": "Width dimension of skeleton block."
+      },
+      {
+        "name": "height",
+        "type": "string",
+        "default": "'16px'",
+        "description": "Height dimension of skeleton block."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-skeleton></ngc-skeleton>",
+    "tsExample": "import { NgcSkeletonModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcSkeletonModule],\n  template: `<ngc-skeleton></ngc-skeleton>`\n})\nexport class SkeletonExampleComponent {}"
+  },
+  {
+    "name": "Switch",
+    "category": "Data Entry",
+    "module": "NgcSwitchModule",
+    "selector": "ngc-switch",
+    "description": "Binary toggle switch for enabling and disabling preferences",
+    "inputs": [
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "labelColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "ngModel",
+        "type": "boolean",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "readonly",
+        "type": "boolean",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-switch></ngc-switch>",
+    "tsExample": "import { NgcSwitchModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcSwitchModule],\n  template: `<ngc-switch></ngc-switch>`\n})\nexport class SwitchExampleComponent {}"
+  },
+  {
+    "name": "Table",
+    "category": "Data Display",
+    "module": "NgcTableModule",
+    "selector": "ngc-table",
+    "description": "Clean HTML table wrapper for tabular datasets",
+    "inputs": [
+      {
+        "name": "scrolling",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "list",
+        "type": "any[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "textContent",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "type",
+        "type": "NgcIExcelCellType",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "scrolling",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "textContentChange",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "focus",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      },
+      {
+        "name": "blur",
+        "type": "EventEmitter<Event>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-table></ngc-table>",
+    "tsExample": "import { NgcTableModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcTableModule],\n  template: `<ngc-table></ngc-table>`\n})\nexport class TableExampleComponent {}"
+  },
+  {
+    "name": "Tabs",
+    "category": "Navigation",
+    "module": "NgcTabsModule",
+    "selector": "ngc-tabs",
+    "description": "Tabbed content switcher for organizing view sections",
+    "inputs": [
+      {
+        "name": "selectedIndex",
+        "type": "number",
+        "default": "0",
+        "description": "Active tab index (0-based)."
+      },
+      {
+        "name": "headerHeight",
+        "type": "string | number",
+        "default": "'40px'",
+        "description": "Height of the tab header buttons bar."
+      },
+      {
+        "name": "contentPaddingVertical",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Vertical padding for projected tab content."
+      },
+      {
+        "name": "contentPaddingHorizontal",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Horizontal padding for projected tab content."
+      },
+      {
+        "name": "contentPaddingTop / contentPaddingBottom",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Individual top/bottom padding for tab content."
+      },
+      {
+        "name": "contentPaddingLeft / contentPaddingRight",
+        "type": "string | number",
+        "default": "'20px'",
+        "description": "Individual left/right padding for tab content."
+      },
+      {
+        "name": "dynamicHeight",
+        "type": "boolean",
+        "default": "false",
+        "description": "Animates container height to match current active tab content."
+      },
+      {
+        "name": "[ngcTab] label",
+        "type": "string",
+        "default": "undefined",
+        "description": "Text title displayed on tab trigger button."
+      },
+      {
+        "name": "[ngcTab] disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables clicking on this specific tab."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "selectedIndexChange",
+        "type": "EventEmitter<number>",
+        "description": "Emitted when active tab index changes."
+      },
+      {
+        "name": "selectedTabChange",
+        "type": "EventEmitter<NgcTabComponent>",
+        "description": "Emitted with the newly activated NgcTab component instance."
+      }
+    ],
+    "templateExample": "<ngc-tabs></ngc-tabs>",
+    "tsExample": "import { NgcTabsModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcTabsModule],\n  template: `<ngc-tabs></ngc-tabs>`\n})\nexport class TabsExampleComponent {}"
+  },
+  {
+    "name": "Tag",
+    "category": "Data Display",
+    "module": "NgcTagModule",
+    "selector": "ngc-tag",
+    "description": "Compact label tag chip with customizable colors and removable close button",
+    "inputs": [
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "labelColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "tagColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "moreMenu",
+        "type": "NgcMenuComponent",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "showMore",
+        "type": "EventEmitter<void>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-tag></ngc-tag>",
+    "tsExample": "import { NgcTagModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcTagModule],\n  template: `<ngc-tag></ngc-tag>`\n})\nexport class TagExampleComponent {}"
+  },
+  {
+    "name": "Textarea",
+    "category": "Data Entry",
+    "module": "NgcTextareaModule",
+    "selector": "ngc-textarea",
+    "description": "Multi-line expandable textarea for long-form content",
+    "inputs": [
+      {
+        "name": "label",
+        "type": "string",
+        "default": "'Textarea'",
+        "description": "No description available."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "'Enter content...'",
+        "description": "No description available."
+      },
+      {
+        "name": "rows",
+        "type": "number",
+        "default": "5",
+        "description": "No description available."
+      },
+      {
+        "name": "cols",
+        "type": "number",
+        "default": "40",
+        "description": "No description available."
+      },
+      {
+        "name": "appearance",
+        "type": "'default' | 'filled' | 'underlined' | 'borderless'",
+        "default": "'default'",
+        "description": "No description available."
+      },
+      {
+        "name": "resize",
+        "type": "'vertical' | 'horizontal' | 'both' | 'none'",
+        "default": "'vertical'",
+        "description": "No description available."
+      },
+      {
+        "name": "debounceTime",
+        "type": "any",
+        "default": "300",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "maxLength",
+        "type": "number",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "errorMessage",
+        "type": "string",
+        "default": "'Error'",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "valueChange",
+        "type": "EventEmitter<string>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-textarea></ngc-textarea>",
+    "tsExample": "import { NgcTextareaModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcTextareaModule],\n  template: `<ngc-textarea></ngc-textarea>`\n})\nexport class TextareaExampleComponent {}"
+  },
+  {
+    "name": "Timeline",
+    "category": "Data Display",
+    "module": "NgcTimelineModule",
+    "selector": "ngc-timeline",
+    "description": "Vertical sequential activity timeline for event histories",
+    "inputs": [
+      {
+        "name": "alternate",
+        "type": "boolean",
+        "default": "false",
+        "description": "Alternates timeline entries on both sides of the center axis."
+      },
+      {
+        "name": "horizontal",
+        "type": "boolean",
+        "default": "false",
+        "description": "Renders timeline nodes horizontally left-to-right."
+      },
+      {
+        "name": "[ngcTimelineItem] color",
+        "type": "string",
+        "default": "'primary'",
+        "description": "Dot indicator color: primary, success, warning, danger, or custom CSS color."
+      },
+      {
+        "name": "[ngcTimelineItem] time",
+        "type": "string",
+        "default": "undefined",
+        "description": "Timestamp or date text displayed alongside the milestone."
+      },
+      {
+        "name": "[ngcTimelineItem] selected",
+        "type": "boolean",
+        "default": "false",
+        "description": "Highlights the timeline item as the currently active step."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "itemClick",
+        "type": "EventEmitter<any>",
+        "description": "Emitted when a timeline milestone item is clicked."
+      }
+    ],
+    "templateExample": "<ngc-timeline></ngc-timeline>",
+    "tsExample": "import { NgcTimelineModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcTimelineModule],\n  template: `<ngc-timeline></ngc-timeline>`\n})\nexport class TimelineExampleComponent {}"
+  },
+  {
+    "name": "Toast",
+    "category": "Feedback",
+    "module": "NgcToastModule",
+    "selector": "ngc-toast",
+    "description": "Floating temporary alert notification banner that auto-dismisses",
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "textColor",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "buttons",
+        "type": "NgcIToastButton[]",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "translateParams",
+        "type": "IObject",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "type",
+        "type": "NgcIToastType",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "closed",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Event emitted by the component."
+      }
+    ],
+    "templateExample": "<ngc-toast></ngc-toast>",
+    "tsExample": "import { NgcToastModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcToastModule],\n  template: `<ngc-toast></ngc-toast>`\n})\nexport class ToastExampleComponent {}"
+  },
+  {
+    "name": "Tooltip",
+    "category": "Data Display",
+    "module": "NgcTooltipModule",
+    "selector": "ngc-tooltip",
+    "description": "Contextual hover and focus tooltip bubble",
+    "inputs": [
+      {
+        "name": "color",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "backdropClass",
+        "type": "string",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceCssPixel",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "CoerceBoolean",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "DefaultValue",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      },
+      {
+        "name": "class",
+        "type": "any",
+        "default": "undefined",
+        "description": "No description available."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-tooltip></ngc-tooltip>",
+    "tsExample": "import { NgcTooltipModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcTooltipModule],\n  template: `<ngc-tooltip></ngc-tooltip>`\n})\nexport class TooltipExampleComponent {}"
+  },
+  {
+    "name": "Tree",
+    "category": "Data Display",
+    "module": "NgcTreeModule",
+    "selector": "ngc-tree",
+    "description": "Expandable hierarchical tree view for nested structures",
+    "inputs": [
+      {
+        "name": "data",
+        "type": "NgcTreeNode[]",
+        "default": "[]",
+        "description": "Hierarchical node structure datasets to render in the tree."
+      },
+      {
+        "name": "checkable",
+        "type": "boolean",
+        "default": "false",
+        "description": "Whether to render interactive checkboxes next to each node."
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "default": "false",
+        "description": "Support multiple selections inside the tree."
+      },
+      {
+        "name": "draggable",
+        "type": "boolean",
+        "default": "false",
+        "description": "Allow dragging and dropping tree nodes to modify the hierarchy."
+      },
+      {
+        "name": "loadData",
+        "type": "(node: NgcTreeNode) => Promise<void> | Observable<void>",
+        "default": "undefined",
+        "description": "Asynchronous callback handler to lazy-load child nodes on expand."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "nodeExpand",
+        "type": "EventEmitter<NgcTreeNode>",
+        "description": "Event emitted when a parent node is expanded or collapsed."
+      },
+      {
+        "name": "nodeSelect",
+        "type": "EventEmitter<NgcTreeNode>",
+        "description": "Event emitted when a node title or text is clicked/selected."
+      },
+      {
+        "name": "nodeCheck",
+        "type": "EventEmitter<NgcTreeNode[]>",
+        "description": "Event emitted when checkboxes are toggled, returning list of all checked nodes."
+      },
+      {
+        "name": "nodeDrop",
+        "type": "EventEmitter<{ dragNode: NgcTreeNode, dropNode: NgcTreeNode }>",
+        "description": "Event emitted when a node is dragged and dropped onto another node."
+      },
+      {
+        "name": "dataChange",
+        "type": "EventEmitter<NgcTreeNode[]>",
+        "description": "Event emitted on any node selection, check, or expansion change, returning the entire tree structure."
+      }
+    ],
+    "templateExample": "<ngc-tree></ngc-tree>",
+    "tsExample": "import { NgcTreeModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcTreeModule],\n  template: `<ngc-tree></ngc-tree>`\n})\nexport class TreeExampleComponent {}"
+  },
+  {
+    "name": "Truncate",
+    "category": "Data Display",
+    "module": "NgcTruncateModule",
+    "selector": "ngc-truncate",
+    "description": "Text truncation with inline read more / read less toggle",
+    "inputs": [
+      {
+        "name": "limitLine",
+        "type": "number",
+        "default": "2",
+        "description": "Number of lines of text to display before adding ellipsis."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disables multi-line clamping, showing full text."
+      },
+      {
+        "name": "tooltip",
+        "type": "boolean",
+        "default": "true",
+        "description": "Automatically renders full text in tooltip on hover when truncated."
+      },
+      {
+        "name": "[ngcBlockTruncate] length",
+        "type": "number",
+        "default": "undefined",
+        "description": "Maximum character count limit for single line string truncation."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "truncated",
+        "type": "EventEmitter<boolean>",
+        "description": "Emitted with true if text overflows and gets truncated."
+      }
+    ],
+    "templateExample": "<ngc-truncate></ngc-truncate>",
+    "tsExample": "import { NgcTruncateModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcTruncateModule],\n  template: `<ngc-truncate></ngc-truncate>`\n})\nexport class TruncateExampleComponent {}"
+  },
+  {
+    "name": "Typography",
+    "category": "General",
+    "module": "NgcTypographyModule",
+    "selector": "ngc-typography",
+    "description": "Typographic scale, font families, headings, and hierarchy",
+    "inputs": [
+      {
+        "name": "font-family",
+        "type": "CSS Font Token",
+        "default": "Inter, -apple-system, sans-serif",
+        "description": "Primary modern typeface stack used across all NGC components."
+      },
+      {
+        "name": "Heading H1–H6",
+        "type": "Classes (.h1 to .h6)",
+        "default": "32px / 24px / 20px / 18px / 16px / 14px",
+        "description": "Structured typographic scale for headings with proportional line-heights and 600/700 font weights."
+      },
+      {
+        "name": "Body Text",
+        "type": "Classes (.text-sm, .text-base, .text-lg)",
+        "default": "13px / 14px / 16px",
+        "description": "Standard body font sizes with optimized line-height for readability."
+      },
+      {
+        "name": "Text Weights",
+        "type": "Classes (.text-regular, .text-medium, .text-semibold, .text-bold)",
+        "default": "400 / 500 / 600 / 700",
+        "description": "Standardized font weights across UI elements."
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-typography></ngc-typography>",
+    "tsExample": "import { NgcTypographyModule } from 'ngc-library';\n\n@Component({\n  imports: [NgcTypographyModule],\n  template: `<ngc-typography></ngc-typography>`\n})\nexport class TypographyExampleComponent {}"
   }
 ]
