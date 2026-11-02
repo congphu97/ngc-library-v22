@@ -1,0 +1,25 @@
+{
+  "name": "ngc-library-mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) Server for NGC Angular Component Library",
+  "main": "index.mjs",
+  "bin": {
+    "ngc-library-mcp": "./index.mjs"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ngc-library",
+    "angular",
+    "ai-agent",
+    "cursor",
+    "claude"
+  ],
+  "author": "Phu Tran",
+  "license": "MIT"
+}
+

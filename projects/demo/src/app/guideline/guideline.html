@@ -37,6 +37,18 @@
 								</div>
 								<span class="item-badge">Docs</span>
 							</button>
+
+							<button class="sidebar-item-card content-component" [class.active]="showMcpDocs" [class.content-component--active]="showMcpDocs"
+								(click)="goMcpDocs()" title="Model Context Protocol (MCP) Server for AI Assistants">
+								<div class="item-icon-box">
+									<ngc-icon name="api" size="18px"></ngc-icon>
+								</div>
+								<div class="item-info">
+									<span class="item-name">MCP Server</span>
+									<span class="item-cat">AI Context Protocol</span>
+								</div>
+								<span class="item-badge">AI</span>
+							</button>
 						</div>
 
 						<div *ngFor="let group of groupedSidebarComponents; let idx = index" class="sidebar-group-section mt-12">
@@ -48,8 +60,8 @@
 							<div class="sidebar-items-list">
 								<button *ngFor="let component of group.items" 
 									class="sidebar-item-card content-component" 
-									[class.active]="!showOverview && !showGetStarted && currentCompLabel === component?.label"
-									[class.content-component--active]="!showOverview && !showGetStarted && currentCompLabel === component?.label"
+									[class.active]="!showOverview && !showGetStarted && !showMcpDocs && currentCompLabel === component?.label"
+									[class.content-component--active]="!showOverview && !showGetStarted && !showMcpDocs && currentCompLabel === component?.label"
 									(click)="selectCompTemplate(component)"
 									[title]="component?.label">
 									<div class="item-icon-box">
@@ -131,11 +143,146 @@ export class AppModule &#123; &#125;</code></pre>
 						</ngc-code-block>
 					</div>
 
-					<ng-container *ngIf="!showOverview && !showGetStarted">
+					<!-- Detailed MCP Documentation Page -->
+					<div *ngIf="showMcpDocs" class="mcp-docs-page p-20" style="max-width: 960px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+						<div class="mcp-hero-badge mb-15">
+							<span class="mcp-pill">AI Standard Protocol</span>
+							<span class="mcp-version">v1.0.0</span>
+						</div>
+						<h3 class="mb-10" style="font-size: 26px; font-weight: 800; color: #09090b; margin-top: 0; letter-spacing: -0.02em;">Model Context Protocol (MCP) Server</h3>
+						<p style="font-size: 15px; color: #52525b; line-height: 1.6; margin-bottom: 25px;">
+							The <strong>NGC Library MCP Server</strong> provides a high-performance bridge that connects NGC components directly to AI assistants such as <strong>Cursor IDE</strong>, <strong>Claude Desktop</strong>, <strong>Google Antigravity</strong>, <strong>Windsurf</strong>, and <strong>Cline</strong>. It supplies LLMs with verified API specifications, Angular templates, TypeScript usage patterns, and design tokens for 100% accurate, hallucination-free code generation.
+						</p>
+
+						<div class="mcp-feature-grid mb-30">
+							<div class="mcp-feature-card">
+								<div class="feature-icon"><ngc-icon name="api" size="20px"></ngc-icon></div>
+								<div class="feature-title">5 Built-in Tools</div>
+								<div class="feature-desc">Query component specs, input/output APIs, live code examples, design tokens, and generate full Angular screens.</div>
+							</div>
+							<div class="mcp-feature-card">
+								<div class="feature-icon"><ngc-icon name="code" size="20px"></ngc-icon></div>
+								<div class="feature-title">Zero Dependency</div>
+								<div class="feature-desc">Runs natively on Node.js stdio JSON-RPC without requiring any third-party npm packages.</div>
+							</div>
+							<div class="mcp-feature-card">
+								<div class="feature-icon"><ngc-icon name="computer" size="20px"></ngc-icon></div>
+								<div class="feature-title">Cross-Platform AI</div>
+								<div class="feature-desc">Compatible with Cursor, Claude Desktop, Antigravity, Windsurf, Cline, and any MCP-compliant client.</div>
+							</div>
+						</div>
+
+						<h3 class="mb-15" style="font-size: 20px; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7; padding-bottom: 8px;">1. Available MCP Tools</h3>
+						<div class="mcp-tools-table-wrap mb-30">
+							<table class="mcp-tools-table">
+								<thead>
+									<tr>
+										<th>Tool Name</th>
+										<th>Description</th>
+										<th>Parameters</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><code>list_components</code></td>
+										<td>Lists all 63 UI components categorized by functional groups</td>
+										<td><code>category</code> <em>(optional)</em></td>
+									</tr>
+									<tr>
+										<td><code>get_component_doc</code></td>
+										<td>Retrieves full API spec, inputs, outputs, HTML, and TypeScript code for a component</td>
+										<td><code>name</code> <em>(required)</em></td>
+									</tr>
+									<tr>
+										<td><code>search_components</code></td>
+										<td>Intelligently searches components by keyword or functional requirement</td>
+										<td><code>query</code> <em>(required)</em></td>
+									</tr>
+									<tr>
+										<td><code>get_design_tokens</code></td>
+										<td>Returns CSS variables, primitive color scales, and semantic tokens</td>
+										<td><code>section</code> <em>(optional)</em></td>
+									</tr>
+									<tr>
+										<td><code>generate_screen_template</code></td>
+										<td>Generates complete, production-ready Angular screens (Login, Dashboard, Settings, CRUD)</td>
+										<td><code>type</code> <em>(required)</em></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<h3 class="mb-15 mt-30" style="font-size: 20px; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7; padding-bottom: 8px;">2. Cursor IDE Integration</h3>
+						<p style="font-size: 14px; color: #52525b; line-height: 1.6; margin-bottom: 15px;">
+							The project includes a ready-to-use <code>.cursor/mcp.json</code> file. Cursor detects and connects to the server automatically when opening this workspace. You can also configure it manually in Cursor Settings:
+						</p>
+						<ngc-code-block language="json">
+							<pre><code #codeContent>&#123;
+  "mcpServers": &#123;
+    "ngc-library": &#123;
+      "command": "node",
+      "args": ["./mcp-server/index.mjs"]
+    &#125;
+  &#125;
+&#125;</code></pre>
+						</ngc-code-block>
+
+						<h3 class="mb-15 mt-30" style="font-size: 20px; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7; padding-bottom: 8px;">3. Claude Desktop Integration</h3>
+						<p style="font-size: 14px; color: #52525b; line-height: 1.6; margin-bottom: 15px;">
+							Open your Claude Desktop configuration file at <code>~/Library/Application Support/Claude/claude_desktop_config.json</code> (macOS) or <code>%APPDATA%\Claude\claude_desktop_config.json</code> (Windows) and add:
+						</p>
+						<ngc-code-block language="json">
+							<pre><code #codeContent>&#123;
+  "mcpServers": &#123;
+    "ngc-library": &#123;
+      "command": "node",
+      "args": [
+        "/Users/congphu2210/Desktop/Phu/ngc-library-v22/mcp-server/index.mjs"
+      ]
+    &#125;
+  &#125;
+&#125;</code></pre>
+						</ngc-code-block>
+
+						<h3 class="mb-15 mt-30" style="font-size: 20px; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7; padding-bottom: 8px;">4. Google Antigravity / Gemini CLI Integration</h3>
+						<p style="font-size: 14px; color: #52525b; line-height: 1.6; margin-bottom: 15px;">
+							Add the server definition to your Antigravity configuration file at <code>~/.gemini/antigravity/mcp_servers.json</code>:
+						</p>
+						<ngc-code-block language="json">
+							<pre><code #codeContent>&#123;
+  "mcpServers": &#123;
+    "ngc-library": &#123;
+      "command": "node",
+      "args": [
+        "/Users/congphu2210/Desktop/Phu/ngc-library-v22/mcp-server/index.mjs"
+      ]
+    &#125;
+  &#125;
+&#125;</code></pre>
+						</ngc-code-block>
+
+						<h3 class="mb-15 mt-30" style="font-size: 20px; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7; padding-bottom: 8px;">5. Sample AI Prompts</h3>
+						<div class="mcp-prompt-examples mb-30">
+							<div class="prompt-item">
+								<span class="prompt-tag">Component Discovery</span>
+								<p class="prompt-text">"Does NGC Library have a component to display tabular data with sorting and pagination? Show me code examples."</p>
+							</div>
+							<div class="prompt-item">
+								<span class="prompt-tag">Screen Generation</span>
+								<p class="prompt-text">"Generate an Angular login component using NGC Library with Email, Password, Remember Me checkbox, and a Submit button."</p>
+							</div>
+							<div class="prompt-item">
+								<span class="prompt-tag">Design Tokens & Colors</span>
+								<p class="prompt-text">"What are the primary color palette and spacing variables defined in the NGC Library design tokens?"</p>
+							</div>
+						</div>
+					</div>
+
+					<ng-container *ngIf="!showOverview && !showGetStarted && !showMcpDocs">
 						<ng-container *ngTemplateOutlet="currentCompTemplate"></ng-container>
 					</ng-container>
 					
-					<div class="guideline-api-reference mt-40" *ngIf="!showOverview && getComponentDocs(currentCompLabel) && (getComponentDocs(currentCompLabel).inputs?.length || getComponentDocs(currentCompLabel).outputs?.length)">
+					<div class="guideline-api-reference mt-40" *ngIf="!showOverview && !showMcpDocs && getComponentDocs(currentCompLabel) && (getComponentDocs(currentCompLabel).inputs?.length || getComponentDocs(currentCompLabel).outputs?.length)">
 						<h3 class="mb-20">API Reference</h3>
 						
 						<div class="mb-35" *ngIf="getComponentDocs(currentCompLabel).inputs?.length">
@@ -2166,15 +2313,21 @@ export class AppModule &#123; &#125;</code></pre>
 					<ngc-icon name="bell-on" size="48px"></ngc-icon>
 					<span class="mt-5" style="font-size: 11px; opacity: 0.6;">48px</span>
 				</div>
+				<div class="mr-20 layout-column layout-align-center-center">
+					<ngc-icon name="star-outline" size="48px" color="#4f8ef7"></ngc-icon>
+					<span class="mt-5" style="font-size: 11px; opacity: 0.6;">ionic 48px</span>
+				</div>
 			</div>
 		</ngc-tab>
-						<ngc-tab [label]="'Code'">
+		<ngc-tab [label]="'Code'">
 			<ngc-code-block language="html">
-									<pre><code #codeContent>&lt;ngc-icon name="bell-on" size="16px"&gt;&lt;/ngc-icon&gt;
-					&lt;ngc-icon name="bell-on" size="24px"&gt;&lt;/ngc-icon&gt;
-					&lt;ngc-icon name="bell-on" size="36px"&gt;&lt;/ngc-icon&gt;
-					&lt;ngc-icon name="bell-on" size="48px"&gt;&lt;/ngc-icon&gt;</code></pre>
-								</ngc-code-block>
+				<pre><code #codeContent>&lt;!-- Works on both Icomoon and Ionic icons --&gt;
+&lt;ngc-icon name="bell-on" size="16px"&gt;&lt;/ngc-icon&gt;
+&lt;ngc-icon name="bell-on" size="24px"&gt;&lt;/ngc-icon&gt;
+&lt;ngc-icon name="bell-on" size="36px"&gt;&lt;/ngc-icon&gt;
+&lt;ngc-icon name="bell-on" size="48px"&gt;&lt;/ngc-icon&gt;
+&lt;ngc-icon name="star-outline" size="48px" color="#4f8ef7"&gt;&lt;/ngc-icon&gt;</code></pre>
+			</ngc-code-block>
 			<div class="mt-15" *ngIf="getComponentTsCode('Icon')">
 				<ngc-code-block [code]="getComponentTsCode('Icon')" language="typescript"></ngc-code-block>
 			</div>
@@ -2198,18 +2351,24 @@ export class AppModule &#123; &#125;</code></pre>
 					<span class="mt-5" style="font-size: 11px; opacity: 0.6;">#2ecc71</span>
 				</div>
 				<div class="mr-20 layout-column layout-align-center-center">
-					<ngc-icon name="star-outline" size="36px" [color]="'PRIMARY' | color"></ngc-icon>
+					<ngc-icon name="star-outline" size="36px" color="primary"></ngc-icon>
 					<span class="mt-5" style="font-size: 11px; opacity: 0.6;">primary</span>
+				</div>
+				<div class="mr-20 layout-column layout-align-center-center">
+					<ngc-icon name="bell-on" size="36px" color="#e74c3c"></ngc-icon>
+					<span class="mt-5" style="font-size: 11px; opacity: 0.6;">icomoon #e74c3c</span>
 				</div>
 			</div>
 		</ngc-tab>
-						<ngc-tab [label]="'Code'">
+		<ngc-tab [label]="'Code'">
 			<ngc-code-block language="html">
-									<pre><code #codeContent>&lt;ngc-icon name="star-outline" size="28px" color="#4f8ef7"&gt;&lt;/ngc-icon&gt;
-					&lt;ngc-icon name="star-outline" size="28px" color="#e74c3c"&gt;&lt;/ngc-icon&gt;
-					&lt;ngc-icon name="star-outline" size="28px" color="#2ecc71"&gt;&lt;/ngc-icon&gt;
-					&lt;ngc-icon name="star-outline" size="28px" [color]="'PRIMARY' | color"&gt;&lt;/ngc-icon&gt;</code></pre>
-								</ngc-code-block>
+				<pre><code #codeContent>&lt;!-- Works with hex, rgb, CSS variables, or named theme colors --&gt;
+&lt;ngc-icon name="star-outline" size="36px" color="#4f8ef7"&gt;&lt;/ngc-icon&gt;
+&lt;ngc-icon name="star-outline" size="36px" color="#e74c3c"&gt;&lt;/ngc-icon&gt;
+&lt;ngc-icon name="star-outline" size="36px" color="#2ecc71"&gt;&lt;/ngc-icon&gt;
+&lt;ngc-icon name="star-outline" size="36px" color="primary"&gt;&lt;/ngc-icon&gt;
+&lt;ngc-icon name="bell-on" size="36px" color="#e74c3c"&gt;&lt;/ngc-icon&gt;</code></pre>
+			</ngc-code-block>
 			<div class="mt-15" *ngIf="getComponentTsCode('Icon')">
 				<ngc-code-block [code]="getComponentTsCode('Icon')" language="typescript"></ngc-code-block>
 			</div>

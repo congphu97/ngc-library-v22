@@ -16,141 +16,7 @@ import { Observable, Observer } from 'rxjs';
 import { NgcIToastType } from '@app/@ngc/ngc-toast/toast/ngc-toast.component';
 import { NgcIMember } from '@app/@ngc/ngc-member-picker';
 import { NgcCdkTableDataSource } from '@app/@ngc/ngc-table';
-
-const COMPONENT_ICON_MAP: Record<string, string> = {
-	'Accordion'          : 'collapse',
-	'Alert'              : 'warning',
-	'Avatar'             : 'user',
-	'Avatar Picker'      : 'users',
-	'Badge'              : 'label',
-	'Breadcrumb'         : 'chevron-right',
-	'Button'             : 'sliders',
-	'Button Toggle'      : 'switch',
-	'Calendar'           : 'calendar',
-	'Card'               : 'collection',
-	'Carousel'           : 'board',
-	'Checkbox'           : 'checkbox',
-	'Clipboard'          : 'clipboard',
-	'Code Block'         : 'code-block',
-	'Collapse'           : 'minimize-left',
-	'Collapse Menu'      : 'tree-list',
-	'Color Picker'       : 'pick-color',
-	'Color & Typography' : 'palette',
-	'Comment'            : 'message',
-	'Confirm'            : 'help',
-	'Cropper'            : 'crop',
-	'Data Table'         : 'data-list',
-	'Date Picker'        : 'calendar-check',
-	'Dialog'             : 'id-card',
-	'Divide'             : 'division',
-	'Drawer'             : 'sidebar',
-	'Dropdown'           : 'dropdown',
-	'Emoji Picker'       : 'emoji',
-	'File Picker'        : 'attachment',
-	'Form Field'         : 'form',
-	'Grid'               : 'grid',
-	'Icon'               : 'image',
-	'Inline Input'       : 'edit',
-	'Input'              : 'text-input',
-	'List'               : 'list',
-	'Loading'            : 'progress-auto',
-	'Member Picker'      : 'user-plus',
-	'Menu'               : 'more-vertical',
-	'Navigation Menu'    : 'bulleted-list',
-	'Page'               : 'document',
-	'Pagination'         : 'more-horizontal',
-	'Phone Field'        : 'phone',
-	'Popover'            : 'info',
-	'Progress'           : 'progress',
-	'Radio Group'        : 'circle-check',
-	'Range Input'        : 'sliders',
-	'Resize'             : 'expand',
-	'Scroll Bar'         : 'move',
-	'Search Box'         : 'search',
-	'Search Box '        : 'search',
-	'Select'             : 'dropdown',
-	'Sheet'              : 'template',
-	'Sidebar'            : 'sidebar',
-	'Skeleton'           : 'template',
-	'Switch'             : 'switch',
-	'Table'              : 'table',
-	'Tabs'               : 'tab-plus',
-	'Tag'                : 'label',
-	'Textarea'           : 'long-text',
-	'Timeline'           : 'time-schedule',
-	'Toast'              : 'bell-new',
-	'Tooltip'            : 'help',
-	'Tree'               : 'hierachy',
-	'Truncate'           : 'more-horizontal',
-};
-
-const COMPONENT_GROUP_MAP: Record<string, string> = {
-	'Accordion': 'Layout',
-	'Alert': 'Feedback',
-	'Avatar': 'Data Display',
-	'Avatar Picker': 'Data Entry',
-	'Badge': 'Data Display',
-	'Breadcrumb': 'Navigation',
-	'Button': 'General',
-	'Button Toggle': 'Data Entry',
-	'Calendar': 'Data Display',
-	'Card': 'Data Display',
-	'Carousel': 'Data Display',
-	'Checkbox': 'Data Entry',
-	'Clipboard': 'General',
-	'Code Block': 'Data Display',
-	'Collapse': 'Layout',
-	'Collapse Menu': 'Layout',
-	'Color Picker': 'Data Entry',
-	'Color & Typography': 'General',
-	'Comment': 'Data Display',
-	'Confirm': 'Feedback',
-	'Cropper': 'Data Entry',
-	'Data Table': 'Data Display',
-	'Date Picker': 'Data Entry',
-	'Dialog': 'Feedback',
-	'Divide': 'Layout',
-	'Drawer': 'Layout',
-	'Dropdown': 'Data Entry',
-	'Emoji Picker': 'Data Entry',
-	'File Picker': 'Data Entry',
-	'Form Field': 'Data Entry',
-	'Grid': 'Layout',
-	'Icon': 'General',
-	'Inline Input': 'Data Entry',
-	'Input': 'Data Entry',
-	'List': 'Data Display',
-	'Loading': 'Feedback',
-	'Member Picker': 'Data Entry',
-	'Menu': 'Navigation',
-	'Navigation Menu': 'Navigation',
-	'Page': 'Layout',
-	'Pagination': 'Navigation',
-	'Phone Field': 'Data Entry',
-	'Popover': 'Feedback',
-	'Progress': 'Feedback',
-	'Radio Group': 'Data Entry',
-	'Range Input': 'Data Entry',
-	'Resize': 'Layout',
-	'Scroll Bar': 'Layout',
-	'Search Box ': 'Data Entry',
-	'Select': 'Data Entry',
-	'Sheet': 'Layout',
-	'Sidebar': 'Layout',
-	'Skeleton': 'Feedback',
-	'Switch': 'Data Entry',
-	'Table': 'Data Display',
-	'Tabs': 'Navigation',
-	'Tag': 'Data Display',
-	'Textarea': 'Data Entry',
-	'Timeline': 'Data Display',
-	'Toast': 'Feedback',
-	'Tooltip': 'Data Display',
-	'Tree': 'Data Display',
-	'Truncate': 'Data Display',
-};
-
-const COMPONENT_GROUP_ORDER = ['General', 'Layout', 'Navigation', 'Data Entry', 'Data Display', 'Feedback'];
+import { COMPONENT_GROUP_MAP, COMPONENT_GROUP_ORDER, COMPONENT_ICON_MAP } from './guideline.constants';
 
 @Component({
 	selector: 'guideline',
@@ -415,10 +281,12 @@ export class GuidelineComponent implements OnInit, DoCheck {
 	}
 
 	public showGetStarted = false;
+	public showMcpDocs = false;
 
 	get currentCompLabel(): string {
 		if (this.showOverview) return 'Overview';
 		if (this.showGetStarted) return 'Get Started';
+		if (this.showMcpDocs) return 'Model Context Protocol (MCP)';
 		return (this.currentCompTemplate as any)?.label || '';
 	}
 
@@ -431,6 +299,7 @@ export class GuidelineComponent implements OnInit, DoCheck {
 	public goOverview() {
 		this.showOverview = true;
 		this.showGetStarted = false;
+		this.showMcpDocs = false;
 		this.opened = false; // close drawer on mobile if needed
 		this._cdr.detectChanges();
 	}
@@ -438,6 +307,15 @@ export class GuidelineComponent implements OnInit, DoCheck {
 	public goGetStarted() {
 		this.showGetStarted = true;
 		this.showOverview = false;
+		this.showMcpDocs = false;
+		this.opened = false;
+		this._cdr.detectChanges();
+	}
+
+	public goMcpDocs() {
+		this.showMcpDocs = true;
+		this.showOverview = false;
+		this.showGetStarted = false;
 		this.opened = false;
 		this._cdr.detectChanges();
 	}
@@ -456,6 +334,7 @@ export class GuidelineComponent implements OnInit, DoCheck {
 
 		this.showOverview = false;
 		this.showGetStarted = false;
+		this.showMcpDocs = false;
 		this.currentCompTemplate = compTemplate;
 		this.selectedCompIndex = index;
 		window.location.hash = this.selectedCompIndex?.toString();

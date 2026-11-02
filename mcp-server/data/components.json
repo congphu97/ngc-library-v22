@@ -1,0 +1,599 @@
+[
+  {
+    "name": "Button",
+    "category": "General",
+    "module": "NgcButtonModule",
+    "selector": "button[ngcButton], button[ngcBasicButton], button[ngcOutlineButton]",
+    "description": "Modern interactive button with multiple appearance styles (primary, outline, basic, danger) and sizes.",
+    "inputs": [
+      {
+        "name": "color",
+        "type": "string",
+        "default": "primary",
+        "description": "Color theme: primary, danger, success, default"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Whether the button is disabled"
+      },
+      {
+        "name": "size",
+        "type": "sm | md | lg",
+        "default": "md",
+        "description": "Button size dimensions"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "click",
+        "type": "EventEmitter<MouseEvent>",
+        "description": "Fired when clicked"
+      }
+    ],
+    "templateExample": "<button ngcButton color=\"primary\" (click)=\"onAction()\">Submit</button>\n<button ngcOutlineButton color=\"default\">Cancel</button>",
+    "tsExample": "import { NgcButtonModule } from \"ngc-library\";\n\n@Component({\n  imports: [NgcButtonModule],\n  templateUrl: \"./example.component.html\"\n})\nexport class ExampleComponent {\n  onAction() { console.log(\"Clicked\"); }\n}"
+  },
+  {
+    "name": "Alert",
+    "category": "Feedback",
+    "module": "NgcAlertModule",
+    "selector": "ngc-alert",
+    "description": "Alert banner for displaying important status, warnings, errors, and system feedback.",
+    "inputs": [
+      {
+        "name": "type",
+        "type": "info | success | warning | danger",
+        "default": "info",
+        "description": "Severity type of alert"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": "\"\"",
+        "description": "Alert headline title"
+      },
+      {
+        "name": "dismissible",
+        "type": "boolean",
+        "default": "true",
+        "description": "Show close/dismiss button"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "close",
+        "type": "EventEmitter<void>",
+        "description": "Fired when dismissed"
+      }
+    ],
+    "templateExample": "<ngc-alert type=\"warning\" title=\"Warning Notice\" [dismissible]=\"true\">\n  Please verify your settings before proceeding.\n</ngc-alert>",
+    "tsExample": "import { NgcAlertModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Accordion",
+    "category": "Layout",
+    "module": "NgcExpansionPanelModule",
+    "selector": "ngc-expansion-panel, ngc-expansion-panel-header",
+    "description": "Collapsible accordion panels with custom headers, toggles, and expandable content bodies.",
+    "inputs": [
+      {
+        "name": "expanded",
+        "type": "boolean",
+        "default": "false",
+        "description": "Initial expand state"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Prevent toggling"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "opened",
+        "type": "EventEmitter<void>",
+        "description": "Fired when opened"
+      },
+      {
+        "name": "closed",
+        "type": "EventEmitter<void>",
+        "description": "Fired when closed"
+      }
+    ],
+    "templateExample": "<ngc-expansion-panel [expanded]=\"true\">\n  <ngc-expansion-panel-header>Panel Title</ngc-expansion-panel-header>\n  <p>Panel content body...</p>\n</ngc-expansion-panel>",
+    "tsExample": "import { NgcExpansionPanelModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Card",
+    "category": "Data Display",
+    "module": "NgcCardModule",
+    "selector": "ngc-card, ngc-card-header, ngc-card-content, ngc-card-footer",
+    "description": "Card container with header, content body, actions, and customizable elevation borders.",
+    "inputs": [
+      {
+        "name": "elevation",
+        "type": "number",
+        "default": "1",
+        "description": "Shadow depth (0-4)"
+      },
+      {
+        "name": "bordered",
+        "type": "boolean",
+        "default": "true",
+        "description": "Show card border"
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-card>\n  <div class=\"ngc-card__header\">Card Title</div>\n  <div class=\"ngc-card__body\">Card description and details.</div>\n  <div class=\"ngc-card__footer\">\n    <button ngcButton>Action</button>\n  </div>\n</ngc-card>",
+    "tsExample": "import { NgcCardModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Data Table",
+    "category": "Data Display",
+    "module": "NGCTableModule",
+    "selector": "ngc-table, ngc-cdk-table",
+    "description": "High performance data table with sorting, filtering, row selection, virtual scrolling and pagination.",
+    "inputs": [
+      {
+        "name": "dataSource",
+        "type": "any[] | NgcCdkTableDataSource",
+        "default": "[]",
+        "description": "Table rows data"
+      },
+      {
+        "name": "columns",
+        "type": "string[]",
+        "default": "[]",
+        "description": "Displayed column keys"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "rowClick",
+        "type": "EventEmitter<any>",
+        "description": "Fired on row click"
+      }
+    ],
+    "templateExample": "<ngc-table [dataSource]=\"users\">\n  <!-- column templates -->\n</ngc-table>",
+    "tsExample": "import { NGCTableModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Dialog",
+    "category": "Feedback",
+    "module": "NgcDialogModule",
+    "selector": "NgcDialogService",
+    "description": "Programmatic modal dialog service to open popup windows, forms, and custom components.",
+    "inputs": [],
+    "outputs": [],
+    "templateExample": "<!-- Opened via NgcDialogService in TypeScript -->",
+    "tsExample": "import { NgcDialogService } from \"ngc-library\";\n\nconstructor(private dialog: NgcDialogService) {}\n\nopenModal() {\n  this.dialog.open(MyDialogComponent, { width: \"450px\" });\n}"
+  },
+  {
+    "name": "Date Picker",
+    "category": "Data Entry",
+    "module": "NgcDatePickerModule",
+    "selector": "ngc-date-picker",
+    "description": "Calendar date picker supporting single date, range selection, time picker, and formats.",
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "Moment | string",
+        "default": "null",
+        "description": "Two-way date binding"
+      },
+      {
+        "name": "minDate",
+        "type": "Moment",
+        "default": "null",
+        "description": "Earliest selectable date"
+      },
+      {
+        "name": "maxDate",
+        "type": "Moment",
+        "default": "null",
+        "description": "Latest selectable date"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<Moment>",
+        "description": "Fired when date changes"
+      }
+    ],
+    "templateExample": "<ngc-date-picker [(ngModel)]=\"selectedDate\" placeholder=\"Select date\"></ngc-date-picker>",
+    "tsExample": "import { NgcDatePickerModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Toast",
+    "category": "Feedback",
+    "module": "NgcToastModule",
+    "selector": "NgcToastService",
+    "description": "Global notification toast service supporting success, info, warning, and error alerts.",
+    "inputs": [],
+    "outputs": [],
+    "templateExample": "<!-- Triggered via NgcToastService in TypeScript -->",
+    "tsExample": "import { NgcToastService } from \"ngc-library\";\n\nconstructor(private toast: NgcToastService) {}\n\nnotify() {\n  this.toast.show(\"Saved!\", \"Your changes were saved successfully.\", { type: \"success\" });\n}"
+  },
+  {
+    "name": "Form Field",
+    "category": "Data Entry",
+    "module": "NgcFormFieldModule",
+    "selector": "ngc-form-field",
+    "description": "Form field wrapper providing floating labels, hint messages, validation errors, and prefixes/suffixes.",
+    "inputs": [
+      {
+        "name": "label",
+        "type": "string",
+        "default": "\"\"",
+        "description": "Field label"
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "default": "false",
+        "description": "Show required asterisk"
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-form-field label=\"Email Address\" [required]=\"true\">\n  <input ngcInput type=\"email\" [(ngModel)]=\"email\" placeholder=\"user@example.com\" />\n</ngc-form-field>",
+    "tsExample": "import { NgcFormFieldModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Dropdown",
+    "category": "Data Entry",
+    "module": "NgcDropdownModule",
+    "selector": "ngc-dropdown, ngc-dropdown-item",
+    "description": "Select dropdown menu with icon support, search filtering, and multiple choice options.",
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "any",
+        "default": "null",
+        "description": "Selected value"
+      },
+      {
+        "name": "canSetNone",
+        "type": "boolean",
+        "default": "true",
+        "description": "Allow unselecting"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<any>",
+        "description": "Value change event"
+      }
+    ],
+    "templateExample": "<ngc-dropdown [(ngModel)]=\"selectedCategory\">\n  <ngc-dropdown-item label=\"Electronics\" value=\"elec\" icon=\"computer\"></ngc-dropdown-item>\n  <ngc-dropdown-item label=\"Clothing\" value=\"cloth\" icon=\"tag\"></ngc-dropdown-item>\n</ngc-dropdown>",
+    "tsExample": "import { NgcDropdownModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Badge",
+    "category": "Data Display",
+    "module": "NgcBadgeModule",
+    "selector": "ngc-badge",
+    "description": "Small numeric or status badge indicator attached to elements or inline.",
+    "inputs": [
+      {
+        "name": "content",
+        "type": "string | number",
+        "default": "\"\"",
+        "description": "Badge display text"
+      },
+      {
+        "name": "color",
+        "type": "primary | success | danger | warning",
+        "default": "primary",
+        "description": "Badge color"
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-badge content=\"New\" color=\"success\"></ngc-badge>",
+    "tsExample": "import { NgcBadgeModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Avatar",
+    "category": "Data Display",
+    "module": "NgcAvatarModule",
+    "selector": "ngc-avatar",
+    "description": "User profile image with initials fallback, online status dot, and custom dimensions.",
+    "inputs": [
+      {
+        "name": "src",
+        "type": "string",
+        "default": "\"\"",
+        "description": "Image URL"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": "\"\"",
+        "description": "Full name for initials"
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "default": "40px",
+        "description": "Avatar diameter"
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-avatar src=\"assets/avatar.jpg\" name=\"Alex Tran\" size=\"48px\"></ngc-avatar>",
+    "tsExample": "import { NgcAvatarModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Tabs",
+    "category": "Navigation",
+    "module": "NgcTabsModule",
+    "selector": "ngc-tab-group, ngc-tab",
+    "description": "Tabbed navigation container with smooth slide animations and dynamic content projection.",
+    "inputs": [
+      {
+        "name": "selectedIndex",
+        "type": "number",
+        "default": "0",
+        "description": "Active tab index"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "selectedIndexChange",
+        "type": "EventEmitter<number>",
+        "description": "Tab changed"
+      }
+    ],
+    "templateExample": "<ngc-tab-group>\n  <ngc-tab label=\"Overview\">Content 1</ngc-tab>\n  <ngc-tab label=\"Analytics\">Content 2</ngc-tab>\n</ngc-tab-group>",
+    "tsExample": "import { NgcTabsModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Drawer",
+    "category": "Layout",
+    "module": "NgcDrawerModule",
+    "selector": "ngc-drawer-container, ngc-drawer, ngc-drawer-content",
+    "description": "Side navigation drawer that can slide in from left or right, overlay or push layout.",
+    "inputs": [
+      {
+        "name": "opened",
+        "type": "boolean",
+        "default": "false",
+        "description": "Drawer visibility"
+      },
+      {
+        "name": "position",
+        "type": "left | right",
+        "default": "left",
+        "description": "Slide direction"
+      },
+      {
+        "name": "width",
+        "type": "string",
+        "default": "260px",
+        "description": "Drawer width"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "openedChange",
+        "type": "EventEmitter<boolean>",
+        "description": "State change"
+      }
+    ],
+    "templateExample": "<ngc-drawer-container stretch>\n  <ngc-drawer [opened]=\"isMenuOpen\" position=\"left\" width=\"260px\">\n    <!-- Sidebar content -->\n  </ngc-drawer>\n  <ngc-drawer-content>\n    <!-- Main content -->\n  </ngc-drawer-content>\n</ngc-drawer-container>",
+    "tsExample": "import { NgcDrawerModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Switch",
+    "category": "Data Entry",
+    "module": "NgcSwitchModule",
+    "selector": "ngc-switch",
+    "description": "Toggle switcher for binary on/off states with smooth sliding knob animation.",
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "boolean",
+        "default": "false",
+        "description": "Toggle value"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Disabled state"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<boolean>",
+        "description": "Value changed"
+      }
+    ],
+    "templateExample": "<ngc-switch [(ngModel)]=\"enableNotifications\" label=\"Notifications\"></ngc-switch>",
+    "tsExample": "import { NgcSwitchModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Checkbox",
+    "category": "Data Entry",
+    "module": "NgcCheckboxModule",
+    "selector": "ngc-checkbox",
+    "description": "Checkbox input supporting checked, unchecked, indeterminate states, and custom labels.",
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "boolean",
+        "default": "false",
+        "description": "Checked value"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "\"\"",
+        "description": "Label text"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<boolean>",
+        "description": "State changed"
+      }
+    ],
+    "templateExample": "<ngc-checkbox [(ngModel)]=\"rememberMe\">Remember my login</ngc-checkbox>",
+    "tsExample": "import { NgcCheckboxModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Radio Group",
+    "category": "Data Entry",
+    "module": "NgcRadioModule",
+    "selector": "ngc-radio-group, ngc-radio",
+    "description": "Radio button choice group for single selection among multiple mutually exclusive options.",
+    "inputs": [
+      {
+        "name": "ngModel",
+        "type": "any",
+        "default": "null",
+        "description": "Selected value"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ngModelChange",
+        "type": "EventEmitter<any>",
+        "description": "Value changed"
+      }
+    ],
+    "templateExample": "<ngc-radio-group [(ngModel)]=\"plan\">\n  <ngc-radio value=\"free\">Free</ngc-radio>\n  <ngc-radio value=\"pro\">Pro</ngc-radio>\n</ngc-radio-group>",
+    "tsExample": "import { NgcRadioModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Skeleton",
+    "category": "Feedback",
+    "module": "NgcSkeletonModule",
+    "selector": "ngc-skeleton",
+    "description": "Pulsing placeholder skeleton loader mimicking text lines, circles, and blocks.",
+    "inputs": [
+      {
+        "name": "shape",
+        "type": "text | circle | rect",
+        "default": "text",
+        "description": "Placeholder shape"
+      },
+      {
+        "name": "width",
+        "type": "string",
+        "default": "100%",
+        "description": "Width"
+      },
+      {
+        "name": "height",
+        "type": "string",
+        "default": "16px",
+        "description": "Height"
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-skeleton shape=\"circle\" width=\"40px\" height=\"40px\"></ngc-skeleton>\n<ngc-skeleton shape=\"text\" width=\"70%\"></ngc-skeleton>",
+    "tsExample": "import { NgcSkeletonModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Progress",
+    "category": "Feedback",
+    "module": "NgcProgressBarModule",
+    "selector": "ngc-progress-bar",
+    "description": "Progress indicator bar with determinate percentage, buffer values, and indeterminate modes.",
+    "inputs": [
+      {
+        "name": "value",
+        "type": "number",
+        "default": "0",
+        "description": "Progress percentage (0-100)"
+      },
+      {
+        "name": "mode",
+        "type": "determinate | indeterminate",
+        "default": "determinate",
+        "description": "Bar mode"
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-progress-bar [value]=\"uploadProgress\" mode=\"determinate\"></ngc-progress-bar>",
+    "tsExample": "import { NgcProgressBarModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Breadcrumb",
+    "category": "Navigation",
+    "module": "NgcBreadcrumbModule",
+    "selector": "ngc-breadcrumb, ngc-breadcrumb-item",
+    "description": "Breadcrumb trail for page hierarchy routing and navigational context.",
+    "inputs": [
+      {
+        "name": "separator",
+        "type": "string",
+        "default": "\"/\"",
+        "description": "Divider character or icon"
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-breadcrumb>\n  <ngc-breadcrumb-item routerLink=\"/\">Home</ngc-breadcrumb-item>\n  <ngc-breadcrumb-item routerLink=\"/settings\">Settings</ngc-breadcrumb-item>\n  <ngc-breadcrumb-item [active]=\"true\">Security</ngc-breadcrumb-item>\n</ngc-breadcrumb>",
+    "tsExample": "import { NgcBreadcrumbModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Code Block",
+    "category": "Data Display",
+    "module": "NgcCodeBlockModule",
+    "selector": "ngc-code-block",
+    "description": "Syntax-highlighted code viewer supporting TypeScript, HTML, CSS, JSON, bash, and auto-copy.",
+    "inputs": [
+      {
+        "name": "code",
+        "type": "string",
+        "default": "\"\"",
+        "description": "Source code text"
+      },
+      {
+        "name": "language",
+        "type": "string",
+        "default": "typescript",
+        "description": "Language for syntax highlighting"
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-code-block [code]=\"snippet\" language=\"typescript\"></ngc-code-block>",
+    "tsExample": "import { NgcCodeBlockModule } from \"ngc-library\";"
+  },
+  {
+    "name": "Icon",
+    "category": "General",
+    "module": "NgcIconModule",
+    "selector": "ngc-icon",
+    "description": "Vector icon component using premium Icomoon font library with customizable size and color.",
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "default": "\"\"",
+        "description": "Icon name (e.g. check, user, settings, calendar)"
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "default": "16px",
+        "description": "Font size / dimension"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "default": "inherit",
+        "description": "CSS color"
+      }
+    ],
+    "outputs": [],
+    "templateExample": "<ngc-icon name=\"check\" size=\"20px\" color=\"#10b981\"></ngc-icon>",
+    "tsExample": "import { NgcIconModule } from \"ngc-library\";"
+  }
+]
