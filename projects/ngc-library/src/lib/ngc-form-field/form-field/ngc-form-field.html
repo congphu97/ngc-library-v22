@@ -17,7 +17,7 @@
 
 <div class="ngc-form-field__input-container">
   <div class="ngc-form-field__prefix">
-    <ng-content select="[ngcFormFieldPrefix]"></ng-content>
+    <ng-content select="[ngcFormFieldPrefix], [ngcPrefix], [wgcFormFieldPrefix]"></ng-content>
   </div>
 
   <ngc-color-dot
@@ -91,7 +91,7 @@
   </div>
 
   <div class="ngc-form-field__suffix">
-    <ng-content select="[ngcFormFieldSuffix]"></ng-content>
+    <ng-content select="[ngcFormFieldSuffix], [ngcSuffix], [wgcFormFieldSuffix]"></ng-content>
   </div>
 
   <div class="ngc-form-field__description">

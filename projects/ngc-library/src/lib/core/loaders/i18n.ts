@@ -62,6 +62,11 @@ class WebpackTranslateLoader implements TranslateLoader {
 									: _translation;
 							}
 
+							if ( prefix[ 0 ] === 'NGC' ) {
+								const rawContent: any = ( translation as any )?.default || translation || {};
+								_translation = _.merge( _translation, { WGC: _.cloneDeep( rawContent ) } );
+							}
+
 							return _.merge( _translation, current );
 						}, {} as any )
 					);

@@ -49,7 +49,7 @@ export class NgcTooltipDirective implements OnChanges, AfterViewInit, OnDestroy 
 	@Input() @DefaultValue() @CoerceBoolean() public autoClose: boolean = true;
 	@Input() @DefaultValue() @CoerceBoolean() public hasBackdrop: boolean = true;
 	@Input() @DefaultValue() @CoerceBoolean() public closeOnClickOutside: boolean = true;
-	@Input() public openDelay: number = 300;
+	@Input() public openDelay: number = 200;
 	@Input() @DefaultValue() @CoerceNumber() public closeDelay: number = 150;
 	@Input() @CoerceNumber() public offsetX: number;
 	@Input() @CoerceNumber() public offsetY: number;
@@ -278,6 +278,9 @@ export class NgcTooltipDirective implements OnChanges, AfterViewInit, OnDestroy 
 		}
 
 		if ( this._instance ) {
+			// Pre-set position classes immediately so animation starts with the right directional class!
+			this._instance.setPositionClasses( this.position );
+
 			// Assign tooltip instance properties
 			const minWidth: string = this.minWidth ?? this.tooltip?.minWidth;
 			const minHeight: string = this.minHeight ?? this.tooltip?.minHeight;

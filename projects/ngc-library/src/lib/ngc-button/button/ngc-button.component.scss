@@ -5,16 +5,18 @@
 	display: flex;
 	cursor: pointer;
 	min-width: fit-content;
-	height: var(--button-size, 40px);
-	min-height: var(--button-size, 40px);
-	max-height: var(--button-size, 40px);
+	height: var(--button-size, 34px);
+	min-height: var(--button-size, 34px);
+	max-height: var(--button-size, 34px);
 	font-weight: $font-weight-semibold;
+	font-size: 13.5px;
 	color: var(--button-text-color, $color-text);
 	background-color: var(--button-color, $color-white);
 	border-width: var(--button-border-width, 1px);
 	border-style: var(--button-border-style, solid);
 	border-color: var(--button-border-color, $color-border-thick);
-	border-radius: 8px;
+	border-radius: 6px;
+	box-sizing: border-box;
 
 	&.ngc-primary {
 		background-color: var(--primary-color, $color-primary);
@@ -32,22 +34,27 @@
 		color: var(--button-text-color, $color-text);
 	}
 
-	&:not(.ngc-button--has-icon) {
+	&:not(.ngc-button--has-icon):not(.ngc-button--loading) {
 		.ngc-button-wrapper {
-			min-width: calc(var(--button-size, 40px) * 2);
+			min-width: calc(var(--button-size, 34px) * 1.6);
 		}
 	}
 
 	&.ngc-button--has-icon {
+		.ngc-button-wrapper {
+			padding-left: 10px;
+			padding-right: 12px;
+		}
+
 		.ngc-button__content {
-			padding-left: 5px;
-			padding-right: 5px;
+			padding-left: 6px;
+			padding-right: 0px;
 		}
 	}
 
 	&:not(.ngc-button--disabled) {
 		&:hover {
-			opacity: .8;
+			opacity: .85;
 		}
 
 		&:focus-visible {
@@ -70,6 +77,13 @@
 		.ngc-button__icon,
 		.ngc-button__content {
 			display: none;
+		}
+
+		.ngc-button-wrapper {
+			min-width: var(--button-size, 34px);
+			padding-left: 8px;
+			padding-right: 8px;
+			justify-content: center;
 		}
 	}
 
@@ -94,16 +108,19 @@
 	.ngc-button-wrapper {
 		display: flex;
 		align-items: center;
-		padding-left: 10px;
-		padding-right: 10px;
+		padding-left: 12px;
+		padding-right: 12px;
 		width: 100%;
 		height: 100%;
+		box-sizing: border-box;
 		// pointer-events: none;
 	}
 
 	.ngc-button__icon {
 		font-size: var(--button-icon-size, inherit);
 		line-height: var(--button-icon-size, inherit);
+		display: flex;
+		align-items: center;
 	}
 
 	.ngc-button__content {

@@ -8,9 +8,9 @@ export class CustomMissingTranslationHandler implements MissingTranslationHandle
 	 * @return {string}
 	 */
 	public handle( params: MissingTranslationHandlerParams ): string {
-		isDevMode() && console.error( params );
+		isDevMode() && console.warn( 'Missing translation for key:', params.key );
 
-		return '';
+		return params.key;
 	}
 
 }

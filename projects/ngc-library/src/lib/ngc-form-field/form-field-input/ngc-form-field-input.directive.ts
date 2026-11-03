@@ -45,7 +45,7 @@ export interface NgcIFormFieldConvertedEvent {
 
 @Directive({
 	standalone: false,
-	selector	: '[ngcFormFieldInput]',
+	selector	: '[ngcFormFieldInput], [ngcInput], [wgcFormFieldInput]',
 	exportAs	: 'ngcFormFieldInput',
 	providers	: [ TRIM_VALUE_ACCESSOR ],
 })

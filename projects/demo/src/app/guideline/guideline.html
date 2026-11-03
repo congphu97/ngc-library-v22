@@ -345,9 +345,30 @@ export class AppModule &#123; &#125;</code></pre>
 							</table>
 						</div>
 
-						<h3 class="mb-15 mt-30" style="font-size: 20px; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7; padding-bottom: 8px;">2. Cursor IDE Integration</h3>
+						<h3 class="mb-15 mt-30" style="font-size: 20px; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7; padding-bottom: 8px;">2. Remote Setup via GitHub (Recommended for External Apps)</h3>
 						<p style="font-size: 14px; color: #52525b; line-height: 1.6; margin-bottom: 15px;">
-							The project includes a ready-to-use <code>.cursor/mcp.json</code> file. Cursor detects and connects to the server automatically when opening this workspace. You can also configure it manually in Cursor Settings:
+							Connect your AI assistant directly to the online GitHub repository (<a href="https://github.com/congphu97/ngc-library-v22" target="_blank" style="color: #0066ff; text-decoration: underline;">congphu97/ngc-library-v22</a>) without needing to clone or download the entire project locally:
+						</p>
+						<ngc-code-block language="json">
+							<pre><code #codeContent>&#123;
+  "mcpServers": &#123;
+    "ngc-library": &#123;
+      "command": "npx",
+      "args": [
+        "-y",
+        "github:congphu97/ngc-library-v22#main:mcp-server"
+      ]
+    &#125;
+  &#125;
+&#125;</code></pre>
+						</ngc-code-block>
+						<p style="font-size: 13px; color: #71717a; margin-top: 10px; margin-bottom: 25px;">
+							💡 <em>The server automatically streams the latest components and tokens directly from GitHub Raw online, keeping your AI assistant synced with every commit on <code>main</code>.</em>
+						</p>
+
+						<h3 class="mb-15 mt-30" style="font-size: 20px; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7; padding-bottom: 8px;">3. Cursor IDE Integration (Local Workspace)</h3>
+						<p style="font-size: 14px; color: #52525b; line-height: 1.6; margin-bottom: 15px;">
+							When working inside this repository, Cursor automatically detects the bundled <code>.cursor/mcp.json</code> file. You can also configure it in Cursor Settings &rarr; Features &rarr; MCP:
 						</p>
 						<ngc-code-block language="json">
 							<pre><code #codeContent>&#123;
@@ -360,9 +381,9 @@ export class AppModule &#123; &#125;</code></pre>
 &#125;</code></pre>
 						</ngc-code-block>
 
-						<h3 class="mb-15 mt-30" style="font-size: 20px; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7; padding-bottom: 8px;">3. Claude Desktop Integration</h3>
+						<h3 class="mb-15 mt-30" style="font-size: 20px; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7; padding-bottom: 8px;">4. Claude Desktop & Google Antigravity Configuration</h3>
 						<p style="font-size: 14px; color: #52525b; line-height: 1.6; margin-bottom: 15px;">
-							Open your Claude Desktop configuration file at <code>~/Library/Application Support/Claude/claude_desktop_config.json</code> (macOS) or <code>%APPDATA%\Claude\claude_desktop_config.json</code> (Windows) and add:
+							Add the server definition to Claude Desktop configuration (<code>~/Library/Application Support/Claude/claude_desktop_config.json</code> on macOS or <code>%APPDATA%\Claude\claude_desktop_config.json</code> on Windows), or Google Antigravity (<code>~/.gemini/antigravity/mcp_servers.json</code>):
 						</p>
 						<ngc-code-block language="json">
 							<pre><code #codeContent>&#123;
@@ -370,24 +391,7 @@ export class AppModule &#123; &#125;</code></pre>
     "ngc-library": &#123;
       "command": "node",
       "args": [
-        "/Users/congphu2210/Desktop/Phu/ngc-library-v22/mcp-server/index.mjs"
-      ]
-    &#125;
-  &#125;
-&#125;</code></pre>
-						</ngc-code-block>
-
-						<h3 class="mb-15 mt-30" style="font-size: 20px; font-weight: 700; color: #09090b; border-bottom: 1px solid #e4e4e7; padding-bottom: 8px;">4. Google Antigravity / Gemini CLI Integration</h3>
-						<p style="font-size: 14px; color: #52525b; line-height: 1.6; margin-bottom: 15px;">
-							Add the server definition to your Antigravity configuration file at <code>~/.gemini/antigravity/mcp_servers.json</code>:
-						</p>
-						<ngc-code-block language="json">
-							<pre><code #codeContent>&#123;
-  "mcpServers": &#123;
-    "ngc-library": &#123;
-      "command": "node",
-      "args": [
-        "/Users/congphu2210/Desktop/Phu/ngc-library-v22/mcp-server/index.mjs"
+        "&lt;path-to-repository&gt;/mcp-server/index.mjs"
       ]
     &#125;
   &#125;
@@ -1917,13 +1921,13 @@ export class AppModule &#123; &#125;</code></pre>
 			<div class="layout-row layout-wrap">
 				<div class="w-300 mr-20 mb-15">
 					<ngc-form-field label="Username" required>
-						<input ngcInput placeholder="Enter your username" />
+						<input ngcFormFieldInput placeholder="Enter your username" />
 					</ngc-form-field>
 				</div>
 				<div class="w-300 mr-20 mb-15">
 					<ngc-form-field label="Search with Icon">
-						<ngc-icon ngcPrefix name="search"></ngc-icon>
-						<input ngcInput placeholder="Type to filter..." />
+						<ngc-icon ngcFormFieldPrefix name="search"></ngc-icon>
+						<input ngcFormFieldInput placeholder="Type to filter..." />
 					</ngc-form-field>
 				</div>
 			</div>
@@ -1932,13 +1936,13 @@ export class AppModule &#123; &#125;</code></pre>
 			<ngc-code-block language="html">
 				<pre><code #codeContent>&lt;!-- Standard Input --&gt;
 &lt;ngc-form-field label="Username" required&gt;
-  &lt;input ngcInput placeholder="Enter your username" /&gt;
+  &lt;input ngcFormFieldInput placeholder="Enter your username" /&gt;
 &lt;/ngc-form-field&gt;
 
 &lt;!-- Input with Prefix Icon --&gt;
-&lt;ngc-form-field label="Search"&gt;
-  &lt;ngc-icon ngcPrefix name="search"&gt;&lt;/ngc-icon&gt;
-  &lt;input ngcInput placeholder="Type to filter..." /&gt;
+&lt;ngc-form-field label="Search with Icon"&gt;
+  &lt;ngc-icon ngcFormFieldPrefix name="search"&gt;&lt;/ngc-icon&gt;
+  &lt;input ngcFormFieldInput placeholder="Type to filter..." /&gt;
 &lt;/ngc-form-field&gt;</code></pre>
 			</ngc-code-block>
 		</ngc-tab>
@@ -2971,12 +2975,10 @@ export class AppModule &#123; &#125;</code></pre>
 
 			<div style="border: 1px solid var(--border-color, #e4e4e7); border-radius: 8px; overflow: hidden; height: 350px; background-color: #fafafa;">
 				<ngc-drawer-container stretch>
-					<ngc-drawer [opened]="demoDrawerOpened" width="220px" position="left" label="Navigation" paddingVertical="20px" paddingLeft="20px">
-						<ngc-list stretch>
-							<ngc-list-item><button ngcButton>Dashboard</button></ngc-list-item>
-							<ngc-list-item><button ngcButton>Settings</button></ngc-list-item>
-							<ngc-list-item><button ngcButton>Users</button></ngc-list-item>
-						</ngc-list>
+					<ngc-drawer [opened]="demoDrawerOpened" width="220px" position="left" label="Navigation" paddingVertical="20px" paddingHorizontal="20px">
+						<div class="sidebar-sample-text" style="font-size: 14px; font-weight: 500; color: inherit;">
+							Sidebar 1
+						</div>
 					</ngc-drawer>
 					<ngc-drawer-content paddingVertical="20px" paddingHorizontal="20px">
 						<h4>Main Content Area</h4>
@@ -2996,11 +2998,8 @@ export class AppModule &#123; &#125;</code></pre>
 &lt;!-- Sidebar Container --&gt;
 &lt;ngc-drawer-container stretch&gt;
   &lt;!-- Collapsible Sidebar --&gt;
-  &lt;ngc-drawer [opened]="sidebarOpened" width="220px" position="left" label="Navigation" paddingVertical="20px" paddingLeft="20px"&gt;
-    &lt;ngc-list stretch&gt;
-      &lt;ngc-list-item&gt;&lt;button ngcButton&gt;Dashboard&lt;/button&gt;&lt;/ngc-list-item&gt;
-      &lt;ngc-list-item&gt;&lt;button ngcButton&gt;Settings&lt;/button&gt;&lt;/ngc-list-item&gt;
-    &lt;/ngc-list&gt;
+  &lt;ngc-drawer [opened]="sidebarOpened" width="220px" position="left" label="Navigation" paddingVertical="20px" paddingHorizontal="20px"&gt;
+    &lt;div&gt;Sidebar 1&lt;/div&gt;
   &lt;/ngc-drawer&gt;
 
   &lt;!-- Main Content --&gt;
@@ -4893,12 +4892,12 @@ export class AppModule &#123; &#125;</code></pre>
 	<p class="component-description">
 		<strong>Scroll Bar</strong> provides a custom-styled, lightweight cross-browser scrollbar wrapper for overflowing content boxes.
 	</p>
-	<h3 class="mb-20">Scrollable Container</h3>
+	<h3 class="mb-20">Vertical Scroll (Scroll Y)</h3>
 	<ngc-tab-group class="mb-20">
 		<ngc-tab [label]="'Preview'">
-			<div style="height: 180px; width: 400px; border: 1px solid var(--border-color, #e4e4e7); border-radius: 8px; overflow: hidden;">
-				<ngc-scroll-bar style="height: 100%; display: block; padding: 15px;">
-					<p *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]">
+			<div class="scrollbar-demo-box" style="height: 180px; width: 420px; max-width: 100%; overflow: hidden;">
+				<ngc-scroll-bar suppressScrollX style="height: 100%; display: block; padding: 15px;">
+					<p *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]" style="margin-bottom: 8px;">
 						Scrollable item row {{ item }}: Smooth scrolling with custom thumb styling.
 					</p>
 				</ngc-scroll-bar>
@@ -4906,9 +4905,45 @@ export class AppModule &#123; &#125;</code></pre>
 		</ngc-tab>
 		<ngc-tab [label]="'Code'">
 			<ngc-code-block language="html">
-				<pre><code #codeContent>&lt;ngc-scroll-bar style="height: 180px; display: block;"&gt;
-  &lt;p *ngFor="let item of items"&gt;Scrollable content here...&lt;/p&gt;
-&lt;/ngc-scroll-bar&gt;</code></pre>
+				<pre><code #codeContent>&lt;!-- Vertical Scroll Container --&gt;
+&lt;div style="height: 180px; width: 420px; overflow: hidden;"&gt;
+  &lt;ngc-scroll-bar suppressScrollX style="height: 100%; display: block; padding: 15px;"&gt;
+    &lt;p *ngFor="let item of items"&gt;Scrollable item row {{ item }}: Smooth scrolling...&lt;/p&gt;
+  &lt;/ngc-scroll-bar&gt;
+&lt;/div&gt;</code></pre>
+			</ngc-code-block>
+		</ngc-tab>
+	</ngc-tab-group>
+
+	<h3 class="mb-20">Horizontal Scroll (Scroll X)</h3>
+	<ngc-tab-group class="mb-20">
+		<ngc-tab [label]="'Preview'">
+			<div class="scrollbar-demo-box" style="width: 520px; max-width: 100%; overflow: hidden; padding: 16px;">
+				<ngc-scroll-bar suppressScrollY style="width: 100%; display: block;">
+					<div style="display: flex; gap: 12px; width: max-content; padding-bottom: 8px;">
+						<div class="scrollbar-card" *ngFor="let card of [1,2,3,4,5,6,7,8]">
+							<ngc-icon name="folder" size="22px" color="primary"></ngc-icon>
+							<span class="scrollbar-card__title">Item {{ card }}</span>
+							<span class="scrollbar-card__desc">Horizontal card</span>
+						</div>
+					</div>
+				</ngc-scroll-bar>
+			</div>
+		</ngc-tab>
+		<ngc-tab [label]="'Code'">
+			<ngc-code-block language="html">
+				<pre><code #codeContent>&lt;!-- Horizontal Scroll Container using suppressScrollY --&gt;
+&lt;div style="max-width: 520px; overflow: hidden; padding: 16px;"&gt;
+  &lt;ngc-scroll-bar suppressScrollY style="width: 100%; display: block;"&gt;
+    &lt;div style="display: flex; gap: 12px; width: max-content; padding-bottom: 8px;"&gt;
+      &lt;div class="scrollbar-card" *ngFor="let card of cards"&gt;
+        &lt;ngc-icon name="folder" size="22px" color="primary"&gt;&lt;/ngc-icon&gt;
+        &lt;span class="scrollbar-card__title"&gt;Item {{ card }}&lt;/span&gt;
+        &lt;span class="scrollbar-card__desc"&gt;Horizontal card&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/ngc-scroll-bar&gt;
+&lt;/div&gt;</code></pre>
 			</ngc-code-block>
 		</ngc-tab>
 	</ngc-tab-group>

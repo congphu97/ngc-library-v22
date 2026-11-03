@@ -896,6 +896,45 @@
   }
 }
 
+.scrollbar-demo-box {
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.scrollbar-card {
+  width: 140px;
+  height: 95px;
+  flex-shrink: 0;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #1a73e8;
+    background-color: #f0f7ff;
+    transform: translateY(-2px);
+  }
+
+  .scrollbar-card__title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+  }
+
+  .scrollbar-card__desc {
+    font-size: 11px;
+    color: #64748b;
+  }
+}
+
 @keyframes logoPulse {
   0%, 100% {
     opacity: 0.8;
@@ -1536,6 +1575,29 @@
 
       tr:hover td {
         background-color: #1c2128 !important;
+      }
+    }
+
+    .scrollbar-demo-box {
+      border-color: #30363d !important;
+      background-color: #161b22 !important;
+    }
+
+    .scrollbar-card {
+      background-color: #0d1117 !important;
+      border-color: #30363d !important;
+
+      &:hover {
+        border-color: #58a6ff !important;
+        background-color: #1c2128 !important;
+      }
+
+      .scrollbar-card__title {
+        color: #f0f6fc !important;
+      }
+
+      .scrollbar-card__desc {
+        color: #8b949e !important;
       }
     }
   }

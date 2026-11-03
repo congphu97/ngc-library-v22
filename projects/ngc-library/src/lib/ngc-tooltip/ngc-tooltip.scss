@@ -1,5 +1,60 @@
 @import 'variable';
 
+@keyframes tooltipFadeIn {
+	0% {
+		opacity: 0;
+		transform: scale(0.92);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes tooltipFadeInAbove {
+	0% {
+		opacity: 0;
+		transform: translateY(6px) scale(0.94);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@keyframes tooltipFadeInBelow {
+	0% {
+		opacity: 0;
+		transform: translateY(-6px) scale(0.94);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@keyframes tooltipFadeInBefore {
+	0% {
+		opacity: 0;
+		transform: translateX(6px) scale(0.94);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0) scale(1);
+	}
+}
+
+@keyframes tooltipFadeInAfter {
+	0% {
+		opacity: 0;
+		transform: translateX(-6px) scale(0.94);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0) scale(1);
+	}
+}
+
 ngc-tooltip {
 	display: none;
 }
@@ -17,10 +72,32 @@ ngc-tooltip {
 	word-break: break-word;
 	border-radius: 8px;
 	border: none;
-	box-shadow: $box-shadow;
-	animation: $popup-animation;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.08);
+	animation: tooltipFadeIn 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	transform-origin: center center;
+	will-change: transform, opacity;
 	background-color: var(--tooltip-color, black);
 	color: var(--tooltip-text-color, white);
+
+	&.ngc-tooltip--above {
+		animation-name: tooltipFadeInAbove;
+		transform-origin: center bottom;
+	}
+
+	&.ngc-tooltip--below {
+		animation-name: tooltipFadeInBelow;
+		transform-origin: center top;
+	}
+
+	&.ngc-tooltip--before {
+		animation-name: tooltipFadeInBefore;
+		transform-origin: right center;
+	}
+
+	&.ngc-tooltip--after {
+		animation-name: tooltipFadeInAfter;
+		transform-origin: left center;
+	}
 
 	&.ngc-tooltip--above,
 	&.ngc-tooltip--below,

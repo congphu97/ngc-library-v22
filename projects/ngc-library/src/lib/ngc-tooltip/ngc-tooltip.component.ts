@@ -84,7 +84,11 @@ export class NgcTooltipComponent {
 			this.classList[ 'ngc-tooltip--message-only' ] = this.messageOnly;
 			this.classList[ 'ngc-tooltip--light-theme' ] = this.theme === 'light';
 
-			this.markForCheck();
+			try {
+				this.detectChanges();
+			} catch {
+				this.markForCheck();
+			}
 		} );
 	}
 

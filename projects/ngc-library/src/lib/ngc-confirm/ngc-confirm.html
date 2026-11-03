@@ -10,7 +10,7 @@
     <ng-container *ngIf="isMessageString; else messageTemplate">
       <ng-container *ngIf="config?.translate; else rawMessage">
         <span
-          [innerHTML]="($any(message) | translate : config?.translateParams) | safeHtml"
+          [innerHTML]="((($any(message) | translate : config?.translateParams) || message)) | safeHtml"
         ></span>
       </ng-container>
       <ng-template #rawMessage>
@@ -36,7 +36,7 @@
       <ng-container *ngIf="config?.buttonApply; else defaultApply">
         <ng-container *ngIf="config?.translate; else rawApply">
           <span
-            [innerHTML]="config?.buttonApply | translate : config?.translateParams | safeHtml"
+            [innerHTML]="((config?.buttonApply | translate : config?.translateParams) || config?.buttonApply) | safeHtml"
           ></span>
         </ng-container>
         <ng-template #rawApply>
@@ -47,7 +47,7 @@
       </ng-container>
 
       <ng-template #defaultApply>
-        {{ 'WGC.LABEL.APPLY' | translate : config?.translateParams }}
+        {{ ('NGC.LABEL.APPLY' | translate : config?.translateParams) || ('WGC.LABEL.APPLY' | translate : config?.translateParams) || 'Apply' }}
       </ng-template>
     </a>
 
@@ -55,7 +55,7 @@
     <ng-container
       *ngIf="config?.buttonApply !== null && config?.buttonDiscard !== null"
     >
-      &nbsp;{{ 'WGC.LABEL.OR' | translate : config?.translateParams }}&nbsp;
+      &nbsp;{{ ('NGC.LABEL.OR' | translate : config?.translateParams) || ('WGC.LABEL.OR' | translate : config?.translateParams) || 'or' }}&nbsp;
     </ng-container>
 
     <!-- DISCARD -->
@@ -66,7 +66,7 @@
       <ng-container *ngIf="config?.buttonDiscard; else defaultDiscard">
         <ng-container *ngIf="config?.translate; else rawDiscard">
           <span
-            [innerHTML]="config?.buttonDiscard | translate : config?.translateParams | safeHtml"
+            [innerHTML]="((config?.buttonDiscard | translate : config?.translateParams) || config?.buttonDiscard) | safeHtml"
           ></span>
         </ng-container>
         <ng-template #rawDiscard>
@@ -77,7 +77,7 @@
       </ng-container>
 
       <ng-template #defaultDiscard>
-        {{ 'WGC.LABEL.DISCARD' | translate : config?.translateParams }}
+        {{ ('NGC.LABEL.DISCARD' | translate : config?.translateParams) || ('WGC.LABEL.DISCARD' | translate : config?.translateParams) || 'Discard' }}
       </ng-template>
     </a>
 
@@ -95,7 +95,7 @@
       <ng-container *ngIf="title; else defaultTitle">
         <ng-container *ngIf="config?.translate; else rawTitle">
           <span
-            [innerHTML]="title | translate : config?.translateParams | safeHtml"
+            [innerHTML]="((title | translate : config?.translateParams) || title) | safeHtml"
           ></span>
         </ng-container>
         <ng-template #rawTitle>
@@ -106,7 +106,7 @@
       </ng-container>
 
       <ng-template #defaultTitle>
-        {{ 'WGC.LABEL.CONFIRMATION' | translate }}
+        {{ ('NGC.LABEL.CONFIRMATION' | translate) || ('WGC.LABEL.CONFIRMATION' | translate) || 'Confirmation' }}
       </ng-template>
     </h1>
 
@@ -118,7 +118,7 @@
       <ng-container *ngIf="isMessageString; else messageTemplateDialog">
         <ng-container *ngIf="config?.translate; else rawMessageDialog">
           <span
-            [innerHTML]="($any(message) | translate : config?.translateParams) | safeHtml"
+            [innerHTML]="((($any(message) | translate : config?.translateParams) || message)) | safeHtml"
           ></span>
         </ng-container>
         <ng-template #rawMessageDialog>
@@ -148,7 +148,7 @@
 
         <ng-container *ngIf="config?.warningMessage; else defaultWarning">
           <ng-container *ngIf="config?.translate; else rawWarning">
-            {{ config?.warningMessage | translate : config?.translateParams }}
+            {{ (config?.warningMessage | translate : config?.translateParams) || config?.warningMessage }}
           </ng-container>
           <ng-template #rawWarning>
             {{ config?.warningMessage }}
@@ -156,7 +156,7 @@
         </ng-container>
 
         <ng-template #defaultWarning>
-          {{ 'WGC.MESSAGE.WARNING_CAN_NOT_UNDO_ACTION' | translate }}
+          {{ ('NGC.MESSAGE.WARNING_CAN_NOT_UNDO_ACTION' | translate) || ('WGC.MESSAGE.WARNING_CAN_NOT_UNDO_ACTION' | translate) || "You can't undo this action." }}
         </ng-template>
       </div>
 
@@ -179,7 +179,7 @@
         <ng-container *ngIf="config?.buttonApply; else defaultApplyBtn">
           <ng-container *ngIf="config?.translate; else rawApplyBtn">
             <span
-              [innerHTML]="config?.buttonApply | translate : config?.translateParams | safeHtml"
+              [innerHTML]="((config?.buttonApply | translate : config?.translateParams) || config?.buttonApply) | safeHtml"
             ></span>
           </ng-container>
           <ng-template #rawApplyBtn>
@@ -190,7 +190,7 @@
         </ng-container>
 
         <ng-template #defaultApplyBtn>
-          {{ 'WGC.LABEL.APPLY' | translate : config?.translateParams }}
+          {{ ('NGC.LABEL.APPLY' | translate : config?.translateParams) || ('WGC.LABEL.APPLY' | translate : config?.translateParams) || 'Apply' }}
         </ng-template>
       </button>
 
@@ -203,7 +203,7 @@
         <ng-container *ngIf="config?.buttonDiscard; else defaultDiscardBtn">
           <ng-container *ngIf="config?.translate; else rawDiscardBtn">
             <span
-              [innerHTML]="config?.buttonDiscard | translate : config?.translateParams | safeHtml"
+              [innerHTML]="((config?.buttonDiscard | translate : config?.translateParams) || config?.buttonDiscard) | safeHtml"
             ></span>
           </ng-container>
           <ng-template #rawDiscardBtn>
@@ -214,7 +214,7 @@
         </ng-container>
 
         <ng-template #defaultDiscardBtn>
-          {{ 'WGC.LABEL.DISCARD' | translate : config?.translateParams }}
+          {{ ('NGC.LABEL.DISCARD' | translate : config?.translateParams) || ('WGC.LABEL.DISCARD' | translate : config?.translateParams) || 'Discard' }}
         </ng-template>
       </button>
 

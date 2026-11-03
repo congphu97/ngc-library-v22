@@ -4,26 +4,35 @@
 .ngc-menu-item {
 	display: flex;
 	align-items: center;
-	padding: 8px 10px;
-	min-height: 40px;
-	border-radius: 8px;
+	padding: 7px 10px;
+	min-height: 34px;
+	border-radius: 6px;
 	border: none;
-	font-weight: $font-weight-semibold;
+	font-size: 13.5px;
+	font-weight: 500;
+	letter-spacing: -0.1px;
 	width: 100%;
 	cursor: pointer;
-	background: none;
+	background: transparent;
 	text-align: left;
-	color: var(--menu-item-color, inherit);
+	color: var(--menu-item-color, var(--ngc-color-neutral-text-primary, #27272a));
+	transition: background-color 0.15s ease, color 0.15s ease;
+	box-sizing: border-box;
 
 	&:not(:last-child) {
-		margin-bottom: 5px;
+		margin-bottom: 2px;
 	}
 
 	&:not(.ngc-menu-item--disabled) {
 		&:focus-visible,
 		&:hover,
 		&.ngc-menu-item--focusing {
-			background-color: $color-default;
+			background-color: var(--ngc-color-neutral-background-disabled, #f4f4f5);
+			color: var(--ngc-color-neutral-text-primary, #09090b);
+
+			.ngc-menu-item__prefix ngc-icon {
+				--icon-color: var(--ngc-color-neutral-text-primary, #09090b);
+			}
 		}
 	}
 
@@ -37,6 +46,7 @@
 		align-items: center;
 		min-width: 0;
 		width: 100%;
+		line-height: 1.4;
 	}
 
 	.ngc-menu-item__prefix,
@@ -51,6 +61,17 @@
 		}
 	}
 
+	.ngc-menu-item__prefix {
+		margin-right: 10px;
+
+		ngc-icon {
+			--icon-color: var(--ngc-color-neutral-text-secondary, #71717a);
+			transition: var(--icon-color) 0.15s ease;
+			display: flex;
+			align-items: center;
+		}
+	}
+
 	.ngc-menu-item__suffix {
 		margin-left: auto;
 
@@ -60,10 +81,35 @@
 	}
 
 	.ngc-menu-item__prefix [ngcMenuItemPrefix] {
-		margin-right: 5px;
+		margin-right: 10px;
 	}
 
 	.ngc-menu-item__suffix [ngcMenuItemSuffix] {
-		margin-left: 5px;
+		margin-left: 8px;
+	}
+}
+
+// Dark theme support
+:host-context(.dark-theme),
+.dark-theme {
+	.ngc-menu-item {
+		color: #e4e4e7;
+
+		.ngc-menu-item__prefix ngc-icon {
+			--icon-color: #a1a1aa;
+		}
+
+		&:not(.ngc-menu-item--disabled) {
+			&:focus-visible,
+			&:hover,
+			&.ngc-menu-item--focusing {
+				background-color: #27272a;
+				color: #ffffff;
+
+				.ngc-menu-item__prefix ngc-icon {
+					--icon-color: #ffffff;
+				}
+			}
+		}
 	}
 }

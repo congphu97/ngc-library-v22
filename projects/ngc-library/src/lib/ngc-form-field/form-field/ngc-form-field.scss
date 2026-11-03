@@ -107,7 +107,8 @@
 			min-height: 40px;
 		}
 
-		textarea[ngcFormFieldInput] {
+		textarea[ngcFormFieldInput],
+		textarea[ngcInput] {
 			padding-top: 10px;
 			padding-bottom: 10px;
 			resize: vertical;
@@ -115,7 +116,9 @@
 		}
 
 		input[ngcFormFieldInput],
-		select[ngcFormFieldInput] {
+		input[ngcInput],
+		select[ngcFormFieldInput],
+		select[ngcInput] {
 			height: 38px;
 			display: block;
 			overflow: hidden;
@@ -158,15 +161,26 @@
 			min-width: 0;
 		}
 
-		[ngcFormFieldInput] {
+		[ngcFormFieldInput],
+		[ngcInput],
+		input,
+		textarea,
+		select {
 			background: none;
 			border: none;
+			outline: none;
 			font-weight: $font-weight-semibold;
 			font-size: var(--input-text-size, $font-size-body);
 			-webkit-appearance: none;
 			text-align: var(--input-text-alignment, left);
 			width: 100%;
 			min-width: 0;
+
+			&:focus {
+				outline: none;
+				border: none;
+				box-shadow: none;
+			}
 
 			&:required,
 			&:invalid {

@@ -2,36 +2,154 @@
 @import '../ngc-dialog/dialog-container/ngc-dialog-container';
 
 .ngc-confirm {
+	display: flex;
+	flex-direction: column;
+	background: #ffffff;
+	border-radius: 12px;
+	overflow: hidden;
+	min-width: 340px;
+	max-width: 460px;
+	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+	border: 1px solid rgba(0, 0, 0, 0.08);
+
+	[ngcDialogHeader] {
+		font-size: 15px !important;
+		font-weight: 600 !important;
+		color: #18181b !important;
+		text-transform: none !important;
+		letter-spacing: normal !important;
+		background: #ffffff !important;
+		padding: 16px 20px !important;
+		border-bottom: 1px solid #e4e4e7 !important;
+		min-height: auto !important;
+
+		&::before {
+			display: none !important;
+		}
+
+		span {
+			font-size: 15px !important;
+			font-weight: 600 !important;
+			color: #18181b !important;
+			text-transform: none !important;
+			letter-spacing: normal !important;
+		}
+	}
+
+	[ngcDialogContent] {
+		padding: 20px !important;
+		font-size: 14px !important;
+		line-height: 1.5 !important;
+		color: #52525b !important;
+		background: #ffffff !important;
+	}
+
+	[ngcDialogFooter] {
+		padding: 14px 20px !important;
+		background: #fafafa !important;
+		border-top: 1px solid #e4e4e7 !important;
+
+		.ngc-button {
+			height: 36px !important;
+			font-size: 13px !important;
+			font-weight: 500 !important;
+			border-radius: 6px !important;
+		}
+	}
+
 	.ngc-confirm--popup {
 		display: flex;
+		align-items: center;
 		position: fixed;
 		top: 30px;
 		left: 50%;
 		transform: translateX(-50%);
-		padding: 5px;
-		font-size: 12px;
+		padding: 10px 18px;
+		font-size: 13px;
 		z-index: $z-level-4;
-		border-radius: 6px;
-		border: 1px solid $color-border;
-		box-shadow: $box-shadow;
-		animation: $popup-animation;
-		background-color: $color-white;
+		border-radius: 8px;
+		border: 1px solid #e4e4e7;
+		box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+		animation: tooltipFadeIn 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+		background-color: #ffffff;
+		color: #18181b;
+
+		a {
+			margin-left: 6px;
+			font-weight: 600;
+			cursor: pointer;
+			color: #0066ff;
+			text-decoration: underline;
+
+			&:hover {
+				color: #0052cc;
+			}
+		}
 	}
 
 	.ngc-confirm--dialog {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+
 		.ngc-confirm__warning {
 			display: flex;
 			align-items: center;
-			margin-top: 20px;
-			color: $color-danger;
+			margin-top: 14px;
+			padding: 10px 12px;
+			border-radius: 6px;
+			background-color: #fff1f2;
+			color: #e11d48;
+			font-size: 13px;
 
 			.ngc-confirm__warning__icon {
-				margin-right: 5px;
+				margin-right: 8px;
+				flex-shrink: 0;
 			}
 		}
 	}
 }
 
 .ngc-confirm-backdrop {
-	background-color: $color-backdrop;
+	background-color: rgba(0, 0, 0, 0.45) !important;
+}
+
+// Dark Mode Overrides
+.dark-theme {
+	.ngc-confirm {
+		background: #161b22 !important;
+		border-color: #30363d !important;
+		box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4) !important;
+
+		[ngcDialogHeader] {
+			background: #161b22 !important;
+			border-bottom-color: #30363d !important;
+			color: #f0f6fc !important;
+
+			span {
+				color: #f0f6fc !important;
+			}
+		}
+
+		[ngcDialogContent] {
+			background: #161b22 !important;
+			color: #c9d1d9 !important;
+		}
+
+		[ngcDialogFooter] {
+			background: #0d1117 !important;
+			border-top-color: #30363d !important;
+		}
+
+		.ngc-confirm--popup {
+			background: #161b22 !important;
+			border-color: #30363d !important;
+			color: #f0f6fc !important;
+		}
+
+		.ngc-confirm__warning {
+			background-color: rgba(225, 29, 72, 0.15) !important;
+			color: #fda4af !important;
+		}
+	}
 }

@@ -15,6 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load component database & design tokens
+const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/congphu97/ngc-library-v22/main/mcp-server/data';
 const componentsPath = path.join(__dirname, 'data', 'components.json');
 const tokensPath = path.join(__dirname, 'data', 'tokens.json');
 
@@ -29,7 +30,32 @@ try {
     tokens = JSON.parse(fs.readFileSync(tokensPath, 'utf8'));
   }
 } catch (err) {
-  process.stderr.write(`Error loading data: ${err.message}\n`);
+  process.stderr.write(`Local data load warning: ${err.message}\n`);
+}
+
+// Fallback to GitHub Raw online data if local files not found or empty
+if (!components || components.length === 0) {
+  try {
+    process.stderr.write('Local components.json not found, fetching from GitHub...\n');
+    const res = await fetch(`${GITHUB_RAW_BASE}/components.json`);
+    if (res.ok) {
+      components = await res.json();
+      process.stderr.write(`Loaded ${components.length} components from GitHub.\n`);
+    }
+  } catch (err) {
+    process.stderr.write(`Failed to fetch components from GitHub: ${err.message}\n`);
+  }
+}
+
+if (!tokens || Object.keys(tokens).length === 0) {
+  try {
+    const res = await fetch(`${GITHUB_RAW_BASE}/tokens.json`);
+    if (res.ok) {
+      tokens = await res.json();
+    }
+  } catch (err) {
+    process.stderr.write(`Failed to fetch tokens from GitHub: ${err.message}\n`);
+  }
 }
 
 // Tool definitions
